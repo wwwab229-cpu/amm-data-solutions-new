@@ -168,6 +168,38 @@ button,a,input,textarea{touch-action:manipulation}
 }
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+/* AMM live workflow: animated order-to-delivery demo */
+.amm-live-dot{width:7px;height:7px;border-radius:50%;background:#27b879;box-shadow:0 0 0 4px #27b8791f;animation:ammPulse 1.8s ease-out infinite}
+.amm-flow-card{--flow-accent:#5B2EE8;position:relative;min-width:0;min-height:260px;padding:22px 18px 18px;border:1px solid #5b2ee826;border-radius:24px;background:#ffffffed;box-shadow:0 12px 30px -20px #14172b42;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.amm-flow-card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--amm-angle,0deg),transparent 0 65%,#D6F25B 72%,#5B2EE8 83%,transparent 92%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;pointer-events:none}
+.amm-flow-card.is-active{border-color:#5b2ee86b;box-shadow:0 18px 38px -20px #5b2ee880;transform:translateY(-3px)}
+.amm-flow-card.is-active::before{opacity:1;animation:ammBorderRun 1.65s linear infinite}
+.amm-flow-card.is-done{border-color:#27b87955}
+.amm-flow-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:18px}
+.amm-flow-number{font-size:.72rem;font-weight:800;letter-spacing:.12em;color:#5B2EE8}
+.amm-flow-state{font-size:.6rem;font-weight:800;letter-spacing:.09em;color:#6d7085;background:#f4f2ff;border-radius:999px;padding:6px 8px}
+.amm-flow-card h3{font-size:1.15rem;font-weight:800;letter-spacing:-.035em;color:#191b35;margin:0 0 12px}
+.amm-flow-scene{min-height:132px;display:flex;align-items:center;border-radius:17px;background:linear-gradient(135deg,#f6f3ff,#f7fbea);padding:15px;position:relative;overflow:hidden}
+.amm-flow-content{display:flex;flex-direction:column;align-items:flex-start;gap:9px;width:100%;transition:opacity .28s ease,transform .28s ease}
+.amm-flow-content.is-clearing{opacity:0;transform:translateY(-8px)}
+.amm-flow-content strong{font-size:.88rem;line-height:1.4;color:#27213f}
+.amm-scene-icon{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;background:#fff;color:#5B2EE8;font-size:1.25rem;font-weight:800;box-shadow:0 4px 12px #5b2ee81a}
+.amm-scene-line{font-size:.74rem;line-height:1.5;color:#666a80}
+.amm-scene-tag{font-size:.65rem;font-weight:800;letter-spacing:.01em;color:#3b258b;background:#fff;border:1px solid #5b2ee81f;padding:6px 9px;border-radius:999px;max-width:100%}
+.amm-flow-card[data-flow-stage="2"] .amm-flow-scene{background:linear-gradient(135deg,#f2edff,#e8f8f0)}
+.amm-flow-card[data-flow-stage="3"] .amm-flow-scene{background:linear-gradient(135deg,#fff7db,#e9f8ef)}
+.amm-flow-card.is-active .amm-flow-content:not(.is-clearing){animation:ammSceneIn .45s ease both}
+.amm-flow-footer{display:flex;align-items:center;gap:14px;margin-top:22px;color:#393451;font-size:.82rem;font-weight:650}
+.amm-flow-track{height:5px;flex:1;background:#e9e6f7;border-radius:99px;overflow:hidden}
+.amm-flow-track span{display:block;width:25%;height:100%;border-radius:99px;background:linear-gradient(90deg,#5B2EE8,#D6F25B);transition:width .5s ease}
+@keyframes ammPulse{50%{box-shadow:0 0 0 7px #27b87905;opacity:.7}}
+@keyframes ammBorderRun{to{--amm-angle:360deg}}
+@keyframes ammSceneIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@property --amm-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
+@media(max-width:767px){.amm-flow-card{min-height:240px;padding:20px 17px 17px}.amm-flow-scene{min-height:120px}.amm-flow-footer{flex-wrap:wrap;gap:10px}.amm-flow-track{order:3;flex-basis:100%}}
+@media(prefers-reduced-motion:reduce){.amm-live-dot{animation:none}.amm-flow-card.is-active::before{animation:none}.amm-flow-content,.amm-flow-card,.amm-flow-track{transition:none}.amm-flow-card.is-active .amm-flow-content{animation:none}}
+
 </style>
 </head>
 <body>
@@ -202,15 +234,33 @@ button,a,input,textarea{touch-action:manipulation}
 
 </div></section>
 
-<!-- 5. SERVICES -->
+<!-- 5. LIVE WORKFLOW EXPERIENCE -->
 <section id="services" class="relative"><div class="ribbon hidden md:block" aria-hidden="true"></div>
-<div class="wrap relative"><h2 class="mb-10 rv">What we build</h2>
-<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-<article class="pill rv"><h3 class="f text-xl font-bold">AI App Development</h3><p class="mt-2 text-sm" style="color:var(--muted)">Big idea? Let’s turn it into a useful digital tool—designed around the people who’ll use it.</p></article>
-<article class="pill rv"><h3 class="f text-xl font-bold">WhatsApp &amp; Business Automation</h3><p class="mt-2 text-sm" style="color:var(--muted)">Let smart automation handle the repeat work—while you stay in control of every important conversation.</p></article>
-<article class="pill rv"><h3 class="f text-xl font-bold">Data &amp; Google Sheets</h3><p class="mt-2 text-sm" style="color:var(--muted)">Turn scattered data into clear answers, smarter decisions and hours of time saved.</p></article>
-<article class="pill rv"><h3 class="f text-xl font-bold">Content &amp; Video</h3><p class="mt-2 text-sm" style="color:var(--muted)">Make your brand impossible to scroll past with creative stories people remember.</p></article>
-</div></div></section>
+<div class="wrap relative">
+  <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 rv">
+    <div><p class="text-xs font-bold uppercase tracking-widest mb-3" style="color:var(--primary)">A little AMM magic</p><h2>From Order to <span class="v">WOW.</span></h2><p class="mt-3 max-w-2xl" style="color:var(--muted);line-height:1.75">See how a request moves through the AMM workflow—from the first message to a polished delivery.</p></div>
+    <span class="inline-flex items-center gap-2 self-start md:self-auto rounded-full px-4 py-2 text-xs font-semibold" style="background:#fff;border:1px solid #5b2ee82b;color:#585D78"><span class="amm-live-dot" aria-hidden="true"></span> SIMULATED LIVE DEMO</span>
+  </div>
+  <div class="amm-flow-grid grid sm:grid-cols-2 lg:grid-cols-4 gap-4" aria-label="Animated demonstration of the AMM order workflow">
+    <article class="amm-flow-card is-active rv" data-flow-stage="0" aria-label="Stage 1: Order received">
+      <div class="amm-flow-top"><span class="amm-flow-number">01</span><span class="amm-flow-state">INCOMING</span></div>
+      <h3>Order received</h3><div class="amm-flow-scene" aria-live="polite"><div class="amm-flow-content" data-flow-content="0"><span class="amm-scene-icon">↙</span><strong>New project request</strong><span class="amm-scene-line">“Help us simplify our workflow.”</span><span class="amm-scene-tag">Request captured</span></div></div>
+    </article>
+    <article class="amm-flow-card rv" data-flow-stage="1" aria-label="Stage 2: Team gets to work">
+      <div class="amm-flow-top"><span class="amm-flow-number">02</span><span class="amm-flow-state">TEAM BRIEF</span></div>
+      <h3>Team activated</h3><div class="amm-flow-scene"><div class="amm-flow-content" data-flow-content="1"><span class="amm-scene-icon">◎</span><strong>Turning request into a plan</strong><span class="amm-scene-line">Scope → tasks → next steps</span><span class="amm-scene-tag">Work organised</span></div></div>
+    </article>
+    <article class="amm-flow-card rv" data-flow-stage="2" aria-label="Stage 3: Work in progress">
+      <div class="amm-flow-top"><span class="amm-flow-number">03</span><span class="amm-flow-state">IN PROGRESS</span></div>
+      <h3>Work in action</h3><div class="amm-flow-scene"><div class="amm-flow-content" data-flow-content="2"><span class="amm-scene-icon">✳</span><strong>Building the solution</strong><span class="amm-scene-line">Connect · create · test</span><span class="amm-scene-tag">Quality check</span></div></div>
+    </article>
+    <article class="amm-flow-card rv" data-flow-stage="3" aria-label="Stage 4: Delivery and customer reaction">
+      <div class="amm-flow-top"><span class="amm-flow-number">04</span><span class="amm-flow-state">DELIVERY</span></div>
+      <h3>Delivered. Wow.</h3><div class="amm-flow-scene"><div class="amm-flow-content" data-flow-content="3"><span class="amm-scene-icon">✦</span><strong>Ready for the customer</strong><span class="amm-scene-line">Solution delivered with care.</span><span class="amm-scene-tag">“WOW. This is it!”</span></div></div>
+    </article>
+  </div>
+  <div class="amm-flow-footer rv"><span id="amm-flow-caption" aria-live="polite">A new request just arrived…</span><div class="amm-flow-track" aria-hidden="true"><span id="amm-flow-progress"></span></div><span class="text-xs font-semibold" style="color:var(--muted)">REQUEST → RESULT</span></div>
+</div></section>
 
 <!-- 6. STATS (replace numbers with real ones) -->
 <section style="padding-top:0"><div class="wrap grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -343,6 +393,47 @@ $('#cf').onsubmit=async e=>{e.preventDefault();const f=e.target,n=f.name.value.t
 $('#en').textContent=n?'':'Enter your name.';$('#ee').textContent=/^\S+@\S+\.\S+$/.test(m)?'':'Enter a valid email.';$('#em').textContent=g.length>9?'':'Write at least 10 characters.';
 if(!n||!/^\S+@\S+\.\S+$/.test(m)||g.length<10)return;
 try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}});$('#ok').textContent=r.ok?'Thanks. We will reply soon.':'Could not send. Please use WhatsApp or email.';if(r.ok)f.reset()}catch{$('#ok').textContent='Could not send. Please use WhatsApp or email.'}};
+
+// AMM workflow animation: a clearly labelled simulation, not live customer data
+(function(){
+ const cards=[...document.querySelectorAll('[data-flow-stage]')];
+ const caption=document.getElementById('amm-flow-caption');
+ const progress=document.getElementById('amm-flow-progress');
+ if(cards.length!==4||!caption||!progress)return;
+ const stages=[
+  {caption:'A new request just arrived…',html:'<span class="amm-scene-icon">↙</span><strong>New project request</strong><span class="amm-scene-line">“Help us simplify our workflow.”</span><span class="amm-scene-tag">Request captured</span>'},
+  {caption:'Request received. The AMM team is on it.',html:'<span class="amm-scene-icon">◎</span><strong>Turning request into a plan</strong><span class="amm-scene-line">Scope → tasks → next steps</span><span class="amm-scene-tag">Work organised</span>'},
+  {caption:'Now the solution takes shape…',html:'<span class="amm-scene-icon">✳</span><strong>Building the solution</strong><span class="amm-scene-line">Connect · create · test</span><span class="amm-scene-tag">Quality check</span>'},
+  {caption:'Delivered. The customer sees the result.',html:'<span class="amm-scene-icon">✦</span><strong>Ready for the customer</strong><span class="amm-scene-line">Solution delivered with care.</span><span class="amm-scene-tag">“WOW. This is it!”</span>'}
+ ];
+ const labels=['INCOMING','TEAM BRIEF','IN PROGRESS','DELIVERY'];
+ const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ let current=0,timer=null;
+ function renderStage(index){
+  cards.forEach((card,i)=>{
+   card.classList.toggle('is-active',i===index);
+   card.classList.toggle('is-done',i<index);
+   card.querySelector('.amm-flow-state').textContent=i===index?'WORKING':i<index?'CLEARED':labels[i];
+   const content=card.querySelector('[data-flow-content]');
+   if(i!==index){
+    content.classList.add('is-clearing');
+    window.setTimeout(()=>{if(current!==i){content.innerHTML='';content.classList.remove('is-clearing')}},220);
+   }else{
+    content.classList.remove('is-clearing');
+    content.innerHTML=stages[index].html;
+   }
+  });
+  caption.textContent=stages[index].caption;
+  progress.style.width=((index+1)*25)+'%';
+ }
+ function advance(){current=(current+1)%4;renderStage(current)}
+ renderStage(current);
+ if(!reduce){
+  timer=window.setInterval(advance,2600);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){window.clearInterval(timer);timer=null}else if(!timer)timer=window.setInterval(advance,2600)});
+ }
+})();
+
 </script>
 </body>
 </html>
