@@ -95,7 +95,10 @@ button,a,input,textarea{touch-action:manipulation}
 <div class="wrap">
 <div class="hero grain p-6 md:p-14">
 <div class="grid md:grid-cols-2 gap-10 items-center relative">
-<div>
+<div class="w-full">
+<p class="text-sm font-semibold mb-4" style="color:var(--primary)">AI AUTOMATION · DIGITAL SOLUTIONS</p>
+<h1 id="hero-title" class="min-h-[2.1em]" aria-label="What If Work Could Do Itself?"><span id="hero-heading-text"></span><span id="hero-cursor" aria-hidden="true" style="display:inline-block;width:2px;height:.85em;background:var(--primary);margin-left:5px;vertical-align:-.04em"></span></h1>
+<p id="hero-subtitle" class="mt-5 text-base md:text-lg max-w-xl" style="color:var(--muted);min-height:3.5em"><span id="hero-subtitle-text"></span></p>
 </div>
 </div>
 </div>
@@ -186,6 +189,41 @@ button,a,input,textarea{touch-action:manipulation}
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+// One-time hero typewriter on each fresh page load; no looping
+const heroHeading = $('#hero-heading-text'), heroSubtitle = $('#hero-subtitle-text'), heroCursor = $('#hero-cursor');
+if (heroHeading && heroSubtitle && heroCursor) {
+  const headingText = 'What If Work Could Do Itself?';
+  const subtitleText = 'Imagine fewer repetitive tasks, smarter workflows, and more time for the ideas that move your business forward.';
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    heroHeading.textContent = headingText;
+    heroSubtitle.textContent = subtitleText;
+    heroCursor.style.display = 'none';
+  } else {
+    let hi = 0, si = 0;
+    const typeHeading = () => {
+      if (hi < headingText.length) {
+        heroHeading.textContent += headingText.charAt(hi++);
+        setTimeout(typeHeading, headingText.charAt(hi - 1) === ' ' ? 105 : 62);
+      } else {
+        const title = $('#hero-title');
+        title.animate([{transform:'scale(1)',filter:'brightness(1)'},{transform:'scale(1.025)',filter:'brightness(1.08)'},{transform:'scale(1)',filter:'brightness(1)'}],{duration:420,easing:'ease-out'});
+        title.style.textShadow = '0 0 24px #5b2ee833';
+        setTimeout(() => { title.style.textShadow = 'none'; }, 650);
+        setTimeout(typeSubtitle, 420);
+      }
+    };
+    const typeSubtitle = () => {
+      if (si < subtitleText.length) {
+        heroSubtitle.textContent += subtitleText.charAt(si++);
+        setTimeout(typeSubtitle, subtitleText.charAt(si - 1) === ',' ? 180 : subtitleText.charAt(si - 1) === ' ' ? 38 : 19);
+      } else {
+        heroCursor.style.display = 'none';
+      }
+    };
+    setTimeout(typeHeading, 350);
+  }
+}
 // navbar blur + mobile menu
 addEventListener('scroll',()=>{const n=$('#nav');n.style.background=scrollY>20?'#fafaffd9':'transparent';n.style.backdropFilter=scrollY>20?'blur(14px)':'none'});
 $('#burger').onclick=e=>{const m=$('#menu');m.classList.toggle('hidden');e.currentTarget.setAttribute('aria-expanded',!m.classList.contains('hidden'))};
