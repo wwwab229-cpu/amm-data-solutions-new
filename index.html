@@ -50,6 +50,65 @@ input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px soli
 .err{color:#b42318;font-size:.85rem;min-height:1.1em}
 .grain::after{content:"";position:absolute;inset:0;opacity:.05;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
 
+/* Creative text treatment: improve hierarchy, contrast and color without changing copy or layout */
+#hero-title{
+  color:var(--navy);
+  line-height:1.08;
+  text-wrap:balance;
+  text-shadow:0 8px 28px #5b2ee817;
+}
+#hero-heading-text{
+  background:linear-gradient(105deg,#4520c9 0%,#7650f2 38%,#087f8c 72%,#5b2ee8 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+}
+#hero-cursor{
+  background:linear-gradient(180deg,#5B2EE8,#0b9b91)!important;
+  border-radius:3px;
+  box-shadow:0 0 12px #5b2ee866;
+}
+#hero-subtitle{
+  color:#343953!important;
+  font-weight:500;
+  line-height:1.8;
+  letter-spacing:-.012em;
+  text-wrap:pretty;
+}
+#about h2,#services h2,#work h2,#process h2,#faq h2,#contact h2{
+  color:#191b35;
+  text-wrap:balance;
+}
+#about h2 .v,#services h2 .v,#work h2 .v,#process h2 .v,#faq h2 .v,#contact h2 .v{
+  color:#5B2EE8;
+}
+#services .pill{
+  border:1px solid #5b2ee81a;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+#services .pill h3{
+  color:#39208f;
+  line-height:1.25;
+}
+#services .pill p,#about p,#work article p,#process li p{
+  color:#4d526b!important;
+  line-height:1.75;
+}
+#services .pill:hover{
+  transform:translateY(-5px);
+  border-color:#5b2ee866;
+  box-shadow:0 20px 42px -18px #5b2ee855;
+}
+@media(max-width:767px){
+  #hero-title{font-size:clamp(2.35rem,10.2vw,3.35rem);line-height:1.08}
+  #hero-subtitle{font-size:1rem;line-height:1.75}
+}
+@media(prefers-reduced-motion:reduce){
+  #services .pill{transition:none}
+}
+
 /* Responsive refinements only: preserve existing content, colors and desktop layout */
 html{scroll-padding-top:88px}
 img,svg,video,canvas{max-width:100%}
