@@ -57,14 +57,52 @@ input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px soli
   text-wrap:balance;
   text-shadow:0 8px 28px #5b2ee817;
 }
+#hero-title{position:relative}
 #hero-heading-text{
-  background:linear-gradient(105deg,#4520c9 0%,#7650f2 38%,#087f8c 72%,#5b2ee8 100%);
+  background:linear-gradient(105deg,#4520c9 0%,#7650f2 27%,#b58a00 44%,#d7a900 53%,#087f8c 72%,#5b2ee8 100%);
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
   box-decoration-break:clone;
   -webkit-box-decoration-break:clone;
 }
+/* Small decorative objects around the hero copy: yellow spark + floating orb */
+#hero-title::after{
+  content:"✦";
+  display:inline-block;
+  color:#F4C400;
+  -webkit-text-fill-color:#F4C400;
+  font-size:.38em;
+  vertical-align:top;
+  margin-left:.2em;
+  text-shadow:0 0 16px #F4C40099;
+  animation:heroSpark 2.8s ease-in-out infinite;
+}
+.hero .grid::before{
+  content:"";
+  position:absolute;
+  width:22px;height:22px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff6b4 0%,#FFD52A 45%,#F0B900 100%);
+  box-shadow:0 8px 24px #e6b80055, inset -3px -4px 8px #a8790033;
+  top:2%;right:5%;
+  pointer-events:none;
+  animation:heroFloat 4s ease-in-out infinite;
+}
+.hero .grid::after{
+  content:"✧";
+  position:absolute;
+  right:14%;bottom:4%;
+  color:#E8B900;
+  font-size:clamp(24px,3vw,38px);
+  line-height:1;
+  text-shadow:0 4px 16px #f4c40066;
+  pointer-events:none;
+  animation:heroSpark 3.2s ease-in-out infinite reverse;
+}
+.hero .grid>div{position:relative;z-index:1}
+@keyframes heroFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-9px) rotate(12deg)}}
+@keyframes heroSpark{0%,100%{transform:scale(1) rotate(0);opacity:.85}50%{transform:scale(1.2) rotate(14deg);opacity:1}}
 #hero-cursor{
   background:linear-gradient(180deg,#5B2EE8,#0b9b91)!important;
   border-radius:3px;
@@ -76,6 +114,10 @@ input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px soli
   line-height:1.8;
   letter-spacing:-.012em;
   text-wrap:pretty;
+  text-decoration:underline;
+  text-decoration-color:#F4C400;
+  text-decoration-thickness:2px;
+  text-underline-offset:5px;
 }
 #about h2,#services h2,#work h2,#process h2,#faq h2,#contact h2{
   color:#191b35;
