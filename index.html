@@ -379,6 +379,37 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 @media(max-width:560px){.amm-workflow{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.amm-stage{padding:10px}.amm-stage h3{font-size:.78rem}.amm-window,.amm-stage:not(.is-active) .amm-window{height:150px;min-height:150px}.amm-system-map{min-height:130px}.amm-system-node span{width:34px;height:34px}.amm-delivery-check{width:54px;height:54px}}
 @media(prefers-reduced-motion:reduce){.amm-task-row>span:nth-child(2)::after,.amm-system-node span,.amm-system-link,.amm-system-orbit,.amm-build-meter i,.amm-delivery-glow,.amm-delivery-check,.amm-stage:not(.is-active) .amm-window::before{animation:none!important}}
 
+
+/* Meaningful animated copy layer + visible client message repair */
+.amm-stage h3{font-size:.88rem;letter-spacing:-.02em}
+.amm-window{isolation:isolate}
+.amm-visual-copy{position:absolute;z-index:8;left:12px;right:12px;bottom:11px;display:flex;flex-direction:column;gap:4px;padding:10px 11px;border:1px solid #ffffffc9;border-radius:11px;background:linear-gradient(135deg,#ffffffed,#f7f4ffdc);box-shadow:0 8px 24px #34205f14;backdrop-filter:blur(10px);opacity:0;transform:translateY(8px);transition:opacity .55s ease,transform .7s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.amm-stage.is-active .amm-visual-copy{opacity:1;transform:translateY(0)}
+.amm-visual-eyebrow{font-size:.48rem;font-weight:900;letter-spacing:.12em;color:#5b2ee8}
+.amm-visual-copy strong{font-size:.76rem;line-height:1.2;letter-spacing:-.025em;color:#201936}
+.amm-visual-copy small{font-size:.57rem;line-height:1.3;color:#77718e}
+.amm-message-body{position:relative;z-index:2;min-height:0;height:100%;padding:11px 9px 72px;align-items:flex-start;justify-content:flex-start;gap:8px}
+.amm-avatar{flex:0 0 30px;width:30px;height:30px;margin-top:3px}
+.amm-message-bubble{display:flex;flex:1;min-width:0;min-height:0;align-items:flex-start;justify-content:flex-start;flex-direction:column;gap:6px;padding:10px 11px;border:1px solid #e7defe;border-radius:4px 13px 13px 13px;background:#ffffffef;box-shadow:0 8px 22px #5b2ee812}
+.amm-message-from{display:block!important;font-size:.48rem!important;line-height:1.2;color:#8a7ab8!important;letter-spacing:.08em;font-weight:900!important;margin:0 0 2px!important}
+#amm-order-typed{display:block;min-height:52px!important;margin:0;color:#39344d;font-size:.62rem!important;line-height:1.5!important;overflow-wrap:anywhere;white-space:normal}
+.amm-typing-cursor{width:5px;height:5px;flex:0 0 5px;margin:0;border-radius:50%;background:#5b2ee8;box-shadow:0 0 0 4px #5b2ee81a;animation:ammPulseObject 1.8s ease-in-out infinite}
+.amm-stage.is-active .amm-message-window{background:radial-gradient(ellipse at 10% 0%,#eee7ff,transparent 62%),linear-gradient(145deg,#faf8ff,#f4efff)}
+.amm-stage.is-active .amm-task-window{background:radial-gradient(ellipse at 90% 10%,#ddf8e9,transparent 65%),linear-gradient(145deg,#f7fffb,#edf9f2)}
+.amm-stage.is-active .amm-build-window{background:radial-gradient(ellipse at 50% 35%,#d9d0ff,transparent 67%),linear-gradient(145deg,#f5f1ff,#e6f7ff)}
+.amm-stage.is-active .amm-delivery-window{background:radial-gradient(ellipse at 50% 50%,#ffe0f0,#fff 65%,#f0fbd1)}
+.amm-stage.is-active .amm-task-window .amm-task-row{opacity:1}
+.amm-stage.is-active .amm-task-row>span:nth-child(2){background:linear-gradient(90deg,#e1f8eb,#e5e0ff)}
+.amm-stage.is-active .amm-task-row>span:nth-child(2)::after{background:linear-gradient(90deg,#44c58a,#5b2ee8,#d6f25b)}
+.amm-stage.is-active .amm-system-node span{border-color:#ffffff;background:linear-gradient(145deg,#fff,#f1eaff);color:#5b2ee8}
+.amm-stage.is-active .node-process span{background:linear-gradient(145deg,#7652f0,#4c23cb);color:#fff}
+.amm-stage.is-active .node-output span{background:linear-gradient(145deg,#f6ffcc,#d6f25b);color:#3f4c10}
+.amm-stage.is-active .amm-delivery-check{background:linear-gradient(145deg,#fff,#e7f9bc);color:#37875e;border-color:#fff}
+.amm-stage.is-active .amm-delivery-glow{opacity:.68;filter:blur(0)}
+.amm-stage:not(.is-active) .amm-visual-copy{opacity:0!important}
+@media(max-width:560px){.amm-message-body{padding:9px 7px 70px;gap:6px}.amm-message-bubble{padding:8px}#amm-order-typed{font-size:.58rem!important}.amm-visual-copy{left:8px;right:8px;bottom:8px;padding:8px}.amm-visual-copy strong{font-size:.68rem}}
+@media(prefers-reduced-motion:reduce){.amm-visual-copy,.amm-typing-cursor{transition:none;animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -423,40 +454,40 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
     <div class="amm-workflow" aria-label="Simulated animated customer order workflow">
       <article class="amm-stage amm-stage-order is-active" data-flow-stage="0">
         <div class="amm-stage-head"><span class="amm-stage-index">01 <i> / 04</i></span><span class="amm-stage-status">NEW REQUEST</span></div>
-        <h3>The order lands</h3><p class="amm-stage-intro">Every great result starts with a message.</p>
+        <h3>Order Intake</h3><p class="amm-stage-intro">Every great result starts with a message.</p>
         <div class="amm-window amm-message-window">
           <div class="amm-window-bar"><span class="amm-window-dots"><i></i><i></i><i></i></span><span>customer message</span><span class="amm-window-secure">●</span></div>
-          <div class="amm-message-body"><div class="amm-avatar">C</div><div class="amm-message-bubble"><span class="amm-message-from">New customer · just now</span><p id="amm-order-typed" aria-live="polite"></p><span class="amm-typing-cursor" aria-hidden="true"></span></div></div>
+          <div class="amm-message-body"><div class="amm-avatar">C</div><div class="amm-message-bubble"><span class="amm-message-from">NEW CLIENT REQUEST</span><p id="amm-order-typed" aria-live="polite"></p><span class="amm-typing-cursor" aria-hidden="true"></span></div><div class="amm-visual-copy order-visual-copy"><span class="amm-visual-eyebrow">INCOMING</span><strong>New client order</strong><small>Request received · AMM inbox</small></div></div>
           <div class="amm-message-foot"><span class="amm-mini-dot"></span> Incoming request <span class="amm-time">09:41 AM</span></div>
         </div>
         <div class="amm-stage-foot"><span class="amm-foot-mark">↳</span><span>Request received by AMM</span></div>
       </article>
       <article class="amm-stage amm-stage-team" data-flow-stage="1">
         <div class="amm-stage-head"><span class="amm-stage-index">02 <i> / 04</i></span><span class="amm-stage-status">TEAM BRIEF</span></div>
-        <h3>Team gets moving</h3><p class="amm-stage-intro">The request becomes a clear, workable plan.</p>
+        <h3>Team Workflow</h3><p class="amm-stage-intro">The request becomes a clear, workable plan.</p>
         <div class="amm-window amm-task-window">
           <div class="amm-window-bar"><span>AMM project desk</span><span class="amm-window-pill">NEW TASK</span></div>
           <div class="amm-task-row" data-task="0"><span class="amm-check">✓</span><span><b>Understand the request</b><small>Goal & requirements</small></span><em>DONE</em></div>
           <div class="amm-task-row" data-task="1"><span class="amm-check">✓</span><span><b>Map the solution</b><small>Plan the right approach</small></span><em>DONE</em></div>
           <div class="amm-task-row" data-task="2"><span class="amm-check">✓</span><span><b>Prepare the build</b><small>Tools & next steps</small></span><em>READY</em></div>
         </div>
-        <div class="amm-stage-foot"><span class="amm-foot-mark">↳</span><span>People, process & tools aligned</span></div>
+        <div class="amm-visual-copy team-visual-copy"><span class="amm-visual-eyebrow">TEAM IN SYNC</span><strong>Plan → Tasks → Ready</strong><small>Work moving forward</small></div><div class="amm-stage-foot"><span class="amm-foot-mark">↳</span><span>People, process & tools aligned</span></div>
       </article>
       <article class="amm-stage amm-stage-build" data-flow-stage="2">
         <div class="amm-stage-head"><span class="amm-stage-index">03 <i> / 04</i></span><span class="amm-stage-status">IN THE MAKING</span></div>
-        <h3>Watch it take shape</h3><p class="amm-stage-intro">Ideas turn into connected, useful work.</p>
+        <h3>Build &amp; Automate</h3><p class="amm-stage-intro">Ideas turn into connected, useful work.</p>
         <div class="amm-window amm-build-window">
           <div class="amm-window-bar"><span>Solution workspace</span><span class="amm-window-pill">BUILDING</span></div>
           <div class="amm-system-map" aria-hidden="true"><div class="amm-system-node node-request"><span>✳</span><b>Input</b></div><div class="amm-system-link link-one"></div><div class="amm-system-node node-process"><span>◈</span><b>Process</b></div><div class="amm-system-link link-two"></div><div class="amm-system-node node-output"><span>↗</span><b>Output</b></div><div class="amm-system-orbit orbit-one"></div><div class="amm-system-orbit orbit-two"></div></div>
-          <div class="amm-build-bottom"><span>Building your solution</span><div class="amm-build-meter"><i></i></div><b id="amm-build-percent">0%</b></div>
+          <div class="amm-build-bottom"><span>Building your solution</span><div class="amm-build-meter"><i></i></div><b id="amm-build-percent">0%</b></div><div class="amm-visual-copy build-visual-copy"><span class="amm-visual-eyebrow">SYSTEM CONNECTED</span><strong>Input → Automate → Output</strong><small>Tools working together</small></div>
         </div>
         <div class="amm-stage-foot"><span class="amm-foot-mark">↳</span><span>Create. Connect. Check.</span></div>
       </article>
       <article class="amm-stage amm-stage-delivery" data-flow-stage="3">
         <div class="amm-stage-head"><span class="amm-stage-index">04 <i> / 04</i></span><span class="amm-stage-status">DELIVERED</span></div>
-        <h3>That “WOW” moment</h3><p class="amm-stage-intro">The finished result reaches the customer.</p>
+        <h3>Client Delivery</h3><p class="amm-stage-intro">The finished result reaches the customer.</p>
         <div class="amm-window amm-delivery-window">
-          <div class="amm-delivery-glow"></div><div class="amm-delivery-check">✓</div><span class="amm-delivery-kicker">PROJECT COMPLETE</span><strong>Ready to make an impact.</strong><div class="amm-delivery-file"><span class="amm-file-icon">↗</span><span><b>Final solution</b><small>Reviewed · ready to use</small></span><span class="amm-file-check">✓</span></div><div class="amm-customer-reaction"><span class="amm-reaction-spark">✦</span><span><small>CUSTOMER REACTION</small><b>“Wow. This is exactly what we needed!”</b></span></div>
+          <div class="amm-delivery-glow"></div><div class="amm-delivery-check">✓</div><span class="amm-delivery-kicker">PROJECT COMPLETE</span><strong>Ready to make an impact.</strong><div class="amm-delivery-file"><span class="amm-file-icon">↗</span><span><b>Final solution</b><small>Reviewed · ready to use</small></span><span class="amm-file-check">✓</span></div><div class="amm-customer-reaction"><span class="amm-reaction-spark">✦</span><span><small>CUSTOMER REACTION</small><b>“Wow. This is exactly what we needed!”</b></span></div><div class="amm-visual-copy delivery-visual-copy"><span class="amm-visual-eyebrow">SUCCESSFULLY DELIVERED</span><strong>Ready for the client</strong><small>Checked · approved · complete</small></div>
         </div>
         <div class="amm-stage-foot"><span class="amm-foot-mark">✦</span><span>Delivered with care by AMM</span></div>
       </article>
