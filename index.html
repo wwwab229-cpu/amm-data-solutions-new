@@ -52,61 +52,34 @@ input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px soli
 
 /* Creative text treatment: improve hierarchy, contrast and color without changing copy or layout */
 #hero-title{
-  color:var(--navy);
-  line-height:1.08;
+  color:#111111;
+  font-size:clamp(2.8rem,6.8vw,5.4rem);
+  line-height:1.12;
   text-wrap:balance;
-  text-shadow:0 8px 28px #5b2ee817;
+  text-shadow:none;
 }
-#hero-title{position:relative}
-#hero-heading-text{
-  background:linear-gradient(105deg,#4520c9 0%,#7650f2 27%,#b58a00 44%,#d7a900 53%,#087f8c 72%,#5b2ee8 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
+#hero-type-box{
+  display:inline;
+  padding:.045em .13em .09em;
+  background:#FFD83D;
+  color:#111111;
+  -webkit-text-fill-color:#111111;
   box-decoration-break:clone;
   -webkit-box-decoration-break:clone;
+  border-radius:.08em;
+  box-shadow:0 .08em 0 #e8b91b;
+  -webkit-box-decoration-break:clone;
 }
-/* Small decorative objects around the hero copy: yellow spark + floating orb */
-#hero-title::after{
-  content:"✦";
-  display:inline-block;
-  color:#F4C400;
-  -webkit-text-fill-color:#F4C400;
-  font-size:.38em;
-  vertical-align:top;
-  margin-left:.2em;
-  text-shadow:0 0 16px #F4C40099;
-  animation:heroSpark 2.8s ease-in-out infinite;
+#hero-heading-text{
+  color:#111111;
+  -webkit-text-fill-color:#111111;
 }
-.hero .grid::before{
-  content:"";
-  position:absolute;
-  width:22px;height:22px;
-  border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,#fff6b4 0%,#FFD52A 45%,#F0B900 100%);
-  box-shadow:0 8px 24px #e6b80055, inset -3px -4px 8px #a8790033;
-  top:2%;right:5%;
-  pointer-events:none;
-  animation:heroFloat 4s ease-in-out infinite;
-}
-.hero .grid::after{
-  content:"✧";
-  position:absolute;
-  right:14%;bottom:4%;
-  color:#E8B900;
-  font-size:clamp(24px,3vw,38px);
-  line-height:1;
-  text-shadow:0 4px 16px #f4c40066;
-  pointer-events:none;
-  animation:heroSpark 3.2s ease-in-out infinite reverse;
-}
-.hero .grid>div{position:relative;z-index:1}
-@keyframes heroFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-9px) rotate(12deg)}}
-@keyframes heroSpark{0%,100%{transform:scale(1) rotate(0);opacity:.85}50%{transform:scale(1.2) rotate(14deg);opacity:1}}
 #hero-cursor{
-  background:linear-gradient(180deg,#5B2EE8,#0b9b91)!important;
-  border-radius:3px;
-  box-shadow:0 0 12px #5b2ee866;
+  background:#111111!important;
+  border-radius:1px;
+  box-shadow:none;
+  margin-left:3px!important;
+  vertical-align:-.02em!important;
 }
 #hero-subtitle{
   color:#343953!important;
@@ -144,7 +117,8 @@ input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px soli
   box-shadow:0 20px 42px -18px #5b2ee855;
 }
 @media(max-width:767px){
-  #hero-title{font-size:clamp(2.35rem,10.2vw,3.35rem);line-height:1.08}
+  #hero-title{font-size:clamp(2.55rem,10.5vw,3.8rem);line-height:1.1}
+  #hero-type-box{padding:.05em .12em .09em}
   #hero-subtitle{font-size:1rem;line-height:1.75}
 }
 @media(prefers-reduced-motion:reduce){
@@ -197,7 +171,7 @@ button,a,input,textarea{touch-action:manipulation}
 <div class="hero grain p-6 md:p-14">
 <div class="grid md:grid-cols-2 gap-10 items-center relative">
 <div class="w-full">
-<h1 id="hero-title" class="min-h-[2.1em]" aria-label="What If Work Could Do Itself?"><span id="hero-heading-text"></span><span id="hero-cursor" aria-hidden="true" style="display:inline-block;width:2px;height:.85em;background:var(--primary);margin-left:5px;vertical-align:-.04em"></span></h1>
+<h1 id="hero-title" class="min-h-[2.1em]" aria-label="What If Work Could Do Itself?"><span id="hero-type-box"><span id="hero-heading-text"></span><span id="hero-cursor" aria-hidden="true" style="display:inline-block;width:2px;height:.85em;background:#111;margin-left:3px;vertical-align:-.02em"></span></span></h1>
 <p id="hero-subtitle" class="mt-5 text-base md:text-lg max-w-xl" style="color:var(--muted);min-height:3.5em"><span id="hero-subtitle-text"></span></p>
 </div>
 </div>
