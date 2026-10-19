@@ -53,7 +53,7 @@ input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px soli
 /* Creative text treatment: improve hierarchy, contrast and color without changing copy or layout */
 #hero-title{
   color:#111111;
-  font-size:clamp(2.8rem,6.8vw,5.4rem);
+  font-size:clamp(2.25rem,4.8vw,4.15rem);
   line-height:1.12;
   text-wrap:balance;
   text-shadow:none;
@@ -68,7 +68,12 @@ input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px soli
   -webkit-box-decoration-break:clone;
   border-radius:.08em;
   box-shadow:0 .08em 0 #e8b91b;
-  -webkit-box-decoration-break:clone;
+  transition:background-color .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+#hero-type-box:hover{
+  background:#FFE36A;
+  box-shadow:0 .12em 0 #e8b91b,0 8px 24px #e8b91b40;
+  filter:saturate(1.08);
 }
 #hero-heading-text{
   color:#111111;
@@ -82,15 +87,12 @@ input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px soli
   vertical-align:-.02em!important;
 }
 #hero-subtitle{
-  color:#343953!important;
+  color:#111111!important;
   font-weight:500;
   line-height:1.8;
   letter-spacing:-.012em;
   text-wrap:pretty;
-  text-decoration:underline;
-  text-decoration-color:#F4C400;
-  text-decoration-thickness:2px;
-  text-underline-offset:5px;
+  text-decoration:none!important;
 }
 #about h2,#services h2,#work h2,#process h2,#faq h2,#contact h2{
   color:#191b35;
@@ -117,9 +119,12 @@ input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px soli
   box-shadow:0 20px 42px -18px #5b2ee855;
 }
 @media(max-width:767px){
-  #hero-title{font-size:clamp(2.55rem,10.5vw,3.8rem);line-height:1.1}
+  #hero-title{font-size:clamp(1.9rem,7.8vw,2.8rem);line-height:1.12}
   #hero-type-box{padding:.05em .12em .09em}
   #hero-subtitle{font-size:1rem;line-height:1.75}
+}
+@media(prefers-reduced-motion:reduce){
+  #hero-type-box{transition:none}
 }
 @media(prefers-reduced-motion:reduce){
   #services .pill{transition:none}
@@ -264,7 +269,7 @@ button,a,input,textarea{touch-action:manipulation}
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 // One-time hero typewriter on each fresh page load; no looping
-const heroHeading = $('#hero-heading-text'), heroSubtitle = $('#hero-subtitle-text'), heroCursor = $('#hero-cursor');
+const heroHeading = $('#hero-heading-text'), heroSubtitle = $('#hero-subtitle-text'), heroCursor = $('#hero-cursor'), heroTypeBox = $('#hero-type-box');
 if (heroHeading && heroSubtitle && heroCursor) {
   const headingText = 'What If Work Could Do Itself?';
   const subtitleText = 'Less busywork. More brainpower. We turn the “ugh, not this again” tasks into smart, connected tools—so your best ideas get the spotlight.';
@@ -278,6 +283,12 @@ if (heroHeading && heroSubtitle && heroCursor) {
     const typeHeading = () => {
       if (hi < headingText.length) {
         heroHeading.textContent += headingText.charAt(hi++);
+        if (heroTypeBox) {
+          heroTypeBox.animate(
+            [{filter:'brightness(1)',boxShadow:'0 .08em 0 #e8b91b'},{filter:'brightness(1.12)',boxShadow:'0 .12em 0 #e8b91b,0 0 12px #FFD83D80'},{filter:'brightness(1)',boxShadow:'0 .08em 0 #e8b91b'}],
+            {duration:180,easing:'ease-out'}
+          );
+        }
         setTimeout(typeHeading, headingText.charAt(hi - 1) === ' ' ? 105 : 62);
       } else {
         const title = $('#hero-title');
