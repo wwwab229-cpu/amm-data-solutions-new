@@ -321,6 +321,64 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 @media(max-width:560px){.amm-workflow{grid-template-columns:1fr;gap:12px}.amm-stage{padding:15px}.amm-window{min-height:175px}.amm-stage-intro{min-height:0}}
 @media(prefers-reduced-motion:reduce){.amm-stage:not(.is-active) .amm-window::after,.amm-stage.is-active .amm-window::after{animation:none!important}}
 
+
+/* Pro mode: category-first cards, maximum animation canvas, minimal dead space */
+.amm-workflow{gap:12px;align-items:stretch}
+.amm-stage{padding:13px 13px 12px;border-radius:17px;min-height:0;display:flex;flex-direction:column;gap:0;opacity:1}
+.amm-stage:nth-child(2),.amm-stage:nth-child(3),.amm-stage:nth-child(4){border-radius:17px}
+.amm-stage-head{margin:0 0 9px;min-height:22px;justify-content:flex-start}
+.amm-stage-index,.amm-stage-status,.amm-stage-intro,.amm-stage-foot{display:none!important}
+.amm-stage h3{display:block;margin:0;font-size:.88rem;line-height:1.2;letter-spacing:-.025em;color:#28223f}
+.amm-window{flex:1;min-height:176px;height:176px;border-radius:12px;position:relative;background:#fbfaff}
+.amm-window-bar,.amm-message-from,.amm-message-foot,.amm-task-row b,.amm-task-row small,.amm-task-row em,.amm-system-node b,.amm-build-bottom>span,.amm-build-bottom>b,.amm-delivery-kicker,.amm-delivery-window>strong,.amm-delivery-file b,.amm-delivery-file small,.amm-customer-reaction small,.amm-customer-reaction b{display:none!important}
+.amm-message-body{padding:12px 10px;align-items:center;min-height:100%;justify-content:center}
+.amm-avatar{width:34px;height:34px;flex-basis:34px;border-radius:12px;font-size:.8rem;box-shadow:0 0 0 7px #eae4ff70}
+.amm-message-bubble{min-height:92px;display:grid;place-items:center;border:0;background:linear-gradient(135deg,#fff,#f4efff);box-shadow:0 8px 22px #5b2ee812}
+#amm-order-typed{min-height:0;font-size:0;line-height:0}
+.amm-typing-cursor{width:4px;height:4px;border-radius:50%;margin:0;background:#5b2ee8;box-shadow:0 0 0 5px #5b2ee81a;animation:ammPulseObject 1.8s ease-in-out infinite}
+.amm-task-window{padding:12px 10px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.amm-task-row{padding:0;border:0;opacity:.48;transform:translateX(-5px);gap:10px}
+.amm-check{width:28px;height:28px;flex-basis:28px;border-radius:10px;background:#fff;box-shadow:0 5px 15px #5b2ee812}
+.amm-task-row.is-complete .amm-check{box-shadow:0 0 0 5px #bfe8cf45,0 5px 15px #26835618}
+.amm-task-row>span:nth-child(2){height:7px;flex:1;border-radius:99px;background:linear-gradient(90deg,#e6defb,#f4f0ff);position:relative;overflow:hidden}
+.amm-task-row>span:nth-child(2)::after{content:"";position:absolute;inset:0;width:44%;border-radius:inherit;background:linear-gradient(90deg,#5b2ee8,#a99aff,#d6f25b);transform:translateX(-120%);animation:ammTaskSweep 2.8s ease-in-out infinite}
+.amm-task-row:nth-child(2)>span:nth-child(2)::after{animation-delay:.5s}
+.amm-task-row:nth-child(3)>span:nth-child(2)::after{animation-delay:1s}
+.amm-system-map{height:100%;min-height:150px;padding:10px 4px}
+.amm-system-node{width:56px;gap:0}
+.amm-system-node span{width:42px;height:42px;border-radius:15px;animation:ammNodeFloat 3.6s ease-in-out infinite;box-shadow:0 8px 20px #5b2ee81a,0 0 0 6px #ffffffa8}
+.node-process span{animation-delay:.4s}
+.node-output span{animation-delay:.8s}
+.amm-system-link{width:20%;top:50%;height:2px;background:linear-gradient(90deg,#bcaaf5,#d6f25b,#5b2ee8);background-size:200% 100%;animation:ammBeamFlow 2.4s linear infinite}
+.amm-system-link::after{width:6px;height:6px;top:-2px;box-shadow:0 0 10px #5b2ee8}
+.amm-system-orbit{border:1px solid #8b71ed38;border-radius:50%;position:absolute;pointer-events:none;animation:ammOrbit 9s linear infinite}
+.amm-system-orbit.orbit-one{width:104px;height:104px;left:calc(50% - 52px);top:calc(50% - 52px)}
+.amm-system-orbit.orbit-two{width:140px;height:140px;left:calc(50% - 70px);top:calc(50% - 70px);border-style:dashed;animation-duration:15s;animation-direction:reverse}
+.amm-build-bottom{position:absolute;bottom:9px;left:12px;right:12px;display:flex;align-items:center;gap:0;padding:0}
+.amm-build-meter{height:4px;flex:1;background:#e8e2f8;border-radius:99px;overflow:hidden}
+.amm-build-meter i{display:block;height:100%;width:100%;transform-origin:left;background:linear-gradient(90deg,#5b2ee8,#a79aff,#d6f25b);border-radius:99px;animation:ammMeterShine 2.8s ease-in-out infinite}
+.amm-delivery-window{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;background:radial-gradient(ellipse at 50% 50%,#f3eeff,#fff 68%);isolation:isolate}
+.amm-delivery-glow{position:absolute;width:112px;height:112px;border-radius:50%;background:conic-gradient(from 0deg,#d6f25b,#b7a4ff,#f7b9dc,#d6f25b);opacity:.48;filter:blur(1px);animation:ammOrbit 9s linear infinite;z-index:-1}
+.amm-delivery-check{display:grid;place-items:center;width:66px;height:66px;border:1px solid #ffffffd9;border-radius:23px;background:linear-gradient(145deg,#fff,#effad0);box-shadow:0 10px 30px #5b2ee826,0 0 0 9px #ffffff70;color:#5b2ee8;font-size:2rem;animation:ammSuccessFloat 3s ease-in-out infinite}
+.amm-delivery-file,.amm-customer-reaction{display:none!important}
+.amm-stage:not(.is-active) .amm-window{min-height:176px}
+.amm-stage:not(.is-active) .amm-window>*{opacity:0!important}
+.amm-stage:not(.is-active) .amm-window::after{animation:ammIdleScreen 6s ease-in-out infinite alternate,ammIdleBreath 4s ease-in-out infinite alternate}
+.amm-stage:not(.is-active) .amm-window::before{content:"";position:absolute;z-index:6;inset:14% 16%;border:1px solid #ffffffa6;border-radius:28px;transform:rotate(-12deg);box-shadow:0 0 0 10px #ffffff2c,0 0 35px #5b2ee826;animation:ammGlassObject 7s ease-in-out infinite alternate;pointer-events:none}
+.amm-flow-bottom,.amm-demo-note{display:none!important}
+@keyframes ammPulseObject{0%,100%{transform:scale(.8);box-shadow:0 0 0 4px #5b2ee812}50%{transform:scale(1.15);box-shadow:0 0 0 9px #5b2ee824}}
+@keyframes ammTaskSweep{0%,15%{transform:translateX(-120%)}75%,100%{transform:translateX(240%)}}
+@keyframes ammNodeFloat{0%,100%{transform:translateY(2px) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+@keyframes ammBeamFlow{to{background-position:200% 0}}
+@keyframes ammOrbit{to{transform:rotate(360deg)}}
+@keyframes ammMeterShine{0%,100%{transform:scaleX(.2);opacity:.55}50%{transform:scaleX(1);opacity:1}}
+@keyframes ammSuccessFloat{0%,100%{transform:translateY(2px) scale(.98)}50%{transform:translateY(-5px) scale(1.03)}}
+@keyframes ammIdleBreath{from{filter:saturate(.9) brightness(1)}to{filter:saturate(1.15) brightness(1.06)}}
+@keyframes ammGlassObject{from{transform:translate(-5px,3px) rotate(-15deg) scale(.9)}to{transform:translate(5px,-3px) rotate(8deg) scale(1.05)}}
+@media(max-width:1100px){.amm-workflow{grid-template-columns:repeat(2,minmax(0,1fr))}.amm-window{height:190px;min-height:190px}}
+@media(max-width:560px){.amm-workflow{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.amm-stage{padding:10px}.amm-stage h3{font-size:.78rem}.amm-window,.amm-stage:not(.is-active) .amm-window{height:150px;min-height:150px}.amm-system-map{min-height:130px}.amm-system-node span{width:34px;height:34px}.amm-delivery-check{width:54px;height:54px}}
+@media(prefers-reduced-motion:reduce){.amm-task-row>span:nth-child(2)::after,.amm-system-node span,.amm-system-link,.amm-system-orbit,.amm-build-meter i,.amm-delivery-glow,.amm-delivery-check,.amm-stage:not(.is-active) .amm-window::before{animation:none!important}}
+
 </style>
 </head>
 <body>
