@@ -94,6 +94,17 @@ input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px soli
   text-wrap:pretty;
   text-decoration:none!important;
 }
+.hero-support-line{
+  animation:hero-support-blink 1.05s ease-out both;
+}
+@keyframes hero-support-blink{
+  0%,24%,48%{opacity:0}
+  12%,36%{opacity:.22}
+  65%,100%{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-support-line{animation:none;opacity:1}
+}
 #about h2,#services h2,#work h2,#process h2,#faq h2,#contact h2{
   color:#191b35;
   text-wrap:balance;
@@ -178,7 +189,7 @@ button,a,input,textarea{touch-action:manipulation}
 <div class="w-full">
 <h1 id="hero-title" class="min-h-[2.1em]" aria-label="What If Work Could Do Itself?"><span id="hero-type-box"><span id="hero-heading-text"></span><span id="hero-cursor" aria-hidden="true" style="display:inline-block;width:2px;height:.85em;background:#111;margin-left:3px;vertical-align:-.02em"></span></span></h1>
 <p id="hero-subtitle" class="mt-5 text-base md:text-lg max-w-xl" style="color:var(--muted);min-height:3.5em"><span id="hero-subtitle-text"></span></p>
-<h2 class="mt-5 text-xl md:text-2xl font-bold leading-snug" style="color:#111">We turn <span class="v">everyday work</span> into <span class="px-2 rounded-lg" style="background:var(--lime)">simple digital tools.</span></h2>
+<h2 class="hero-support-line mt-5 text-xl md:text-2xl font-bold leading-snug" style="color:#111">We turn <span class="v">everyday work</span> into <span class="px-2 rounded-lg" style="background:var(--lime)">simple digital tools.</span></h2>
 </div>
 </div>
 </div>
