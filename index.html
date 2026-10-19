@@ -271,6 +271,56 @@ button,a,input,textarea{touch-action:manipulation}
 @media(max-width:600px){.amm-workflow{grid-template-columns:minmax(0,1fr);gap:13px}.amm-stage,.amm-stage:nth-child(n){border-radius:22px 22px 22px 8px;padding:21px 18px 17px}.amm-stage-intro{min-height:0}.amm-window{min-height:205px}.amm-message-bubble{max-width:100%}.amm-flow-bottom{grid-template-columns:minmax(0,1fr) auto;gap:10px}.amm-flow-progress{grid-column:1/-1;grid-row:2}.amm-flow-count{font-size:.53rem}.amm-stage h3{font-size:1.13rem}}
 @media(prefers-reduced-motion:reduce){.amm-stage,.amm-stage::before,.amm-task-row,.amm-delivery-check,.amm-customer-reaction,.amm-flow-progress span{transition:none}.amm-typing-cursor{animation:none}.amm-stage.is-active .amm-system-link::after,.amm-stage.is-active .amm-build-meter i{animation:none}.amm-stage.is-active .amm-build-meter i{width:100%}.amm-stage.is-active .amm-customer-reaction{opacity:1;transform:none}.amm-delivery-glow{opacity:1}.amm-delivery-check{opacity:1;transform:none}}
 
+
+/* Compact, object-rich workflow panels; inactive stages stay as colourful idle screens */
+.amm-workflow{gap:10px}
+.amm-stage{padding:15px 13px 13px;border-radius:18px 18px 18px 7px;opacity:.94;transition:opacity .75s ease,transform .9s cubic-bezier(.2,.7,.2,1),border-color .75s ease,box-shadow .75s ease,background .75s ease}
+.amm-stage:nth-child(2){border-radius:7px 18px 18px 18px}
+.amm-stage:nth-child(3){border-radius:18px 7px 18px 18px}
+.amm-stage:nth-child(4){border-radius:18px 18px 7px 18px}
+.amm-stage-head{margin-bottom:12px}
+.amm-stage-intro{min-height:2.5em;margin-bottom:12px;font-size:.72rem;line-height:1.5}
+.amm-stage h3{font-size:1rem;margin-bottom:5px}
+.amm-window{min-height:185px;border-radius:13px;transition:background .8s ease,border-color .8s ease,box-shadow .8s ease}
+.amm-window-bar{height:31px}
+.amm-message-body{padding:11px 9px 9px}
+#amm-order-typed{min-height:74px;font-size:.68rem;line-height:1.55}
+.amm-task-row{padding:10px 8px}
+.amm-system-map{height:125px}
+.amm-system-link{top:59px}
+.amm-build-bottom{padding-top:5px}
+.amm-stage-foot{margin-top:11px;font-size:.6rem}
+.amm-foot-mark{flex-basis:19px;width:19px;height:19px}
+.amm-stage.is-clearing{opacity:.94;transform:scale(.99);box-shadow:none}
+.amm-stage:not(.is-active) .amm-window{border-color:transparent;box-shadow:inset 0 1px 0 #ffffff85,0 12px 28px -20px #5b2ee866}
+.amm-stage:not(.is-active) .amm-window>*{opacity:0!important;transition:opacity .55s ease}
+.amm-stage:not(.is-active) .amm-window::after{content:"";position:absolute;inset:0;z-index:5;display:block;pointer-events:none;border-radius:inherit;background:
+radial-gradient(circle at 18% 25%,#ffffffd9 0 3px,transparent 4px),
+radial-gradient(circle at 78% 28%,#ffffffa8 0 5px,transparent 6px),
+radial-gradient(circle at 68% 76%,#ffffffc7 0 2px,transparent 3px),
+radial-gradient(ellipse at 15% 100%,#d6f25b 0,transparent 47%),
+radial-gradient(ellipse at 88% 4%,#b9a5ff 0,transparent 48%),
+linear-gradient(135deg,#f4efff 0%,#dcd0ff 42%,#f7fbdc 100%);
+background-size:100% 100%,100% 100%,100% 100%,150% 150%,150% 150%,100% 100%;
+animation:ammIdleScreen 8s ease-in-out infinite alternate}
+.amm-stage:nth-child(2):not(.is-active) .amm-window::after{background:
+radial-gradient(circle at 24% 28%,#fff 0 4px,transparent 5px),radial-gradient(circle at 76% 68%,#ffffffc9 0 6px,transparent 7px),
+radial-gradient(ellipse at 0 100%,#c8f4dc 0,transparent 52%),radial-gradient(ellipse at 100% 0,#a9e6f5 0,transparent 52%),linear-gradient(135deg,#e4fbf1,#d9f1ff 55%,#f4fbdc);background-size:100% 100%,100% 100%,150% 150%,150% 150%,100% 100%;animation:ammIdleScreen 7s ease-in-out infinite alternate}
+.amm-stage:nth-child(3):not(.is-active) .amm-window::after{background:
+radial-gradient(circle at 26% 34%,#fff 0 4px,transparent 5px),radial-gradient(circle at 75% 64%,#ffffffc9 0 6px,transparent 7px),
+radial-gradient(ellipse at 0 0,#c5b4ff 0,transparent 54%),radial-gradient(ellipse at 100% 100%,#d6f25b 0,transparent 50%),linear-gradient(135deg,#e8e0ff,#d8d0ff 55%,#f4fbdc);background-size:100% 100%,100% 100%,150% 150%,150% 150%,100% 100%;animation:ammIdleScreen 6.5s ease-in-out infinite alternate}
+.amm-stage:nth-child(4):not(.is-active) .amm-window::after{background:
+radial-gradient(circle at 20% 25%,#fff 0 4px,transparent 5px),radial-gradient(circle at 72% 70%,#ffffffd9 0 5px,transparent 6px),
+radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ellipse at 100% 0,#ffd6e8 0,transparent 52%),linear-gradient(135deg,#fff0f6,#e8e0ff 55%,#f7fbdc);background-size:100% 100%,100% 100%,150% 150%,150% 150%,100% 100%;animation:ammIdleScreen 7.5s ease-in-out infinite alternate}
+.amm-stage.is-active .amm-window{border-color:#5b2ee82b;box-shadow:0 12px 26px -20px #5b2ee866}
+.amm-stage.is-active .amm-window::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 0 35%,#ffffff40 48%,transparent 60%);transform:translateX(-120%);animation:ammGlassSweep 5s ease-in-out infinite}
+.amm-stage.is-active .amm-window .amm-window-bar,.amm-stage.is-active .amm-window .amm-message-body,.amm-stage.is-active .amm-window .amm-message-foot,.amm-stage.is-active .amm-window .amm-task-row,.amm-stage.is-active .amm-window .amm-system-map,.amm-stage.is-active .amm-window .amm-build-bottom,.amm-stage.is-active .amm-window .amm-delivery-check,.amm-stage.is-active .amm-window .amm-delivery-kicker,.amm-stage.is-active .amm-window>strong,.amm-stage.is-active .amm-window .amm-delivery-file,.amm-stage.is-active .amm-window .amm-customer-reaction{opacity:1}
+@keyframes ammIdleScreen{0%{background-position:0% 0%,0% 0%,0% 0%,0% 20%,100% 0%,0% 0%}100%{background-position:0% 0%,0% 0%,0% 0%,100% 80%,0% 100%,0% 0%}}
+@keyframes ammGlassSweep{0%,28%{transform:translateX(-120%)}65%,100%{transform:translateX(120%)}}
+@media(max-width:1100px){.amm-workflow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.amm-workflow{grid-template-columns:1fr;gap:12px}.amm-stage{padding:15px}.amm-window{min-height:175px}.amm-stage-intro{min-height:0}}
+@media(prefers-reduced-motion:reduce){.amm-stage:not(.is-active) .amm-window::after,.amm-stage.is-active .amm-window::after{animation:none!important}}
+
 </style>
 </head>
 <body>
