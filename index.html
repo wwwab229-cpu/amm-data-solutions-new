@@ -169,36 +169,106 @@ button,a,input,textarea{touch-action:manipulation}
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 
-/* AMM live workflow: animated order-to-delivery demo */
-.amm-live-dot{width:7px;height:7px;border-radius:50%;background:#27b879;box-shadow:0 0 0 4px #27b8791f;animation:ammPulse 1.8s ease-out infinite}
-.amm-flow-card{--flow-accent:#5B2EE8;position:relative;min-width:0;min-height:260px;padding:22px 18px 18px;border:1px solid #5b2ee826;border-radius:24px;background:#ffffffed;box-shadow:0 12px 30px -20px #14172b42;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
-.amm-flow-card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--amm-angle,0deg),transparent 0 65%,#D6F25B 72%,#5B2EE8 83%,transparent 92%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;pointer-events:none}
-.amm-flow-card.is-active{border-color:#5b2ee86b;box-shadow:0 18px 38px -20px #5b2ee880;transform:translateY(-3px)}
-.amm-flow-card.is-active::before{opacity:1;animation:ammBorderRun 1.65s linear infinite}
-.amm-flow-card.is-done{border-color:#27b87955}
-.amm-flow-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:18px}
-.amm-flow-number{font-size:.72rem;font-weight:800;letter-spacing:.12em;color:#5B2EE8}
-.amm-flow-state{font-size:.6rem;font-weight:800;letter-spacing:.09em;color:#6d7085;background:#f4f2ff;border-radius:999px;padding:6px 8px}
-.amm-flow-card h3{font-size:1.15rem;font-weight:800;letter-spacing:-.035em;color:#191b35;margin:0 0 12px}
-.amm-flow-scene{min-height:132px;display:flex;align-items:center;border-radius:17px;background:linear-gradient(135deg,#f6f3ff,#f7fbea);padding:15px;position:relative;overflow:hidden}
-.amm-flow-content{display:flex;flex-direction:column;align-items:flex-start;gap:9px;width:100%;transition:opacity .28s ease,transform .28s ease}
-.amm-flow-content.is-clearing{opacity:0;transform:translateY(-8px)}
-.amm-flow-content strong{font-size:.88rem;line-height:1.4;color:#27213f}
-.amm-scene-icon{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;background:#fff;color:#5B2EE8;font-size:1.25rem;font-weight:800;box-shadow:0 4px 12px #5b2ee81a}
-.amm-scene-line{font-size:.74rem;line-height:1.5;color:#666a80}
-.amm-scene-tag{font-size:.65rem;font-weight:800;letter-spacing:.01em;color:#3b258b;background:#fff;border:1px solid #5b2ee81f;padding:6px 9px;border-radius:999px;max-width:100%}
-.amm-flow-card[data-flow-stage="2"] .amm-flow-scene{background:linear-gradient(135deg,#f2edff,#e8f8f0)}
-.amm-flow-card[data-flow-stage="3"] .amm-flow-scene{background:linear-gradient(135deg,#fff7db,#e9f8ef)}
-.amm-flow-card.is-active .amm-flow-content:not(.is-clearing){animation:ammSceneIn .45s ease both}
-.amm-flow-footer{display:flex;align-items:center;gap:14px;margin-top:22px;color:#393451;font-size:.82rem;font-weight:650}
-.amm-flow-track{height:5px;flex:1;background:#e9e6f7;border-radius:99px;overflow:hidden}
-.amm-flow-track span{display:block;width:25%;height:100%;border-radius:99px;background:linear-gradient(90deg,#5B2EE8,#D6F25B);transition:width .5s ease}
-@keyframes ammPulse{50%{box-shadow:0 0 0 7px #27b87905;opacity:.7}}
-@keyframes ammBorderRun{to{--amm-angle:360deg}}
-@keyframes ammSceneIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
-@property --amm-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
-@media(max-width:767px){.amm-flow-card{min-height:240px;padding:20px 17px 17px}.amm-flow-scene{min-height:120px}.amm-flow-footer{flex-wrap:wrap;gap:10px}.amm-flow-track{order:3;flex-basis:100%}}
-@media(prefers-reduced-motion:reduce){.amm-live-dot{animation:none}.amm-flow-card.is-active::before{animation:none}.amm-flow-content,.amm-flow-card,.amm-flow-track{transition:none}.amm-flow-card.is-active .amm-flow-content{animation:none}}
+/* AMM premium workflow: quiet motion, editorial shapes, clear visual storytelling */
+.amm-demo-label{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:11px 15px;border:1px solid #5b2ee81c;border-radius:999px;background:#fff;color:#585d78;font-size:.68rem;font-weight:800;letter-spacing:.09em;white-space:nowrap}
+.amm-live-dot{width:7px;height:7px;border-radius:50%;background:#55b98a;box-shadow:0 0 0 4px #55b98a1a}
+.amm-workflow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;position:relative;isolation:isolate}
+.amm-stage{--stage-accent:#5b2ee8;position:relative;min-width:0;padding:23px 18px 19px;background:rgba(255,255,255,.88);border:1px solid #24204412;border-radius:24px 24px 24px 8px;box-shadow:0 10px 36px -30px #17152f70;overflow:hidden;opacity:.78;transform:translateY(0);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1),border-color .8s ease,box-shadow .8s ease,background .8s ease}
+.amm-stage:nth-child(2){border-radius:8px 24px 24px 24px}
+.amm-stage:nth-child(3){border-radius:24px 8px 24px 24px}
+.amm-stage:nth-child(4){border-radius:24px 24px 8px 24px}
+.amm-stage::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,#5b2ee8,#d6f25b);opacity:0;transform:scaleY(.25);transform-origin:top;transition:opacity .7s ease,transform .9s ease}
+.amm-stage.is-active{opacity:1;transform:translateY(-5px);border-color:#5b2ee84d;background:#fff;box-shadow:0 22px 50px -34px #5b2ee8a8,0 2px 8px #14172b08}
+.amm-stage.is-active::before{opacity:1;transform:scaleY(1)}
+.amm-stage.is-clearing{opacity:.3;transform:scale(.985);box-shadow:none}
+.amm-stage-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:20px}
+.amm-stage-index{font-size:.7rem;font-weight:850;letter-spacing:.09em;color:#5b2ee8}
+.amm-stage-index i{font-style:normal;color:#9b98ae;font-weight:600}
+.amm-stage-status{font-size:.56rem;letter-spacing:.08em;font-weight:850;color:#77738c;background:#f5f3fb;border-radius:7px;padding:7px 8px;white-space:nowrap}
+.amm-stage.is-active .amm-stage-status{color:#4b2bb6;background:#f0ebff}
+.amm-stage h3{font-size:clamp(1rem,1.3vw,1.18rem);line-height:1.25;font-weight:850;letter-spacing:-.04em;color:#19172d;margin:0 0 7px}
+.amm-stage-intro{font-size:.76rem;line-height:1.65;color:#77758a;min-height:2.9em;margin:0 0 17px}
+.amm-window{min-height:224px;position:relative;overflow:hidden;border:1px solid #2520440d;border-radius:15px;background:#fbfaff;box-shadow:0 8px 20px -20px #21154e80}
+.amm-window-bar{height:37px;display:flex;align-items:center;justify-content:space-between;gap:7px;padding:0 11px;border-bottom:1px solid #2520440c;background:#fff;color:#77748b;font-size:.58rem;font-weight:750;letter-spacing:.025em}
+.amm-window-dots{display:flex;gap:4px}
+.amm-window-dots i{width:5px;height:5px;border-radius:50%;background:#d9d5e6}
+.amm-window-dots i:first-child{background:#d6f25b}
+.amm-window-secure{font-size:.55rem;color:#55a987}
+.amm-message-body{display:flex;align-items:flex-start;gap:8px;padding:17px 10px 14px}
+.amm-avatar{display:grid;place-items:center;flex:0 0 25px;width:25px;height:25px;border-radius:9px;background:#eae4ff;color:#5b2ee8;font-size:.7rem;font-weight:850}
+.amm-message-bubble{position:relative;min-width:0;flex:1;padding:10px 10px 12px;border:1px solid #5b2ee814;border-radius:3px 12px 12px 12px;background:#fff}
+.amm-message-from{display:block;margin-bottom:8px;color:#9691a8;font-size:.57rem;font-weight:650}
+#amm-order-typed{min-height:87px;margin:0;color:#39344d;font-size:.72rem;line-height:1.7;overflow-wrap:anywhere}
+.amm-typing-cursor{display:inline-block;width:2px;height:12px;margin-top:3px;vertical-align:middle;background:#5b2ee8;animation:ammCaret 1.1s steps(2,start) infinite}
+.amm-message-foot{display:flex;align-items:center;gap:6px;padding:9px 11px;border-top:1px solid #2520440b;color:#827d94;font-size:.57rem}
+.amm-mini-dot{width:5px;height:5px;border-radius:50%;background:#58b68a}
+.amm-time{margin-left:auto;color:#aaa5b9}
+.amm-stage-foot{display:flex;align-items:center;gap:8px;margin-top:16px;color:#77748a;font-size:.63rem;line-height:1.5}
+.amm-foot-mark{display:grid;place-items:center;flex:0 0 22px;width:22px;height:22px;border-radius:7px;background:#f1edff;color:#5b2ee8;font-size:.85rem}
+.amm-window-pill{padding:5px 7px;border-radius:6px;background:#f1edff;color:#5b2ee8;font-size:.53rem;font-weight:850;letter-spacing:.07em}
+.amm-task-row{display:flex;align-items:center;gap:8px;padding:13px 10px;border-bottom:1px solid #2520440a;opacity:.38;transform:translateX(-4px);transition:opacity .7s ease,transform .7s ease}
+.amm-task-row:last-child{border-bottom:0}
+.amm-task-row.is-complete{opacity:1;transform:translateX(0)}
+.amm-check{display:grid;place-items:center;flex:0 0 20px;width:20px;height:20px;border:1px solid #d8d2e9;border-radius:7px;color:transparent;font-size:.65rem}
+.amm-task-row.is-complete .amm-check{background:#e9f8ef;border-color:#bfe8cf;color:#268356}
+.amm-task-row>span:nth-child(2){display:flex;flex-direction:column;gap:4px;min-width:0}
+.amm-task-row b{font-size:.66rem;color:#39344d}
+.amm-task-row small{font-size:.57rem;color:#8b869d}
+.amm-task-row em{margin-left:auto;font-size:.48rem;font-style:normal;font-weight:850;letter-spacing:.06em;color:#aaa5b9}
+.amm-task-row.is-complete em{color:#378761}
+.amm-build-window{background:radial-gradient(ellipse at 50% 42%,#f0eaff 0,transparent 65%),#fbfaff}
+.amm-system-map{height:155px;position:relative;display:flex;align-items:center;justify-content:space-evenly;padding:10px 7px}
+.amm-system-node{z-index:2;display:flex;flex-direction:column;align-items:center;gap:7px;width:60px;color:#5b2ee8;font-size:.56rem}
+.amm-system-node span{display:grid;place-items:center;width:38px;height:38px;border:1px solid #5b2ee827;border-radius:13px;background:#fff;box-shadow:0 5px 16px #5b2ee814;font-size:1rem}
+.amm-system-node b{font-size:.57rem;color:#6b6682;font-weight:750}
+.node-process span{background:#5b2ee8;color:#fff;box-shadow:0 8px 20px #5b2ee82c}
+.node-output span{background:#f4facf;color:#4e5a18;border-color:#d6f25b88}
+.amm-system-link{position:absolute;z-index:1;top:73px;height:1px;width:18%;background:#c6b9f2;transform-origin:left center}
+.amm-system-link::after{content:"";position:absolute;top:-2px;left:0;width:5px;height:5px;border-radius:50%;background:#5b2ee8;box-shadow:0 0 0 3px #5b2ee814}
+.link-one{left:27%}.link-two{left:58%}
+.amm-system-orbit{position:absolute;left:50%;top:50%;border:1px solid #5b2ee80e;border-radius:50%;transform:translate(-50%,-50%)}
+.orbit-one{width:125px;height:125px}.orbit-two{width:88px;height:88px;border-style:dashed}
+.amm-build-bottom{display:flex;align-items:center;gap:8px;padding:0 11px 13px;color:#817b95;font-size:.56rem}
+.amm-build-meter{height:4px;flex:1;overflow:hidden;border-radius:99px;background:#e9e4f8}
+.amm-build-meter i{display:block;width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,#5b2ee8,#d6f25b)}
+.amm-build-bottom>b{min-width:24px;text-align:right;color:#5b2ee8;font-size:.57rem}
+.amm-delivery-window{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:15px 10px;background:radial-gradient(ellipse at 50% 0%,#f6fbdc 0,transparent 58%),#fbfaff;text-align:center}
+.amm-delivery-glow{position:absolute;top:10px;width:90px;height:90px;border-radius:50%;background:#d6f25b45;filter:blur(22px);opacity:0}
+.amm-delivery-check{position:relative;display:grid;place-items:center;width:39px;height:39px;border-radius:14px;background:#e5f7ed;border:1px solid #b9e8ce;color:#238251;font-size:1.05rem;opacity:.3;transform:scale(.8);transition:opacity .7s ease,transform .7s ease}
+.amm-delivery-kicker{font-size:.52rem;letter-spacing:.14em;font-weight:850;color:#6c8c65}
+.amm-delivery-window>strong{max-width:180px;font-size:.79rem;line-height:1.4;color:#34304a}
+.amm-delivery-file{display:flex;align-items:center;gap:8px;width:100%;padding:9px;border:1px solid #2520440e;border-radius:10px;background:#fff;text-align:left}
+.amm-file-icon{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:#f0ebff;color:#5b2ee8;font-size:.8rem}
+.amm-delivery-file>span:nth-child(2){display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}
+.amm-delivery-file b{font-size:.6rem;color:#39344d}
+.amm-delivery-file small{font-size:.52rem;color:#9691a8}
+.amm-file-check{color:#2b9962;font-size:.75rem;font-weight:850}
+.amm-customer-reaction{display:flex;align-items:center;gap:8px;width:100%;padding:9px;border-radius:10px;background:#f5f0ff;text-align:left;opacity:0;transform:translateY(5px);transition:opacity .8s ease,transform .8s ease}
+.amm-reaction-spark{display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:8px;background:#fff;color:#5b2ee8}
+.amm-customer-reaction>span:last-child{display:flex;flex-direction:column;gap:4px}
+.amm-customer-reaction small{font-size:.47rem;letter-spacing:.09em;font-weight:850;color:#7c69b2}
+.amm-customer-reaction b{font-size:.57rem;line-height:1.45;color:#3c315c}
+.amm-stage.is-active .amm-task-row.is-complete{transition-delay:.2s}
+.amm-stage.is-active .amm-system-link::after{animation:ammDataTravel 2.4s ease-in-out infinite}
+.amm-stage.is-active .amm-system-link.link-two::after{animation-delay:1.2s}
+.amm-stage.is-active .amm-build-meter i{animation:ammBuildProgress 7.8s ease-in-out both}
+.amm-stage.is-active .amm-delivery-glow{opacity:1;transition:opacity 1.4s ease}
+.amm-stage.is-active .amm-delivery-check{opacity:1;transform:scale(1)}
+.amm-stage.is-active .amm-customer-reaction{opacity:1;transform:translateY(0);transition-delay:1.1s}
+.amm-flow-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(100px,1.1fr) auto;align-items:center;gap:18px;margin-top:27px;padding:15px 0;border-top:1px solid #25204410;border-bottom:1px solid #25204410}
+.amm-flow-bottom-copy{display:flex;align-items:center;gap:10px;color:#4d4865;font-size:.76rem;font-weight:700}
+.amm-flow-pulse{width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#5b2ee8;box-shadow:0 0 0 4px #5b2ee814}
+.amm-flow-progress{height:3px;overflow:hidden;border-radius:99px;background:#ece8f6}
+.amm-flow-progress span{display:block;width:25%;height:100%;border-radius:99px;background:linear-gradient(90deg,#5b2ee8,#d6f25b);transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.amm-flow-count{color:#9994aa;font-size:.58rem;font-weight:850;letter-spacing:.09em;white-space:nowrap}
+.amm-demo-note{margin-top:13px;color:#a09bad;font-size:.61rem;line-height:1.6}
+@keyframes ammCaret{to{visibility:hidden}}
+@keyframes ammDataTravel{0%{left:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:calc(100% - 5px);opacity:0}}
+@keyframes ammBuildProgress{0%{width:4%}30%{width:36%}65%{width:72%}100%{width:100%}}
+@media(min-width:1024px){.amm-workflow::before{content:"";position:absolute;z-index:-1;left:6%;right:6%;top:37px;height:1px;background:linear-gradient(90deg,#5b2ee82a,#d6f25b88,#5b2ee82a)}}
+@media(max-width:1023px){.amm-workflow{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.amm-stage{padding:22px 18px 18px}.amm-window{min-height:218px}}
+@media(max-width:600px){.amm-workflow{grid-template-columns:minmax(0,1fr);gap:13px}.amm-stage,.amm-stage:nth-child(n){border-radius:22px 22px 22px 8px;padding:21px 18px 17px}.amm-stage-intro{min-height:0}.amm-window{min-height:205px}.amm-message-bubble{max-width:100%}.amm-flow-bottom{grid-template-columns:minmax(0,1fr) auto;gap:10px}.amm-flow-progress{grid-column:1/-1;grid-row:2}.amm-flow-count{font-size:.53rem}.amm-stage h3{font-size:1.13rem}}
+@media(prefers-reduced-motion:reduce){.amm-stage,.amm-stage::before,.amm-task-row,.amm-delivery-check,.amm-customer-reaction,.amm-flow-progress span{transition:none}.amm-typing-cursor{animation:none}.amm-stage.is-active .amm-system-link::after,.amm-stage.is-active .amm-build-meter i{animation:none}.amm-stage.is-active .amm-build-meter i{width:100%}.amm-stage.is-active .amm-customer-reaction{opacity:1;transform:none}.amm-delivery-glow{opacity:1}.amm-delivery-check{opacity:1;transform:none}}
 
 </style>
 </head>
@@ -234,33 +304,58 @@ button,a,input,textarea{touch-action:manipulation}
 
 </div></section>
 
-<!-- 5. LIVE WORKFLOW EXPERIENCE -->
-<section id="services" class="relative"><div class="ribbon hidden md:block" aria-hidden="true"></div>
-<div class="wrap relative">
-  <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 rv">
-    <div><p class="text-xs font-bold uppercase tracking-widest mb-3" style="color:var(--primary)">A little AMM magic</p><h2>From Order to <span class="v">WOW.</span></h2><p class="mt-3 max-w-2xl" style="color:var(--muted);line-height:1.75">See how a request moves through the AMM workflow—from the first message to a polished delivery.</p></div>
-    <span class="inline-flex items-center gap-2 self-start md:self-auto rounded-full px-4 py-2 text-xs font-semibold" style="background:#fff;border:1px solid #5b2ee82b;color:#585D78"><span class="amm-live-dot" aria-hidden="true"></span> SIMULATED LIVE DEMO</span>
+<!-- 5. AMM ORDER-TO-DELIVERY EXPERIENCE -->
+<section id="services" class="relative">
+  <div class="wrap relative">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 rv">
+      <div><p class="text-xs font-bold uppercase tracking-widest mb-3" style="color:var(--primary)">Inside the AMM workflow</p><h2>One Request. <span class="v">Four Stages.</span></h2><p class="mt-3 max-w-2xl" style="color:var(--muted);line-height:1.8">From the first customer message to the final “wow”—watch an idea move through our creative process.</p></div>
+      <span class="amm-demo-label"><span class="amm-live-dot" aria-hidden="true"></span> A LIVE-STYLE DEMO</span>
+    </div>
+    <div class="amm-workflow" aria-label="Simulated animated customer order workflow">
+      <article class="amm-stage amm-stage-order is-active" data-flow-stage="0">
+        <div class="amm-stage-head"><span class="amm-stage-index">01 <i> / 04</i></span><span class="amm-stage-status">NEW REQUEST</span></div>
+        <h3>The order lands</h3><p class="amm-stage-intro">Every great result starts with a message.</p>
+        <div class="amm-window amm-message-window">
+          <div class="amm-window-bar"><span class="amm-window-dots"><i></i><i></i><i></i></span><span>customer message</span><span class="amm-window-secure">●</span></div>
+          <div class="amm-message-body"><div class="amm-avatar">C</div><div class="amm-message-bubble"><span class="amm-message-from">New customer · just now</span><p id="amm-order-typed" aria-live="polite"></p><span class="amm-typing-cursor" aria-hidden="true"></span></div></div>
+          <div class="amm-message-foot"><span class="amm-mini-dot"></span> Incoming request <span class="amm-time">09:41 AM</span></div>
+        </div>
+        <div class="amm-stage-foot"><span class="amm-foot-mark">↳</span><span>Request received by AMM</span></div>
+      </article>
+      <article class="amm-stage amm-stage-team" data-flow-stage="1">
+        <div class="amm-stage-head"><span class="amm-stage-index">02 <i> / 04</i></span><span class="amm-stage-status">TEAM BRIEF</span></div>
+        <h3>Team gets moving</h3><p class="amm-stage-intro">The request becomes a clear, workable plan.</p>
+        <div class="amm-window amm-task-window">
+          <div class="amm-window-bar"><span>AMM project desk</span><span class="amm-window-pill">NEW TASK</span></div>
+          <div class="amm-task-row" data-task="0"><span class="amm-check">✓</span><span><b>Understand the request</b><small>Goal & requirements</small></span><em>DONE</em></div>
+          <div class="amm-task-row" data-task="1"><span class="amm-check">✓</span><span><b>Map the solution</b><small>Plan the right approach</small></span><em>DONE</em></div>
+          <div class="amm-task-row" data-task="2"><span class="amm-check">✓</span><span><b>Prepare the build</b><small>Tools & next steps</small></span><em>READY</em></div>
+        </div>
+        <div class="amm-stage-foot"><span class="amm-foot-mark">↳</span><span>People, process & tools aligned</span></div>
+      </article>
+      <article class="amm-stage amm-stage-build" data-flow-stage="2">
+        <div class="amm-stage-head"><span class="amm-stage-index">03 <i> / 04</i></span><span class="amm-stage-status">IN THE MAKING</span></div>
+        <h3>Watch it take shape</h3><p class="amm-stage-intro">Ideas turn into connected, useful work.</p>
+        <div class="amm-window amm-build-window">
+          <div class="amm-window-bar"><span>Solution workspace</span><span class="amm-window-pill">BUILDING</span></div>
+          <div class="amm-system-map" aria-hidden="true"><div class="amm-system-node node-request"><span>✳</span><b>Input</b></div><div class="amm-system-link link-one"></div><div class="amm-system-node node-process"><span>◈</span><b>Process</b></div><div class="amm-system-link link-two"></div><div class="amm-system-node node-output"><span>↗</span><b>Output</b></div><div class="amm-system-orbit orbit-one"></div><div class="amm-system-orbit orbit-two"></div></div>
+          <div class="amm-build-bottom"><span>Building your solution</span><div class="amm-build-meter"><i></i></div><b id="amm-build-percent">0%</b></div>
+        </div>
+        <div class="amm-stage-foot"><span class="amm-foot-mark">↳</span><span>Create. Connect. Check.</span></div>
+      </article>
+      <article class="amm-stage amm-stage-delivery" data-flow-stage="3">
+        <div class="amm-stage-head"><span class="amm-stage-index">04 <i> / 04</i></span><span class="amm-stage-status">DELIVERED</span></div>
+        <h3>That “WOW” moment</h3><p class="amm-stage-intro">The finished result reaches the customer.</p>
+        <div class="amm-window amm-delivery-window">
+          <div class="amm-delivery-glow"></div><div class="amm-delivery-check">✓</div><span class="amm-delivery-kicker">PROJECT COMPLETE</span><strong>Ready to make an impact.</strong><div class="amm-delivery-file"><span class="amm-file-icon">↗</span><span><b>Final solution</b><small>Reviewed · ready to use</small></span><span class="amm-file-check">✓</span></div><div class="amm-customer-reaction"><span class="amm-reaction-spark">✦</span><span><small>CUSTOMER REACTION</small><b>“Wow. This is exactly what we needed!”</b></span></div>
+        </div>
+        <div class="amm-stage-foot"><span class="amm-foot-mark">✦</span><span>Delivered with care by AMM</span></div>
+      </article>
+    </div>
+    <div class="amm-flow-bottom rv"><div class="amm-flow-bottom-copy"><span class="amm-flow-pulse"></span><span id="amm-flow-caption" aria-live="polite">A customer is writing a request…</span></div><div class="amm-flow-progress" aria-hidden="true"><span id="amm-flow-progress"></span></div><span class="amm-flow-count" id="amm-flow-count">STAGE 01 / 04</span></div>
+    <p class="amm-demo-note">Illustrative workflow demo · not connected to live customer orders or internal systems.</p>
   </div>
-  <div class="amm-flow-grid grid sm:grid-cols-2 lg:grid-cols-4 gap-4" aria-label="Animated demonstration of the AMM order workflow">
-    <article class="amm-flow-card is-active rv" data-flow-stage="0" aria-label="Stage 1: Order received">
-      <div class="amm-flow-top"><span class="amm-flow-number">01</span><span class="amm-flow-state">INCOMING</span></div>
-      <h3>Order received</h3><div class="amm-flow-scene" aria-live="polite"><div class="amm-flow-content" data-flow-content="0"><span class="amm-scene-icon">↙</span><strong>New project request</strong><span class="amm-scene-line">“Help us simplify our workflow.”</span><span class="amm-scene-tag">Request captured</span></div></div>
-    </article>
-    <article class="amm-flow-card rv" data-flow-stage="1" aria-label="Stage 2: Team gets to work">
-      <div class="amm-flow-top"><span class="amm-flow-number">02</span><span class="amm-flow-state">TEAM BRIEF</span></div>
-      <h3>Team activated</h3><div class="amm-flow-scene"><div class="amm-flow-content" data-flow-content="1"><span class="amm-scene-icon">◎</span><strong>Turning request into a plan</strong><span class="amm-scene-line">Scope → tasks → next steps</span><span class="amm-scene-tag">Work organised</span></div></div>
-    </article>
-    <article class="amm-flow-card rv" data-flow-stage="2" aria-label="Stage 3: Work in progress">
-      <div class="amm-flow-top"><span class="amm-flow-number">03</span><span class="amm-flow-state">IN PROGRESS</span></div>
-      <h3>Work in action</h3><div class="amm-flow-scene"><div class="amm-flow-content" data-flow-content="2"><span class="amm-scene-icon">✳</span><strong>Building the solution</strong><span class="amm-scene-line">Connect · create · test</span><span class="amm-scene-tag">Quality check</span></div></div>
-    </article>
-    <article class="amm-flow-card rv" data-flow-stage="3" aria-label="Stage 4: Delivery and customer reaction">
-      <div class="amm-flow-top"><span class="amm-flow-number">04</span><span class="amm-flow-state">DELIVERY</span></div>
-      <h3>Delivered. Wow.</h3><div class="amm-flow-scene"><div class="amm-flow-content" data-flow-content="3"><span class="amm-scene-icon">✦</span><strong>Ready for the customer</strong><span class="amm-scene-line">Solution delivered with care.</span><span class="amm-scene-tag">“WOW. This is it!”</span></div></div>
-    </article>
-  </div>
-  <div class="amm-flow-footer rv"><span id="amm-flow-caption" aria-live="polite">A new request just arrived…</span><div class="amm-flow-track" aria-hidden="true"><span id="amm-flow-progress"></span></div><span class="text-xs font-semibold" style="color:var(--muted)">REQUEST → RESULT</span></div>
-</div></section>
+</section>
 
 <!-- 6. STATS (replace numbers with real ones) -->
 <section style="padding-top:0"><div class="wrap grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -394,44 +489,58 @@ $('#en').textContent=n?'':'Enter your name.';$('#ee').textContent=/^\S+@\S+\.\S+
 if(!n||!/^\S+@\S+\.\S+$/.test(m)||g.length<10)return;
 try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}});$('#ok').textContent=r.ok?'Thanks. We will reply soon.':'Could not send. Please use WhatsApp or email.';if(r.ok)f.reset()}catch{$('#ok').textContent='Could not send. Please use WhatsApp or email.'}};
 
-// AMM workflow animation: a clearly labelled simulation, not live customer data
+// Slow, staged AMM workflow demo with a typed customer order and calm handoffs
 (function(){
  const cards=[...document.querySelectorAll('[data-flow-stage]')];
+ const typed=document.getElementById('amm-order-typed');
  const caption=document.getElementById('amm-flow-caption');
  const progress=document.getElementById('amm-flow-progress');
- if(cards.length!==4||!caption||!progress)return;
- const stages=[
-  {caption:'A new request just arrived…',html:'<span class="amm-scene-icon">↙</span><strong>New project request</strong><span class="amm-scene-line">“Help us simplify our workflow.”</span><span class="amm-scene-tag">Request captured</span>'},
-  {caption:'Request received. The AMM team is on it.',html:'<span class="amm-scene-icon">◎</span><strong>Turning request into a plan</strong><span class="amm-scene-line">Scope → tasks → next steps</span><span class="amm-scene-tag">Work organised</span>'},
-  {caption:'Now the solution takes shape…',html:'<span class="amm-scene-icon">✳</span><strong>Building the solution</strong><span class="amm-scene-line">Connect · create · test</span><span class="amm-scene-tag">Quality check</span>'},
-  {caption:'Delivered. The customer sees the result.',html:'<span class="amm-scene-icon">✦</span><strong>Ready for the customer</strong><span class="amm-scene-line">Solution delivered with care.</span><span class="amm-scene-tag">“WOW. This is it!”</span>'}
- ];
- const labels=['INCOMING','TEAM BRIEF','IN PROGRESS','DELIVERY'];
+ const count=document.getElementById('amm-flow-count');
+ const percent=document.getElementById('amm-build-percent');
+ if(cards.length!==4||!typed||!caption||!progress||!count||!percent)return;
+ const order='Hi AMM! We need a smarter way to manage customer orders and keep everything organised. Can you help us build a solution?';
+ const captions=['A customer is writing a request…','The request is received. The AMM team starts planning.','The solution is taking shape, step by step…','The finished work is ready for the customer.'];
+ const labels=['NEW REQUEST','TEAM BRIEF','IN THE MAKING','DELIVERED'];
+ const durations=[10500,7200,9300,7600];
  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- let current=0,timer=null;
- function renderStage(index){
+ let stage=0,runId=0,timer=null,typingTimer=null;
+ function clearTimers(){if(timer)clearTimeout(timer);if(typingTimer)clearTimeout(typingTimer);timer=null;typingTimer=null}
+ function typeOrder(id,index){
+  if(id!==runId||stage!==0||document.hidden)return;
+  typed.textContent=order.slice(0,index);
+  if(index<order.length){typingTimer=setTimeout(()=>typeOrder(id,index+1),reduce?0:43)}
+ }
+ function setStage(next){
+  runId++;const id=runId;clearTimers();stage=next;
   cards.forEach((card,i)=>{
-   card.classList.toggle('is-active',i===index);
-   card.classList.toggle('is-done',i<index);
-   card.querySelector('.amm-flow-state').textContent=i===index?'WORKING':i<index?'CLEARED':labels[i];
-   const content=card.querySelector('[data-flow-content]');
-   if(i!==index){
-    content.classList.add('is-clearing');
-    window.setTimeout(()=>{if(current!==i){content.innerHTML='';content.classList.remove('is-clearing')}},220);
-   }else{
-    content.classList.remove('is-clearing');
-    content.innerHTML=stages[index].html;
-   }
+   card.classList.remove('is-active','is-clearing');
+   if(i<next){card.classList.add('is-clearing')}
+   card.querySelector('.amm-stage-status').textContent=i===next?'WORKING':i<next?'COMPLETE':labels[i];
   });
-  caption.textContent=stages[index].caption;
-  progress.style.width=((index+1)*25)+'%';
+  const active=cards[next];active.classList.add('is-active');
+  caption.textContent=captions[next];
+  progress.style.width=((next+1)*25)+'%';
+  count.textContent='STAGE 0'+(next+1)+' / 04';
+  if(next===0){
+   typed.textContent='';
+   if(reduce){typed.textContent=order}else typeOrder(id,1);
+  }
+  if(next===1){
+   cards[1].querySelectorAll('[data-task]').forEach((row,i)=>{row.classList.remove('is-complete');if(!reduce)setTimeout(()=>{if(id===runId)row.classList.add('is-complete')},700+i*1050);else row.classList.add('is-complete')});
+  }
+  if(next===2){
+   percent.textContent='0%';
+   if(reduce)percent.textContent='100%';
+   else{
+    const start=performance.now(),duration=7900;
+    const tick=(now)=>{if(id!==runId||stage!==2)return;const p=Math.min(1,(now-start)/duration);percent.textContent=Math.round(p*100)+'%';if(p<1)requestAnimationFrame(tick)};
+    requestAnimationFrame(tick);
+   }
+  }
+  timer=setTimeout(()=>{if(id===runId)setStage((stage+1)%4)},reduce?durations[next]:durations[next]);
  }
- function advance(){current=(current+1)%4;renderStage(current)}
- renderStage(current);
- if(!reduce){
-  timer=window.setInterval(advance,2600);
-  document.addEventListener('visibilitychange',()=>{if(document.hidden){window.clearInterval(timer);timer=null}else if(!timer)timer=window.setInterval(advance,2600)});
- }
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){clearTimers()}else{setStage(stage)}});
+ setStage(0);
 })();
 
 </script>
