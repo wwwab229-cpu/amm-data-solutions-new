@@ -96,7 +96,6 @@ button,a,input,textarea{touch-action:manipulation}
 <div class="hero grain p-6 md:p-14">
 <div class="grid md:grid-cols-2 gap-10 items-center relative">
 <div class="w-full">
-<p class="text-sm font-semibold mb-4" style="color:var(--primary)">AI AUTOMATION · DIGITAL SOLUTIONS</p>
 <h1 id="hero-title" class="min-h-[2.1em]" aria-label="What If Work Could Do Itself?"><span id="hero-heading-text"></span><span id="hero-cursor" aria-hidden="true" style="display:inline-block;width:2px;height:.85em;background:var(--primary);margin-left:5px;vertical-align:-.04em"></span></h1>
 <p id="hero-subtitle" class="mt-5 text-base md:text-lg max-w-xl" style="color:var(--muted);min-height:3.5em"><span id="hero-subtitle-text"></span></p>
 </div>
@@ -193,7 +192,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const heroHeading = $('#hero-heading-text'), heroSubtitle = $('#hero-subtitle-text'), heroCursor = $('#hero-cursor');
 if (heroHeading && heroSubtitle && heroCursor) {
   const headingText = 'What If Work Could Do Itself?';
-  const subtitleText = 'Imagine fewer repetitive tasks, smarter workflows, and more time for the ideas that move your business forward.';
+  const subtitleText = 'Less busywork. More brainpower. We turn the “ugh, not this again” tasks into smart, connected tools—so your best ideas get the spotlight.';
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion) {
     heroHeading.textContent = headingText;
