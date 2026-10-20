@@ -1111,7 +1111,7 @@ openFeedback.onclick=()=>{feedbackPanel.classList.remove('hidden');$('#feedback-
 $('#close-feedback').onclick=()=>{feedbackPanel.classList.add('hidden');openFeedback.focus()};
 let chosenRating=0;
 const ratingNames=['','Poor','Fair','Good','Very good','Excellent'];
-const starButtons=$('.feedback-star');
+const starButtons=$$('.feedback-star');
 function setRating(n){chosenRating=n;starButtons.forEach(b=>{const v=Number(b.dataset.rating);b.setAttribute('aria-checked',String(v===n));b.classList.toggle('is-filled',v<=n);b.tabIndex=v===n?0:-1;});$('#feedback-rating-label').textContent=n? n+' out of 5 — '+ratingNames[n]+'.':'Choose a rating from 1 to 5.';$('#feedback-rating-error').textContent='';}
 starButtons.forEach((b,i)=>{b.tabIndex=i===0?0:-1;b.onclick=()=>setRating(Number(b.dataset.rating));b.onkeydown=e=>{if(['ArrowRight','ArrowLeft','ArrowUp','ArrowDown','Home','End'].includes(e.key)){e.preventDefault();let next=chosenRating||Number(b.dataset.rating);if(e.key==='ArrowRight'||e.key==='ArrowUp')next=Math.min(5,next+1);else if(e.key==='ArrowLeft'||e.key==='ArrowDown')next=Math.max(1,next-1);else if(e.key==='Home')next=1;else if(e.key==='End')next=5;setRating(next);starButtons[next-1].focus();}else if(e.key===' '||e.key==='Enter'){e.preventDefault();setRating(Number(b.dataset.rating));}}});
 $('#feedback-review').addEventListener('input',e=>$('#feedback-count').textContent=e.target.value.length+' / 1000');
