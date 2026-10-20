@@ -639,6 +639,37 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
  #services .amm-stage.is-active h3,#services .amm-stage.is-active .amm-stage-status,#services .amm-stage.is-active .amm-stage-status::before,#services .amm-stage.is-active .amm-window,#services .amm-stage.is-sending .amm-window,#services .amm-stage.is-receiving .amm-stage-head,#services .amm-waiting-state::before,#services .amm-transfer-packet::after{animation:none!important}
 }
 
+
+/* Motion-graphics layer: orbiting nodes, animated signal paths and energy rings */
+#services .amm-stage{--motion-speed:3.8s}
+#services .amm-window::before{content:"";position:absolute;z-index:1;inset:10px;border:1px solid color-mix(in srgb,var(--stage-accent) 13%,transparent);border-radius:15px;pointer-events:none;opacity:0;transform:scale(.97);transition:opacity .3s ease,transform .3s ease}
+#services .amm-stage.is-active .amm-window::before{opacity:1;transform:scale(1);animation:ammFrameBreath 3.2s ease-in-out infinite}
+#services .amm-stage.is-active .amm-window::after{content:"";position:absolute;z-index:1;top:0;bottom:0;left:-45%;width:35%;pointer-events:none;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--stage-accent) 14%,transparent),transparent);transform:skewX(-18deg);animation:ammEnergySweep 2.7s ease-in-out infinite}
+#services .amm-stage.is-active .amm-system-node span{filter:drop-shadow(0 0 7px color-mix(in srgb,var(--stage-accent) 32%,transparent))}
+#services .amm-stage.is-active .amm-system-orbit{transform-origin:center;animation:ammOrbitDrift 8s linear infinite}
+#services .amm-stage.is-active .amm-system-link::after{animation-duration:1.05s!important;filter:drop-shadow(0 0 4px color-mix(in srgb,var(--stage-accent) 45%,transparent))}
+#services .amm-stage.is-active .amm-build-meter i{position:relative;overflow:hidden}
+#services .amm-stage.is-active .amm-build-meter i::after{content:"";position:absolute;inset:0;width:38%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);animation:ammMeterGlint 1.25s ease-in-out infinite}
+#services .amm-stage.is-active .amm-task-row.is-complete{animation:ammTaskPop .32s cubic-bezier(.2,.8,.25,1) both}
+#services .amm-stage.is-active .amm-task-row.is-complete::after{filter:drop-shadow(0 0 4px color-mix(in srgb,var(--stage-accent) 45%,transparent))}
+#services .amm-stage.is-active .amm-delivery-glow{animation:ammDeliveryAura 2.4s ease-in-out infinite}
+#services .amm-stage.is-active .amm-delivery-check{filter:drop-shadow(0 0 12px color-mix(in srgb,var(--stage-accent) 28%,transparent))}
+#services .amm-transfer-packet{width:12px;height:12px}
+#services .amm-transfer-packet::before{content:"";position:absolute;top:50%;left:50%;width:34px;height:34px;border:1px solid color-mix(in srgb,var(--packet-color,#7653e8) 45%,transparent);border-radius:50%;transform:translate(-50%,-50%);animation:ammPacketOrbit .72s linear infinite}
+#services .amm-transfer-packet::after{inset:-7px}
+#services .amm-stage.is-receiving .amm-window::before{animation:ammImpactRing .6s ease-out 1}
+@keyframes ammFrameBreath{0%,100%{opacity:.45;inset:10px}50%{opacity:1;inset:7px}}
+@keyframes ammEnergySweep{0%,18%{left:-45%;opacity:0}28%{opacity:1}72%{opacity:.75}100%{left:115%;opacity:0}}
+@keyframes ammOrbitDrift{from{rotate:0deg}to{rotate:360deg}}
+@keyframes ammMeterGlint{0%{transform:translateX(-120%)}100%{transform:translateX(300%)}}
+@keyframes ammTaskPop{0%{transform:translateX(-4px) scale(.98);opacity:.65}75%{transform:translateX(1px) scale(1.01)}100%{transform:translateX(0) scale(1);opacity:1}}
+@keyframes ammDeliveryAura{0%,100%{opacity:.45;transform:scale(.96)}50%{opacity:.9;transform:scale(1.04)}}
+@keyframes ammPacketOrbit{from{transform:translate(-50%,-50%) rotate(0deg) scale(.78)}to{transform:translate(-50%,-50%) rotate(360deg) scale(1.18)}}
+@keyframes ammImpactRing{0%{opacity:0;inset:18px}40%{opacity:.8;inset:4px}100%{opacity:0;inset:-4px}}
+@media(prefers-reduced-motion:reduce){
+ #services .amm-stage.is-active .amm-window::before,#services .amm-stage.is-active .amm-window::after,#services .amm-stage.is-active .amm-system-orbit,#services .amm-stage.is-active .amm-build-meter i::after,#services .amm-stage.is-active .amm-delivery-glow,#services .amm-transfer-packet::before{animation:none!important}
+}
+
 </style>
 </head>
 <body>
