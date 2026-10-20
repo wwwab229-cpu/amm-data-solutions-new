@@ -713,7 +713,7 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 /* Closing: keep the overlay completely still; only the card travels back. */
 .amm-service-overlay.is-closing{transition:none!important}
 .amm-service-dialog{position:fixed;left:50%;top:50%;width:min(900px,calc(100vw - 40px));height:min(720px,88vh);perspective:1400px;opacity:1;transform:translate(-50%,-50%);transform-origin:center center;will-change:transform;}
-.amm-service-flipper{position:relative;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.75,.25,1);min-height:480px}
+.amm-service-flipper{position:relative;transform-style:preserve-3d;transition:none!important;min-height:480px}
 .amm-service-overlay.is-flipped .amm-service-flipper{transform:rotateY(180deg)}
 .amm-service-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;overflow:auto;background:#fff;border:1px solid #e8e4f4;box-shadow:0 30px 100px rgba(0,0,0,.25)}
 .amm-service-front{display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,5vw,52px);background:linear-gradient(145deg,#fff 0%,#f8f6ff 100%)}
@@ -1106,12 +1106,12 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(!fillDetails(i))return;
   clearTimeout(closeTimer);clearTimeout(openTimer);if(animation)animation.cancel();
   previousFocus=document.activeElement;sourceCard=card;sourceRect=card.getBoundingClientRect();
-  overlay.classList.remove('is-flipped','is-closing');overlay.classList.add('is-open');document.body.style.overflow='hidden';
+  overlay.classList.remove('is-closing');overlay.classList.add('is-open','is-flipped');document.body.style.overflow='hidden';
   close.focus();
-  if(reduce()){dialog.style.transform='translate(-50%,-50%)';dialog.style.opacity='1';overlay.classList.add('is-flipped');return;}
+  if(reduce()){dialog.style.transform='translate(-50%,-50%)';dialog.style.opacity='1';return;}
   const tr=getTransformFromCard(sourceRect);
   animation=dialog.animate([{transform:tr.from,opacity:.96},{transform:tr.to,opacity:1}],{duration:520,easing:'cubic-bezier(.2,.75,.25,1)',fill:'none'});
-  openTimer=setTimeout(()=>{if(overlay.classList.contains('is-open'))overlay.classList.add('is-flipped')},560);
+  openTimer=null;
  }
  function closeService(){
   if(!overlay.classList.contains('is-open'))return;
@@ -1120,9 +1120,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(!reduce()&&rect){
    overlay.classList.add('is-closing');
    const tr=getTransformFromCard(rect);
-   /* Keep the detail face locked in place during close; only the dialog moves/scales. */
-   const flipper=overlay.querySelector('.amm-service-flipper');
-   flipper.style.transition='none';flipper.style.transform='rotateY(180deg)';
+   /* Keep the detail face unchanged. Closing animates only the dialog position/scale. */
    animation=dialog.animate([{transform:tr.to,opacity:1},{transform:tr.from,opacity:1}],{duration:360,easing:'ease-in',fill:'forwards'});
    closeTimer=setTimeout(finishClose,360);
   }else finishClose();
