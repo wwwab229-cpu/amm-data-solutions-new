@@ -691,6 +691,55 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 @media(max-width:640px){#services .amm-customer-3d{flex-basis:36px;width:36px;height:43px;font-size:1.25rem}#services .amm-stage-team .amm-task-window::after{font-size:.4rem}}
 @media(prefers-reduced-motion:reduce){#services .amm-customer-3d span,#services .amm-stage-build.is-active .amm-system-node span{animation:none!important}}
 
+
+/* Box 2: animated workflow infographic with nodes, progress packet and compact metrics */
+#services .amm-team-infographic{position:relative;margin:0 11px 8px;padding:9px 10px 7px;border:1px solid #d7eddf;border-radius:12px;background:linear-gradient(145deg,#fff,#f1fbf5);box-shadow:0 5px 15px #2382510b;transition:opacity .45s ease,filter .45s ease}
+#services .amm-infographic-top{display:flex;justify-content:space-between;align-items:center;color:#7b8b82;font-size:.43rem;font-weight:850;letter-spacing:.13em}
+#services .amm-live-dot{display:flex;align-items:center;gap:4px;color:#33885a;font-size:.4rem;letter-spacing:.08em}
+#services .amm-live-dot::before{content:"";width:5px;height:5px;border-radius:50%;background:#58c889;box-shadow:0 0 0 3px #58c88920}
+#services .amm-infographic-track{position:relative;display:flex;justify-content:space-between;align-items:center;margin:12px 12px 4px;height:24px}
+#services .amm-track-line{position:absolute;left:8px;right:8px;height:2px;border-radius:4px;background:linear-gradient(90deg,#bce8cc,#cfc3ff,#d6f25b)}
+#services .amm-track-node{position:relative;z-index:2;display:grid;place-items:center;width:23px;height:23px;border:1px solid #cde9d7;border-radius:8px;background:#fff;color:#438b60;font-size:.48rem;font-weight:850;box-shadow:0 3px 8px #2c865016}
+#services .amm-track-node.node-b{border-color:#c9b9f6;background:#f5f0ff;color:#6745d2}
+#services .amm-track-node.node-c{border-color:#dce9a4;background:#fbffe8;color:#758627}
+#services .amm-track-packet{position:absolute;z-index:3;left:8px;top:9px;width:7px;height:7px;border-radius:2px;background:#5b2ee8;box-shadow:0 0 0 3px #5b2ee820,0 0 12px #5b2ee866;opacity:.3}
+#services .amm-infographic-labels{display:flex;justify-content:space-between;padding:0 8px;color:#8d9a92;font-size:.45rem;font-weight:700}
+#services .amm-infographic-metrics{display:flex;align-items:center;gap:10px;margin-top:8px;padding-top:7px;border-top:1px solid #e8f2eb}
+#services .amm-metric-ring{position:relative;display:grid;place-items:center;width:28px;height:28px;flex:0 0 28px;border-radius:50%;background:conic-gradient(#5b2ee8 0 72%,#dcefe3 72% 100%)}
+#services .amm-metric-ring::before{content:"";position:absolute;inset:4px;border-radius:50%;background:#fff}
+#services .amm-metric-ring i{position:relative;z-index:1;width:4px;height:4px;border-radius:50%;background:#5b2ee8}
+#services .amm-metric-bars{display:flex;align-items:flex-end;gap:3px;height:23px;padding:0 2px}
+#services .amm-metric-bars i{display:block;width:4px;height:35%;border-radius:3px;background:#b6e7c8}
+#services .amm-metric-bars i:nth-child(2){height:58%;background:#8dd7a9}
+#services .amm-metric-bars i:nth-child(3){height:76%;background:#a99af1}
+#services .amm-metric-bars i:nth-child(4){height:100%;background:#5b2ee8}
+#services .amm-metric-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+#services .amm-metric-copy b{color:#4e6657;font-size:.5rem}
+#services .amm-metric-copy small{color:#8d9a92;font-size:.43rem}
+#services .amm-stage-team.is-active .amm-track-packet{opacity:1;animation:ammTeamPacket 2.4s ease-in-out infinite}
+#services .amm-stage-team.is-active .amm-track-node{animation:ammTeamNode 2.4s ease-in-out infinite}
+#services .amm-stage-team.is-active .amm-track-node.node-b{animation-delay:.35s}
+#services .amm-stage-team.is-active .amm-track-node.node-c{animation-delay:.7s}
+#services .amm-stage-team.is-active .amm-metric-ring{animation:ammRingPulse 2.2s ease-in-out infinite}
+#services .amm-stage-team.is-active .amm-metric-bars i{animation:ammBarPulse 1.1s ease-in-out infinite alternate}
+#services .amm-stage-team.is-active .amm-metric-bars i:nth-child(2){animation-delay:.15s}
+#services .amm-stage-team.is-active .amm-metric-bars i:nth-child(3){animation-delay:.3s}
+#services .amm-stage-team.is-active .amm-metric-bars i:nth-child(4){animation-delay:.45s}
+@keyframes ammTeamPacket{0%{left:8px;transform:scale(.8)}45%{transform:scale(1.35)}100%{left:calc(100% - 15px);transform:scale(.8)}}
+@keyframes ammTeamNode{0%,100%{box-shadow:0 3px 8px #2c865016}50%{box-shadow:0 0 0 4px #5b2ee81a,0 4px 12px #5b2ee82b}}
+@keyframes ammRingPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes ammBarPulse{from{filter:saturate(.75);transform:scaleY(.82);transform-origin:bottom}to{filter:saturate(1.2);transform:scaleY(1);transform-origin:bottom}}
+/* Completed stages settle into a clean, neutral blank state after handoff */
+#services .amm-stage.is-complete-stage{--stage-accent:#b8b8c5!important;background:#fff!important;border-color:#e7e7ed!important;box-shadow:0 4px 18px #20203308!important;filter:saturate(.18)}
+#services .amm-stage.is-complete-stage .amm-window{background:#fbfbfd!important;border-color:#ececf1!important;box-shadow:none!important;animation:none!important}
+#services .amm-stage.is-complete-stage .amm-window::before,#services .amm-stage.is-complete-stage .amm-window::after{opacity:0!important;animation:none!important}
+#services .amm-stage.is-complete-stage .amm-window>*:not(.amm-waiting-state){opacity:.12!important;filter:grayscale(1);transition:opacity .45s ease}
+#services .amm-stage.is-complete-stage .amm-stage-status{background:#f1f1f5!important;color:#858594!important;border-color:#e5e5eb!important}
+#services .amm-stage.is-complete-stage .amm-stage-head,#services .amm-stage.is-complete-stage h3,#services .amm-stage.is-complete-stage .amm-stage-intro,#services .amm-stage.is-complete-stage .amm-stage-foot{color:#aaa9b5!important;transition:color .45s ease}
+#services .amm-stage.is-complete-stage .amm-stage-index{color:#aaa9b5!important}
+@media(max-width:640px){#services .amm-team-infographic{margin-right:8px;margin-left:8px;padding:8px}#services .amm-infographic-metrics{gap:7px}}
+@media(prefers-reduced-motion:reduce){#services .amm-stage-team.is-active .amm-track-packet,#services .amm-stage-team.is-active .amm-track-node,#services .amm-stage-team.is-active .amm-metric-ring,#services .amm-stage-team.is-active .amm-metric-bars i{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -748,6 +797,12 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
         <h3>Team Workflow</h3><p class="amm-stage-intro">The request becomes a clear, workable plan.</p>
         <div class="amm-window amm-task-window">
           <div class="amm-window-bar"><span>AMM project desk</span><span class="amm-window-pill">NEW TASK</span></div>
+          <div class="amm-team-infographic" aria-label="Animated team workflow infographic">
+            <div class="amm-infographic-top"><span>WORKFLOW MAP</span><span class="amm-live-dot">LIVE</span></div>
+            <div class="amm-infographic-track"><span class="amm-track-line"></span><span class="amm-track-node node-a">01</span><span class="amm-track-node node-b">02</span><span class="amm-track-node node-c">03</span><span class="amm-track-packet"></span></div>
+            <div class="amm-infographic-labels"><span>Brief</span><span>Plan</span><span>Ready</span></div>
+            <div class="amm-infographic-metrics"><span class="amm-metric-ring"><i></i></span><span class="amm-metric-bars"><i></i><i></i><i></i><i></i></span><span class="amm-metric-copy"><b>Task clarity</b><small>Organised handoff</small></span></div>
+          </div>
           <div class="amm-task-row" data-task="0"><span class="amm-check">✓</span><span><b>Understand the request</b><small>Goal & requirements</small></span><em>DONE</em></div>
           <div class="amm-task-row" data-task="1"><span class="amm-check">✓</span><span><b>Map the solution</b><small>Plan the right approach</small></span><em>DONE</em></div>
           <div class="amm-task-row" data-task="2"><span class="amm-check">✓</span><span><b>Prepare the build</b><small>Tools & next steps</small></span><em>READY</em>
