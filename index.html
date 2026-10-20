@@ -1293,18 +1293,13 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  function closeService(){
   if(!overlay.classList.contains('is-open'))return;
   if(openFrame)cancelAnimationFrame(openFrame);
-  const rect=sourceCard&&sourceCard.isConnected?sourceCard.getBoundingClientRect():null;
-  if(!reduce()&&rect){
-   const dx=rect.left+rect.width/2-window.innerWidth/2;
-   const dy=rect.top+rect.height/2-window.innerHeight/2;
-   const dialogRect=dialog.getBoundingClientRect();
-   const sx=Math.max(.08,Math.min(1,rect.width/dialogRect.width));
-   const sy=Math.max(.08,Math.min(1,rect.height/dialogRect.height));
-   dialog.style.transition='transform 260ms linear';
-   overlay.classList.add('is-closing');
-   dialog.style.transform='translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px)) scale('+sx+','+sy+')';
-   closeTimer=setTimeout(finishClose,270);
-  }else finishClose();
+  clearTimeout(closeTimer);
+  overlay.classList.add('is-closing');
+  overlay.style.transition='opacity 150ms ease';
+  dialog.style.transition='opacity 150ms ease';
+  dialog.style.transform='translate(-50%,-50%) scale(1,1)';
+  dialog.style.opacity='0';
+  closeTimer=setTimeout(finishClose,160);
  }
  function finishClose(){
   clearTimeout(closeTimer);
