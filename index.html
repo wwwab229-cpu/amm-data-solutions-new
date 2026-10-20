@@ -575,6 +575,14 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 #services .amm-waiting-state{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px;text-align:center;background:linear-gradient(145deg,color-mix(in srgb,var(--stage-accent) 15%,white),color-mix(in srgb,var(--stage-accent) 5%,white));color:#242033;visibility:visible;opacity:1;transition:opacity .22s ease}
 #services .amm-stage.is-active .amm-waiting-state,#services .amm-stage.is-complete-stage .amm-waiting-state{visibility:hidden;opacity:0;pointer-events:none}
 #services .amm-waiting-orb{display:grid;place-items:center;width:43px;height:43px;border:1px solid color-mix(in srgb,var(--stage-accent) 55%,white);border-radius:50%;background:white;color:var(--stage-accent);font-size:1.35rem;box-shadow:0 0 0 6px color-mix(in srgb,var(--stage-accent) 10%,transparent)}
+
+#services .amm-waiting-dots{display:flex;align-items:center;justify-content:center;gap:7px;height:43px}
+#services .amm-waiting-dots i{display:block;width:9px;height:9px;border-radius:50%;background:var(--stage-accent);opacity:.35;animation:ammWaitingDot 1s ease-in-out infinite}
+#services .amm-waiting-dots i:nth-child(2){animation-delay:.16s}
+#services .amm-waiting-dots i:nth-child(3){animation-delay:.32s}
+@keyframes ammWaitingDot{0%,60%,100%{transform:translateY(0) scale(.82);opacity:.35}30%{transform:translateY(-5px) scale(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){#services .amm-waiting-dots i{animation:none!important;opacity:.8}}
+
 #services .amm-waiting-title{font-size:.72rem;font-weight:850;letter-spacing:.14em;color:var(--stage-accent)}
 #services .amm-waiting-sub{font-size:.68rem;color:#777184}
 #services .amm-stage.is-active .amm-window{border:2px solid var(--stage-accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--stage-accent) 15%,transparent),0 0 22px color-mix(in srgb,var(--stage-accent) 42%,transparent)!important;animation:ammQuickBorderPulse .8s ease-in-out infinite alternate!important}
@@ -832,7 +840,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   const win=card.querySelector('.amm-window');
   if(win&&!win.querySelector('.amm-waiting-state')){
    const waiting=document.createElement('div');waiting.className='amm-waiting-state';
-   waiting.innerHTML='<span class="amm-waiting-orb" aria-hidden="true">↗</span><span class="amm-waiting-title">WAITING FOR TASK</span><span class="amm-waiting-sub">Ready when work arrives</span>';
+   waiting.innerHTML='<span class="amm-waiting-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="amm-waiting-title">WAITING FOR TASK</span><span class="amm-waiting-sub">Ready when work arrives</span>';
    win.appendChild(waiting);
   }
  });
