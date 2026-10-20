@@ -755,6 +755,20 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 #services .amm-metric-ring::before{inset:3px}
 #services .amm-metric-bars{height:19px}
 
+
+/* Fix: give Box 2 enough vertical room so checklist and infographic never clip */
+#services .amm-stage-team .amm-task-window{height:auto!important;min-height:350px!important;max-height:none!important;overflow:visible!important;justify-content:flex-start!important;gap:8px!important;padding:12px 12px 14px!important}
+#services .amm-stage-team .amm-task-window>.amm-window-bar{flex:0 0 20px;min-height:20px}
+#services .amm-stage-team .amm-task-window>.amm-task-row{flex:0 0 auto;min-height:36px}
+#services .amm-stage-team .amm-task-window>.amm-team-infographic{display:block!important;visibility:visible!important;flex:0 0 auto;min-height:132px;opacity:1!important;overflow:visible}
+#services .amm-stage-team.is-active .amm-task-window>.amm-team-infographic,
+#services .amm-stage-team.is-active .amm-task-window>.amm-task-row{visibility:visible!important;opacity:1!important}
+#services .amm-stage-team .amm-task-window::before{z-index:0;pointer-events:none}
+#services .amm-stage-team .amm-task-window>*{position:relative;z-index:1}
+#services .amm-stage-team .amm-task-window::after{z-index:2;pointer-events:none}
+@media(max-width:1023px){#services .amm-stage-team .amm-task-window{min-height:350px!important;height:auto!important}}
+@media(max-width:600px){#services .amm-stage-team .amm-task-window{min-height:350px!important;height:auto!important;padding:12px 11px 14px!important}#services .amm-stage-team .amm-team-infographic{margin-left:5px;margin-right:5px}}
+
 </style>
 </head>
 <body>
