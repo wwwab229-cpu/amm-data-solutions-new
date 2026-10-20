@@ -563,6 +563,29 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 /* Active workflow stage gets a fast, clear border pulse. */
 #services .amm-stage.is-active .amm-window{border:2px solid #7653e8;box-shadow:0 0 0 4px #7653e826,0 0 22px #7653e866;animation:ammQuickBorderPulse 1.25s ease-in-out infinite alternate!important}
 @keyframes ammQuickBorderPulse{from{box-shadow:0 0 0 2px #7653e81a,0 0 10px #7653e833}to{box-shadow:0 0 0 5px #7653e833,0 0 26px #7653e866}}
+
+/* Workflow states: idle panels, active glow, and visible hand-off motion */
+#services .amm-workflow{position:relative;isolation:isolate}
+#services .amm-stage{--stage-accent:#7653e8}
+#services .amm-stage-team{--stage-accent:#2ca66f}
+#services .amm-stage-build{--stage-accent:#22a6cf}
+#services .amm-stage-delivery{--stage-accent:#d45aa7}
+#services .amm-window{position:relative;overflow:hidden;transition:border-color .25s ease,box-shadow .25s ease}
+#services .amm-stage:not(.is-active):not(.is-complete-stage) .amm-window>*:not(.amm-waiting-state){visibility:hidden!important;opacity:0!important}
+#services .amm-waiting-state{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px;text-align:center;background:linear-gradient(145deg,color-mix(in srgb,var(--stage-accent) 15%,white),color-mix(in srgb,var(--stage-accent) 5%,white));color:#242033;visibility:visible;opacity:1;transition:opacity .22s ease}
+#services .amm-stage.is-active .amm-waiting-state,#services .amm-stage.is-complete-stage .amm-waiting-state{visibility:hidden;opacity:0;pointer-events:none}
+#services .amm-waiting-orb{display:grid;place-items:center;width:43px;height:43px;border:1px solid color-mix(in srgb,var(--stage-accent) 55%,white);border-radius:50%;background:white;color:var(--stage-accent);font-size:1.35rem;box-shadow:0 0 0 6px color-mix(in srgb,var(--stage-accent) 10%,transparent)}
+#services .amm-waiting-title{font-size:.72rem;font-weight:850;letter-spacing:.14em;color:var(--stage-accent)}
+#services .amm-waiting-sub{font-size:.68rem;color:#777184}
+#services .amm-stage.is-active .amm-window{border:2px solid var(--stage-accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--stage-accent) 15%,transparent),0 0 22px color-mix(in srgb,var(--stage-accent) 42%,transparent)!important;animation:ammQuickBorderPulse .8s ease-in-out infinite alternate!important}
+#services .amm-stage.is-sending .amm-window{box-shadow:0 0 0 4px color-mix(in srgb,var(--stage-accent) 18%,transparent),0 0 28px color-mix(in srgb,var(--stage-accent) 55%,transparent)!important}
+#services .amm-stage.is-receiving .amm-window{animation:ammReceiveGlow .55s ease-out 1!important}
+@keyframes ammQuickBorderPulse{from{box-shadow:0 0 0 2px color-mix(in srgb,var(--stage-accent) 10%,transparent),0 0 9px color-mix(in srgb,var(--stage-accent) 28%,transparent)}to{box-shadow:0 0 0 5px color-mix(in srgb,var(--stage-accent) 24%,transparent),0 0 25px color-mix(in srgb,var(--stage-accent) 62%,transparent)}}
+@keyframes ammReceiveGlow{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--stage-accent) 0%,transparent)}45%{box-shadow:0 0 0 6px color-mix(in srgb,var(--stage-accent) 25%,transparent),0 0 28px color-mix(in srgb,var(--stage-accent) 55%,transparent)}100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--stage-accent) 0%,transparent)}}
+#services .amm-transfer-packet{position:absolute;z-index:20;left:0;top:0;width:17px;height:17px;border:2px solid white;border-radius:50%;pointer-events:none;background:var(--packet-color,#7653e8);box-shadow:0 0 0 5px color-mix(in srgb,var(--packet-color,#7653e8) 18%,transparent),0 0 22px 8px color-mix(in srgb,var(--packet-color,#7653e8) 70%,transparent);transform:translate(calc(var(--packet-x) - 50%),calc(var(--packet-y) - 50%));animation:ammTransferFlight .72s cubic-bezier(.2,.75,.25,1) forwards}
+@keyframes ammTransferFlight{0%{opacity:0;transform:translate(calc(var(--packet-x) - 50%),calc(var(--packet-y) - 50%)) scale(.5)}12%{opacity:1}100%{opacity:1;transform:translate(calc(var(--packet-x) + var(--packet-dx) - 50%),calc(var(--packet-y) + var(--packet-dy) - 50%)) scale(1.12)}}
+@media(prefers-reduced-motion:reduce){#services .amm-stage.is-active .amm-window,#services .amm-stage.is-receiving .amm-window{animation:none!important}#services .amm-transfer-packet{display:none}}
+
 </style>
 </head>
 <body>
@@ -795,14 +818,14 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  const order='Hi AMM! We need a smarter way to manage customer orders and keep everything organised. Can you help us build a solution?';
  const captions=['A customer is writing a request…','The request is received. The AMM team starts planning.','The solution is taking shape, step by step…','The finished work is ready for the customer.'];
  const labels=['NEW REQUEST','TEAM BRIEF','IN THE MAKING','DELIVERED'];
- const durations=[6900,5000,6400,5200];
+ const durations=[4200,3400,3900,3200];
  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  let stage=0,runId=0,timer=null,typingTimer=null;
  function clearTimers(){if(timer)clearTimeout(timer);if(typingTimer)clearTimeout(typingTimer);timer=null;typingTimer=null}
  function typeOrder(id,index){
   if(id!==runId||stage!==0||document.hidden)return;
   typed.textContent=order.slice(0,index);
-  if(index<order.length){typingTimer=setTimeout(()=>typeOrder(id,index+1),reduce?0:27)}
+  if(index<order.length){typingTimer=setTimeout(()=>typeOrder(id,index+1),reduce?0:16)}
  }
  // Each panel waits in a calm idle state until its turn begins.
  cards.forEach((card,i)=>{
@@ -853,7 +876,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
    percent.textContent='0%';
    if(reduce)percent.textContent='100%';
    else{
-    const start=performance.now(),duration=5000;
+    const start=performance.now(),duration=3000;
     const tick=(now)=>{if(id!==runId||stage!==2)return;const p=Math.min(1,(now-start)/duration);percent.textContent=Math.round(p*100)+'%';if(p<1)requestAnimationFrame(tick)};
     requestAnimationFrame(tick);
    }
