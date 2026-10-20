@@ -804,8 +804,34 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   typed.textContent=order.slice(0,index);
   if(index<order.length){typingTimer=setTimeout(()=>typeOrder(id,index+1),reduce?0:43)}
  }
+ // Each panel waits in a calm idle state until its turn begins.
+ cards.forEach((card,i)=>{
+  const win=card.querySelector('.amm-window');
+  if(win&&!win.querySelector('.amm-waiting-state')){
+   const waiting=document.createElement('div');waiting.className='amm-waiting-state';
+   waiting.innerHTML='<span class="amm-waiting-orb" aria-hidden="true">↗</span><span class="amm-waiting-title">WAITING FOR TASK</span><span class="amm-waiting-sub">Ready when work arrives</span>';
+   win.appendChild(waiting);
+  }
+ });
+ function sendWork(from,to){
+  const a=cards[from]?.querySelector('.amm-window'),b=cards[to]?.querySelector('.amm-window'),wrap=document.querySelector('#services .amm-workflow');
+  if(!a||!b||!wrap||reduce)return;
+  const wr=wrap.getBoundingClientRect(),ar=a.getBoundingClientRect(),br=b.getBoundingClientRect();
+  const sx=ar.left+ar.width/2-wr.left,sy=ar.top+ar.height/2-wr.top;
+  const ex=br.left+br.width/2-wr.left,ey=br.top+br.height/2-wr.top;
+  const packet=document.createElement('span');packet.className='amm-transfer-packet';
+  packet.style.setProperty('--packet-x',sx+'px');packet.style.setProperty('--packet-y',sy+'px');
+  packet.style.setProperty('--packet-dx',(ex-sx)+'px');packet.style.setProperty('--packet-dy',(ey-sy)+'px');
+  packet.style.setProperty('--packet-color',getComputedStyle(cards[from]).getPropertyValue('--stage-accent').trim()||'#7653e8');
+  wrap.appendChild(packet);setTimeout(()=>packet.remove(),850);
+  cards[from].classList.add('is-sending');cards[to].classList.add('is-receiving');
+  setTimeout(()=>{cards[from]?.classList.remove('is-sending');cards[to]?.classList.remove('is-receiving')},760);
+ }
  function setStage(next){
+  const previousStage=stage;
   runId++;const id=runId;clearTimers();stage=next;
+  if(previousStage!==next)sendWork(previousStage,next);
+
   cards.forEach((card,i)=>{
    card.classList.remove('is-active','is-clearing');
    if(i<next){card.classList.add('is-clearing')}
