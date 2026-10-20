@@ -760,6 +760,50 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 @media(max-width:767px){.amm-process-heading{margin-bottom:30px;text-align:left}.amm-process-list{grid-template-columns:minmax(0,1fr);border-bottom:0}.amm-process-step,.amm-process-step:not(:first-child){display:grid;grid-template-columns:44px minmax(0,1fr);align-items:start;gap:16px;padding:20px 0;border-left:0;border-bottom:1px solid #5b2ee81b}.amm-process-step p{max-width:none}.amm-process-number{width:40px;height:40px}}
 @media(prefers-reduced-motion:reduce){.amm-process-step,.amm-process-number{transition:none}}
 
+
+/* Restore the compact, clickable four-stage live workflow cards */
+#services .amm-workflow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
+#services .amm-stage,#services .amm-stage:nth-child(n){position:relative;display:flex;flex-direction:column;min-width:0;padding:15px 13px 13px;border:1px solid #e8e1fa;border-radius:20px;background:linear-gradient(160deg,#fff 0%,#fcfbff 72%,#f7f4ff 100%);box-shadow:0 10px 28px -20px #21174755;overflow:hidden;opacity:1;transform:none;transition:border-color .45s ease,box-shadow .45s ease,background .45s ease}
+#services .amm-stage::before{display:block;content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--amm-angle,0deg),transparent 0 64%,#ffd21f 72%,#5b2ee8 84%,transparent 94%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;pointer-events:none}
+#services .amm-stage.is-active{border-color:#b9a7f8;box-shadow:0 16px 32px -19px #5b2ee866;background:linear-gradient(160deg,#fff 0%,#faf8ff 62%,#f4f0ff 100%)}
+#services .amm-stage.is-active::before{opacity:1;animation:ammBorderRun 3.8s linear infinite}
+#services .amm-stage.is-complete-stage{border-color:#cbe9d8;background:linear-gradient(160deg,#fff 0%,#fbfffc 100%)}
+#services .amm-stage:not(:last-child)::after{display:none}
+#services .amm-stage-head{align-items:center;margin:0 0 10px;padding:0 0 10px;border-bottom:1px solid #5b2ee817}
+#services .amm-stage-index{display:inline-flex;align-items:center;justify-content:center;min-width:30px;width:30px;height:30px;padding:0;border:1px solid #e8e1fa;border-radius:10px;background:linear-gradient(145deg,#f0eaff,#fff)!important;color:#5b2ee8;font-size:.68rem;letter-spacing:0;box-shadow:none}
+#services .amm-stage-status{font-size:.48rem;letter-spacing:.035em;padding:5px 7px;background:#f6f3ff;color:#6751ac}
+#services .amm-stage h3{font-size:.91rem;line-height:1.25;margin:0 0 6px}
+#services .amm-stage-intro{min-height:3.1em;margin:0 0 10px;font-size:.67rem;line-height:1.5}
+#services .amm-window,#services .amm-stage:not(.is-active) .amm-window{height:174px;min-height:174px;flex:none;position:relative;overflow:hidden;border:1px solid #e9e3f7;border-radius:14px;background:#f8f7ff;box-shadow:inset 0 1px 0 #fff;isolation:isolate;transition:box-shadow .6s ease,transform .6s ease}
+#services .amm-stage.is-active .amm-window{box-shadow:0 8px 20px #5b2ee814,inset 0 1px 0 #fff}
+#services .amm-window-bar{height:23px;padding:0 0 7px;font-size:.5rem}
+#services .amm-message-body{padding:12px 8px 45px;gap:6px}
+#services .amm-avatar{flex:0 0 26px;width:26px;height:26px;border-radius:9px}
+#services .amm-message-bubble{padding:8px;gap:5px}
+#services #amm-order-typed{min-height:48px;font-size:.57rem!important;line-height:1.45!important}
+#services .amm-task-window{gap:10px;padding:15px 10px}
+#services .amm-task-row{gap:7px}
+#services .amm-task-row>span:nth-child(2){gap:3px}
+#services .amm-task-row b{font-size:.6rem}
+#services .amm-task-row small{font-size:.51rem}
+#services .amm-check{flex-basis:23px;width:23px;height:23px;border-radius:7px}
+#services .amm-system-map{min-height:130px;padding:8px 0}
+#services .amm-system-node{width:54px;font-size:.49rem}
+#services .amm-system-node span{width:36px;height:36px;border-radius:12px}
+#services .amm-system-node b{font-size:.5rem}
+#services .amm-system-link{width:15%}
+#services .amm-build-bottom{bottom:9px;left:10px;right:10px;font-size:.49rem}
+#services .amm-delivery-window{gap:7px;padding:12px}
+#services .amm-delivery-glow{width:86px;height:86px}
+#services .amm-delivery-check{width:45px;height:45px;border-radius:15px;font-size:1.35rem}
+#services .amm-delivery-window>strong{font-size:.7rem}
+#services .amm-delivery-file,#services .amm-customer-reaction{max-width:100%;padding:6px 8px}
+#services .amm-stage-foot{margin-top:9px;font-size:.54rem}
+#services .amm-flow-bottom{margin-top:18px;padding:12px 0}
+@media(max-width:1023px){#services .amm-workflow{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}#services .amm-window,#services .amm-stage:not(.is-active) .amm-window{height:174px;min-height:174px}}
+@media(max-width:560px){#services .amm-workflow{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#services .amm-stage,#services .amm-stage:nth-child(n){padding:10px 9px;border-radius:16px}#services .amm-stage-head{margin-bottom:8px;padding-bottom:8px;gap:5px}#services .amm-stage-index{width:26px;height:26px;min-width:26px}#services .amm-stage-status{font-size:.43rem;padding:4px 5px}#services .amm-stage h3{font-size:.76rem}#services .amm-stage-intro{font-size:.58rem;min-height:3.1em}#services .amm-window,#services .amm-stage:not(.is-active) .amm-window{height:158px;min-height:158px}#services .amm-message-body{padding:8px 6px 42px}#services #amm-order-typed{font-size:.52rem!important;min-height:42px}#services .amm-task-window{padding:10px 7px;gap:8px}#services .amm-task-row{gap:5px}#services .amm-task-row b{font-size:.53rem}#services .amm-task-row small{font-size:.46rem}#services .amm-system-node{width:43px;font-size:.43rem}#services .amm-system-node span{width:30px;height:30px;border-radius:10px}#services .amm-system-node b{font-size:.43rem}#services .amm-delivery-check{width:38px;height:38px}#services .amm-stage-foot{font-size:.49rem}#services .amm-flow-bottom{grid-template-columns:minmax(0,1fr) auto;gap:8px}}
+@media(prefers-reduced-motion:reduce){#services .amm-stage.is-active::before{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -1177,7 +1221,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
 /* Simple service-card open/close: on close, return to the original card position only. */
 (function(){
  const data=[{"title":"AI & Business Automation","short":"Automate repetitive work","detail":"Replace repetitive manual tasks with connected, reliable workflows. AMM helps map your process, identify practical automation opportunities, connect the tools you already use, and reduce avoidable hand-offs so your team can focus on higher-value work.","items":["Workflow mapping and process improvement","Tool and app integrations","Automated task routing and notifications","Testing, documentation and handover"]},{"title":"AI Chatbots & Customer Support","short":"Helpful support, around the clock","detail":"Give visitors a clearer path to answers with a website chatbot designed around your business information. Start with common questions and service guidance, then refine responses and hand-off points as your needs grow.","items":["Website chatbot setup","Business FAQs and service information","Lead capture and enquiry routing","Human hand-off for questions needing attention"]},{"title":"Google SEO & AI Search Visibility","short":"Be easier to discover","detail":"Improve how your business is understood by search engines and AI-powered discovery experiences. AMM focuses on clear site structure, useful content, technical SEO foundations and consistent service information—without promising rankings or guaranteed results.","items":["On-page SEO and metadata","Technical SEO basics and indexing checks","Content structure for Google and AI search","Search visibility review and improvement plan"]},{"title":"Digital Advertising","short":"Campaigns built around your goals","detail":"Plan and manage digital ad campaigns with a clear objective, audience and measurement approach. Service options can include Google Ads, Meta Ads (Facebook and Instagram), and TikTok Ads. ChatGPT or other AI ad placements are considered only where officially available and eligible.","items":["Campaign planning and ad copy","Google, Meta and TikTok campaign setup","Conversion tracking and performance review","Reporting and ongoing optimization"]},{"title":"Website Design & Digital Solutions","short":"Clear, responsive digital experiences","detail":"Create or improve a professional website that explains your offer clearly, works across devices and guides visitors toward a useful next step. Scope is agreed before work begins, with attention to usability, performance and search-friendly foundations.","items":["Responsive landing pages and websites","Service-focused content structure","Contact and enquiry pathways","Performance and basic SEO foundations"]},{"title":"Data Management & Data Entry","short":"Organized, dependable business data","detail":"Make business information easier to maintain and use through structured data entry, cleanup and documentation. Workflows are designed around the client's format and quality requirements, with clear checks to reduce avoidable errors.","items":["Data entry and spreadsheet organization","Data cleanup and formatting","Consistent records and validation checks","Simple reporting and repeatable workflows"]}];
- const section=document.querySelector('#work');if(!section)return;
+ const serviceCards=[...document.querySelectorAll('#services [data-service-index], #work [data-service-index]')];if(!serviceCards.length)return;
  const overlay=document.createElement('div');overlay.className='amm-service-overlay';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','AMM service details');
  overlay.innerHTML='<div class="amm-service-dialog"><button type="button" class="amm-service-close" aria-label="Close service details">×</button><div class="amm-service-flipper"><section class="amm-service-face amm-service-front" aria-hidden="true"><div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">AMM DATA SOLUTIONS</span><h2 class="f font-extrabold mt-5" style="font-size:clamp(30px,5vw,54px);line-height:1.08;color:#171329"></h2><p class="mt-4 text-lg" style="color:#625d72"></p></div><p class="text-sm font-semibold" style="color:#5b2ee8">Turning business needs into practical solutions ↗</p></section><section class="amm-service-face amm-service-back"><div class="h-1.5 absolute top-0 left-0 right-0" style="background:linear-gradient(90deg,#5b2ee8,#d6f25b)"></div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">AMM SERVICE OVERVIEW</span><h2 class="f font-extrabold mt-3 pr-10" style="font-size:clamp(26px,4vw,38px);line-height:1.15;color:#171329"></h2><p class="mt-4 text-sm sm:text-base leading-relaxed" style="color:#625d72"></p><div class="amm-service-detail-grid mt-7"><div><h3 class="f font-bold text-base mb-3" style="color:#171329">What this can include</h3><ul class="amm-service-detail-list"></ul></div><div class="rounded-2xl p-5" style="background:#f8f6ff;border:1px solid #ebe5ff"><h3 class="f font-bold text-base mb-2" style="color:#171329">Built around your business</h3><p class="text-sm leading-relaxed" style="color:#625d72">We agree the scope, tools and priorities with you first, then shape a practical solution around your goals. Deliverables depend on your requirements and the agreed project scope.</p><a class="amm-service-cta mt-5" href="mailto:ammdatasolutions229@gmail.com?subject=AMM%20Service%20Enquiry">Discuss this service <span aria-hidden="true" style="margin-left:8px">↗</span></a></div></div></section></div></div>';
  document.body.appendChild(overlay);
@@ -1239,7 +1283,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(previousFocus&&previousFocus.isConnected)previousFocus.focus();
   sourceCard=null;
  }
- section.querySelectorAll('[data-service-index]').forEach(card=>card.addEventListener('click',()=>openService(Number(card.dataset.serviceIndex),card)));
+ serviceCards.forEach(card=>card.addEventListener('click',()=>openService(Number(card.dataset.serviceIndex),card)));
  close.addEventListener('click',closeService);
  overlay.addEventListener('click',e=>{if(e.target===overlay)closeService()});
  document.addEventListener('keydown',e=>{if(!overlay.classList.contains('is-open'))return;if(e.key==='Escape')closeService()});
