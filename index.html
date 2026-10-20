@@ -1106,8 +1106,8 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   const ghost=card.cloneNode(true);
   ghost.removeAttribute('id');
   ghost.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
-  /* Never scale text during the travel animation: hide clone text until the card reaches its destination. */
-  ghost.querySelectorAll('h1,h2,h3,h4,h5,h6,p,span,strong,small,li,a,button,label').forEach(el=>{el.style.visibility='hidden';});
+  /* Keep the travelling clone visually complete; hiding its text made it look like a blank white card. */
+  ghost.style.webkitFontSmoothing='antialiased';
   ghost.style.cssText+=';position:fixed!important;left:'+fromRect.left+'px!important;top:'+fromRect.top+'px!important;width:'+fromRect.width+'px!important;height:'+fromRect.height+'px!important;margin:0!important;z-index:10001!important;pointer-events:none!important;overflow:hidden!important;transform-origin:top left!important;will-change:transform,opacity!important;';
   ghost.setAttribute('aria-hidden','true');
   document.body.appendChild(ghost);
