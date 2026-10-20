@@ -726,6 +726,22 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 @media(max-width:640px){.amm-service-overlay{padding:10px}.amm-service-dialog{width:calc(100vw - 20px);max-height:92vh}.amm-service-flipper{min-height:0}.amm-service-face{border-radius:18px}.amm-service-detail-grid{grid-template-columns:1fr;gap:18px}.amm-service-back{padding:22px 18px;max-height:92vh}.amm-service-front{display:none!important}}
 @media(prefers-reduced-motion:reduce){.amm-service-flipper,.amm-service-overlay,.amm-service-card{transition:none!important}}
 
+
+/* How we work: editorial process layout, intentionally without cards/boxes */
+.amm-process-section{padding-top:clamp(44px,6vw,72px);padding-bottom:clamp(58px,8vw,92px);background:linear-gradient(180deg,#fafaff 0%,#fff 100%)}
+.amm-process-heading{max-width:690px;margin:0 auto 44px;text-align:center}
+.amm-process-eyebrow{display:inline-block;margin-bottom:15px;color:#5b2ee8;font-size:.7rem;font-weight:850;letter-spacing:.16em}
+.amm-process-heading h2{margin:0;color:#191b35}
+.amm-process-heading>p{margin:15px 0 0;color:#585d78;font-size:clamp(.95rem,1.5vw,1.08rem);line-height:1.75}
+.amm-process-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:0;padding:0;list-style:none;border-top:1px solid #5b2ee824;border-bottom:1px solid #5b2ee824}
+.amm-process-step{display:flex;flex-direction:column;align-items:flex-start;gap:23px;min-width:0;padding:27px 25px 29px 0;position:relative}
+.amm-process-step:not(:first-child){padding-left:25px;border-left:1px solid #5b2ee81b}
+.amm-process-number{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:#f0ebff;color:#5b2ee8;font-size:.78rem;font-weight:850;letter-spacing:.04em}
+.amm-process-step h3{margin:0 0 8px;color:#19172d;font-size:1.13rem;font-weight:800;letter-spacing:-.035em}
+.amm-process-step p{margin:0;max-width:230px;color:#585d78;font-size:.88rem;line-height:1.75}
+@media(max-width:767px){.amm-process-heading{margin-bottom:30px;text-align:left}.amm-process-list{grid-template-columns:minmax(0,1fr);border-bottom:0}.amm-process-step,.amm-process-step:not(:first-child){display:grid;grid-template-columns:44px minmax(0,1fr);align-items:start;gap:16px;padding:20px 0;border-left:0;border-bottom:1px solid #5b2ee81b}.amm-process-step p{max-width:none}.amm-process-number{width:40px;height:40px}}
+@media(prefers-reduced-motion:reduce){.amm-process-step,.amm-process-number{transition:none}}
+
 </style>
 </head>
 <body>
@@ -859,13 +875,21 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 </div></div></section>
 
 <!-- 8. PROCESS -->
-<section id="process"><div class="wrap"><h2 class="mb-10 rv">How we work</h2>
-<ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-<li class="card p-6 rv"><span class="f font-extrabold v text-2xl">1</span><h3 class="f font-bold mt-2">Discover</h3><p class="text-sm mt-1" style="color:var(--muted)">We learn your problem and your users.</p></li>
-<li class="card p-6 rv"><span class="f font-extrabold v text-2xl">2</span><h3 class="f font-bold mt-2">Design</h3><p class="text-sm mt-1" style="color:var(--muted)">A simple plan and a clear screen flow.</p></li>
-<li class="card p-6 rv"><span class="f font-extrabold v text-2xl">3</span><h3 class="f font-bold mt-2">Build</h3><p class="text-sm mt-1" style="color:var(--muted)">Fast delivery with AI and no-code tools.</p></li>
-<li class="card p-6 rv"><span class="f font-extrabold v text-2xl">4</span><h3 class="f font-bold mt-2">Support</h3><p class="text-sm mt-1" style="color:var(--muted)">We stay on to fix, tune and grow it.</p></li>
-</ol></div></section>
+<section id="process" class="amm-process-section">
+  <div class="wrap">
+    <div class="amm-process-heading rv">
+      <span class="amm-process-eyebrow">A CLEAR PATH FORWARD</span>
+      <h2>From Idea to <span class="v">Impact</span></h2>
+      <p>A clear, collaborative process — built around your needs.</p>
+    </div>
+    <ol class="amm-process-list">
+      <li class="amm-process-step rv"><span class="amm-process-number">01</span><div><h3>Discover</h3><p>We understand your challenge, goals, and users.</p></div></li>
+      <li class="amm-process-step rv"><span class="amm-process-number">02</span><div><h3>Design</h3><p>We map out a clear, practical solution.</p></div></li>
+      <li class="amm-process-step rv"><span class="amm-process-number">03</span><div><h3>Build</h3><p>We create and test the solution using suitable tools.</p></div></li>
+      <li class="amm-process-step rv"><span class="amm-process-number">04</span><div><h3>Support</h3><p>We help refine and improve the solution as needs evolve.</p></div></li>
+    </ol>
+  </div>
+</section>
 
 <!-- 9. CTA -->
 <section style="padding-top:0"><div class="wrap"><div class="dark rounded-[36px] p-8 md:p-14 text-center relative overflow-hidden">
