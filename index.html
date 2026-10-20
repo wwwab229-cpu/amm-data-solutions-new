@@ -723,6 +723,10 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 
 
 
+/* Match each live-demo box outline to its own stage accent */
+#services .amm-stage.is-active{border-color:var(--stage-accent)!important;box-shadow:0 12px 30px -20px color-mix(in srgb,var(--stage-accent) 48%,transparent)!important}
+#services .amm-stage.is-active .amm-window{border-color:var(--stage-accent)!important}
+#services .amm-stage.is-sending .amm-window{border-color:var(--stage-accent)!important}
 /* AMM service card detail overlay */
 .amm-service-card{appearance:none;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
 .amm-service-card:hover,.amm-service-card:focus-visible{transform:none!important;box-shadow:0 14px 34px rgba(35,24,74,.13)!important;border-color:#c8b9ff!important;outline:none}
