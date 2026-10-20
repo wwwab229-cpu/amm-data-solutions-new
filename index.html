@@ -1127,10 +1127,20 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  }
  function finishClose(){
   clearTimeout(closeTimer);
-  overlay.classList.remove('is-open','is-flipped','is-closing');document.body.style.overflow='';
+  /* Hide the overlay BEFORE resetting the dialog transform; otherwise it briefly jumps back to center and flashes. */
+  overlay.style.transition='none';
+  overlay.style.visibility='hidden';
+  overlay.style.opacity='0';
+  overlay.classList.remove('is-open','is-flipped','is-closing');
+  document.body.style.overflow='';
   if(animation){animation.cancel();animation=null;}
-  const flipper=overlay.querySelector('.amm-service-flipper');flipper.style.transition='';flipper.style.transform='';
-  dialog.style.transform='translate(-50%,-50%)';dialog.style.opacity='1';
+  const flipper=overlay.querySelector('.amm-service-flipper');
+  flipper.style.transition='none';
+  flipper.style.transform='';
+  dialog.style.transform='translate(-50%,-50%)';
+  dialog.style.opacity='1';
+  /* Restore normal overlay transitions only after its hidden state is established. */
+  requestAnimationFrame(()=>{overlay.style.transition='';overlay.style.visibility='';overlay.style.opacity='';flipper.style.transition='';});
   if(previousFocus&&previousFocus.isConnected)previousFocus.focus();
   sourceCard=null;sourceRect=null;
  }
