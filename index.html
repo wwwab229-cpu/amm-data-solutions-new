@@ -670,6 +670,27 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
  #services .amm-stage.is-active .amm-window::before,#services .amm-stage.is-active .amm-window::after,#services .amm-stage.is-active .amm-system-orbit,#services .amm-stage.is-active .amm-build-meter i::after,#services .amm-stage.is-active .amm-delivery-glow,#services .amm-transfer-packet::before{animation:none!important}
 }
 
+
+/* Workflow infographic layer: tactile depth, data visuals and a friendly customer character */
+#services .amm-customer-3d{position:relative;isolation:isolate;flex:0 0 42px;width:42px;height:48px;display:grid;place-items:center;overflow:visible;border:1px solid #d9cef9;border-radius:15px 15px 12px 12px;background:linear-gradient(145deg,#fff 5%,#e5dcff 58%,#c7b6ff);box-shadow:inset 2px 2px 0 #fff,3px 5px 0 #b8a5ee,0 8px 15px #5b2ee82b;transform:perspective(90px) rotateY(-8deg);font-size:1.45rem}
+#services .amm-customer-3d span{position:relative;z-index:2;filter:drop-shadow(0 3px 2px #40306930);transform:translateY(-1px);animation:ammCustomerBob 2.8s ease-in-out infinite}
+#services .amm-customer-3d i{position:absolute;bottom:4px;left:8px;right:8px;height:5px;border-radius:50%;background:#5b2ee82b;filter:blur(2px)}
+#services .amm-customer-3d::before{content:"";position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;background:#d6f25b;border:1px solid #fff;box-shadow:0 0 8px #d6f25b}
+#services .amm-stage-order .amm-message-window{background-image:radial-gradient(circle at 14% 22%,#fff 0 2px,transparent 3px),radial-gradient(ellipse at 12% 0%,#eee7ff,transparent 62%),linear-gradient(145deg,#faf8ff,#f4efff)}
+#services .amm-stage-order .amm-message-window::after{content:"";position:absolute;right:10px;top:47px;width:42px;height:42px;border:1px solid #5b2ee81f;border-radius:50%;box-shadow:0 0 0 7px #5b2ee80a,0 0 0 14px #5b2ee806;pointer-events:none}
+#services .amm-stage-team .amm-task-window::after{content:"TASK FLOW  •  03";position:absolute;right:12px;bottom:10px;padding:4px 7px;border:1px solid #c9e9d6;border-radius:6px;background:#f5fff8;color:#39805a;font-size:.44rem;font-weight:850;letter-spacing:.08em;box-shadow:0 3px 10px #28794b12}
+#services .amm-stage-build .amm-build-window{background-image:radial-gradient(circle at 50% 40%,#fff9 0 2px,transparent 3px),radial-gradient(ellipse at 50% 35%,#d9d0ff,transparent 67%),linear-gradient(145deg,#f5f1ff,#e6f7ff)}
+#services .amm-stage-build .amm-system-node span{box-shadow:0 8px 0 #5b2ee80b,0 12px 22px #5b2ee820,inset 1px 1px 0 #fff;transform:translateZ(0);transition:transform .3s ease}
+#services .amm-stage-build.is-active .amm-system-node span{animation:ammInfographicFloat 2.6s ease-in-out infinite}
+#services .amm-stage-build.is-active .node-process span{animation-delay:.22s}
+#services .amm-stage-build.is-active .node-output span{animation-delay:.44s}
+#services .amm-stage-delivery .amm-delivery-window{background-image:radial-gradient(circle at 12% 20%,#d6f25b88 0 2px,transparent 3px),radial-gradient(circle at 86% 28%,#5b2ee866 0 2px,transparent 3px),radial-gradient(ellipse at 50% 50%,#ffe0f0,#fff 65%,#f0fbd1)}
+#services .amm-stage-delivery.is-active .amm-delivery-file{box-shadow:0 8px 18px #5b2ee812;border:1px solid #dcd4f4;transform:translateY(-2px)}
+@keyframes ammCustomerBob{0%,100%{transform:translateY(-1px) rotate(-2deg)}50%{transform:translateY(-4px) rotate(2deg)}}
+@keyframes ammInfographicFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(max-width:640px){#services .amm-customer-3d{flex-basis:36px;width:36px;height:43px;font-size:1.25rem}#services .amm-stage-team .amm-task-window::after{font-size:.4rem}}
+@media(prefers-reduced-motion:reduce){#services .amm-customer-3d span,#services .amm-stage-build.is-active .amm-system-node span{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -717,7 +738,7 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
         <h3>Order Intake</h3><p class="amm-stage-intro">Every great result starts with a message.</p>
         <div class="amm-window amm-message-window">
           <div class="amm-window-bar"><span class="amm-window-dots"><i></i><i></i><i></i></span><span>customer message</span><span class="amm-window-secure">●</span></div>
-          <div class="amm-message-body"><div class="amm-avatar">C</div><div class="amm-message-bubble"><span class="amm-message-from">NEW CLIENT REQUEST</span><p id="amm-order-typed" aria-live="polite"></p><span class="amm-typing-cursor" aria-hidden="true"></span></div></div>
+          <div class="amm-message-body"><div class="amm-avatar amm-customer-3d" aria-label="3D cartoon customer" title="Customer"><span>👨🏻‍💼</span><i></i></div><div class="amm-message-bubble"><span class="amm-message-from">NEW CLIENT REQUEST</span><p id="amm-order-typed" aria-live="polite"></p><span class="amm-typing-cursor" aria-hidden="true"></span></div></div>
           <div class="amm-message-foot"><span class="amm-mini-dot"></span> Incoming request <span class="amm-time">09:41 AM</span></div>
         </div>
         <div class="amm-stage-foot"><span class="amm-foot-mark">↳</span><span>Request received by AMM</span></div>
