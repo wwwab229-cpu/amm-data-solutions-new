@@ -1119,20 +1119,45 @@ openFeedback.onclick=()=>{feedbackPanel.classList.remove('hidden');$('#feedback-
 $('#close-feedback').onclick=()=>{feedbackPanel.classList.add('hidden');openFeedback.focus()};
 let chosenRating=0;
 const ratingNames=['','Poor','Fair','Good','Very good','Excellent'];
-const starButtons=$$('.feedback-star');
-function setRating(n){chosenRating=n;starButtons.forEach(b=>{const v=Number(b.dataset.rating);b.setAttribute('aria-checked',String(v===n));b.classList.toggle('is-filled',v<=n);b.tabIndex=v===n?0:-1;});$('#feedback-rating-label').textContent=n? n+' out of 5 — '+ratingNames[n]+'.':'Choose a rating from 1 to 5.';$('#feedback-rating-error').textContent='';}
-starButtons.forEach((b,i)=>{b.tabIndex=i===0?0:-1;b.onclick=()=>setRating(Number(b.dataset.rating));b.onkeydown=e=>{if(['ArrowRight','ArrowLeft','ArrowUp','ArrowDown','Home','End'].includes(e.key)){e.preventDefault();let next=chosenRating||Number(b.dataset.rating);if(e.key==='ArrowRight'||e.key==='ArrowUp')next=Math.min(5,next+1);else if(e.key==='ArrowLeft'||e.key==='ArrowDown')next=Math.max(1,next-1);else if(e.key==='Home')next=1;else if(e.key==='End')next=5;setRating(next);starButtons[next-1].focus();}else if(e.key===' '||e.key==='Enter'){e.preventDefault();setRating(Number(b.dataset.rating));}}});
-$('#feedback-review').addEventListener('input',e=>$('#feedback-count').textContent=e.target.value.length+' / 1000');
+const starButtons=$$('#feedback-stars .feedback-star');
+function setRating(n){
+ chosenRating=Math.max(1,Math.min(5,Number(n)||1));
+ window.ammFeedbackRating=chosenRating;
+ starButtons.forEach(b=>{
+  const v=Number(b.dataset.rating);
+  b.classList.toggle('is-filled',v<=chosenRating);
+  b.setAttribute('aria-checked',String(v===chosenRating));
+  b.tabIndex=v===chosenRating?0:-1;
+ });
+ $('#feedback-rating-label').textContent=chosenRating+' out of 5 — '+ratingNames[chosenRating]+'.';
+ $('#feedback-rating-error').textContent='';
+}
+starButtons.forEach((b,i)=>{
+ b.tabIndex=i===0?0:-1;
+ b.addEventListener('click',()=>setRating(Number(b.dataset.rating)));
+ b.addEventListener('keydown',e=>{
+  if(!['ArrowRight','ArrowLeft','ArrowUp','ArrowDown','Home','End',' ','Enter'].includes(e.key))return;
+  e.preventDefault();
+  let next=Number(b.dataset.rating);
+  if(e.key==='ArrowRight'||e.key==='ArrowUp')next=Math.min(5,next+1);
+  else if(e.key==='ArrowLeft'||e.key==='ArrowDown')next=Math.max(1,next-1);
+  else if(e.key==='Home')next=1;
+  else if(e.key==='End')next=5;
+  setRating(next);
+  starButtons[next-1].focus();
+ });
+});$('#feedback-review').addEventListener('input',e=>$('#feedback-count').textContent=e.target.value.length+' / 1000');
 feedbackForm.onsubmit=e=>{
  e.preventDefault();
  const name=$('#feedback-name').value.trim(),business=$('#feedback-business').value.trim(),review=$('#feedback-review').value.trim(),consent=$('#feedback-consent').checked;
  $('#feedback-name-error').textContent=name?'':'Please enter your name.';
+ chosenRating=chosenRating||Number(window.ammFeedbackRating)||0;
  $('#feedback-rating-error').textContent=chosenRating?'':'Please choose a star rating.';
  $('#feedback-review-error').textContent=review.length>=10?'':'Please write at least 10 characters.';
  $('#feedback-consent-error').textContent=consent?'':'Please confirm before submitting.';
  $('#feedback-status').textContent='';
  if(!name||!chosenRating||review.length<10||!consent)return;
- const item={name,business,rating:chosenRating,review};
+ const item={name,business,rating:chosenRating||window.ammFeedbackRating||0,review};
  T.push(item);ti=T.length-1;renderT();
  $('#feedback-status').textContent='Thanks for sharing your feedback. This is a local preview only; it has not been sent to AMM or published on the website.';
  feedbackForm.reset();chosenRating=0;setRating(0);$('#feedback-count').textContent='0 / 1000';
@@ -1324,47 +1349,30 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
 </script>
 
 <script>
-/* Reliable mouse, touch and keyboard feedback rating */
+/* Feedback rating state bridge for mouse, touch and keyboard */
 (function(){
+ function sync(n){
+  const value=Math.max(1,Math.min(5,Number(n)||1));
+  window.ammFeedbackRating=value;
+  const wrap=document.getElementById('feedback-stars');
+  if(!wrap)return;
+  wrap.querySelectorAll('.feedback-star').forEach(function(star){
+   const v=Number(star.dataset.rating);
+   star.classList.toggle('is-filled',v<=value);
+   star.setAttribute('aria-checked',String(v===value));
+   star.tabIndex=v===value?0:-1;
+  });
   const names=['','Poor','Fair','Good','Very good','Excellent'];
-  function applyRating(n){
-    const wrap=document.getElementById('feedback-stars');
-    if(!wrap) return;
-    n=Math.max(1,Math.min(5,Number(n)||1));
-    window.ammFeedbackRating=n;
-    wrap.querySelectorAll('.feedback-star').forEach(function(star){
-      const value=Number(star.dataset.rating);
-      star.classList.toggle('is-filled',value<=n);
-      star.setAttribute('aria-checked',String(value===n));
-      star.tabIndex=value===n?0:-1;
-    });
-    const label=document.getElementById('feedback-rating-label');
-    const error=document.getElementById('feedback-rating-error');
-    if(label) label.textContent=n+' out of 5 — '+names[n]+'.';
-    if(error) error.textContent='';
-  }
-  window.setAMMFeedbackRating=applyRating;
-  function handle(event){
-    const target=event.target;
-    const star=target && target.closest ? target.closest('#feedback-stars .feedback-star') : null;
-    if(!star) return;
-    if(event.type==='keydown'){
-      let n=Number(star.dataset.rating);
-      if(event.key==='ArrowRight'||event.key==='ArrowUp') n=Math.min(5,n+1);
-      else if(event.key==='ArrowLeft'||event.key==='ArrowDown') n=Math.max(1,n-1);
-      else if(event.key==='Home') n=1;
-      else if(event.key==='End') n=5;
-      else if(event.key===' '||event.key==='Enter'){event.preventDefault();applyRating(n);return;}
-      else return;
-      event.preventDefault();applyRating(n);
-      const next=document.querySelector('#feedback-stars [data-rating="'+n+'"]');
-      if(next) next.focus();
-      return;
-    }
-    if(event.type==='click'){applyRating(star.dataset.rating);}
-  }
-  document.addEventListener('click',handle,true);
-  document.addEventListener('keydown',handle,true);
+  const label=document.getElementById('feedback-rating-label');
+  const error=document.getElementById('feedback-rating-error');
+  if(label)label.textContent=value+' out of 5 — '+names[value]+'.';
+  if(error)error.textContent='';
+ }
+ window.setAMMFeedbackRating=sync;
+ document.addEventListener('click',function(e){
+  const star=e.target&&e.target.closest?e.target.closest('#feedback-stars .feedback-star'):null;
+  if(star)sync(star.dataset.rating);
+ },true);
 })();</script>
 
 </body>
