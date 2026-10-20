@@ -1300,10 +1300,10 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
    const dialogRect=dialog.getBoundingClientRect();
    const sx=Math.max(.08,Math.min(1,rect.width/dialogRect.width));
    const sy=Math.max(.08,Math.min(1,rect.height/dialogRect.height));
-   dialog.style.transition='transform 300ms cubic-bezier(.4,0,1,1)';
+   dialog.style.transition='transform 260ms linear';
    overlay.classList.add('is-closing');
    dialog.style.transform='translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px)) scale('+sx+','+sy+')';
-   closeTimer=setTimeout(finishClose,310);
+   closeTimer=setTimeout(finishClose,270);
   }else finishClose();
  }
  function finishClose(){
@@ -1311,8 +1311,8 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   overlay.classList.remove('is-open','is-flipped','is-closing');
   overlay.style.opacity='0';overlay.style.visibility='hidden';overlay.style.pointerEvents='none';overlay.style.display='none';
   document.body.style.overflow='';
-  dialog.style.transition='';
-  dialog.style.transform='translate(-50%,-50%)';
+  dialog.style.transition='none';
+  dialog.style.transform='translate(-50%,-50%) scale(1,1)';
   dialog.style.opacity='1';
   if(previousFocus&&previousFocus.isConnected)previousFocus.focus();
   sourceCard=null;
