@@ -708,9 +708,9 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 /* AMM service card detail overlay */
 .amm-service-card{appearance:none;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
 .amm-service-card:hover,.amm-service-card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 34px rgba(35,24,74,.13)!important;border-color:#c8b9ff!important;outline:none}
-.amm-service-overlay{position:fixed;inset:0;z-index:9999;background:rgba(17,13,34,.64);backdrop-filter:none;-webkit-backdrop-filter:none;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease}
+.amm-service-overlay{position:fixed;inset:0;z-index:9999;background:rgba(17,13,34,.64);backdrop-filter:none;-webkit-backdrop-filter:none;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .24s ease,visibility .24s ease}
 .amm-service-overlay.is-open{opacity:1;visibility:visible}
-.amm-service-overlay.is-closing{opacity:0;visibility:visible;transition:opacity .2s ease}
+.amm-service-overlay.is-closing{opacity:0;visibility:visible;transition:opacity .28s ease}
 .amm-service-dialog{position:fixed;left:50%;top:50%;width:min(900px,calc(100vw - 40px));height:auto;max-height:min(720px,88vh);perspective:none;opacity:1;transform:translate(-50%,-50%);transform-origin:center center;will-change:opacity,transform;}
 .amm-service-flipper{position:relative;transform:none!important;transform-style:flat;transition:none!important;min-height:0}
 .amm-service-overlay.is-flipped .amm-service-flipper{transform:none!important}
@@ -1099,29 +1099,35 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(!fillDetails(i))return;
   clearTimeout(closeTimer);if(openFrame)cancelAnimationFrame(openFrame);
   previousFocus=document.activeElement;sourceCard=card;
+  const rect=card.getBoundingClientRect();
+  const dx=rect.left+rect.width/2-window.innerWidth/2;
+  const dy=rect.top+rect.height/2-window.innerHeight/2;
   overlay.classList.remove('is-closing');
   dialog.style.transition='none';
-  dialog.style.opacity='0';
-  dialog.style.transform='translate(-50%, calc(-50% + 10px))';
+  dialog.style.opacity='1';
+  dialog.style.transform='translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px))';
   overlay.classList.add('is-open','is-flipped');
   document.body.style.overflow='hidden';
   if(reduce()){
-   dialog.style.opacity='1';dialog.style.transform='translate(-50%,-50%)';
+   dialog.style.transform='translate(-50%,-50%)';
   }else{
    dialog.getBoundingClientRect();
-   dialog.style.transition='opacity 220ms ease, transform 220ms cubic-bezier(.2,.8,.2,1)';
-   openFrame=requestAnimationFrame(()=>{dialog.style.opacity='1';dialog.style.transform='translate(-50%,-50%)';openFrame=null;});
+   dialog.style.transition='transform 320ms cubic-bezier(.22,.75,.2,1)';
+   openFrame=requestAnimationFrame(()=>{dialog.style.transform='translate(-50%,-50%)';openFrame=null;});
   }
   close.focus();
  }
  function closeService(){
   if(!overlay.classList.contains('is-open'))return;
   if(openFrame)cancelAnimationFrame(openFrame);
-  overlay.classList.add('is-closing');
-  if(!reduce()){
-   dialog.style.opacity='0';
-   dialog.style.transform='translate(-50%, calc(-50% + 8px))';
-   closeTimer=setTimeout(finishClose,230);
+  const rect=sourceCard&&sourceCard.isConnected?sourceCard.getBoundingClientRect():null;
+  if(!reduce()&&rect){
+   const dx=rect.left+rect.width/2-window.innerWidth/2;
+   const dy=rect.top+rect.height/2-window.innerHeight/2;
+   dialog.style.transition='transform 280ms cubic-bezier(.4,0,.7,.2)';
+   overlay.classList.add('is-closing');
+   dialog.style.transform='translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px))';
+   closeTimer=setTimeout(finishClose,290);
   }else finishClose();
  }
  function finishClose(){
@@ -1138,7 +1144,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  close.addEventListener('click',closeService);
  overlay.addEventListener('click',e=>{if(e.target===overlay)closeService()});
  document.addEventListener('keydown',e=>{if(!overlay.classList.contains('is-open'))return;if(e.key==='Escape')closeService()});
- window.addEventListener('resize',()=>{if(overlay.classList.contains('is-open'))dialog.style.transform='translate(-50%,-50%)';});
+ window.addEventListener('resize',()=>{if(overlay.classList.contains('is-open')&&!overlay.classList.contains('is-closing'))dialog.style.transform='translate(-50%,-50%)';});
 })();
 </script>
 </body>
