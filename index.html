@@ -708,16 +708,16 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 /* AMM service card detail overlay */
 .amm-service-card{appearance:none;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
 .amm-service-card:hover,.amm-service-card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 34px rgba(35,24,74,.13)!important;border-color:#c8b9ff!important;outline:none}
-.amm-service-overlay{position:fixed;inset:0;z-index:9999;background:rgba(17,13,34,.72);backdrop-filter:blur(9px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease}
+.amm-service-overlay{position:fixed;inset:0;z-index:9999;background:rgba(17,13,34,.64);backdrop-filter:none;-webkit-backdrop-filter:none;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease}
 .amm-service-overlay.is-open{opacity:1;visibility:visible}
 /* Closing: keep the overlay completely still; only the card travels back. */
 .amm-service-overlay.is-closing{transition:none!important}
-.amm-service-dialog{position:fixed;left:50%;top:50%;width:min(900px,calc(100vw - 40px));height:auto;max-height:min(720px,88vh);perspective:none;opacity:1;transform:translate(-50%,-50%);transform-origin:center center;will-change:opacity,transform;}
+.amm-service-dialog{position:fixed;left:50%;top:50%;width:min(900px,calc(100vw - 40px));height:auto;max-height:min(720px,88vh);perspective:none;opacity:1;transform:translate(-50%,-50%);transform-origin:center center;will-change:transform;}
 .amm-service-flipper{position:relative;transform:none!important;transform-style:flat;transition:none!important;min-height:0}
 .amm-service-overlay.is-flipped .amm-service-flipper{transform:none!important}
-.amm-service-face{position:relative;inset:auto;backface-visibility:visible;-webkit-backface-visibility:visible;border-radius:24px;overflow-y:auto;overflow-x:hidden;background:#fff;border:1px solid #e8e4f4;box-shadow:0 30px 100px rgba(0,0,0,.25);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.amm-service-face{position:relative;inset:auto;backface-visibility:visible;-webkit-backface-visibility:visible;border-radius:24px;overflow-y:auto;overflow-x:hidden;background:#fff;border:1px solid #e8e4f4;box-shadow:0 20px 55px rgba(0,0,0,.18);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:geometricPrecision;color:#211b35;filter:none!important;opacity:1!important}
 .amm-service-front{display:none!important}
-.amm-service-back{display:block;transform:none!important;padding:clamp(22px,4vw,42px);max-height:min(720px,88vh);height:auto;overflow-y:auto;overscroll-behavior:contain}
+.amm-service-back{display:block;transform:none!important;padding:clamp(22px,4vw,42px);max-height:min(720px,88vh);height:auto;overflow-y:auto;overscroll-behavior:contain;color:#211b35;font-size:16px;line-height:1.7;filter:none!important;opacity:1!important} .amm-service-back>p{color:#39344d!important;font-size:16px!important;line-height:1.8!important;font-weight:450!important;letter-spacing:0!important;text-shadow:none!important} .amm-service-back h2,.amm-service-back h3{color:#171329!important;text-shadow:none!important;filter:none!important} .amm-service-detail-list li{color:#302b42;font-size:15px;line-height:1.7} .amm-service-back .rounded-2xl p{color:#39344d!important;font-size:14px!important;line-height:1.75!important}
 .amm-service-close{position:absolute;right:14px;top:14px;z-index:3;border:1px solid #e7e2f2;border-radius:999px;width:42px;height:42px;background:#fff;color:#211b35;font-size:23px;line-height:1}
 .amm-service-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .amm-service-detail-list{display:grid;gap:10px}
@@ -1111,7 +1111,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(reduce()){dialog.style.transform='translate(-50%,-50%)';dialog.style.opacity='1';return;}
   const tr=getTransformFromCard(sourceRect);
   /* Keep service text crisp: fade and lift the dialog instead of scaling a 3D-flipped text layer. */
-  animation=dialog.animate([{transform:'translate(-50%,-47%)',opacity:0},{transform:'translate(-50%,-50%)',opacity:1}],{duration:220,easing:'cubic-bezier(.16,1,.3,1)',fill:'none'});
+  animation=dialog.animate([{transform:'translate(-50%,-47%)',opacity:0},{transform:'translate(-50%,-50%)',opacity:1}],{duration:260,easing:'cubic-bezier(.16,1,.3,1)',fill:'none'});
   openTimer=null;
  }
  function closeService(){
@@ -1122,8 +1122,8 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
    overlay.classList.add('is-closing');
    const tr=getTransformFromCard(rect);
    /* Keep the detail face unchanged. Closing animates only the dialog position/scale. */
-   animation=dialog.animate([{transform:tr.to,opacity:1},{transform:tr.from,opacity:1}],{duration:280,easing:'cubic-bezier(.4,0,.8,.3)',fill:'forwards'});
-   closeTimer=setTimeout(finishClose,280);
+   animation=dialog.animate([{transform:tr.to,opacity:1},{transform:tr.from,opacity:1}],{duration:650,easing:'cubic-bezier(.45,0,.75,.4)',fill:'forwards'});
+   closeTimer=setTimeout(finishClose,650);
   }else finishClose();
  }
  function finishClose(){
