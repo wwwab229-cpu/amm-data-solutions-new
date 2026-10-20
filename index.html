@@ -899,9 +899,9 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 
 <!-- 10. TESTIMONIALS: PLACEHOLDERS, replace with real reviews -->
 <section style="padding-top:0"><div class="wrap max-w-3xl"><h2 class="mb-6 text-center">Kind words</h2>
-<div class="card p-8 text-center"><div id="tq" aria-live="polite"></div>
-<div class="flex justify-center gap-3 mt-6"><button id="tp" class="btn btn-o" aria-label="Previous">&larr;</button><button id="tn" class="btn btn-o" aria-label="Next">&rarr;</button></div>
-<p class="text-xs mt-4" style="color:var(--muted)">Placeholder reviews: replace with real client feedback.</p></div></div></section>
+<div class="card p-8 text-center"><div id="tq" aria-live="polite" style="transition:opacity .65s ease;opacity:1"></div>
+<div class="flex justify-center gap-3 mt-6"><button id="tp" class="btn btn-o" aria-label="Previous review">&larr;</button><button id="tn" class="btn btn-o" aria-label="Next review">&rarr;</button></div>
+<p class="text-xs mt-4" style="color:var(--muted)">Illustrative examples — replace with verified client feedback before publishing as testimonials.</p></div></div></section>
 
 <!-- 11. FAQ -->
 <section id="faq" style="padding-top:0"><div class="wrap max-w-3xl"><h2 class="mb-6">Questions</h2><div class="faq space-y-3">
@@ -986,10 +986,13 @@ const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.targ
 $$('.rv').forEach(e=>io.observe(e));
 const co=new IntersectionObserver(es=>es.forEach(x=>{if(!x.isIntersecting)return;const el=x.target,t=+el.dataset.c;let v=0;const s=setInterval(()=>{v+=Math.ceil(t/30);if(v>=t){v=t;clearInterval(s)}el.textContent=v},35);co.unobserve(el)}),{threshold:.5});
 $$('[data-c]').forEach(e=>co.observe(e));
-// testimonials (PLACEHOLDERS)
-const T=[["Ayesha K.","Shop owner, Karachi","Replies that used to take hours now take minutes, and I still approve everything."],["Bilal R.","Farm supervisor, Punjab","The app explains things in simple Urdu. Our team actually uses it."],["Sana M.","Operations lead","Our Google Sheets reports finally make sense at a glance."]];let ti=0;
-function showT(){const t=T[ti];$('#tq').innerHTML=`<p class="f text-xl md:text-2xl font-bold">&ldquo;${t[2]}&rdquo;</p><p class="mt-4 font-semibold">${t[0]}</p><p class="text-sm" style="color:var(--muted)">${t[1]}</p>`}
-$('#tn').onclick=()=>{ti=(ti+1)%T.length;showT()};$('#tp').onclick=()=>{ti=(ti+T.length-1)%T.length;showT()};showT();
+// testimonials: slow auto-advance with a gentle fade; pause while hovered or focused
+const T=[["Ayesha K.","Shop owner, Karachi","Replies that used to take hours now take minutes, and I still approve everything."],["Bilal R.","Farm supervisor, Punjab","The app explains things in simple Urdu. Our team actually uses it."],["Sana M.","Operations lead","Our Google Sheets reports finally make sense at a glance."]];let ti=0,testimonialTimer;
+function showT(){const box=$('#tq'),t=T[ti];box.style.opacity='0';setTimeout(()=>{box.innerHTML=`<p class="f text-xl md:text-2xl font-bold">&ldquo;${t[2]}&rdquo;</p><p class="mt-4 font-semibold">${t[0]}</p><p class="text-sm" style="color:var(--muted)">${t[1]}</p>`;box.style.opacity='1'},320)}
+function nextT(){ti=(ti+1)%T.length;showT()}
+function resetTestimonialTimer(){clearInterval(testimonialTimer);testimonialTimer=setInterval(nextT,7000)}
+$('#tn').onclick=()=>{nextT();resetTestimonialTimer()};$('#tp').onclick=()=>{ti=(ti+T.length-1)%T.length;showT();resetTestimonialTimer()};
+const testimonialCard=$('#tq').parentElement;testimonialCard.addEventListener('mouseenter',()=>clearInterval(testimonialTimer));testimonialCard.addEventListener('mouseleave',resetTestimonialTimer);testimonialCard.addEventListener('focusin',()=>clearInterval(testimonialTimer));testimonialCard.addEventListener('focusout',resetTestimonialTimer);showT();resetTestimonialTimer();
 // FAQ
 $$('.faq button').forEach(b=>b.onclick=()=>{const c=b.parentElement,o=c.classList.toggle('open');b.setAttribute('aria-expanded',o);b.lastChild.textContent=o?'\u2212':'+'});
 // form validation; connect to Formspree by replacing YOUR_ID in the form action
