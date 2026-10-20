@@ -708,11 +708,10 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 /* AMM service card detail overlay */
 .amm-service-card{appearance:none;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
 .amm-service-card:hover,.amm-service-card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 34px rgba(35,24,74,.13)!important;border-color:#c8b9ff!important;outline:none}
-.amm-service-overlay{position:fixed;inset:0;z-index:9999;background:rgba(17,13,34,.64);backdrop-filter:none;-webkit-backdrop-filter:none;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .16s ease,visibility .16s ease}
+.amm-service-overlay{position:fixed;inset:0;z-index:9999;background:rgba(17,13,34,.64);backdrop-filter:none;-webkit-backdrop-filter:none;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease}
 .amm-service-overlay.is-open{opacity:1;visibility:visible}
-/* Closing: keep the overlay completely still; only the card travels back. */
-.amm-service-overlay.is-closing{transition:none!important}
-.amm-service-dialog{position:fixed;left:50%;top:50%;width:min(900px,calc(100vw - 40px));height:auto;max-height:min(720px,88vh);perspective:none;opacity:1;transform:translate(-50%,-50%);transform-origin:center center;will-change:transform;}
+.amm-service-overlay.is-closing{opacity:0;visibility:visible;transition:opacity .2s ease}
+.amm-service-dialog{position:fixed;left:50%;top:50%;width:min(900px,calc(100vw - 40px));height:auto;max-height:min(720px,88vh);perspective:none;opacity:1;transform:translate(-50%,-50%);transform-origin:center center;will-change:opacity,transform;}
 .amm-service-flipper{position:relative;transform:none!important;transform-style:flat;transition:none!important;min-height:0}
 .amm-service-overlay.is-flipped .amm-service-flipper{transform:none!important}
 .amm-service-face{position:relative;inset:auto;backface-visibility:visible;-webkit-backface-visibility:visible;border-radius:24px;overflow-y:auto;overflow-x:hidden;background:#fff;border:1px solid #e8e4f4;box-shadow:0 20px 55px rgba(0,0,0,.18);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:geometricPrecision;color:#211b35;filter:none!important;opacity:1!important}
@@ -1084,14 +1083,8 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  overlay.innerHTML='<div class="amm-service-dialog"><button type="button" class="amm-service-close" aria-label="Close service details">×</button><div class="amm-service-flipper"><section class="amm-service-face amm-service-front" aria-hidden="true"><div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">AMM DATA SOLUTIONS</span><h2 class="f font-extrabold mt-5" style="font-size:clamp(30px,5vw,54px);line-height:1.08;color:#171329"></h2><p class="mt-4 text-lg" style="color:#625d72"></p></div><p class="text-sm font-semibold" style="color:#5b2ee8">Turning business needs into practical solutions ↗</p></section><section class="amm-service-face amm-service-back"><div class="h-1.5 absolute top-0 left-0 right-0" style="background:linear-gradient(90deg,#5b2ee8,#d6f25b)"></div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">AMM SERVICE OVERVIEW</span><h2 class="f font-extrabold mt-3 pr-10" style="font-size:clamp(26px,4vw,38px);line-height:1.15;color:#171329"></h2><p class="mt-4 text-sm sm:text-base leading-relaxed" style="color:#625d72"></p><div class="amm-service-detail-grid mt-7"><div><h3 class="f font-bold text-base mb-3" style="color:#171329">What this can include</h3><ul class="amm-service-detail-list"></ul></div><div class="rounded-2xl p-5" style="background:#f8f6ff;border:1px solid #ebe5ff"><h3 class="f font-bold text-base mb-2" style="color:#171329">Built around your business</h3><p class="text-sm leading-relaxed" style="color:#625d72">We agree the scope, tools and priorities with you first, then shape a practical solution around your goals. Deliverables depend on your requirements and the agreed project scope.</p><a class="amm-service-cta mt-5" href="mailto:ammdatasolutions229@gmail.com?subject=AMM%20Service%20Enquiry">Discuss this service <span aria-hidden="true" style="margin-left:8px">↗</span></a></div></div></section></div></div>';
  document.body.appendChild(overlay);
  const dialog=overlay.querySelector('.amm-service-dialog'),close=overlay.querySelector('.amm-service-close');
- let previousFocus=null,sourceCard=null,sourceRect=null,animation=null,closeTimer=null,openTimer=null;
+ let previousFocus=null,sourceCard=null,closeTimer=null,openFrame=null;
  const reduce=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- function getTransformFromCard(rect){
-  const finalWidth=Math.min(900,window.innerWidth-40),finalHeight=Math.min(720,window.innerHeight*.88);
-  const dx=rect.left+rect.width/2-window.innerWidth/2,dy=rect.top+rect.height/2-window.innerHeight/2;
-  const sx=Math.max(.02,rect.width/finalWidth),sy=Math.max(.02,rect.height/finalHeight);
-  return {from:'translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px)) scale('+sx+','+sy+')',to:'translate(-50%,-50%) scale(1,1)'};
- }
  function fillDetails(i){
   const item=data[i];if(!item)return false;
   overlay.querySelector('.amm-service-front h2').textContent=item.title;
@@ -1102,83 +1095,50 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   item.items.forEach(text=>{const li=document.createElement('li');li.textContent=text;list.appendChild(li)});
   return true;
  }
- function makeTravelGhost(card,fromRect,toRect,duration,onDone){
-  const ghost=card.cloneNode(true);
-  ghost.removeAttribute('id');
-  ghost.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
-  /* Keep the travelling clone visually complete; hiding its text made it look like a blank white card. */
-  ghost.style.webkitFontSmoothing='antialiased';
-  ghost.style.cssText+=';position:fixed!important;left:'+fromRect.left+'px!important;top:'+fromRect.top+'px!important;width:'+fromRect.width+'px!important;height:'+fromRect.height+'px!important;margin:0!important;z-index:10001!important;pointer-events:none!important;overflow:hidden!important;transform-origin:top left!important;will-change:transform,opacity!important;';
-  ghost.setAttribute('aria-hidden','true');
-  document.body.appendChild(ghost);
-  const dx=toRect.left-fromRect.left,dy=toRect.top-fromRect.top;
-  const sx=Math.max(.02,toRect.width/fromRect.width),sy=Math.max(.02,toRect.height/fromRect.height);
-  const a=ghost.animate([
-   {transform:'translate(0,0) scale(1,1)',opacity:1,borderRadius:getComputedStyle(card).borderRadius},
-   {transform:'translate('+dx+'px,'+dy+'px) scale('+sx+','+sy+')',opacity:1,borderRadius:'24px'}
-  ],{duration,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'});
-  a.onfinish=()=>{ghost.remove();if(onDone)onDone();};
-  a.oncancel=()=>ghost.remove();
-  return a;
- }
  function openService(i,card){
   if(!fillDetails(i))return;
-  clearTimeout(closeTimer);clearTimeout(openTimer);if(animation){animation.cancel();animation=null;}
-  previousFocus=document.activeElement;sourceCard=card;sourceRect=card.getBoundingClientRect();
-  overlay.classList.remove('is-closing');overlay.classList.add('is-open','is-flipped');document.body.style.overflow='hidden';
-  close.focus();
-  if(reduce()){dialog.style.transform='translate(-50%,-50%)';dialog.style.opacity='1';return;}
-  const targetRect=dialog.getBoundingClientRect();
-  /* A clean card clone visibly travels from the clicked service; real detail text appears only at full size. */
+  clearTimeout(closeTimer);if(openFrame)cancelAnimationFrame(openFrame);
+  previousFocus=document.activeElement;sourceCard=card;
+  overlay.classList.remove('is-closing');
+  dialog.style.transition='none';
   dialog.style.opacity='0';
-  animation=makeTravelGhost(card,sourceRect,targetRect,300,()=>{
-   if(overlay.classList.contains('is-open')&&!overlay.classList.contains('is-closing')){
-    dialog.style.opacity='1';
-    dialog.animate([{opacity:0},{opacity:1}],{duration:90,easing:'ease-out',fill:'none'});
-   }
-   animation=null;
-  });
+  dialog.style.transform='translate(-50%, calc(-50% + 10px))';
+  overlay.classList.add('is-open','is-flipped');
+  document.body.style.overflow='hidden';
+  if(reduce()){
+   dialog.style.opacity='1';dialog.style.transform='translate(-50%,-50%)';
+  }else{
+   dialog.getBoundingClientRect();
+   dialog.style.transition='opacity 220ms ease, transform 220ms cubic-bezier(.2,.8,.2,1)';
+   openFrame=requestAnimationFrame(()=>{dialog.style.opacity='1';dialog.style.transform='translate(-50%,-50%)';openFrame=null;});
+  }
+  close.focus();
  }
  function closeService(){
   if(!overlay.classList.contains('is-open'))return;
-  clearTimeout(openTimer);if(animation){animation.cancel();animation=null;}
-  const rect=sourceCard&&sourceCard.isConnected?sourceCard.getBoundingClientRect():sourceRect;
-  if(!reduce()&&rect){
-   overlay.classList.add('is-closing');
-   const fromRect=dialog.getBoundingClientRect();
-   /* The crisp detail panel fades while a clean service-card clone visibly travels back to its original position. */
+  if(openFrame)cancelAnimationFrame(openFrame);
+  overlay.classList.add('is-closing');
+  if(!reduce()){
    dialog.style.opacity='0';
-   animation=makeTravelGhost(sourceCard,fromRect,rect,280,()=>{
-    animation=null;
-    finishClose();
-   });
-   closeTimer=setTimeout(finishClose,320);
+   dialog.style.transform='translate(-50%, calc(-50% + 8px))';
+   closeTimer=setTimeout(finishClose,230);
   }else finishClose();
  }
  function finishClose(){
   clearTimeout(closeTimer);
-  /* Hide the overlay BEFORE resetting the dialog transform; otherwise it briefly jumps back to center and flashes. */
-  overlay.style.transition='none';
-  overlay.style.visibility='hidden';
-  overlay.style.opacity='0';
   overlay.classList.remove('is-open','is-flipped','is-closing');
   document.body.style.overflow='';
-  if(animation){animation.cancel();animation=null;}
-  const flipper=overlay.querySelector('.amm-service-flipper');
-  flipper.style.transition='none';
-  flipper.style.transform='';
+  dialog.style.transition='';
   dialog.style.transform='translate(-50%,-50%)';
   dialog.style.opacity='1';
-  /* Restore normal overlay transitions only after its hidden state is established. */
-  requestAnimationFrame(()=>{overlay.style.transition='';overlay.style.visibility='';overlay.style.opacity='';flipper.style.transition='';});
   if(previousFocus&&previousFocus.isConnected)previousFocus.focus();
-  sourceCard=null;sourceRect=null;
+  sourceCard=null;
  }
  section.querySelectorAll('[data-service-index]').forEach(card=>card.addEventListener('click',()=>openService(Number(card.dataset.serviceIndex),card)));
  close.addEventListener('click',closeService);
  overlay.addEventListener('click',e=>{if(e.target===overlay)closeService()});
  document.addEventListener('keydown',e=>{if(!overlay.classList.contains('is-open'))return;if(e.key==='Escape')closeService()});
- window.addEventListener('resize',()=>{if(overlay.classList.contains('is-open')){if(animation)animation.cancel();dialog.style.transform='translate(-50%,-50%)';}});
+ window.addEventListener('resize',()=>{if(overlay.classList.contains('is-open'))dialog.style.transform='translate(-50%,-50%)';});
 })();
 </script>
 </body>
