@@ -830,13 +830,14 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  function setStage(next){
   const previousStage=stage;
   runId++;const id=runId;clearTimers();stage=next;
-  if(previousStage!==next&&previousStage<next)sendWork(previousStage,next);
+  const shouldTransfer=previousStage!==next&&previousStage<next;
 
   cards.forEach((card,i)=>{
    card.classList.remove('is-active','is-clearing','is-complete-stage','is-sending','is-receiving');
    if(i<next)card.classList.add('is-complete-stage');
    card.querySelector('.amm-stage-status').textContent=i===next?'WORKING':i<next?(i===3?'TRANSFER TO CONSIGNEE':'TRANSFERRED'): 'WAITING FOR TASK';
   });
+  if(shouldTransfer)sendWork(previousStage,next);
   const active=cards[next];active.classList.add('is-active');
   caption.textContent=captions[next];
   progress.style.width=((next+1)*25)+'%';
