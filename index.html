@@ -559,6 +559,10 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 @media(max-width:560px){#services .amm-workflow{gap:28px}#services .amm-stage-head{margin-bottom:13px;padding-bottom:10px}#services .amm-stage-intro{min-height:0;margin-bottom:12px}#services .amm-window,#services .amm-stage:not(.is-active) .amm-window{height:230px;min-height:230px}#services .amm-message-body{padding:20px 12px 10px}#services #amm-order-typed{font-size:.65rem!important;line-height:1.52!important;min-height:68px}#services .amm-task-window{padding:24px 15px 18px}#services .amm-system-node{width:60px}#services .amm-system-node span{width:39px;height:39px}#services .amm-system-link{width:13%}#services .amm-delivery-check{width:55px;height:55px}}
 @media(prefers-reduced-motion:reduce){#services .amm-window::after,#services .amm-message-bubble,#services .amm-system-node span,#services .amm-system-orbit,#services .amm-delivery-glow{animation:none!important}}
 
+
+/* Active workflow stage gets a fast, clear border pulse. */
+#services .amm-stage.is-active .amm-window{border:2px solid #7653e8;box-shadow:0 0 0 4px #7653e826,0 0 22px #7653e866;animation:ammQuickBorderPulse 1.25s ease-in-out infinite alternate!important}
+@keyframes ammQuickBorderPulse{from{box-shadow:0 0 0 2px #7653e81a,0 0 10px #7653e833}to{box-shadow:0 0 0 5px #7653e833,0 0 26px #7653e866}}
 </style>
 </head>
 <body>
