@@ -1120,8 +1120,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(!reduce()&&rect){
    overlay.classList.add('is-closing');
    const tr=getTransformFromCard(rect);
-   /* No flip, fade, or overlay animation while closing: only move/scale back to source card. */
-   overlay.classList.remove('is-flipped');
+   /* Keep the detail face locked in place during close; only the dialog moves/scales. */
    const flipper=overlay.querySelector('.amm-service-flipper');
    flipper.style.transition='none';flipper.style.transform='rotateY(180deg)';
    animation=dialog.animate([{transform:tr.to,opacity:1},{transform:tr.from,opacity:1}],{duration:360,easing:'ease-in',fill:'forwards'});
