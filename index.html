@@ -1076,7 +1076,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
 })();
 
 
-/* Expand the clicked service card in place without moving the service grid */
+/* Simple service-card open/close: on close, return to the original card position only. */
 (function(){
  const data=[{"title":"AI & Business Automation","short":"Automate repetitive work","detail":"Replace repetitive manual tasks with connected, reliable workflows. AMM helps map your process, identify practical automation opportunities, connect the tools you already use, and reduce avoidable hand-offs so your team can focus on higher-value work.","items":["Workflow mapping and process improvement","Tool and app integrations","Automated task routing and notifications","Testing, documentation and handover"]},{"title":"AI Chatbots & Customer Support","short":"Helpful support, around the clock","detail":"Give visitors a clearer path to answers with a website chatbot designed around your business information. Start with common questions and service guidance, then refine responses and hand-off points as your needs grow.","items":["Website chatbot setup","Business FAQs and service information","Lead capture and enquiry routing","Human hand-off for questions needing attention"]},{"title":"Google SEO & AI Search Visibility","short":"Be easier to discover","detail":"Improve how your business is understood by search engines and AI-powered discovery experiences. AMM focuses on clear site structure, useful content, technical SEO foundations and consistent service information—without promising rankings or guaranteed results.","items":["On-page SEO and metadata","Technical SEO basics and indexing checks","Content structure for Google and AI search","Search visibility review and improvement plan"]},{"title":"Digital Advertising","short":"Campaigns built around your goals","detail":"Plan and manage digital ad campaigns with a clear objective, audience and measurement approach. Service options can include Google Ads, Meta Ads (Facebook and Instagram), and TikTok Ads. ChatGPT or other AI ad placements are considered only where officially available and eligible.","items":["Campaign planning and ad copy","Google, Meta and TikTok campaign setup","Conversion tracking and performance review","Reporting and ongoing optimization"]},{"title":"Website Design & Digital Solutions","short":"Clear, responsive digital experiences","detail":"Create or improve a professional website that explains your offer clearly, works across devices and guides visitors toward a useful next step. Scope is agreed before work begins, with attention to usability, performance and search-friendly foundations.","items":["Responsive landing pages and websites","Service-focused content structure","Contact and enquiry pathways","Performance and basic SEO foundations"]},{"title":"Data Management & Data Entry","short":"Organized, dependable business data","detail":"Make business information easier to maintain and use through structured data entry, cleanup and documentation. Workflows are designed around the client's format and quality requirements, with clear checks to reduce avoidable errors.","items":["Data entry and spreadsheet organization","Data cleanup and formatting","Consistent records and validation checks","Simple reporting and repeatable workflows"]}];
  const section=document.querySelector('#work');if(!section)return;
@@ -1106,30 +1106,34 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(!fillDetails(i))return;
   clearTimeout(closeTimer);clearTimeout(openTimer);if(animation)animation.cancel();
   previousFocus=document.activeElement;sourceCard=card;sourceRect=card.getBoundingClientRect();
-  const rect=sourceRect;overlay.classList.remove('is-flipped','is-closing');overlay.classList.add('is-open');document.body.style.overflow='hidden';
+  overlay.classList.remove('is-flipped','is-closing');overlay.classList.add('is-open');document.body.style.overflow='hidden';
   close.focus();
   if(reduce()){dialog.style.transform='translate(-50%,-50%)';dialog.style.opacity='1';overlay.classList.add('is-flipped');return;}
-  const tr=getTransformFromCard(rect);
+  const tr=getTransformFromCard(sourceRect);
   animation=dialog.animate([{transform:tr.from,opacity:.96},{transform:tr.to,opacity:1}],{duration:520,easing:'cubic-bezier(.2,.75,.25,1)',fill:'none'});
   openTimer=setTimeout(()=>{if(overlay.classList.contains('is-open'))overlay.classList.add('is-flipped')},560);
  }
  function closeService(){
   if(!overlay.classList.contains('is-open'))return;
-  clearTimeout(openTimer);
-  if(animation)animation.cancel();
+  clearTimeout(openTimer);if(animation){animation.cancel();animation=null;}
   const rect=sourceCard&&sourceCard.isConnected?sourceCard.getBoundingClientRect():sourceRect;
   if(!reduce()&&rect){
    overlay.classList.add('is-closing');
    const tr=getTransformFromCard(rect);
-   /* Keep the details face visible during the return animation; do not run a second flip. */
-   animation=dialog.animate([{transform:tr.to,opacity:1},{transform:tr.from,opacity:1}],{duration:420,easing:'cubic-bezier(.4,0,.8,.3)',fill:'none'});
-   closeTimer=setTimeout(finishClose,420);
+   /* No flip, fade, or overlay animation while closing: only move/scale back to source card. */
+   overlay.classList.remove('is-flipped');
+   const flipper=overlay.querySelector('.amm-service-flipper');
+   flipper.style.transition='none';flipper.style.transform='rotateY(180deg)';
+   animation=dialog.animate([{transform:tr.to,opacity:1},{transform:tr.from,opacity:1}],{duration:360,easing:'ease-in',fill:'forwards'});
+   closeTimer=setTimeout(finishClose,360);
   }else finishClose();
  }
  function finishClose(){
   clearTimeout(closeTimer);
   overlay.classList.remove('is-open','is-flipped','is-closing');document.body.style.overflow='';
   if(animation){animation.cancel();animation=null;}
+  const flipper=overlay.querySelector('.amm-service-flipper');flipper.style.transition='';flipper.style.transform='';
+  dialog.style.transform='translate(-50%,-50%)';dialog.style.opacity='1';
   if(previousFocus&&previousFocus.isConnected)previousFocus.focus();
   sourceCard=null;sourceRect=null;
  }
