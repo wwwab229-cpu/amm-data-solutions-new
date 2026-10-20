@@ -704,6 +704,27 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 @media(prefers-reduced-motion:reduce){#services .amm-stage-team.is-active .amm-track-packet,#services .amm-stage-team.is-active .amm-track-node,#services .amm-stage-team.is-active .amm-metric-ring,#services .amm-stage-team.is-active .amm-metric-bars i{animation:none!important}}
 
 
+
+/* AMM service card detail overlay */
+.amm-service-card{appearance:none;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.amm-service-card:hover,.amm-service-card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 34px rgba(35,24,74,.13)!important;border-color:#c8b9ff!important;outline:none}
+.amm-service-overlay{position:fixed;inset:0;z-index:9999;background:rgba(17,13,34,.72);backdrop-filter:blur(9px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease}
+.amm-service-overlay.is-open{opacity:1;visibility:visible}
+.amm-service-dialog{width:min(900px,100%);max-height:min(88vh,820px);perspective:1400px;position:relative}
+.amm-service-flipper{position:relative;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.75,.25,1);min-height:480px}
+.amm-service-overlay.is-flipped .amm-service-flipper{transform:rotateY(180deg)}
+.amm-service-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;overflow:auto;background:#fff;border:1px solid #e8e4f4;box-shadow:0 30px 100px rgba(0,0,0,.25)}
+.amm-service-front{display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,5vw,52px);background:linear-gradient(145deg,#fff 0%,#f8f6ff 100%)}
+.amm-service-back{transform:rotateY(180deg);padding:clamp(22px,4vw,42px);max-height:min(88vh,820px)}
+.amm-service-close{position:absolute;right:14px;top:14px;z-index:3;border:1px solid #e7e2f2;border-radius:999px;width:42px;height:42px;background:#fff;color:#211b35;font-size:23px;line-height:1}
+.amm-service-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.amm-service-detail-list{display:grid;gap:10px}
+.amm-service-detail-list li{display:flex;gap:10px;align-items:flex-start;color:#49445b;font-size:14px;line-height:1.55}
+.amm-service-detail-list li:before{content:"✓";font-weight:800;color:#5b2ee8;background:#f0ebff;border-radius:999px;min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center}
+.amm-service-cta{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:999px;background:#5b2ee8;color:#fff;font-weight:700;font-size:14px}
+@media(max-width:640px){.amm-service-overlay{padding:10px}.amm-service-dialog{max-height:92vh}.amm-service-flipper{min-height:560px}.amm-service-face{border-radius:18px}.amm-service-detail-grid{grid-template-columns:1fr;gap:18px}.amm-service-back{padding:22px 18px}.amm-service-front{padding:28px 22px}}
+@media(prefers-reduced-motion:reduce){.amm-service-flipper,.amm-service-overlay,.amm-service-card{transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -795,33 +816,45 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 
 
 
-<!-- 7. PORTFOLIO -->
-<section id="work"><div class="wrap"><h2 class="mb-10 rv">Selected work</h2>
+<!-- 7. SERVICES -->
+<section id="work"><div class="wrap"><h2 class="mb-3 rv">Our Services</h2><p class="mb-10 rv" style="color:var(--muted)">Select a service to explore how AMM can help your business.</p>
 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-<article class="card overflow-hidden rv aspect-square flex flex-col" aria-label="Empty service box 1" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06)">
+<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="0" aria-label="View details for AI & Business Automation" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#5b2ee8,#d6f25b)" aria-hidden="true"></div>
-<div class="flex-1" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)"></div>
-</article>
-<article class="card overflow-hidden rv aspect-square flex flex-col" aria-label="Empty service box 2" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06)">
+<div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
+<div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">01 / AMM SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">AI & Business Automation</h3><p class="text-sm mt-2" style="color:#625d72">Automate repetitive work</p></div>
+<span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
+</div></button>
+<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="1" aria-label="View details for AI Chatbots & Customer Support" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#d6f25b,#5b2ee8)" aria-hidden="true"></div>
-<div class="flex-1" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)"></div>
-</article>
-<article class="card overflow-hidden rv aspect-square flex flex-col" aria-label="Empty service box 3" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06)">
+<div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
+<div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">02 / AMM SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">AI Chatbots & Customer Support</h3><p class="text-sm mt-2" style="color:#625d72">Helpful support, around the clock</p></div>
+<span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
+</div></button>
+<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="2" aria-label="View details for Google SEO & AI Search Visibility" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#5b2ee8,#b9a5ff)" aria-hidden="true"></div>
-<div class="flex-1" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)"></div>
-</article>
-<article class="card overflow-hidden rv aspect-square flex flex-col" aria-label="Empty service box 4" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06)">
+<div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
+<div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">03 / AMM SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">Google SEO & AI Search Visibility</h3><p class="text-sm mt-2" style="color:#625d72">Be easier to discover</p></div>
+<span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
+</div></button>
+<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="3" aria-label="View details for Digital Advertising" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#b9a5ff,#d6f25b)" aria-hidden="true"></div>
-<div class="flex-1" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)"></div>
-</article>
-<article class="card overflow-hidden rv aspect-square flex flex-col" aria-label="Empty service box 5" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06)">
+<div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
+<div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">04 / AMM SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">Digital Advertising</h3><p class="text-sm mt-2" style="color:#625d72">Campaigns built around your goals</p></div>
+<span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
+</div></button>
+<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="4" aria-label="View details for Website Design & Digital Solutions" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#d6f25b,#8fd6a8)" aria-hidden="true"></div>
-<div class="flex-1" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)"></div>
-</article>
-<article class="card overflow-hidden rv aspect-square flex flex-col" aria-label="Empty service box 6" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06)">
+<div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
+<div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">05 / AMM SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">Website Design & Digital Solutions</h3><p class="text-sm mt-2" style="color:#625d72">Clear, responsive digital experiences</p></div>
+<span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
+</div></button>
+<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="5" aria-label="View details for Data Management & Data Entry" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#8fd6a8,#5b2ee8)" aria-hidden="true"></div>
-<div class="flex-1" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)"></div>
-</article>
+<div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
+<div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">06 / AMM SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">Data Management & Data Entry</h3><p class="text-sm mt-2" style="color:#625d72">Organized, dependable business data</p></div>
+<span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
+</div></button>
 </div></div></section>
 
 <!-- 8. PROCESS -->
@@ -1038,6 +1071,38 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  }
  document.addEventListener('visibilitychange',()=>{if(document.hidden){clearTimers()}else{setStage(stage)}});
  setStage(0);
+})();
+
+
+/* Click-to-expand, flip-to-details service cards */
+(function(){
+ const data=[{"title":"AI & Business Automation","short":"Automate repetitive work","detail":"Replace repetitive manual tasks with connected, reliable workflows. AMM helps map your process, identify practical automation opportunities, connect the tools you already use, and reduce avoidable hand-offs so your team can focus on higher-value work.","items":["Workflow mapping and process improvement","Tool and app integrations","Automated task routing and notifications","Testing, documentation and handover"]},{"title":"AI Chatbots & Customer Support","short":"Helpful support, around the clock","detail":"Give visitors a clearer path to answers with a website chatbot designed around your business information. Start with common questions and service guidance, then refine responses and hand-off points as your needs grow.","items":["Website chatbot setup","Business FAQs and service information","Lead capture and enquiry routing","Human hand-off for questions needing attention"]},{"title":"Google SEO & AI Search Visibility","short":"Be easier to discover","detail":"Improve how your business is understood by search engines and AI-powered discovery experiences. AMM focuses on clear site structure, useful content, technical SEO foundations and consistent service information—without promising rankings or guaranteed results.","items":["On-page SEO and metadata","Technical SEO basics and indexing checks","Content structure for Google and AI search","Search visibility review and improvement plan"]},{"title":"Digital Advertising","short":"Campaigns built around your goals","detail":"Plan and manage digital ad campaigns with a clear objective, audience and measurement approach. Service options can include Google Ads, Meta Ads (Facebook and Instagram), and TikTok Ads. ChatGPT or other AI ad placements are considered only where officially available and eligible.","items":["Campaign planning and ad copy","Google, Meta and TikTok campaign setup","Conversion tracking and performance review","Reporting and ongoing optimization"]},{"title":"Website Design & Digital Solutions","short":"Clear, responsive digital experiences","detail":"Create or improve a professional website that explains your offer clearly, works across devices and guides visitors toward a useful next step. Scope is agreed before work begins, with attention to usability, performance and search-friendly foundations.","items":["Responsive landing pages and websites","Service-focused content structure","Contact and enquiry pathways","Performance and basic SEO foundations"]},{"title":"Data Management & Data Entry","short":"Organized, dependable business data","detail":"Make business information easier to maintain and use through structured data entry, cleanup and documentation. Workflows are designed around the client's format and quality requirements, with clear checks to reduce avoidable errors.","items":["Data entry and spreadsheet organization","Data cleanup and formatting","Consistent records and validation checks","Simple reporting and repeatable workflows"]}];
+ const section=document.querySelector('#work');
+ if(!section)return;
+ const overlay=document.createElement('div');
+ overlay.className='amm-service-overlay';
+ overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','AMM service details');
+ overlay.innerHTML='<div class="amm-service-dialog"><button type="button" class="amm-service-close" aria-label="Close service details">×</button><div class="amm-service-flipper"><section class="amm-service-face amm-service-front" aria-hidden="true"><div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">AMM DATA SOLUTIONS</span><h2 class="f font-extrabold mt-5" style="font-size:clamp(30px,5vw,54px);line-height:1.08;color:#171329"></h2><p class="mt-4 text-lg" style="color:#625d72"></p></div><p class="text-sm font-semibold" style="color:#5b2ee8">Turning business needs into practical solutions ↗</p></section><section class="amm-service-face amm-service-back"><div class="h-1.5 absolute top-0 left-0 right-0" style="background:linear-gradient(90deg,#5b2ee8,#d6f25b)"></div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">AMM SERVICE OVERVIEW</span><h2 class="f font-extrabold mt-3 pr-10" style="font-size:clamp(26px,4vw,38px);line-height:1.15;color:#171329"></h2><p class="mt-4 text-sm sm:text-base leading-relaxed" style="color:#625d72"></p><div class="amm-service-detail-grid mt-7"><div><h3 class="f font-bold text-base mb-3" style="color:#171329">What this can include</h3><ul class="amm-service-detail-list"></ul></div><div class="rounded-2xl p-5" style="background:#f8f6ff;border:1px solid #ebe5ff"><h3 class="f font-bold text-base mb-2" style="color:#171329">Built around your business</h3><p class="text-sm leading-relaxed" style="color:#625d72">We agree the scope, tools and priorities with you first, then shape a practical solution around your goals. Deliverables depend on your requirements and the agreed project scope.</p><a class="amm-service-cta mt-5" href="mailto:ammdatasolutions229@gmail.com?subject=AMM%20Service%20Enquiry">Discuss this service <span aria-hidden="true" style="margin-left:8px">↗</span></a></div></div></section></div></div>';
+document.body.appendChild(overlay);
+const dialog=overlay.querySelector('.amm-service-dialog'), close=overlay.querySelector('.amm-service-close'), flipper=overlay.querySelector('.amm-service-flipper');
+let previousFocus=null;
+function openService(i){
+ const s=data[i];if(!s)return;previousFocus=document.activeElement;
+ overlay.querySelector('.amm-service-front h2').textContent=s.title;
+ overlay.querySelector('.amm-service-front p').textContent=s.short;
+ overlay.querySelector('.amm-service-back h2').textContent=s.title;
+ overlay.querySelector('.amm-service-back p').textContent=s.detail;
+ const list=overlay.querySelector('.amm-service-detail-list');list.replaceChildren();
+ s.items.forEach(item=>{const li=document.createElement('li');li.textContent=item;list.appendChild(li)});
+ overlay.classList.remove('is-flipped');overlay.classList.add('is-open');document.body.style.overflow='hidden';
+ requestAnimationFrame(()=>requestAnimationFrame(()=>overlay.classList.add('is-flipped')));
+ close.focus();
+}
+function closeService(){overlay.classList.remove('is-flipped','is-open');document.body.style.overflow='';if(previousFocus)previousFocus.focus()}
+section.querySelectorAll('[data-service-index]').forEach(card=>card.addEventListener('click',()=>openService(Number(card.dataset.serviceIndex))));
+close.addEventListener('click',closeService);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeService()});
+document.addEventListener('keydown',e=>{if(!overlay.classList.contains('is-open'))return;if(e.key==='Escape')closeService()});
 })();
 
 </script>
