@@ -735,7 +735,7 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 .amm-service-face{position:relative;inset:auto;backface-visibility:visible;-webkit-backface-visibility:visible;border-radius:24px;overflow-y:auto;overflow-x:hidden;background:#fff;border:1px solid #e8e4f4;box-shadow:0 20px 55px rgba(0,0,0,.18);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:geometricPrecision;color:#211b35;filter:none!important;opacity:1!important}
 .amm-service-front{display:none!important}
 .amm-service-back{display:block;transform:none!important;padding:clamp(22px,4vw,42px);max-height:min(720px,88vh);height:auto;overflow-y:auto;overscroll-behavior:contain;color:#211b35;font-size:16px;line-height:1.7;filter:none!important;opacity:1!important} .amm-service-back>p{color:#39344d!important;font-size:16px!important;line-height:1.8!important;font-weight:450!important;letter-spacing:0!important;text-shadow:none!important} .amm-service-back h2,.amm-service-back h3{color:#171329!important;text-shadow:none!important;filter:none!important} .amm-service-detail-list li{color:#302b42;font-size:15px;line-height:1.7} .amm-service-back .rounded-2xl p{color:#39344d!important;font-size:14px!important;line-height:1.75!important}
-.amm-service-close{position:absolute;right:14px;top:14px;z-index:3;border:1px solid #e7e2f2;border-radius:999px;width:42px;height:42px;background:#fff;color:#211b35;font-size:23px;line-height:1}
+.amm-service-close{position:absolute;right:14px;top:14px;z-index:10;display:inline-flex;align-items:center;justify-content:center;border:1px solid #e7e2f2;border-radius:999px;width:44px;height:44px;background:#fff;color:#211b35;font-size:23px;line-height:1;box-shadow:0 4px 14px rgba(23,19,41,.12);cursor:pointer;transition:background .18s ease,transform .18s ease,border-color .18s ease}.amm-service-close:hover{background:#fff7cc;border-color:#e8b91b;transform:rotate(90deg)}.amm-service-close:focus-visible{outline:3px solid #5b2ee8;outline-offset:3px}
 .amm-service-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .amm-service-detail-list{display:grid;gap:10px}
 .amm-service-detail-list li{display:flex;gap:10px;align-items:flex-start;color:#49445b;font-size:14px;line-height:1.55}
@@ -1268,21 +1268,25 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   clearTimeout(closeTimer);if(openFrame)cancelAnimationFrame(openFrame);
   previousFocus=document.activeElement;sourceCard=card;
   const rect=card.getBoundingClientRect();
-  const dx=rect.left+rect.width/2-window.innerWidth/2;
-  const dy=rect.top+rect.height/2-window.innerHeight/2;
   overlay.classList.remove('is-closing');
   overlay.style.display='flex';overlay.style.visibility='visible';overlay.style.opacity='1';overlay.style.pointerEvents='auto';
   dialog.style.transition='none';
   dialog.style.opacity='1';
-  dialog.style.transform='translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px))';
+  dialog.style.transform='translate(-50%,-50%) scale(1,1)';
   overlay.classList.add('is-open','is-flipped');
   document.body.style.overflow='hidden';
+  const dialogRect=dialog.getBoundingClientRect();
+  const dx=rect.left+rect.width/2-window.innerWidth/2;
+  const dy=rect.top+rect.height/2-window.innerHeight/2;
+  const sx=Math.max(.08,Math.min(1,rect.width/dialogRect.width));
+  const sy=Math.max(.08,Math.min(1,rect.height/dialogRect.height));
   if(reduce()){
-   dialog.style.transform='translate(-50%,-50%)';
+   dialog.style.transform='translate(-50%,-50%) scale(1,1)';
   }else{
+   dialog.style.transform='translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px)) scale('+sx+','+sy+')';
    dialog.getBoundingClientRect();
-   dialog.style.transition='transform 320ms cubic-bezier(.22,.75,.2,1)';
-   openFrame=requestAnimationFrame(()=>{dialog.style.transform='translate(-50%,-50%)';openFrame=null;});
+   dialog.style.transition='transform 420ms cubic-bezier(.2,.75,.2,1)';
+   openFrame=requestAnimationFrame(()=>{dialog.style.transform='translate(-50%,-50%) scale(1,1)';openFrame=null;});
   }
   close.focus();
  }
@@ -1293,10 +1297,13 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(!reduce()&&rect){
    const dx=rect.left+rect.width/2-window.innerWidth/2;
    const dy=rect.top+rect.height/2-window.innerHeight/2;
-   dialog.style.transition='transform 280ms cubic-bezier(.4,0,.7,.2)';
+   const dialogRect=dialog.getBoundingClientRect();
+   const sx=Math.max(.08,Math.min(1,rect.width/dialogRect.width));
+   const sy=Math.max(.08,Math.min(1,rect.height/dialogRect.height));
+   dialog.style.transition='transform 320ms cubic-bezier(.4,0,.7,.2)';
    overlay.classList.add('is-closing');
-   dialog.style.transform='translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px))';
-   closeTimer=setTimeout(finishClose,290);
+   dialog.style.transform='translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px)) scale('+sx+','+sy+')';
+   closeTimer=setTimeout(finishClose,330);
   }else finishClose();
  }
  function finishClose(){
