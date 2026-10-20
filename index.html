@@ -170,6 +170,13 @@ button,a,input,textarea{touch-action:manipulation}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 
 
+/* Feedback suggestions: compact, accessible one-click pill controls */
+.feedback-pill-list{display:flex;flex-wrap:wrap;gap:8px}
+.feedback-pill{appearance:none;border:1px solid var(--line, #dedede);border-radius:999px;background:transparent;color:inherit;padding:9px 13px;font-size:.875rem;line-height:1.25;cursor:pointer;transition:background .15s ease,border-color .15s ease,color .15s ease;touch-action:manipulation}
+.feedback-pill:hover{border-color:#D9A900}
+.feedback-pill[aria-pressed="true"]{background:#FFF1B8;border-color:#D9A900;color:#765500}
+.feedback-pill:focus-visible{outline:2px solid #D9A900;outline-offset:2px}
+@media(max-width:480px){.feedback-pill{padding:9px 11px;font-size:.82rem}}
 /* Feedback form: touch-friendly inline stars and cumulative yellow rating */
 #feedback-stars{align-items:center;gap:5px;position:relative;z-index:2;pointer-events:auto;touch-action:manipulation}
 #feedback-stars .feedback-star{appearance:none;-webkit-appearance:none;display:inline-block;position:relative;z-index:3;pointer-events:auto;touch-action:manipulation;user-select:none;-webkit-user-select:none;width:auto;height:auto;min-width:36px;min-height:42px;padding:2px;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#d8d4c8;font-size:2.15rem;line-height:1;cursor:pointer;transition:color .16s ease,text-shadow .16s ease}
@@ -1004,7 +1011,8 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 <fieldset><legend class="block text-sm font-semibold mb-2">Your rating *</legend><div id="feedback-stars" class="flex flex-wrap gap-2" role="radiogroup" aria-label="Rate your experience">
 <button type="button" class="feedback-star" data-rating="1" role="radio" aria-checked="false" aria-label="1 star" title="1 star">★</button><button type="button" class="feedback-star" data-rating="2" role="radio" aria-checked="false" aria-label="2 stars" title="2 stars">★</button><button type="button" class="feedback-star" data-rating="3" role="radio" aria-checked="false" aria-label="3 stars" title="3 stars">★</button><button type="button" class="feedback-star" data-rating="4" role="radio" aria-checked="false" aria-label="4 stars" title="4 stars">★</button><button type="button" class="feedback-star" data-rating="5" role="radio" aria-checked="false" aria-label="5 stars" title="5 stars">★</button>
 </div><p id="feedback-rating-label" class="text-sm mt-2" style="color:var(--muted)">Choose a rating from 1 to 5.</p><p class="err" id="feedback-rating-error"></p></fieldset>
-<div><label for="feedback-review" class="block text-sm font-semibold mb-2">Your feedback *</label><textarea id="feedback-review" name="review" rows="4" maxlength="1000" required placeholder="What went well, and what could we improve?"></textarea><div class="flex justify-between gap-3 text-xs mt-2" style="color:var(--muted)"><span>10–1,000 characters</span><span id="feedback-count">0 / 1000</span></div><p class="err" id="feedback-review-error"></p></div>
+<fieldset class="space-y-3"><legend class="block text-sm font-semibold mb-1">What would you like to say?</legend><p class="text-sm" style="color:var(--muted)">Tap any that match your experience.</p><div><p class="text-sm font-semibold mb-2">Positive feedback</p><div id="feedback-positive" class="feedback-pill-list"><button type="button" class="feedback-pill" aria-pressed="false">😊 Great experience!</button><button type="button" class="feedback-pill" aria-pressed="false">👍 Really helpful!</button><button type="button" class="feedback-pill" aria-pressed="false">Everything was good</button><button type="button" class="feedback-pill" aria-pressed="false">Quick and easy</button><button type="button" class="feedback-pill" aria-pressed="false">Exactly what I needed</button></div></div><div><p class="text-sm font-semibold mb-2">Complaints &amp; suggestions</p><div id="feedback-improvements" class="feedback-pill-list"><button type="button" class="feedback-pill" aria-pressed="false">Please reply faster</button><button type="button" class="feedback-pill" aria-pressed="false">Keep me updated</button><button type="button" class="feedback-pill" aria-pressed="false">Explain things better</button><button type="button" class="feedback-pill" aria-pressed="false">Improve the work</button><button type="button" class="feedback-pill" aria-pressed="false">Something needs to be better</button></div></div><p class="err" id="feedback-review-error"></p></fieldset>
+<div><label for="feedback-review" class="block text-sm font-semibold mb-2">Anything else you’d like to share? <span class="font-normal" style="color:var(--muted)">(optional)</span></label><textarea id="feedback-review" name="review" rows="3" maxlength="250" placeholder="Type your feedback here..."></textarea><div class="flex justify-between gap-3 text-xs mt-2" style="color:var(--muted)"><span>Your message is optional.</span><span id="feedback-count">0 / 250</span></div></div>
 <label class="flex items-start gap-3 text-sm" style="color:var(--muted)"><input id="feedback-consent" type="checkbox" required style="width:18px;height:18px;flex:0 0 18px;margin-top:2px"><span>I confirm this feedback reflects my own experience and understand that public display will require AMM review.</span></label>
 <p class="err" id="feedback-consent-error"></p>
 <button class="btn btn-p w-full justify-center" type="submit">Submit Feedback</button><p id="feedback-status" class="text-sm" role="status" aria-live="polite"></p>
@@ -1119,17 +1127,17 @@ openFeedback.onclick=()=>{feedbackPanel.classList.remove('hidden');$('#feedback-
 $('#close-feedback').onclick=()=>{feedbackPanel.classList.add('hidden');openFeedback.focus()};
 let chosenRating=0;
 const ratingNames=['','Poor','Fair','Good','Very good','Excellent'];
-const starButtons=$$('#feedback-stars .feedback-star');
+const starButtons=$('#feedback-stars .feedback-star');
 function setRating(n){
- chosenRating=Math.max(1,Math.min(5,Number(n)||1));
+ chosenRating=Math.max(0,Math.min(5,Number(n)||0));
  window.ammFeedbackRating=chosenRating;
  starButtons.forEach(b=>{
   const v=Number(b.dataset.rating);
-  b.classList.toggle('is-filled',v<=chosenRating);
-  b.setAttribute('aria-checked',String(v===chosenRating));
-  b.tabIndex=v===chosenRating?0:-1;
+  b.classList.toggle('is-filled',v<=chosenRating&&chosenRating>0);
+  b.setAttribute('aria-checked',String(v===chosenRating&&chosenRating>0));
+  b.tabIndex=v===chosenRating&&chosenRating>0?0:(chosenRating===0&&v===1?0:-1);
  });
- $('#feedback-rating-label').textContent=chosenRating+' out of 5 — '+ratingNames[chosenRating]+'.';
+ $('#feedback-rating-label').textContent=chosenRating?chosenRating+' out of 5 — '+ratingNames[chosenRating]+'.':'Choose a rating from 1 to 5.';
  $('#feedback-rating-error').textContent='';
 }
 starButtons.forEach((b,i)=>{
@@ -1146,21 +1154,38 @@ starButtons.forEach((b,i)=>{
   setRating(next);
   starButtons[next-1].focus();
  });
-});$('#feedback-review').addEventListener('input',e=>$('#feedback-count').textContent=e.target.value.length+' / 1000');
+});
+const feedbackPills=$('#feedback-positive .feedback-pill, #feedback-improvements .feedback-pill');
+feedbackPills.forEach(pill=>pill.addEventListener('click',()=>{
+ const pressed=pill.getAttribute('aria-pressed')==='true';
+ pill.setAttribute('aria-pressed',String(!pressed));
+ if(pill.textContent.trim()==='Everything was good'&&!pressed){
+  $('#feedback-improvements .feedback-pill').forEach(other=>other.setAttribute('aria-pressed','false'));
+ }
+ if(pill.closest('#feedback-improvements')&&!pressed){
+  const allGood=$('#feedback-positive .feedback-pill').find(p=>p.textContent.trim()==='Everything was good');
+  if(allGood)allGood.setAttribute('aria-pressed','false');
+ }
+ $('#feedback-review-error').textContent='';
+}));
+$('#feedback-review').addEventListener('input',e=>$('#feedback-count').textContent=e.target.value.length+' / 250');
 feedbackForm.onsubmit=e=>{
  e.preventDefault();
- const name=$('#feedback-name').value.trim(),business=$('#feedback-business').value.trim(),review=$('#feedback-review').value.trim(),consent=$('#feedback-consent').checked;
+ const name=$('#feedback-name').value.trim(),business=$('#feedback-business').value.trim(),typedReview=$('#feedback-review').value.trim(),consent=$('#feedback-consent').checked;
+ const selectedPills=feedbackPills.filter(p=>p.getAttribute('aria-pressed')==='true').map(p=>p.textContent.trim());
+ const review=[...selectedPills,typedReview].filter(Boolean).join(' — ');
  $('#feedback-name-error').textContent=name?'':'Please enter your name.';
  chosenRating=chosenRating||Number(window.ammFeedbackRating)||0;
  $('#feedback-rating-error').textContent=chosenRating?'':'Please choose a star rating.';
- $('#feedback-review-error').textContent=review.length>=10?'':'Please write at least 10 characters.';
+ $('#feedback-review-error').textContent=review?'':'Please choose a suggestion or write a short message.';
  $('#feedback-consent-error').textContent=consent?'':'Please confirm before submitting.';
  $('#feedback-status').textContent='';
- if(!name||!chosenRating||review.length<10||!consent)return;
- const item={name,business,rating:chosenRating||window.ammFeedbackRating||0,review};
+ if(!name||!chosenRating||!review||!consent)return;
+ const item={name,business,rating:chosenRating,review};
  T.push(item);ti=T.length-1;renderT();
  $('#feedback-status').textContent='Thanks for sharing your feedback. This is a local preview only; it has not been sent to AMM or published on the website.';
- feedbackForm.reset();chosenRating=0;setRating(0);$('#feedback-count').textContent='0 / 1000';
+ feedbackForm.reset();chosenRating=0;setRating(0);$('#feedback-count').textContent='0 / 250';
+ feedbackPills.forEach(p=>p.setAttribute('aria-pressed','false'));
  // The local preview is deliberately not persisted or treated as a real public review.
  $('#feedback-preview').classList.remove('hidden');
  $('#feedback-preview').innerHTML='<p class="font-bold">Feedback preview created</p><p class="text-sm mt-2" style="color:var(--muted)">Your review appears in the Kind words preview in this browser session only. It is not sent to AMM and will disappear when the page is refreshed.</p>';
