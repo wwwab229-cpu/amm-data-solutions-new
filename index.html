@@ -1297,6 +1297,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  }
  document.addEventListener('visibilitychange',()=>{if(document.hidden){clearTimers()}else{setStage(stage)}});
  setStage(0);
+ window.__ammWorkflowController = true;
 })();
 
 
@@ -1399,6 +1400,60 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(star)sync(star.dataset.rating);
  },true);
 })();</script>
+
+
+<script>
+/* Independent safety net: keep the AMM workflow demo animated if the main page script fails early. */
+(function(){
+  if(window.__ammWorkflowController) return;
+  const root=document.querySelector('#services .amm-workflow');
+  if(!root) return;
+  const cards=[...root.querySelectorAll('[data-flow-stage]')];
+  const typed=document.getElementById('amm-order-typed');
+  const caption=document.getElementById('amm-flow-caption');
+  const progress=document.getElementById('amm-flow-progress');
+  const count=document.getElementById('amm-flow-count');
+  const percent=document.getElementById('amm-build-percent');
+  if(cards.length!==4) return;
+  const order='Hi AMM! We need a smarter way to manage customer orders and keep everything organised. Can you help us build a solution?';
+  const captions=['A customer is writing a request…','The request is received. The AMM team starts planning.','The solution is taking shape, step by step…','The finished work is ready for the customer.'];
+  const statuses=['NEW REQUEST','TEAM BRIEF','IN THE MAKING','DELIVERED'];
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let stage=0, timer=0, typing=0, generation=0;
+  function activate(next){
+    generation++;
+    const id=generation;
+    clearTimeout(timer);clearTimeout(typing);
+    stage=next;
+    cards.forEach((card,i)=>{
+      card.classList.toggle('is-active',i===next);
+      card.classList.toggle('is-complete-stage',i<next);
+      const status=card.querySelector('.amm-stage-status');
+      if(status) status.textContent=i===next?'WORKING':i<next?'COMPLETED':'WAITING FOR TASK';
+      card.querySelectorAll('[data-task]').forEach((row,j)=>row.classList.toggle('is-complete',i===1&&j<3));
+    });
+    if(caption) caption.textContent=captions[next];
+    if(progress) progress.style.width=((next+1)*25)+'%';
+    if(count) count.textContent='STAGE 0'+(next+1)+' / 04';
+    if(typed){
+      typed.textContent='';
+      if(next===0){
+        if(reduced){typed.textContent=order}
+        else {
+          let n=0;
+          const type=()=>{if(id!==generation||stage!==0)return;typed.textContent=order.slice(0,n++);if(n<=order.length)typing=setTimeout(type,22)};
+          type();
+        }
+      }
+    }
+    if(percent) percent.textContent=next===2?'100%':'0%';
+    timer=setTimeout(()=>activate((next+1)%4),reduced?4200:4200);
+  }
+  window.__ammWorkflowFallback=true;
+  activate(0);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)activate(stage)});
+})();
+</script>
 
 </body>
 </html>
