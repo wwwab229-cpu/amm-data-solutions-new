@@ -710,8 +710,7 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 .amm-service-card:hover,.amm-service-card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 34px rgba(35,24,74,.13)!important;border-color:#c8b9ff!important;outline:none}
 .amm-service-overlay{position:fixed;inset:0;z-index:9999;background:rgba(17,13,34,.72);backdrop-filter:blur(9px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease}
 .amm-service-overlay.is-open{opacity:1;visibility:visible}
-.amm-service-dialog{position:fixed;left:var(--start-left,50%);top:var(--start-top,50%);width:var(--start-width, min(900px,calc(100vw - 40px)));height:var(--start-height,min(720px,88vh));perspective:1400px;opacity:0;transform:translate(0,0);transform-origin:top left;transition:left .48s cubic-bezier(.2,.75,.25,1),top .48s cubic-bezier(.2,.75,.25,1),width .48s cubic-bezier(.2,.75,.25,1),height .48s cubic-bezier(.2,.75,.25,1),opacity .18s ease}
-.amm-service-dialog.is-expanded{left:50%;top:50%;width:min(900px,calc(100vw - 40px));height:min(720px,88vh);opacity:1;transform:translate(-50%,-50%)}
+.amm-service-dialog{position:fixed;left:50%;top:50%;width:min(900px,calc(100vw - 40px));height:min(720px,88vh);perspective:1400px;opacity:1;transform:translate(-50%,-50%);transform-origin:center center;will-change:transform;}
 .amm-service-flipper{position:relative;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.75,.25,1);min-height:480px}
 .amm-service-overlay.is-flipped .amm-service-flipper{transform:rotateY(180deg)}
 .amm-service-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;overflow:auto;background:#fff;border:1px solid #e8e4f4;box-shadow:0 30px 100px rgba(0,0,0,.25)}
@@ -1075,7 +1074,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
 })();
 
 
-/* Expand from the exact card the visitor clicks, then flip to its details */
+/* Expand the clicked service card in place without moving the service grid */
 (function(){
  const data=[{"title":"AI & Business Automation","short":"Automate repetitive work","detail":"Replace repetitive manual tasks with connected, reliable workflows. AMM helps map your process, identify practical automation opportunities, connect the tools you already use, and reduce avoidable hand-offs so your team can focus on higher-value work.","items":["Workflow mapping and process improvement","Tool and app integrations","Automated task routing and notifications","Testing, documentation and handover"]},{"title":"AI Chatbots & Customer Support","short":"Helpful support, around the clock","detail":"Give visitors a clearer path to answers with a website chatbot designed around your business information. Start with common questions and service guidance, then refine responses and hand-off points as your needs grow.","items":["Website chatbot setup","Business FAQs and service information","Lead capture and enquiry routing","Human hand-off for questions needing attention"]},{"title":"Google SEO & AI Search Visibility","short":"Be easier to discover","detail":"Improve how your business is understood by search engines and AI-powered discovery experiences. AMM focuses on clear site structure, useful content, technical SEO foundations and consistent service information—without promising rankings or guaranteed results.","items":["On-page SEO and metadata","Technical SEO basics and indexing checks","Content structure for Google and AI search","Search visibility review and improvement plan"]},{"title":"Digital Advertising","short":"Campaigns built around your goals","detail":"Plan and manage digital ad campaigns with a clear objective, audience and measurement approach. Service options can include Google Ads, Meta Ads (Facebook and Instagram), and TikTok Ads. ChatGPT or other AI ad placements are considered only where officially available and eligible.","items":["Campaign planning and ad copy","Google, Meta and TikTok campaign setup","Conversion tracking and performance review","Reporting and ongoing optimization"]},{"title":"Website Design & Digital Solutions","short":"Clear, responsive digital experiences","detail":"Create or improve a professional website that explains your offer clearly, works across devices and guides visitors toward a useful next step. Scope is agreed before work begins, with attention to usability, performance and search-friendly foundations.","items":["Responsive landing pages and websites","Service-focused content structure","Contact and enquiry pathways","Performance and basic SEO foundations"]},{"title":"Data Management & Data Entry","short":"Organized, dependable business data","detail":"Make business information easier to maintain and use through structured data entry, cleanup and documentation. Workflows are designed around the client's format and quality requirements, with clear checks to reduce avoidable errors.","items":["Data entry and spreadsheet organization","Data cleanup and formatting","Consistent records and validation checks","Simple reporting and repeatable workflows"]}];
  const section=document.querySelector('#work');if(!section)return;
@@ -1083,43 +1082,58 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  overlay.innerHTML='<div class="amm-service-dialog"><button type="button" class="amm-service-close" aria-label="Close service details">×</button><div class="amm-service-flipper"><section class="amm-service-face amm-service-front" aria-hidden="true"><div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">AMM DATA SOLUTIONS</span><h2 class="f font-extrabold mt-5" style="font-size:clamp(30px,5vw,54px);line-height:1.08;color:#171329"></h2><p class="mt-4 text-lg" style="color:#625d72"></p></div><p class="text-sm font-semibold" style="color:#5b2ee8">Turning business needs into practical solutions ↗</p></section><section class="amm-service-face amm-service-back"><div class="h-1.5 absolute top-0 left-0 right-0" style="background:linear-gradient(90deg,#5b2ee8,#d6f25b)"></div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">AMM SERVICE OVERVIEW</span><h2 class="f font-extrabold mt-3 pr-10" style="font-size:clamp(26px,4vw,38px);line-height:1.15;color:#171329"></h2><p class="mt-4 text-sm sm:text-base leading-relaxed" style="color:#625d72"></p><div class="amm-service-detail-grid mt-7"><div><h3 class="f font-bold text-base mb-3" style="color:#171329">What this can include</h3><ul class="amm-service-detail-list"></ul></div><div class="rounded-2xl p-5" style="background:#f8f6ff;border:1px solid #ebe5ff"><h3 class="f font-bold text-base mb-2" style="color:#171329">Built around your business</h3><p class="text-sm leading-relaxed" style="color:#625d72">We agree the scope, tools and priorities with you first, then shape a practical solution around your goals. Deliverables depend on your requirements and the agreed project scope.</p><a class="amm-service-cta mt-5" href="mailto:ammdatasolutions229@gmail.com?subject=AMM%20Service%20Enquiry">Discuss this service <span aria-hidden="true" style="margin-left:8px">↗</span></a></div></div></section></div></div>';
  document.body.appendChild(overlay);
  const dialog=overlay.querySelector('.amm-service-dialog'),close=overlay.querySelector('.amm-service-close');
- let previousFocus=null,sourceCard=null,sourceRect=null,closeTimer=null,openTimer=null;
- function setOrigin(rect){
-  if(!rect)return;
-  dialog.style.setProperty('--start-left',rect.left+'px');
-  dialog.style.setProperty('--start-top',rect.top+'px');
-  dialog.style.setProperty('--start-width',rect.width+'px');
-  dialog.style.setProperty('--start-height',rect.height+'px');
+ let previousFocus=null,sourceCard=null,sourceRect=null,animation=null,closeTimer=null,openTimer=null;
+ const reduce=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function getTransformFromCard(rect){
+  const finalWidth=Math.min(900,window.innerWidth-40),finalHeight=Math.min(720,window.innerHeight*.88);
+  const dx=rect.left+rect.width/2-window.innerWidth/2,dy=rect.top+rect.height/2-window.innerHeight/2;
+  const sx=Math.max(.02,rect.width/finalWidth),sy=Math.max(.02,rect.height/finalHeight);
+  return {from:'translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px)) scale('+sx+','+sy+')',to:'translate(-50%,-50%) scale(1,1)'};
+ }
+ function fillDetails(i){
+  const item=data[i];if(!item)return false;
+  overlay.querySelector('.amm-service-front h2').textContent=item.title;
+  overlay.querySelector('.amm-service-front p').textContent=item.short;
+  overlay.querySelector('.amm-service-back h2').textContent=item.title;
+  overlay.querySelector('.amm-service-back p').textContent=item.detail;
+  const list=overlay.querySelector('.amm-service-detail-list');list.replaceChildren();
+  item.items.forEach(text=>{const li=document.createElement('li');li.textContent=text;list.appendChild(li)});
+  return true;
  }
  function openService(i,card){
-  const s=data[i];if(!s)return;
-  if(closeTimer)clearTimeout(closeTimer);if(openTimer)clearTimeout(openTimer);
+  if(!fillDetails(i))return;
+  clearTimeout(closeTimer);clearTimeout(openTimer);if(animation)animation.cancel();
   previousFocus=document.activeElement;sourceCard=card;sourceRect=card.getBoundingClientRect();
-  overlay.querySelector('.amm-service-front h2').textContent=s.title;
-  overlay.querySelector('.amm-service-front p').textContent=s.short;
-  overlay.querySelector('.amm-service-back h2').textContent=s.title;
-  overlay.querySelector('.amm-service-back p').textContent=s.detail;
-  const list=overlay.querySelector('.amm-service-detail-list');list.replaceChildren();
-  s.items.forEach(item=>{const li=document.createElement('li');li.textContent=item;list.appendChild(li)});
-  overlay.classList.remove('is-flipped');overlay.classList.add('is-open');document.body.style.overflow='hidden';
-  dialog.classList.remove('is-expanded');setOrigin(sourceRect);
-  void dialog.offsetWidth;
-  requestAnimationFrame(()=>{dialog.classList.add('is-expanded');openTimer=setTimeout(()=>{if(overlay.classList.contains('is-open'))overlay.classList.add('is-flipped')},420)});
+  const rect=sourceRect;overlay.classList.remove('is-flipped');overlay.classList.add('is-open');document.body.style.overflow='hidden';
   close.focus();
+  if(reduce()){dialog.style.transform='translate(-50%,-50%)';dialog.style.opacity='1';overlay.classList.add('is-flipped');return;}
+  const tr=getTransformFromCard(rect);
+  animation=dialog.animate([{transform:tr.from,opacity:.96},{transform:tr.to,opacity:1}],{duration:520,easing:'cubic-bezier(.2,.75,.25,1)',fill:'none'});
+  openTimer=setTimeout(()=>{if(overlay.classList.contains('is-open'))overlay.classList.add('is-flipped')},560);
  }
  function closeService(){
   if(!overlay.classList.contains('is-open'))return;
-  if(openTimer)clearTimeout(openTimer);overlay.classList.remove('is-flipped');
+  clearTimeout(openTimer);overlay.classList.remove('is-flipped');
+  if(animation)animation.cancel();
   const rect=sourceCard&&sourceCard.isConnected?sourceCard.getBoundingClientRect():sourceRect;
-  if(rect){setOrigin(rect);dialog.classList.remove('is-expanded');}
-  overlay.classList.remove('is-open');document.body.style.overflow='';
-  closeTimer=setTimeout(()=>{if(previousFocus&&previousFocus.isConnected)previousFocus.focus();sourceCard=null},420);
+  if(!reduce()&&rect){
+   const tr=getTransformFromCard(rect);
+   animation=dialog.animate([{transform:tr.to,opacity:1},{transform:tr.from,opacity:.96}],{duration:420,easing:'cubic-bezier(.4,0,.8,.3)',fill:'none'});
+   overlay.animate([{opacity:1},{opacity:0}],{duration:260,easing:'ease',fill:'none'});
+   closeTimer=setTimeout(finishClose,420);
+  }else finishClose();
+ }
+ function finishClose(){
+  overlay.classList.remove('is-open','is-flipped');document.body.style.overflow='';
+  if(animation){animation.cancel();animation=null;}
+  if(previousFocus&&previousFocus.isConnected)previousFocus.focus();
+  sourceCard=null;sourceRect=null;
  }
  section.querySelectorAll('[data-service-index]').forEach(card=>card.addEventListener('click',()=>openService(Number(card.dataset.serviceIndex),card)));
  close.addEventListener('click',closeService);
  overlay.addEventListener('click',e=>{if(e.target===overlay)closeService()});
  document.addEventListener('keydown',e=>{if(!overlay.classList.contains('is-open'))return;if(e.key==='Escape')closeService()});
- window.addEventListener('resize',()=>{if(overlay.classList.contains('is-open')&&sourceRect){/* Keep expanded dialog centered while open. */dialog.style.setProperty('--start-left','50%');dialog.style.setProperty('--start-top','50%');dialog.style.setProperty('--start-width','min(900px,calc(100vw - 40px))');dialog.style.setProperty('--start-height','min(720px,88vh)')}});
+ window.addEventListener('resize',()=>{if(overlay.classList.contains('is-open')){if(animation)animation.cancel();dialog.style.transform='translate(-50%,-50%)';}});
 })();
 </script>
 </body>
