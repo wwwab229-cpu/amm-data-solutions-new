@@ -170,7 +170,12 @@ button,a,input,textarea{touch-action:manipulation}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 
 
-/* Feedback form: clean inline stars, cumulative yellow rating */
+/* Feedback form: touch-friendly inline stars and cumulative yellow rating */
+#feedback-stars{align-items:center;gap:5px;position:relative;z-index:2;pointer-events:auto;touch-action:manipulation}
+#feedback-stars .feedback-star{appearance:none;-webkit-appearance:none;display:inline-block;position:relative;z-index:3;pointer-events:auto;touch-action:manipulation;user-select:none;-webkit-user-select:none;width:auto;height:auto;min-width:36px;min-height:42px;padding:2px;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#d8d4c8;font-size:2.15rem;line-height:1;cursor:pointer;transition:color .16s ease,text-shadow .16s ease}
+#feedback-stars .feedback-star:hover,#feedback-stars .feedback-star.is-filled,#feedback-stars .feedback-star[aria-checked="true"]{color:#FFD21F!important;text-shadow:0 0 8px #ffd21f66}
+#feedback-stars .feedback-star:focus-visible{outline:2px solid #FFD21F;outline-offset:3px;border-radius:3px!important}
+#feedback-stars .feedback-star[aria-checked="true"]{transform:none}
 #feedback-stars{align-items:center;gap:5px}
 .feedback-star{appearance:none;width:auto;height:auto;min-width:0;padding:2px;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#d8d4c8;font-size:2.15rem;line-height:1;cursor:pointer;transition:color .16s ease,text-shadow .16s ease}
 .feedback-star:hover,.feedback-star.is-filled,.feedback-star[aria-checked="true"]{color:#FFD21F!important;text-shadow:0 0 8px #ffd21f66}
@@ -1319,8 +1324,9 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
 </script>
 
 <script>
-/* Independent mobile-safe feedback star handler */
+/* Reliable mouse, touch and keyboard feedback rating */
 (function(){
+  const names=['','Poor','Fair','Good','Very good','Excellent'];
   function applyRating(n){
     const wrap=document.getElementById('feedback-stars');
     if(!wrap) return;
@@ -1334,30 +1340,32 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
     });
     const label=document.getElementById('feedback-rating-label');
     const error=document.getElementById('feedback-rating-error');
-    const names=['','Poor','Fair','Good','Very good','Excellent'];
     if(label) label.textContent=n+' out of 5 — '+names[n]+'.';
     if(error) error.textContent='';
   }
-  document.addEventListener('click',function(event){
-    const star=event.target.closest && event.target.closest('#feedback-stars .feedback-star');
-    if(star) applyRating(star.dataset.rating);
-  });
-  document.addEventListener('keydown',function(event){
-    const star=event.target.closest && event.target.closest('#feedback-stars .feedback-star');
+  window.setAMMFeedbackRating=applyRating;
+  function handle(event){
+    const target=event.target;
+    const star=target && target.closest ? target.closest('#feedback-stars .feedback-star') : null;
     if(!star) return;
-    let n=Number(star.dataset.rating);
-    if(event.key==='ArrowRight'||event.key==='ArrowUp') n=Math.min(5,n+1);
-    else if(event.key==='ArrowLeft'||event.key==='ArrowDown') n=Math.max(1,n-1);
-    else if(event.key==='Home') n=1;
-    else if(event.key==='End') n=5;
-    else return;
-    event.preventDefault();
-    applyRating(n);
-    const next=document.querySelector('#feedback-stars [data-rating="'+n+'"]');
-    if(next) next.focus();
-  });
-})();
-</script>
+    if(event.type==='keydown'){
+      let n=Number(star.dataset.rating);
+      if(event.key==='ArrowRight'||event.key==='ArrowUp') n=Math.min(5,n+1);
+      else if(event.key==='ArrowLeft'||event.key==='ArrowDown') n=Math.max(1,n-1);
+      else if(event.key==='Home') n=1;
+      else if(event.key==='End') n=5;
+      else if(event.key===' '||event.key==='Enter'){event.preventDefault();applyRating(n);return;}
+      else return;
+      event.preventDefault();applyRating(n);
+      const next=document.querySelector('#feedback-stars [data-rating="'+n+'"]');
+      if(next) next.focus();
+      return;
+    }
+    if(event.type==='click'){applyRating(star.dataset.rating);}
+  }
+  document.addEventListener('click',handle,true);
+  document.addEventListener('keydown',handle,true);
+})();</script>
 
 </body>
 </html>
