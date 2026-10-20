@@ -830,7 +830,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  function setStage(next){
   const previousStage=stage;
   runId++;const id=runId;clearTimers();stage=next;
-  if(previousStage!==next)sendWork(previousStage,next);
+  if(previousStage!==next&&previousStage<next)sendWork(previousStage,next);
 
   cards.forEach((card,i)=>{
    card.classList.remove('is-active','is-clearing','is-complete-stage','is-sending','is-receiving');
@@ -857,7 +857,17 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
     requestAnimationFrame(tick);
    }
   }
-  timer=setTimeout(()=>{if(id===runId)setStage((stage+1)%4)},reduce?durations[next]:durations[next]);
+  if(next===3){
+   timer=setTimeout(()=>{
+    if(id!==runId)return;
+    active.classList.remove('is-active');active.classList.add('is-complete-stage');
+    active.querySelector('.amm-stage-status').textContent='TRANSFER TO CONSIGNEE';
+    caption.textContent='The completed work is handed over to the client.';
+    timer=setTimeout(()=>{if(id===runId)setStage(0)},reduce?0:1100);
+   },reduce?durations[next]:durations[next]);
+  }else{
+   timer=setTimeout(()=>{if(id===runId)setStage(next+1)},reduce?durations[next]:durations[next]);
+  }
  }
  document.addEventListener('visibilitychange',()=>{if(document.hidden){clearTimers()}else{setStage(stage)}});
  setStage(0);
