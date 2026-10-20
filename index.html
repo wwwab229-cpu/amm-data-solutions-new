@@ -805,6 +805,19 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 @media(prefers-reduced-motion:reduce){#services .amm-stage.is-active::before{animation:none!important}}
 
 
+
+/* Live workflow fix: completed stages must remain readable, not fade to near-invisible. */
+#services .amm-stage.is-complete-stage .amm-window>*:not(.amm-waiting-state){visibility:visible!important;opacity:1!important;filter:none!important}
+#services .amm-stage.is-complete-stage .amm-window::before,
+#services .amm-stage.is-complete-stage .amm-window::after{opacity:.35!important;pointer-events:none!important}
+#services .amm-stage.is-complete-stage .amm-waiting-state{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+#services .amm-stage.is-active .amm-window>*:not(.amm-waiting-state){visibility:visible!important;opacity:1!important;filter:none!important}
+#services .amm-stage.is-active .amm-waiting-state{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+@media(prefers-reduced-motion:reduce){
+ #services .amm-stage.is-active .amm-window,
+ #services .amm-stage.is-active::before{animation:none!important}
+}
+
 /* Reliable service detail modal visibility and responsive live-demo layout */
 .amm-service-overlay{display:flex!important;position:fixed!important;inset:0!important;z-index:2147483000!important;align-items:center!important;justify-content:center!important;opacity:0;visibility:hidden;pointer-events:none}
 .amm-service-overlay.is-open{display:flex!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important}
