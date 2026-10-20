@@ -710,8 +710,8 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 .amm-service-card:hover,.amm-service-card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 34px rgba(35,24,74,.13)!important;border-color:#c8b9ff!important;outline:none}
 .amm-service-overlay{position:fixed;inset:0;z-index:9999;background:rgba(17,13,34,.72);backdrop-filter:blur(9px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease}
 .amm-service-overlay.is-open{opacity:1;visibility:visible}
-.amm-service-dialog{width:min(900px,100%);height:min(720px,88vh);perspective:1400px;position:relative;opacity:0;transform:translate(var(--origin-x,0px),var(--origin-y,0px)) scale(var(--origin-scale,.2));transition:transform .42s cubic-bezier(.2,.75,.25,1),opacity .24s ease}
-.amm-service-dialog.is-expanded{opacity:1;transform:translate(0,0) scale(1)}
+.amm-service-dialog{position:fixed;left:var(--start-left,50%);top:var(--start-top,50%);width:var(--start-width, min(900px,calc(100vw - 40px)));height:var(--start-height,min(720px,88vh));perspective:1400px;opacity:0;transform:translate(0,0);transform-origin:top left;transition:left .48s cubic-bezier(.2,.75,.25,1),top .48s cubic-bezier(.2,.75,.25,1),width .48s cubic-bezier(.2,.75,.25,1),height .48s cubic-bezier(.2,.75,.25,1),opacity .18s ease}
+.amm-service-dialog.is-expanded{left:50%;top:50%;width:min(900px,calc(100vw - 40px));height:min(720px,88vh);opacity:1;transform:translate(-50%,-50%)}
 .amm-service-flipper{position:relative;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.75,.25,1);min-height:480px}
 .amm-service-overlay.is-flipped .amm-service-flipper{transform:rotateY(180deg)}
 .amm-service-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;overflow:auto;background:#fff;border:1px solid #e8e4f4;box-shadow:0 30px 100px rgba(0,0,0,.25)}
@@ -1086,10 +1086,10 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  let previousFocus=null,sourceCard=null,sourceRect=null,closeTimer=null,openTimer=null;
  function setOrigin(rect){
   if(!rect)return;
-  const scale=Math.min(rect.width/Math.max(dialog.offsetWidth,1),rect.height/Math.max(dialog.offsetHeight,1));
-  dialog.style.setProperty('--origin-x',(rect.left+rect.width/2-window.innerWidth/2)+'px');
-  dialog.style.setProperty('--origin-y',(rect.top+rect.height/2-window.innerHeight/2)+'px');
-  dialog.style.setProperty('--origin-scale',String(Math.max(.08,Math.min(scale,1))));
+  dialog.style.setProperty('--start-left',rect.left+'px');
+  dialog.style.setProperty('--start-top',rect.top+'px');
+  dialog.style.setProperty('--start-width',rect.width+'px');
+  dialog.style.setProperty('--start-height',rect.height+'px');
  }
  function openService(i,card){
   const s=data[i];if(!s)return;
@@ -1119,7 +1119,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  close.addEventListener('click',closeService);
  overlay.addEventListener('click',e=>{if(e.target===overlay)closeService()});
  document.addEventListener('keydown',e=>{if(!overlay.classList.contains('is-open'))return;if(e.key==='Escape')closeService()});
- window.addEventListener('resize',()=>{if(overlay.classList.contains('is-open')&&sourceRect){/* Keep expanded dialog centered while open. */dialog.style.setProperty('--origin-x','0px');dialog.style.setProperty('--origin-y','0px');dialog.style.setProperty('--origin-scale','1')}});
+ window.addEventListener('resize',()=>{if(overlay.classList.contains('is-open')&&sourceRect){/* Keep expanded dialog centered while open. */dialog.style.setProperty('--start-left','50%');dialog.style.setProperty('--start-top','50%');dialog.style.setProperty('--start-width','min(900px,calc(100vw - 40px))');dialog.style.setProperty('--start-height','min(720px,88vh)')}});
 })();
 </script>
 </body>
