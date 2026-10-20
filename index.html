@@ -589,6 +589,9 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 #services .amm-stage.is-active .amm-window{border:2px solid var(--stage-accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--stage-accent) 15%,transparent),0 0 22px color-mix(in srgb,var(--stage-accent) 42%,transparent)!important;animation:ammQuickBorderPulse .8s ease-in-out infinite alternate!important}
 #services .amm-stage.is-sending .amm-window{box-shadow:0 0 0 4px color-mix(in srgb,var(--stage-accent) 18%,transparent),0 0 28px color-mix(in srgb,var(--stage-accent) 55%,transparent)!important}
 #services .amm-stage.is-receiving .amm-window{animation:ammReceiveGlow .55s ease-out 1!important}
+#services .amm-stage.is-receiving{animation:ammBoxShake .42s ease-in-out 1!important;transform-origin:center}
+@keyframes ammBoxShake{0%,100%{transform:translateX(0)}18%{transform:translateX(-3px)}36%{transform:translateX(3px)}54%{transform:translateX(-2px)}72%{transform:translateX(2px)}90%{transform:translateX(-1px)}}
+@media(prefers-reduced-motion:reduce){#services .amm-stage.is-receiving{animation:none!important}}
 @keyframes ammQuickBorderPulse{from{box-shadow:0 0 0 2px color-mix(in srgb,var(--stage-accent) 10%,transparent),0 0 9px color-mix(in srgb,var(--stage-accent) 28%,transparent)}to{box-shadow:0 0 0 5px color-mix(in srgb,var(--stage-accent) 24%,transparent),0 0 25px color-mix(in srgb,var(--stage-accent) 62%,transparent)}}
 @keyframes ammReceiveGlow{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--stage-accent) 0%,transparent)}45%{box-shadow:0 0 0 6px color-mix(in srgb,var(--stage-accent) 25%,transparent),0 0 28px color-mix(in srgb,var(--stage-accent) 55%,transparent)}100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--stage-accent) 0%,transparent)}}
 #services .amm-transfer-packet{position:absolute;z-index:20;left:0;top:0;width:17px;height:17px;border:2px solid white;border-radius:50%;pointer-events:none;background:var(--packet-color,#7653e8);box-shadow:0 0 0 5px color-mix(in srgb,var(--packet-color,#7653e8) 18%,transparent),0 0 22px 8px color-mix(in srgb,var(--packet-color,#7653e8) 70%,transparent);transform:translate(calc(var(--packet-x) - 50%),calc(var(--packet-y) - 50%));animation:ammTransferFlight .72s cubic-bezier(.2,.75,.25,1) forwards}
@@ -869,7 +872,16 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
    if(i<next)card.classList.add('is-complete-stage');
    card.querySelector('.amm-stage-status').textContent=i===next?'WORKING':i<next?(i===3?'TRANSFER TO CONSIGNEE':'TRANSFERRED'): 'WAITING FOR TASK';
   });
-  if(shouldTransfer)sendWork(previousStage,next);
+  if(shouldTransfer){
+   sendWork(previousStage,next);
+   if(window.matchMedia('(max-width: 600px)').matches){
+    const workflow=document.querySelector('#services .amm-workflow');
+    const rect=workflow?.getBoundingClientRect();
+    if(rect&&rect.bottom>0&&rect.top<window.innerHeight){
+     setTimeout(()=>{if(id===runId)cards[next]?.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center',inline:'nearest'})},180);
+    }
+   }
+  }
   const active=cards[next];active.classList.add('is-active');
   caption.textContent=captions[next];
   progress.style.width=((next+1)*25)+'%';
