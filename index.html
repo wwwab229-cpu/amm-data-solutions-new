@@ -169,6 +169,19 @@ button,a,input,textarea{touch-action:manipulation}
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 
+
+/* Feedback form: accessible, lightweight front-end preview */
+.feedback-star{width:44px;height:44px;border:1px solid #ded8f3;border-radius:13px;background:#fff;color:#c9c4d5;font-size:1.45rem;transition:color .15s,background .15s,border-color .15s}
+.feedback-star[aria-checked="true"],.feedback-star.is-filled{color:#5B2EE8;background:#f1edff;border-color:#5B2EE8}
+.feedback-star:focus-visible{outline:3px solid #FFD83D;outline-offset:2px}
+#feedback-panel input:not([type=checkbox]),#feedback-panel textarea{width:100%;min-width:0}
+#feedback-panel input[type=checkbox]{accent-color:#5B2EE8}
+#feedback-panel .err{margin-top:4px}
+.feedback-pending{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;background:#fff7d6;color:#6d5700;font-size:.72rem;font-weight:700}
+.feedback-preview-stars{color:#5B2EE8;letter-spacing:2px}
+@media(max-width:767px){#feedback-panel{padding:20px}.feedback-star{width:42px;height:42px}}
+@media(prefers-reduced-motion:reduce){.feedback-star{transition:none}}
+
 /* AMM premium workflow: quiet motion, editorial shapes, clear visual storytelling */
 .amm-demo-label{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:11px 15px;border:1px solid #5b2ee81c;border-radius:999px;background:#fff;color:#585d78;font-size:.68rem;font-weight:800;letter-spacing:.09em;white-space:nowrap}
 .amm-live-dot{width:7px;height:7px;border-radius:50%;background:#55b98a;box-shadow:0 0 0 4px #55b98a1a}
@@ -897,11 +910,26 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 <h2 class="relative">Need a Solution for Your Business?</h2><p class="mt-3 opacity-80 relative">Tell us what you want to improve in your business. We’ll help you choose the right service, tool, or digital solution for your needs.</p>
 <a href="#contact" class="btn btn-l mt-7 relative">Get in Touch →</a></div></div></section>
 
-<!-- 10. TESTIMONIALS: PLACEHOLDERS, replace with real reviews -->
-<section style="padding-top:0"><div class="wrap max-w-3xl"><h2 class="mb-6 text-center">Kind words</h2>
-<div class="card p-8 text-center"><div id="tq" aria-live="polite" style="transition:opacity .65s ease;opacity:1"></div>
-<div class="flex justify-center gap-3 mt-6"><button id="tp" class="btn btn-o" aria-label="Previous review">&larr;</button><button id="tn" class="btn btn-o" aria-label="Next review">&rarr;</button></div>
-<p class="text-xs mt-4" style="color:var(--muted)">Illustrative examples — replace with verified client feedback before publishing as testimonials.</p></div></div></section>
+<!-- 10. FEEDBACK: front-end preview; backend moderation will be connected later -->
+<section id="feedback" style="padding-top:0"><div class="wrap max-w-3xl"><div class="text-center mb-6"><p class="text-xs font-bold tracking-widest mb-3" style="color:var(--primary)">YOUR VOICE MATTERS</p><h2>Kind words</h2><p class="mt-3" style="color:var(--muted)">Share your experience with AMM Data Solutions.</p></div>
+<div class="card p-7 md:p-9 text-center"><div id="tq" aria-live="polite" style="transition:opacity .35s ease;opacity:1"></div>
+<div class="flex justify-center gap-3 mt-6"><button id="tp" class="btn btn-o" aria-label="Previous review">&larr; Previous</button><button id="tn" class="btn btn-o" aria-label="Next review">Next &rarr;</button></div>
+<div class="mt-7 pt-6" style="border-top:1px solid #14172b12"><p class="text-sm mb-4" style="color:var(--muted)">Worked with us? Tell us how it went.</p><button type="button" id="open-feedback" class="btn btn-p">Share Your Feedback <span aria-hidden="true">↗</span></button></div>
+<p class="text-xs mt-4" style="color:var(--muted)">Feedback submitted in this preview is saved only in this browser. Public display and approval will be enabled after backend setup.</p></div>
+<div id="feedback-panel" class="card p-6 md:p-8 mt-5 hidden" aria-labelledby="feedback-title"><div class="flex items-start justify-between gap-4 mb-6"><div><h3 id="feedback-title" class="text-xl font-extrabold">Share your experience</h3><p class="text-sm mt-2" style="color:var(--muted)">Your feedback helps us improve.</p></div><button type="button" id="close-feedback" class="btn btn-o" aria-label="Close feedback form">✕</button></div>
+<form id="feedback-form" class="space-y-4" novalidate>
+<div><label for="feedback-name" class="block text-sm font-semibold mb-2">Your name *</label><input id="feedback-name" name="name" autocomplete="name" maxlength="80" required placeholder="Enter your name"><p class="err" id="feedback-name-error"></p></div>
+<div><label for="feedback-business" class="block text-sm font-semibold mb-2">Business / role <span class="font-normal" style="color:var(--muted)">(optional)</span></label><input id="feedback-business" name="business" maxlength="100" placeholder="e.g. Shop owner"></div>
+<fieldset><legend class="block text-sm font-semibold mb-2">Your rating *</legend><div id="feedback-stars" class="flex flex-wrap gap-2" role="radiogroup" aria-label="Rate your experience">
+<button type="button" class="feedback-star" data-rating="1" role="radio" aria-checked="false" aria-label="1 star" title="1 star">★</button><button type="button" class="feedback-star" data-rating="2" role="radio" aria-checked="false" aria-label="2 stars" title="2 stars">★</button><button type="button" class="feedback-star" data-rating="3" role="radio" aria-checked="false" aria-label="3 stars" title="3 stars">★</button><button type="button" class="feedback-star" data-rating="4" role="radio" aria-checked="false" aria-label="4 stars" title="4 stars">★</button><button type="button" class="feedback-star" data-rating="5" role="radio" aria-checked="false" aria-label="5 stars" title="5 stars">★</button>
+</div><p id="feedback-rating-label" class="text-sm mt-2" style="color:var(--muted)">Choose a rating from 1 to 5.</p><p class="err" id="feedback-rating-error"></p></fieldset>
+<div><label for="feedback-review" class="block text-sm font-semibold mb-2">Your feedback *</label><textarea id="feedback-review" name="review" rows="4" maxlength="1000" required placeholder="What went well, and what could we improve?"></textarea><div class="flex justify-between gap-3 text-xs mt-2" style="color:var(--muted)"><span>10–1,000 characters</span><span id="feedback-count">0 / 1000</span></div><p class="err" id="feedback-review-error"></p></div>
+<label class="flex items-start gap-3 text-sm" style="color:var(--muted)"><input id="feedback-consent" type="checkbox" required style="width:18px;height:18px;flex:0 0 18px;margin-top:2px"><span>I confirm this feedback reflects my own experience and understand that public display will require AMM review.</span></label>
+<p class="err" id="feedback-consent-error"></p>
+<button class="btn btn-p w-full justify-center" type="submit">Submit Feedback</button><p id="feedback-status" class="text-sm" role="status" aria-live="polite"></p>
+</form></div>
+<div id="feedback-preview" class="hidden card mt-5 p-6" aria-live="polite"></div>
+</div></section>
 
 <!-- 11. FAQ -->
 <section id="faq" style="padding-top:0"><div class="wrap max-w-3xl"><h2 class="mb-6">Questions</h2><div class="faq space-y-3">
@@ -986,13 +1014,52 @@ const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.targ
 $$('.rv').forEach(e=>io.observe(e));
 const co=new IntersectionObserver(es=>es.forEach(x=>{if(!x.isIntersecting)return;const el=x.target,t=+el.dataset.c;let v=0;const s=setInterval(()=>{v+=Math.ceil(t/30);if(v>=t){v=t;clearInterval(s)}el.textContent=v},35);co.unobserve(el)}),{threshold:.5});
 $$('[data-c]').forEach(e=>co.observe(e));
-// testimonials: slow auto-advance with a gentle fade; pause while hovered or focused
-const T=[["Ayesha K.","Shop owner, Karachi","Replies that used to take hours now take minutes, and I still approve everything."],["Bilal R.","Farm supervisor, Punjab","The app explains things in simple Urdu. Our team actually uses it."],["Sana M.","Operations lead","Our Google Sheets reports finally make sense at a glance."]];let ti=0,testimonialTimer;
-function showT(){const box=$('#tq'),t=T[ti];box.style.opacity='0';setTimeout(()=>{box.innerHTML=`<p class="f text-xl md:text-2xl font-bold">&ldquo;${t[2]}&rdquo;</p><p class="mt-4 font-semibold">${t[0]}</p><p class="text-sm" style="color:var(--muted)">${t[1]}</p>`;box.style.opacity='1'},320)}
-function nextT(){ti=(ti+1)%T.length;showT()}
-function resetTestimonialTimer(){clearInterval(testimonialTimer);testimonialTimer=setInterval(nextT,7000)}
-$('#tn').onclick=()=>{nextT();resetTestimonialTimer()};$('#tp').onclick=()=>{ti=(ti+T.length-1)%T.length;showT();resetTestimonialTimer()};
-const testimonialCard=$('#tq').parentElement;testimonialCard.addEventListener('mouseenter',()=>clearInterval(testimonialTimer));testimonialCard.addEventListener('mouseleave',resetTestimonialTimer);testimonialCard.addEventListener('focusin',()=>clearInterval(testimonialTimer));testimonialCard.addEventListener('focusout',resetTestimonialTimer);showT();resetTestimonialTimer();
+// Feedback UI: clearly marked local-only preview until a backend is connected.
+const T=[];let ti=0,testimonialTimer;
+const tq=$('#tq');
+function renderT(){
+ if(!tq)return;
+ if(!T.length){tq.innerHTML='<div class="py-4"><div class="mx-auto mb-4 grid place-items-center rounded-2xl" style="width:54px;height:54px;background:#f1edff;color:#5b2ee8;font-size:1.4rem" aria-hidden="true">★</div><p class="f text-xl md:text-2xl font-bold">Your feedback could be featured here.</p><p class="mt-3 text-sm" style="color:var(--muted)">We are getting ready to share verified customer experiences.</p></div>';$('#tp').disabled=true;$('#tn').disabled=true;return;}
+ const t=T[ti];tq.style.opacity='0';setTimeout(()=>{tq.replaceChildren();
+ const badge=document.createElement('span');badge.className='feedback-pending';badge.textContent='Preview · Not published';tq.appendChild(badge);
+ const stars=document.createElement('p');stars.className='feedback-preview-stars mt-4';stars.textContent='★'.repeat(t.rating)+'☆'.repeat(5-t.rating);stars.setAttribute('aria-label',t.rating+' out of 5 stars');tq.appendChild(stars);
+ const quote=document.createElement('p');quote.className='f text-xl md:text-2xl font-bold mt-4';quote.textContent='“'+t.review+'”';tq.appendChild(quote);
+ const name=document.createElement('p');name.className='mt-4 font-semibold';name.textContent=t.name;tq.appendChild(name);
+ if(t.business){const business=document.createElement('p');business.className='text-sm';business.style.color='var(--muted)';business.textContent=t.business;tq.appendChild(business);}
+ const note=document.createElement('p');note.className='text-xs mt-4';note.style.color='var(--muted)';note.textContent='This local preview is not public and has not been approved.';tq.appendChild(note);
+ tq.style.opacity='1';$('#tp').disabled=T.length<2;$('#tn').disabled=T.length<2;
+ },180);
+}
+function nextT(){if(T.length<2)return;ti=(ti+1)%T.length;renderT()}
+$('#tn').onclick=nextT;$('#tp').onclick=()=>{if(T.length<2)return;ti=(ti+T.length-1)%T.length;renderT()};
+renderT();
+const openFeedback=$('#open-feedback'),feedbackPanel=$('#feedback-panel'),feedbackForm=$('#feedback-form');
+openFeedback.onclick=()=>{feedbackPanel.classList.remove('hidden');$('#feedback-status').textContent='';$('#feedback-name').focus();feedbackPanel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});};
+$('#close-feedback').onclick=()=>{feedbackPanel.classList.add('hidden');openFeedback.focus()};
+let chosenRating=0;
+const ratingNames=['','Poor','Fair','Good','Very good','Excellent'];
+const starButtons=$('.feedback-star');
+function setRating(n){chosenRating=n;starButtons.forEach(b=>{const v=Number(b.dataset.rating);b.setAttribute('aria-checked',String(v===n));b.classList.toggle('is-filled',v<=n)});$('#feedback-rating-label').textContent=n? n+' out of 5 — '+ratingNames[n]+'.':'Choose a rating from 1 to 5.';$('#feedback-rating-error').textContent='';}
+starButtons.forEach((b,i)=>{b.onclick=()=>setRating(Number(b.dataset.rating));b.onkeydown=e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const d=e.key==='ArrowRight'?1:-1;const next=Math.min(5,Math.max(1,(chosenRating||Number(b.dataset.rating))+d));setRating(next);starButtons[next-1].focus();}}});
+$('#feedback-review').addEventListener('input',e=>$('#feedback-count').textContent=e.target.value.length+' / 1000');
+feedbackForm.onsubmit=e=>{
+ e.preventDefault();
+ const name=$('#feedback-name').value.trim(),business=$('#feedback-business').value.trim(),review=$('#feedback-review').value.trim(),consent=$('#feedback-consent').checked;
+ $('#feedback-name-error').textContent=name?'':'Please enter your name.';
+ $('#feedback-rating-error').textContent=chosenRating?'':'Please choose a star rating.';
+ $('#feedback-review-error').textContent=review.length>=10?'':'Please write at least 10 characters.';
+ $('#feedback-consent-error').textContent=consent?'':'Please confirm before submitting.';
+ $('#feedback-status').textContent='';
+ if(!name||!chosenRating||review.length<10||!consent)return;
+ const item={name,business,rating:chosenRating,review};
+ T.push(item);ti=T.length-1;renderT();
+ $('#feedback-status').textContent='Thanks for sharing your feedback. This is a local preview only; it has not been sent to AMM or published on the website.';
+ feedbackForm.reset();chosenRating=0;setRating(0);$('#feedback-count').textContent='0 / 1000';
+ // The local preview is deliberately not persisted or treated as a real public review.
+ $('#feedback-preview').classList.remove('hidden');
+ $('#feedback-preview').innerHTML='<p class="font-bold">Feedback preview created</p><p class="text-sm mt-2" style="color:var(--muted)">Your review appears in the Kind words preview in this browser session only. It is not sent to AMM and will disappear when the page is refreshed.</p>';
+ $('#feedback-preview').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});
+};
 // FAQ
 $$('.faq button').forEach(b=>b.onclick=()=>{const c=b.parentElement,o=c.classList.toggle('open');b.setAttribute('aria-expanded',o);b.lastChild.textContent=o?'\u2212':'+'});
 // form validation; connect to Formspree by replacing YOUR_ID in the form action
