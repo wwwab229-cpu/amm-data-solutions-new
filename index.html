@@ -1294,12 +1294,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(!overlay.classList.contains('is-open'))return;
   if(openFrame)cancelAnimationFrame(openFrame);
   clearTimeout(closeTimer);
-  overlay.classList.add('is-closing');
-  overlay.style.transition='opacity 150ms ease';
-  dialog.style.transition='opacity 150ms ease';
-  dialog.style.transform='translate(-50%,-50%) scale(1,1)';
-  dialog.style.opacity='0';
-  closeTimer=setTimeout(finishClose,160);
+  finishClose();
  }
  function finishClose(){
   clearTimeout(closeTimer);
@@ -1309,7 +1304,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   dialog.style.transition='none';
   dialog.style.transform='translate(-50%,-50%) scale(1,1)';
   dialog.style.opacity='1';
-  if(previousFocus&&previousFocus.isConnected)previousFocus.focus();
+  if(previousFocus&&previousFocus.isConnected){try{previousFocus.focus({preventScroll:true})}catch(e){previousFocus.focus()}}
   sourceCard=null;
  }
  serviceCards.forEach(card=>card.addEventListener('click',()=>openService(Number(card.dataset.serviceIndex),card)));
