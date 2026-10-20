@@ -795,7 +795,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  const order='Hi AMM! We need a smarter way to manage customer orders and keep everything organised. Can you help us build a solution?';
  const captions=['A customer is writing a request…','The request is received. The AMM team starts planning.','The solution is taking shape, step by step…','The finished work is ready for the customer.'];
  const labels=['NEW REQUEST','TEAM BRIEF','IN THE MAKING','DELIVERED'];
- const durations=[10500,7200,9300,7600];
+ const durations=[6900,5000,6400,5200];
  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  let stage=0,runId=0,timer=null,typingTimer=null;
  function clearTimers(){if(timer)clearTimeout(timer);if(typingTimer)clearTimeout(typingTimer);timer=null;typingTimer=null}
@@ -833,9 +833,9 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(previousStage!==next)sendWork(previousStage,next);
 
   cards.forEach((card,i)=>{
-   card.classList.remove('is-active','is-clearing');
-   if(i<next){card.classList.add('is-clearing')}
-   card.querySelector('.amm-stage-status').textContent=i===next?'WORKING':i<next?'COMPLETE':labels[i];
+   card.classList.remove('is-active','is-clearing','is-complete-stage','is-sending','is-receiving');
+   if(i<next)card.classList.add('is-complete-stage');
+   card.querySelector('.amm-stage-status').textContent=i===next?'WORKING':i<next?(i===3?'TRANSFER TO CONSIGNEE':'TRANSFERRED'): 'WAITING FOR TASK';
   });
   const active=cards[next];active.classList.add('is-active');
   caption.textContent=captions[next];
@@ -852,7 +852,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
    percent.textContent='0%';
    if(reduce)percent.textContent='100%';
    else{
-    const start=performance.now(),duration=7900;
+    const start=performance.now(),duration=5000;
     const tick=(now)=>{if(id!==runId||stage!==2)return;const p=Math.min(1,(now-start)/duration);percent.textContent=Math.round(p*100)+'%';if(p<1)requestAnimationFrame(tick)};
     requestAnimationFrame(tick);
    }
