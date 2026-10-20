@@ -710,6 +710,8 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 .amm-service-card:hover,.amm-service-card:focus-visible{transform:translateY(-3px);box-shadow:0 14px 34px rgba(35,24,74,.13)!important;border-color:#c8b9ff!important;outline:none}
 .amm-service-overlay{position:fixed;inset:0;z-index:9999;background:rgba(17,13,34,.72);backdrop-filter:blur(9px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease}
 .amm-service-overlay.is-open{opacity:1;visibility:visible}
+/* Closing: keep the overlay completely still; only the card travels back. */
+.amm-service-overlay.is-closing{transition:none!important}
 .amm-service-dialog{position:fixed;left:50%;top:50%;width:min(900px,calc(100vw - 40px));height:min(720px,88vh);perspective:1400px;opacity:1;transform:translate(-50%,-50%);transform-origin:center center;will-change:transform;}
 .amm-service-flipper{position:relative;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.75,.25,1);min-height:480px}
 .amm-service-overlay.is-flipped .amm-service-flipper{transform:rotateY(180deg)}
@@ -1104,7 +1106,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(!fillDetails(i))return;
   clearTimeout(closeTimer);clearTimeout(openTimer);if(animation)animation.cancel();
   previousFocus=document.activeElement;sourceCard=card;sourceRect=card.getBoundingClientRect();
-  const rect=sourceRect;overlay.classList.remove('is-flipped');overlay.classList.add('is-open');document.body.style.overflow='hidden';
+  const rect=sourceRect;overlay.classList.remove('is-flipped','is-closing');overlay.classList.add('is-open');document.body.style.overflow='hidden';
   close.focus();
   if(reduce()){dialog.style.transform='translate(-50%,-50%)';dialog.style.opacity='1';overlay.classList.add('is-flipped');return;}
   const tr=getTransformFromCard(rect);
@@ -1117,6 +1119,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(animation)animation.cancel();
   const rect=sourceCard&&sourceCard.isConnected?sourceCard.getBoundingClientRect():sourceRect;
   if(!reduce()&&rect){
+   overlay.classList.add('is-closing');
    const tr=getTransformFromCard(rect);
    /* Keep the details face visible during the return animation; do not run a second flip. */
    animation=dialog.animate([{transform:tr.to,opacity:1},{transform:tr.from,opacity:1}],{duration:420,easing:'cubic-bezier(.4,0,.8,.3)',fill:'none'});
@@ -1125,7 +1128,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  }
  function finishClose(){
   clearTimeout(closeTimer);
-  overlay.classList.remove('is-open','is-flipped');document.body.style.overflow='';
+  overlay.classList.remove('is-open','is-flipped','is-closing');document.body.style.overflow='';
   if(animation){animation.cancel();animation=null;}
   if(previousFocus&&previousFocus.isConnected)previousFocus.focus();
   sourceCard=null;sourceRect=null;
