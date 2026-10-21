@@ -1273,6 +1273,7 @@ feedbackForm.onsubmit=async e=>{
  const status=$('#feedback-status');status.textContent='';
  if(!name||!chosenRating||review.length<10||!consent){
   const firstInvalid=!name?$('#feedback-name'):!chosenRating?$('#feedback-stars .feedback-star'):review.length<10?$('#feedback-review'):$('#feedback-consent');
+  status.textContent=!name?'Please enter your name to continue.':!chosenRating?'Please select a star rating to continue.':review.length<10?'Please choose a feedback suggestion or enter at least 10 characters.':'Please confirm the consent checkbox before submitting.';
   firstInvalid?.focus?.();
   return;
  }
@@ -1284,7 +1285,13 @@ feedbackForm.onsubmit=async e=>{
    headers:{'Content-Type':'application/json','apikey':'sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk','Authorization':'Bearer sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk','Prefer':'return=minimal'},
    body:JSON.stringify({submission_type:'review',display_name:name,business:business||null,rating:chosenRating,message:review,status:'pending'})
   });
-  if(!response.ok){if(response.status===400)throw new Error('The database rejected this submission. Please make sure your message contains at least 10 characters and try again.');if(response.status===401||response.status===403)throw new Error('The feedback service is temporarily unavailable. Please try again later.');throw new Error('Your feedback could not be sent right now. Please try again.');}
+  if(!response.ok){
+   const detail=await response.text().catch(()=> '');
+   console.error('AMM feedback API response:',response.status,detail);
+   if(response.status===400)throw new Error('The database rejected this submission. Please check your rating and ensure the feedback message has at least 10 characters.');
+   if(response.status===401||response.status===403)throw new Error('The feedback service denied this request. Please try again later.');
+   throw new Error('Your feedback could not be saved (HTTP '+response.status+'). Please try again.');
+  }
   status.textContent='Thank you! Your review has been received and will be checked by AMM Data Solutions before it appears publicly.';
   feedbackForm.reset();chosenRating=0;setRating(0);$('#feedback-count').textContent='0 / 250';
   feedbackPills.forEach(p=>p.setAttribute('aria-pressed','false'));
