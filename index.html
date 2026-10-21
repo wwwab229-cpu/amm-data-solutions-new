@@ -1597,11 +1597,11 @@ window.addEventListener('load', () => {
   const rating=Number(stars.find(s=>s.getAttribute('aria-checked')==='true')?.dataset.rating||window.ammFeedbackRating||0);
   setError('feedback-name-error',name?'':'Please enter your name.');
   setError('feedback-rating-error',rating?'':'Please choose a star rating.');
-  setError('feedback-review-error',message.length>=10?'':'Please choose a suggestion or enter at least 10 characters.');
+  setError('feedback-review-error','');
   setError('feedback-consent-error',consent?'':'Please confirm before submitting.');
-  if(!name||!rating||message.length<10||!consent){
-   status.textContent=!name?'Please enter your name to continue.':!rating?'Please select a star rating to continue.':message.length<10?'Please choose a feedback suggestion or enter at least 10 characters.':'Please confirm the consent checkbox before submitting.';
-   const invalid=!name?byId('feedback-name'):!rating?byId('feedback-stars'):message.length<10?byId('feedback-review'):byId('feedback-consent');
+  if(!name||!rating||!consent){
+   status.textContent=!name?'Please enter your name to continue.':!rating?'Please select a star rating to continue.':'Please confirm the consent checkbox before submitting.';
+   const invalid=!name?byId('feedback-name'):!rating?byId('feedback-stars'):byId('feedback-consent');
    invalid?.focus?.({preventScroll:true});
    return;
   }
@@ -1616,6 +1616,7 @@ window.addEventListener('load', () => {
     headers:{
      'Content-Type':'application/json',
      'apikey':'sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk',
+     'Authorization':'Bearer sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk',
      'Prefer':'return=minimal'
     },
     body:JSON.stringify({submission_type:'review',display_name:name,business:business||null,rating:rating,message:message,status:'pending'}),
@@ -1636,7 +1637,11 @@ window.addEventListener('load', () => {
    const count=byId('feedback-count');if(count)count.textContent='0 / 250';
    pills.forEach(p=>p.setAttribute('aria-pressed','false'));
    byId('feedback-preview')?.classList.add('hidden');
-   status.textContent='Thank you! Your review has been received and will be checked by AMM Data Solutions before it appears publicly.';
+   status.textContent='✅ Thank you for your words! Your feedback has been received. AMM Data Solutions will review it before it appears publicly.';
+   status.style.color='#166534';
+   status.style.fontWeight='700';
+   status.setAttribute('tabindex','-1');
+   status.focus({preventScroll:true});
   }catch(error){
    console.error('AMM feedback submission failed:',error);
    status.textContent=error?.name==='AbortError'
