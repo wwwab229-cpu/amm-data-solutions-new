@@ -1194,8 +1194,20 @@ async function loadApprovedReviews(){
 }
 loadApprovedReviews();
 const openFeedback=$('#open-feedback'),feedbackPanel=$('#feedback-panel'),feedbackForm=$('#feedback-form');
-openFeedback.onclick=()=>{feedbackPanel.classList.remove('hidden');openFeedback.setAttribute('aria-expanded','true');$('#feedback-status').textContent='';feedbackPanel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});};
-$('#close-feedback').onclick=()=>{feedbackPanel.classList.add('hidden');openFeedback.setAttribute('aria-expanded','false');openFeedback.focus()};
+window.__ammFeedbackInteracting=false;
+openFeedback.onclick=()=>{
+ window.__ammFeedbackInteracting=true;
+ feedbackPanel.classList.remove('hidden');
+ openFeedback.setAttribute('aria-expanded','true');
+ $('#feedback-status').textContent='';
+ feedbackPanel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+};
+$('#close-feedback').onclick=()=>{
+ window.__ammFeedbackInteracting=false;
+ feedbackPanel.classList.add('hidden');
+ openFeedback.setAttribute('aria-expanded','false');
+ openFeedback.focus();
+};
 let chosenRating=0;
 const ratingNames=['','Poor','Fair','Good','Very good','Excellent'];
 const starButtons=$('#feedback-stars .feedback-star');
@@ -1242,6 +1254,8 @@ feedbackPills.forEach(pill=>pill.addEventListener('click',()=>{
 $('#feedback-review').addEventListener('input',e=>$('#feedback-count').textContent=e.target.value.length+' / 250');
 feedbackForm.onsubmit=async e=>{
  e.preventDefault();
+ e.stopPropagation();
+ window.__ammFeedbackInteracting=true;
  const name=$('#feedback-name').value.trim(),business=$('#feedback-business').value.trim(),typedReview=$('#feedback-review').value.trim(),consent=$('#feedback-consent').checked;
  const selectedPills=feedbackPills.filter(p=>p.getAttribute('aria-pressed')==='true').map(p=>p.textContent.trim());
  const review=[...selectedPills,typedReview].filter(Boolean).join(' — ');
@@ -1251,7 +1265,11 @@ feedbackForm.onsubmit=async e=>{
  $('#feedback-review-error').textContent=review?'':'Please choose a suggestion or write a short message.';
  $('#feedback-consent-error').textContent=consent?'':'Please confirm before submitting.';
  const status=$('#feedback-status');status.textContent='';
- if(!name||!chosenRating||!review||!consent)return;
+ if(!name||!chosenRating||!review||!consent){
+  const firstInvalid=!name?$('#feedback-name'):!chosenRating?$('#feedback-stars .feedback-star'):!review?$('#feedback-review'):$('#feedback-consent');
+  firstInvalid?.focus?.();
+  return;
+ }
  const submit=feedbackForm.querySelector('button[type="submit"]');
  submit.disabled=true;submit.setAttribute('aria-busy','true');status.textContent='Sending your feedback…';
  try{
@@ -1266,7 +1284,8 @@ feedbackForm.onsubmit=async e=>{
   feedbackPills.forEach(p=>p.setAttribute('aria-pressed','false'));
   $('#feedback-preview').classList.add('hidden');
  }catch(error){
-  status.textContent='We could not submit your review right now. Please try again in a moment or contact AMM Data Solutions by email.';
+  console.error('AMM feedback submission failed:',error);
+  status.textContent='Your feedback could not be sent. Please check your connection and try again. If the problem continues, contact ammdatasolutions229@gmail.com.';
  }
  finally{submit.disabled=false;submit.removeAttribute('aria-busy');}
 };
@@ -1337,8 +1356,8 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
    if(window.matchMedia('(max-width: 600px)').matches){
     const workflow=document.querySelector('#services .amm-workflow');
     const rect=workflow?.getBoundingClientRect();
-    if(rect&&rect.bottom>0&&rect.top<window.innerHeight){
-     setTimeout(()=>{if(id===runId)cards[next]?.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center',inline:'nearest'})},180);
+    if(rect&&rect.bottom>0&&rect.top<window.innerHeight&&!window.__ammFeedbackInteracting&&!document.getElementById('feedback-panel')?.contains(document.activeElement)){
+     setTimeout(()=>{if(id===runId&&!window.__ammFeedbackInteracting&&!document.getElementById('feedback-panel')?.contains(document.activeElement))cards[next]?.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center',inline:'nearest'})},180);
     }
    }
   }
@@ -1502,7 +1521,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
       if(status) status.textContent=i===next?'WORKING':i<next?'COMPLETED':'WAITING FOR TASK';
       card.querySelectorAll('[data-task]').forEach((row,j)=>row.classList.toggle('is-complete',i===1&&j<3));
     });
-    if(next!==previousStage && window.matchMedia('(max-width: 560px)').matches){
+    if(next!==previousStage && window.matchMedia('(max-width: 560px)').matches&&!window.__ammFeedbackInteracting&&!document.getElementById('feedback-panel')?.contains(document.activeElement)){
       cards[next].scrollIntoView({
         behavior:reduced?'auto':'smooth',
         block:'start'
