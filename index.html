@@ -1043,10 +1043,10 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 </details>
 <p class="mt-4 text-sm" style="color:var(--muted)">Prefer the form? Send your project details and inquiry below.</p>
 </div>
-<form id="cf" class="card p-6 space-y-3" novalidate action="https://formspree.io/f/YOUR_ID" method="POST">
-<label class="block text-sm font-semibold" for="n">Name</label><input id="n" name="name" autocomplete="name"><p class="err" id="en"></p>
-<label class="block text-sm font-semibold" for="e">Email</label><input id="e" name="email" type="email" autocomplete="email"><p class="err" id="ee"></p>
-<label class="block text-sm font-semibold" for="m">Message</label><textarea id="m" name="message" rows="4"></textarea><p class="err" id="em"></p>
+<form id="cf" class="card p-6 space-y-3" style="display:block;visibility:visible;opacity:1;position:relative;min-width:0;width:100%;align-self:start" novalidate action="https://formspree.io/f/YOUR_ID" method="POST">
+<label class="block text-sm font-semibold" for="n">Name</label><input id="n" name="name" autocomplete="name" placeholder="Your name" required class="w-full"><p class="err" id="en"></p>
+<label class="block text-sm font-semibold" for="e">Email</label><input id="e" name="email" type="email" autocomplete="email" placeholder="you@example.com" required class="w-full"><p class="err" id="ee"></p>
+<label class="block text-sm font-semibold" for="m">Message</label><textarea id="m" name="message" rows="4" placeholder="Tell us about your project..." required class="w-full"></textarea><p class="err" id="em"></p>
 <button class="btn btn-p w-full justify-center" type="submit">Send message</button><p id="ok" class="text-sm" role="status"></p></form>
 </div></section>
 </main>
