@@ -1578,12 +1578,14 @@ window.addEventListener('load', () => {
  const status=byId('feedback-status');
  const submit=form.querySelector('button[type="submit"]');
  const setError=(id,message)=>{const el=byId(id);if(el)el.textContent=message;};
+ let successMessageTimer=0;
  const stars=[...form.querySelectorAll('#feedback-stars .feedback-star')];
  const pills=[...form.querySelectorAll('#feedback-positive .feedback-pill, #feedback-improvements .feedback-pill')];
  form.addEventListener('submit',async function(event){
   event.preventDefault();
   event.stopPropagation();
   event.stopImmediatePropagation();
+  clearTimeout(successMessageTimer);
   window.__ammFeedbackInteracting=true;
   if(!status||!submit)return;
   status.setAttribute('role','status');
@@ -1637,11 +1639,12 @@ window.addEventListener('load', () => {
    const count=byId('feedback-count');if(count)count.textContent='0 / 250';
    pills.forEach(p=>p.setAttribute('aria-pressed','false'));
    byId('feedback-preview')?.classList.add('hidden');
-   status.textContent='✅ Thank you for your words! Your feedback has been received. AMM Data Solutions will review it before it appears publicly.';
+   status.textContent='Thank you for your feedback.';
    status.style.color='#166534';
    status.style.fontWeight='700';
    status.setAttribute('tabindex','-1');
    status.focus({preventScroll:true});
+   successMessageTimer=window.setTimeout(()=>{status.textContent='';status.style.color='';status.style.fontWeight='';status.removeAttribute('tabindex');},3000);
   }catch(error){
    console.error('AMM feedback submission failed:',error);
    status.textContent=error?.name==='AbortError'
