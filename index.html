@@ -1321,13 +1321,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   });
   if(shouldTransfer){
    sendWork(previousStage,next);
-   if(window.matchMedia('(max-width: 600px)').matches){
-    const workflow=document.querySelector('#services .amm-workflow');
-    const rect=workflow?.getBoundingClientRect();
-    if(rect&&rect.bottom>0&&rect.top<window.innerHeight&&!window.__ammFeedbackInteracting&&!document.getElementById('feedback-panel')?.contains(document.activeElement)){
-     setTimeout(()=>{if(id===runId&&!window.__ammFeedbackInteracting&&!document.getElementById('feedback-panel')?.contains(document.activeElement))cards[next]?.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center',inline:'nearest'})},180);
-    }
-   }
+   // Keep the page position stable on mobile; the demo advances without scrolling the website.
   }
   const active=cards[next];active.classList.add('is-active');
   caption.textContent=captions[next];
@@ -1489,12 +1483,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
       if(status) status.textContent=i===next?'WORKING':i<next?'COMPLETED':'WAITING FOR TASK';
       card.querySelectorAll('[data-task]').forEach((row,j)=>row.classList.toggle('is-complete',i===1&&j<3));
     });
-    if(next!==previousStage && window.matchMedia('(max-width: 560px)').matches&&!window.__ammFeedbackInteracting&&!document.getElementById('feedback-panel')?.contains(document.activeElement)){
-      cards[next].scrollIntoView({
-        behavior:reduced?'auto':'smooth',
-        block:'start'
-      });
-    }
+    // Deliberately do not scroll the page as the live demo changes stages.
     if(caption) caption.textContent=captions[next];
     if(progress) progress.style.width=((next+1)*25)+'%';
     if(count) count.textContent='STAGE 0'+(next+1)+' / 04';
