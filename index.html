@@ -1258,7 +1258,7 @@ feedbackPills.forEach(pill=>pill.addEventListener('click',()=>{
  $('#feedback-review-error').textContent='';
 }));
 $('#feedback-review').addEventListener('input',e=>$('#feedback-count').textContent=e.target.value.length+' / 250');
-feedbackForm.onsubmit=async e=>{
+feedbackForm.addEventListener('submit',async e=>{
  e.preventDefault();
  e.stopPropagation();
  e.stopImmediatePropagation();
@@ -1314,7 +1314,7 @@ feedbackForm.onsubmit=async e=>{
   preserveFeedbackPosition();
  }
  finally{submit.disabled=false;submit.removeAttribute('aria-busy');}
-};
+},true);
 // FAQ
 $$('.faq button').forEach(b=>b.onclick=()=>{const c=b.parentElement,o=c.classList.toggle('open');b.setAttribute('aria-expanded',o);b.lastChild.textContent=o?'\u2212':'+'});
 // form validation; connect to Formspree by replacing YOUR_ID in the form action
