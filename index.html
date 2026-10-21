@@ -1268,11 +1268,11 @@ feedbackForm.onsubmit=async e=>{
  $('#feedback-name-error').textContent=name?'':'Please enter your name.';
  chosenRating=chosenRating||Number(window.ammFeedbackRating)||0;
  $('#feedback-rating-error').textContent=chosenRating?'':'Please choose a star rating.';
- $('#feedback-review-error').textContent=review?'':'Please choose a suggestion or write a short message.';
+ $('#feedback-review-error').textContent=review.length>=10?'':'Please select a suggestion or enter at least 10 characters.';
  $('#feedback-consent-error').textContent=consent?'':'Please confirm before submitting.';
  const status=$('#feedback-status');status.textContent='';
- if(!name||!chosenRating||!review||!consent){
-  const firstInvalid=!name?$('#feedback-name'):!chosenRating?$('#feedback-stars .feedback-star'):!review?$('#feedback-review'):$('#feedback-consent');
+ if(!name||!chosenRating||review.length<10||!consent){
+  const firstInvalid=!name?$('#feedback-name'):!chosenRating?$('#feedback-stars .feedback-star'):review.length<10?$('#feedback-review'):$('#feedback-consent');
   firstInvalid?.focus?.();
   return;
  }
@@ -1284,7 +1284,7 @@ feedbackForm.onsubmit=async e=>{
    headers:{'Content-Type':'application/json','apikey':'sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk','Authorization':'Bearer sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk','Prefer':'return=minimal'},
    body:JSON.stringify({submission_type:'review',display_name:name,business:business||null,rating:chosenRating,message:review,status:'pending'})
   });
-  if(!response.ok)throw new Error('Submission failed: '+response.status);
+  if(!response.ok){if(response.status===400)throw new Error('The database rejected this submission. Please make sure your message contains at least 10 characters and try again.');if(response.status===401||response.status===403)throw new Error('The feedback service is temporarily unavailable. Please try again later.');throw new Error('Your feedback could not be sent right now. Please try again.');}
   status.textContent='Thank you! Your review has been received and will be checked by AMM Data Solutions before it appears publicly.';
   feedbackForm.reset();chosenRating=0;setRating(0);$('#feedback-count').textContent='0 / 250';
   feedbackPills.forEach(p=>p.setAttribute('aria-pressed','false'));
