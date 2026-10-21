@@ -190,7 +190,8 @@ button,a,input,textarea{touch-action:manipulation}
 .feedback-mood-angry{animation-delay:-3.6s}
 .feedback-mood-amazing{animation-delay:-5.4s}
 .feedback-mood-star{animation-delay:-7.2s}
-@keyframes ammFeedbackMoodSwap{0%,18%{opacity:1;transform:translateY(0) scale(1)}20%,100%{opacity:0;transform:translateY(-2px) scale(.97)}}
+.feedback-mood-thumbs{animation-delay:-8.1s}
+@keyframes ammFeedbackMoodSwap{0%,14%{opacity:1;transform:translateY(0) scale(1)}16%,100%{opacity:0;transform:translateY(-2px) scale(.97)}}
 @media(prefers-reduced-motion:reduce){.feedback-mood{animation:none;opacity:1;transform:none}.feedback-mood-touched,.feedback-mood-angry,.feedback-mood-amazing,.feedback-mood-star{display:none}}
 /* Feedback form: touch-friendly inline stars and cumulative yellow rating */
 #feedback-stars{align-items:center;gap:5px;position:relative;z-index:2;pointer-events:auto;touch-action:manipulation}
@@ -1139,7 +1140,7 @@ const T=[];let ti=0,testimonialTimer;
 const tq=$('#tq');
 function renderT(){
  if(!tq)return;
- if(!T.length){tq.innerHTML='<div class="py-4"><div class="feedback-mood-icon mx-auto mb-4 grid place-items-center rounded-2xl" style="width:64px;height:64px;background:#fff7d6;color:#5b2ee8" aria-label="A little smile, then a heartfelt face"><span class="feedback-mood feedback-mood-happy" aria-hidden="true">😊</span><span class="feedback-mood feedback-mood-touched" aria-hidden="true">🥹</span><span class="feedback-mood feedback-mood-angry" aria-hidden="true">😡</span><span class="feedback-mood feedback-mood-amazing" aria-hidden="true">🤩</span><span class="feedback-mood feedback-mood-star" aria-hidden="true">🌟</span></div><p class="f text-xl md:text-2xl font-bold">Your feedback could be featured here.</p><p class="mt-3 text-sm" style="color:var(--muted)">We are getting ready to share verified customer experiences.</p></div>';$('#tp').disabled=true;$('#tn').disabled=true;return;}
+ if(!T.length){tq.innerHTML='<div class="py-4"><div class="feedback-mood-icon mx-auto mb-4 grid place-items-center rounded-2xl" style="width:64px;height:64px;background:#fff7d6;color:#5b2ee8" aria-label="A little smile, then a heartfelt face"><span class="feedback-mood feedback-mood-happy" aria-hidden="true">😊</span><span class="feedback-mood feedback-mood-touched" aria-hidden="true">🥹</span><span class="feedback-mood feedback-mood-angry" aria-hidden="true">😡</span><span class="feedback-mood feedback-mood-amazing" aria-hidden="true">🤩</span><span class="feedback-mood feedback-mood-star" aria-hidden="true">🌟</span><span class="feedback-mood feedback-mood-thumbs" aria-hidden="true">👍🏼</span></div><p class="f text-xl md:text-2xl font-bold">Your feedback could be featured here.</p><p class="mt-3 text-sm" style="color:var(--muted)">We are getting ready to share verified customer experiences.</p></div>';$('#tp').disabled=true;$('#tn').disabled=true;return;}
  const t=T[ti];tq.style.opacity='0';setTimeout(()=>{tq.replaceChildren();
  const badge=document.createElement('span');badge.className='feedback-pending';badge.textContent='Preview · Not published';tq.appendChild(badge);
  const stars=document.createElement('p');stars.className='feedback-preview-stars mt-4';stars.textContent='★'.repeat(t.rating)+'☆'.repeat(5-t.rating);stars.setAttribute('aria-label',t.rating+' out of 5 stars');tq.appendChild(stars);
