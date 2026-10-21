@@ -43,9 +43,14 @@ section{padding:clamp(48px,8vw,96px) 0}
 .chip{border:1px solid #14172b1f;background:#fff;padding:8px 16px;border-radius:999px;font-weight:600;font-size:.9rem}
 .sp{position:absolute;color:var(--primary);animation:tw 3s ease-in-out infinite}
 @keyframes tw{50%{opacity:.3;transform:scale(.8) rotate(20deg)}}
-.faq button{width:100%;text-align:left;padding:20px 24px;font-weight:600;display:flex;justify-content:space-between;gap:12px}
-.faq .a{max-height:0;overflow:hidden;transition:max-height .3s;padding:0 24px;color:var(--muted)}
-.faq .open .a{max-height:200px;padding-bottom:20px}
+.faq details{overflow:hidden}
+.faq summary{width:100%;text-align:left;padding:20px 24px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;list-style:none;touch-action:manipulation}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary span{flex:0 0 auto;font-size:1.35rem;line-height:1;color:var(--primary);transition:transform .2s ease}
+.faq details[open] summary span{transform:rotate(45deg)}
+.faq .a{display:block;max-height:none;overflow:visible;padding:0 24px 20px;color:var(--muted);line-height:1.75}
+@media(max-width:640px){.faq summary{padding:18px 16px}.faq .a{padding:0 16px 18px}}
+@media(prefers-reduced-motion:reduce){.faq summary span{transition:none}}
 input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px solid #14172b26;background:#fff;font:inherit}
 .err{color:#b42318;font-size:.85rem;min-height:1.1em}
 .grain::after{content:"";position:absolute;inset:0;opacity:.05;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -1028,12 +1033,12 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 
 <!-- 11. FAQ -->
 <section id="faq" style="padding-top:0"><div class="wrap max-w-3xl"><h2 class="mb-3">Frequently Asked Questions</h2><p class="mb-6" style="color:var(--muted)">Learn more about AMM Data Solutions, AI automation, WhatsApp workflows and digital services for your business.</p><div class="faq space-y-3">
-<div class="card"><button aria-expanded="false">Do I need technical knowledge to use AI automation?<span>+</span></button><div class="a">No. AMM Data Solutions explains each solution in plain language and helps you understand how to use your AI automation or digital tool.</div></div>
-<div class="card"><button aria-expanded="false">How long does an AI automation or website project take?<span>+</span></button><div class="a">Many small tools take around 2 to 4 weeks after the discovery stage. The timeline depends on your requirements, integrations and project scope.</div></div>
-<div class="card"><button aria-expanded="false">Can WhatsApp AI automation send customer messages without approval?<span>+</span></button><div class="a">The WhatsApp assistant workflow described here drafts replies and waits for your approval before sending. Automation rules depend on the final setup you choose.</div></div>
-<div class="card"><button aria-expanded="false">Which languages does AMM Data Solutions support?<span>+</span></button><div class="a">AMM Data Solutions provides language support according to its service policies and the capabilities of the tools used for each project. Contact us to confirm language availability for your requirements.</div></div>
-<div class="card"><button aria-expanded="false">How much do AI automation and digital solutions cost?<span>+</span></button><div class="a">Pricing depends on the project scope, features, integrations and ongoing support needed. Share your requirements with AMM Data Solutions to request a clear estimate.</div></div>
-</div></div></section>
+<details class="card"><summary>Do I need technical knowledge to use AI automation?<span aria-hidden="true">+</span></summary><div class="a">No. AMM Data Solutions explains each solution in plain language and helps you understand how to use your AI automation or digital tool.</div></details>
+<details class="card"><summary>How long does an AI automation or website project take?<span aria-hidden="true">+</span></summary><div class="a">Many small tools take around 2 to 4 weeks after the discovery stage. The timeline depends on your requirements, integrations and project scope.</div></details>
+<details class="card"><summary>Can WhatsApp AI automation send customer messages without approval?<span aria-hidden="true">+</span></summary><div class="a">The WhatsApp assistant workflow described here drafts replies and waits for your approval before sending. Automation rules depend on the final setup you choose.</div></details>
+<details class="card"><summary>Which languages does AMM Data Solutions support?<span aria-hidden="true">+</span></summary><div class="a">AMM Data Solutions provides language support according to its service policies and the capabilities of the tools used for each project. Contact us to confirm language availability for your requirements.</div></details>
+<details class="card"><summary>How much do AI automation and digital solutions cost?<span aria-hidden="true">+</span></summary><div class="a">Pricing depends on the project scope, features, integrations and ongoing support needed. Share your requirements with AMM Data Solutions to request a clear estimate.</div></details>
+</div></div></div></section>
 
 <!-- 12. CONTACT -->
 <section id="contact" style="padding-top:0"><div class="wrap grid md:grid-cols-2 gap-8">
