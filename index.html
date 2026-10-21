@@ -1388,25 +1388,32 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(previousFocus&&previousFocus.isConnected){try{previousFocus.focus({preventScroll:true})}catch(e){previousFocus.focus()}}
   sourceCard=null;
  }
- // Use one document-level CAPTURE handler so nested elements, existing page handlers,
- // and dynamically animated cards cannot swallow the service-card click.
- // Listen at window capture phase: this runs before document/section handlers,
- // so unrelated page scripts cannot cancel the card interaction first.
- window.addEventListener('click',function(e){
-  const target=e.target;
-  const card=target&&typeof target.closest==='function'
-   ?target.closest('#services [data-service-index], #work [data-service-index]')
-   :null;
-  if(!card||overlay.contains(card))return;
-  e.preventDefault();
-  e.stopPropagation();
-  if(typeof e.stopImmediatePropagation==='function')e.stopImmediatePropagation();
-  if(overlay.classList.contains('is-open')){
-   closeService();
-   return;
-  }
-  openService(Number(card.dataset.serviceIndex),card);
- },true);
+ // Bind directly to each real service card rather than relying on event delegation.
+ // Stop other page handlers from overriding this card's open/close action.
+ serviceCards.forEach(function(card){
+  card.addEventListener('click',function(e){
+   e.preventDefault();
+   e.stopPropagation();
+   if(typeof e.stopImmediatePropagation==='function')e.stopImmediatePropagation();
+   if(overlay.classList.contains('is-open')){
+    closeService();
+    return;
+   }
+   openService(Number(card.dataset.serviceIndex),card);
+  },true);
+  card.setAttribute('aria-haspopup','dialog');
+  card.setAttribute('aria-expanded','false');
+ });
+ const originalOpenService=openService;
+ openService=function(i,card){
+  originalOpenService(i,card);
+  serviceCards.forEach(function(c){c.setAttribute('aria-expanded',String(c===card))});
+ };
+ const originalFinishClose=finishClose;
+ finishClose=function(){
+  originalFinishClose();
+  serviceCards.forEach(function(c){c.setAttribute('aria-expanded','false')});
+ }
  close.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();closeService()});
  overlay.addEventListener('click',e=>{if(e.target===overlay)closeService()});
  dialog.addEventListener('click',e=>{if(e.target.closest('button,a,input,textarea,select'))return;closeService()});
