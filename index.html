@@ -1031,10 +1031,18 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 
 <!-- 12. CONTACT -->
 <section id="contact" style="padding-top:0"><div class="wrap grid md:grid-cols-2 gap-8">
-<div><h2>Start a conversation</h2>
-<p class="mt-3" style="color:var(--muted)">Email: <a class="underline" href="mailto:ammdatasolutions229@gmail.com">ammdatasolutions229@gmail.com</a><br>Pakistan <!-- REPLACE city --></p>
-<a class="btn btn-l mt-5" href="mailto:ammdatasolutions229@gmail.com?subject=AMM%20Data%20Solutions%20Inquiry">Chat on WhatsApp</a>
-<div class="card mt-6 h-40 flex items-center justify-center text-sm" style="color:var(--muted)"><!-- REPLACE: Google Maps embed -->Map placeholder</div></div>
+<div class="flex flex-col items-start">
+<h2>Start a conversation</h2>
+<p class="mt-3 max-w-md" style="color:var(--muted)">Have a project in mind? Tell us what you need, and we’ll help you explore a practical solution.</p>
+<details class="mt-5">
+<summary class="btn btn-l cursor-pointer list-none">Show email address <span aria-hidden="true">↗</span></summary>
+<div class="card mt-3 p-4">
+<p class="text-sm mb-2" style="color:var(--muted)">Email AMM Data Solutions</p>
+<a class="font-semibold underline break-all" href="mailto:ammdatasolutions229@gmail.com?subject=AMM%20Data%20Solutions%20Inquiry">ammdatasolutions229@gmail.com</a>
+</div>
+</details>
+<p class="mt-4 text-sm" style="color:var(--muted)">Prefer the form? Send your project details and inquiry below.</p>
+</div>
 <form id="cf" class="card p-6 space-y-3" novalidate action="https://formspree.io/f/YOUR_ID" method="POST">
 <label class="block text-sm font-semibold" for="n">Name</label><input id="n" name="name" autocomplete="name"><p class="err" id="en"></p>
 <label class="block text-sm font-semibold" for="e">Email</label><input id="e" name="email" type="email" autocomplete="email"><p class="err" id="ee"></p>
@@ -1049,7 +1057,7 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 <nav class="flex flex-wrap gap-5 text-sm" aria-label="Footer"><a href="#services">Services</a><a href="#work">Work</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="#">LinkedIn</a><a href="#">Facebook</a></nav></div>
 <p class="wrap text-xs opacity-60 mt-8">&copy; 2026 AMM Data Solutions. All rights reserved.</p></footer>
 
-<a href="mailto:ammdatasolutions229@gmail.com" aria-label="Email AMM Data Solutions" class="fixed z-50 grid place-items-center w-14 h-14 rounded-full shadow-xl" style="background:#25D366;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0))"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.2 14c-.2.6-1.300 1.200-1.800 1.200-.5.1-1 .2-3.300-.7-2.800-1.100-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 2c.1.200.1.400 0 .5l-.4.600c-.1.100-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.100 1 2.100 1.300 2.400 1.400.3.100.5.100.6-.1l.9-1.100c.2-.2.400-.2.600-.1l1.900.9c.3.100.5.200.5.300.1.200.1.800-.1 1.400z"/></svg></a>
+<a href="mailto:ammdatasolutions229@gmail.com?subject=AMM%20Data%20Solutions%20Inquiry" aria-label="Email AMM Data Solutions" title="Email AMM Data Solutions" class="fixed z-50 grid place-items-center w-14 h-14 rounded-full shadow-xl" style="background:var(--lime);color:var(--navy);right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0));border:1px solid #14172b14"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -1197,7 +1205,7 @@ $$('.faq button').forEach(b=>b.onclick=()=>{const c=b.parentElement,o=c.classLis
 $('#cf').onsubmit=async e=>{e.preventDefault();const f=e.target,n=f.name.value.trim(),m=f.email.value.trim(),g=f.message.value.trim();
 $('#en').textContent=n?'':'Enter your name.';$('#ee').textContent=/^\S+@\S+\.\S+$/.test(m)?'':'Enter a valid email.';$('#em').textContent=g.length>9?'':'Write at least 10 characters.';
 if(!n||!/^\S+@\S+\.\S+$/.test(m)||g.length<10)return;
-try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}});$('#ok').textContent=r.ok?'Thanks. We will reply soon.':'Could not send. Please use WhatsApp or email.';if(r.ok)f.reset()}catch{$('#ok').textContent='Could not send. Please use WhatsApp or email.'}};
+try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}});$('#ok').textContent=r.ok?'Thanks. We will reply soon.':'Could not send right now. Please try the email button above.';if(r.ok)f.reset()}catch{$('#ok').textContent='Could not send. Please use WhatsApp or email.'}};
 
 // Slow, staged AMM workflow demo with a typed customer order and calm handoffs
 (function(){
