@@ -1470,6 +1470,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let stage=0, timer=0, typing=0, generation=0;
   function activate(next){
+    const previousStage=stage;
     generation++;
     const id=generation;
     clearTimeout(timer);clearTimeout(typing);
@@ -1481,6 +1482,12 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
       if(status) status.textContent=i===next?'WORKING':i<next?'COMPLETED':'WAITING FOR TASK';
       card.querySelectorAll('[data-task]').forEach((row,j)=>row.classList.toggle('is-complete',i===1&&j<3));
     });
+    if(next!==previousStage && window.matchMedia('(max-width: 560px)').matches){
+      cards[next].scrollIntoView({
+        behavior:reduced?'auto':'smooth',
+        block:'start'
+      });
+    }
     if(caption) caption.textContent=captions[next];
     if(progress) progress.style.width=((next+1)*25)+'%';
     if(count) count.textContent='STAGE 0'+(next+1)+' / 04';
