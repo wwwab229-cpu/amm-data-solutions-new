@@ -182,17 +182,17 @@ button,a,input,textarea{touch-action:manipulation}
 .feedback-pill[aria-pressed="true"]{background:#FFF1B8;border-color:#D9A900;color:#765500}
 .feedback-pill:focus-visible{outline:2px solid #D9A900;outline-offset:2px}
 @media(max-width:480px){.feedback-pill{padding:9px 11px;font-size:.82rem}}
-/* Five feedback emojis take turns cleanly in the same fixed icon spot */
+/* Six feedback emojis rotate one at a time in the same fixed icon spot */
 .feedback-mood-icon{position:relative;display:grid;place-items:center;overflow:hidden}
-.feedback-mood{grid-area:1/1;font-size:2rem;line-height:1;opacity:0;transform:translateY(3px) scale(.96);animation:ammFeedbackMoodSwap 9s ease-in-out infinite}
+.feedback-mood{grid-area:1/1;font-size:2rem;line-height:1;opacity:0;transform:translateY(3px) scale(.96);animation:ammFeedbackMoodSwap 10.8s ease-in-out infinite}
 .feedback-mood-happy{animation-delay:0s}
 .feedback-mood-touched{animation-delay:-1.8s}
 .feedback-mood-angry{animation-delay:-3.6s}
 .feedback-mood-amazing{animation-delay:-5.4s}
 .feedback-mood-star{animation-delay:-7.2s}
-.feedback-mood-thumbs{animation-delay:-8.1s}
+.feedback-mood-thumbs{animation-delay:-9s}
 @keyframes ammFeedbackMoodSwap{0%,14%{opacity:1;transform:translateY(0) scale(1)}16%,100%{opacity:0;transform:translateY(-2px) scale(.97)}}
-@media(prefers-reduced-motion:reduce){.feedback-mood{animation:none;opacity:1;transform:none}.feedback-mood-touched,.feedback-mood-angry,.feedback-mood-amazing,.feedback-mood-star{display:none}}
+@media(prefers-reduced-motion:reduce){.feedback-mood{animation:none;opacity:1;transform:none}.feedback-mood-touched,.feedback-mood-angry,.feedback-mood-amazing,.feedback-mood-star,.feedback-mood-thumbs{display:none}}
 /* Feedback form: touch-friendly inline stars and cumulative yellow rating */
 #feedback-stars{align-items:center;gap:5px;position:relative;z-index:2;pointer-events:auto;touch-action:manipulation}
 #feedback-stars .feedback-star{appearance:none;-webkit-appearance:none;display:inline-block;position:relative;z-index:3;pointer-events:auto;touch-action:manipulation;user-select:none;-webkit-user-select:none;width:auto;height:auto;min-width:36px;min-height:42px;padding:2px;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#d8d4c8;font-size:2.15rem;line-height:1;cursor:pointer;transition:color .16s ease,text-shadow .16s ease}
