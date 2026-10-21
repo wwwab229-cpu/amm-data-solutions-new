@@ -1255,7 +1255,7 @@ feedbackPills.forEach(pill=>pill.addEventListener('click',()=>{
  }
  $('#feedback-review-error').textContent='';
 }));
-$('#feedback-review').addEventListener('input',e=>$('#feedback-count').textContent=e.target.value.length+' / 250');
+/* Feedback text is unrestricted; no character counter or length limit. */
 
 // FAQ
 $$('.faq button').forEach(b=>b.onclick=()=>{const c=b.parentElement,o=c.classList.toggle('open');b.setAttribute('aria-expanded',o);b.lastChild.textContent=o?'\u2212':'+'});
