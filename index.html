@@ -1496,5 +1496,15 @@ document.querySelectorAll('#nav a[href="#business-cta"]').forEach(link=>{
 });
 </script>
 
+
+<script>
+/* Always start at the website header on a fresh load or reload. */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.addEventListener('load', () => {
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+});
+</script>
+
 </body>
 </html>
