@@ -839,12 +839,13 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 }
 
 /* Reliable service detail modal visibility and responsive live-demo layout */
-.amm-service-overlay{display:flex!important;position:fixed!important;inset:0!important;z-index:2147483000!important;align-items:center!important;justify-content:center!important;opacity:0;visibility:hidden;pointer-events:none}
+.amm-service-overlay{display:flex!important;position:fixed!important;inset:0!important;z-index:2147483000!important;align-items:center!important;justify-content:center!important;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility .22s ease}
+.amm-service-overlay:not(.is-open){display:none!important}
 .amm-service-overlay.is-open{display:flex!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important}
-.amm-service-overlay.is-closing{pointer-events:none!important}
-.amm-service-overlay .amm-service-dialog{z-index:1;pointer-events:auto;width:min(900px,calc(100vw - 32px));max-height:calc(100dvh - 32px);margin:auto}
-.amm-service-overlay .amm-service-back{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;max-height:calc(100dvh - 32px);overflow:auto!important;background:#fff!important}
-.amm-service-overlay .amm-service-close{position:sticky;float:right;top:0;margin-bottom:-42px}
+.amm-service-overlay.is-closing{opacity:0!important;visibility:visible!important;pointer-events:none!important}
+.amm-service-overlay .amm-service-dialog{z-index:1;pointer-events:auto;width:min(900px,calc(100vw - 32px));max-height:calc(100dvh - 32px);margin:auto;overflow:visible}
+.amm-service-overlay .amm-service-back{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;max-height:calc(100dvh - 32px);overflow:auto!important;background:#fff!important;overscroll-behavior:contain}
+.amm-service-overlay .amm-service-close{position:absolute!important;right:14px!important;top:14px!important;float:none!important;margin:0!important;z-index:100!important;cursor:pointer;touch-action:manipulation}
 @media(max-width:640px){.amm-service-overlay{padding:10px!important}.amm-service-overlay .amm-service-dialog{width:calc(100vw - 20px);max-height:calc(100dvh - 20px)}.amm-service-overlay .amm-service-back{max-height:calc(100dvh - 20px);padding:22px 18px}}
 
 
@@ -1343,53 +1344,54 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   return true;
  }
  function openService(i,card){
-  if(!fillDetails(i))return;
+  if(!fillDetails(i)||!card)return;
   clearTimeout(closeTimer);if(openFrame)cancelAnimationFrame(openFrame);
-  previousFocus=document.activeElement;sourceCard=card;
+  previousFocus=card;sourceCard=card;
   const rect=card.getBoundingClientRect();
   overlay.classList.remove('is-closing');
   overlay.style.display='flex';overlay.style.visibility='visible';overlay.style.opacity='1';overlay.style.pointerEvents='auto';
-  dialog.style.transition='none';
-  dialog.style.opacity='1';
-  dialog.style.transform='translate(-50%,-50%) scale(1,1)';
   overlay.classList.add('is-open','is-flipped');
   document.body.style.overflow='hidden';
+  dialog.style.transition='none';dialog.style.opacity='1';
+  dialog.style.transform='translate(-50%,-50%) scale(1,1)';
   const dialogRect=dialog.getBoundingClientRect();
   const dx=rect.left+rect.width/2-window.innerWidth/2;
   const dy=rect.top+rect.height/2-window.innerHeight/2;
-  const sx=Math.max(.08,Math.min(1,rect.width/dialogRect.width));
-  const sy=Math.max(.08,Math.min(1,rect.height/dialogRect.height));
-  if(reduce()){
-   dialog.style.transform='translate(-50%,-50%) scale(1,1)';
-  }else{
+  const sx=Math.max(.12,Math.min(1,rect.width/Math.max(dialogRect.width,1)));
+  const sy=Math.max(.12,Math.min(1,rect.height/Math.max(dialogRect.height,1)));
+  if(!reduce()){
    dialog.style.transform='translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px)) scale('+sx+','+sy+')';
    dialog.getBoundingClientRect();
-   dialog.style.transition='transform 380ms cubic-bezier(.22,.61,.36,1)';
+   dialog.style.transition='transform 360ms cubic-bezier(.22,.61,.36,1)';
    openFrame=requestAnimationFrame(()=>{dialog.style.transform='translate(-50%,-50%) scale(1,1)';openFrame=null;});
   }
-  close.focus();
+  requestAnimationFrame(()=>close.focus());
  }
  function closeService(){
   if(!overlay.classList.contains('is-open'))return;
   if(openFrame)cancelAnimationFrame(openFrame);
   clearTimeout(closeTimer);
-  finishClose();
+  overlay.classList.add('is-closing');
+  if(!reduce()){
+   dialog.style.transition='transform 180ms ease,opacity 180ms ease';
+   dialog.style.transform='translate(-50%,-50%) scale(.96)';
+   dialog.style.opacity='0';
+   closeTimer=setTimeout(finishClose,190);
+  }else finishClose();
  }
  function finishClose(){
   clearTimeout(closeTimer);
   overlay.classList.remove('is-open','is-flipped','is-closing');
   overlay.style.opacity='0';overlay.style.visibility='hidden';overlay.style.pointerEvents='none';overlay.style.display='none';
   document.body.style.overflow='';
-  dialog.style.transition='none';
-  dialog.style.transform='translate(-50%,-50%) scale(1,1)';
-  dialog.style.opacity='1';
+  dialog.style.transition='none';dialog.style.transform='translate(-50%,-50%) scale(1,1)';dialog.style.opacity='1';
   if(previousFocus&&previousFocus.isConnected){try{previousFocus.focus({preventScroll:true})}catch(e){previousFocus.focus()}}
   sourceCard=null;
  }
  serviceCards.forEach(card=>card.addEventListener('click',()=>openService(Number(card.dataset.serviceIndex),card)));
- close.addEventListener('click',closeService);
+ close.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();closeService()});
  overlay.addEventListener('click',e=>{if(e.target===overlay)closeService()});
- document.addEventListener('keydown',e=>{if(!overlay.classList.contains('is-open'))return;if(e.key==='Escape')closeService()});
+ document.addEventListener('keydown',e=>{if(!overlay.classList.contains('is-open'))return;if(e.key==='Escape'){e.preventDefault();closeService()}});
  window.addEventListener('resize',()=>{if(overlay.classList.contains('is-open')&&!overlay.classList.contains('is-closing'))dialog.style.transform='translate(-50%,-50%)';});
 })();
 </script>
