@@ -1195,12 +1195,14 @@ async function loadApprovedReviews(){
 loadApprovedReviews();
 const openFeedback=$('#open-feedback'),feedbackPanel=$('#feedback-panel'),feedbackForm=$('#feedback-form');
 window.__ammFeedbackInteracting=false;
-openFeedback.onclick=()=>{
+openFeedback.onclick=(event)=>{
+ event.preventDefault();
+ event.stopPropagation();
  window.__ammFeedbackInteracting=true;
  feedbackPanel.classList.remove('hidden');
  openFeedback.setAttribute('aria-expanded','true');
  $('#feedback-status').textContent='';
- feedbackPanel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+ // Open the inline form without forcing the page to scroll.
 };
 $('#close-feedback').onclick=()=>{
  window.__ammFeedbackInteracting=false;
