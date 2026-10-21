@@ -1244,7 +1244,7 @@ starButtons.forEach((b,i)=>{
   starButtons[next-1].focus();
  });
 });
-const feedbackPills=$('#feedback-positive .feedback-pill, #feedback-improvements .feedback-pill');
+const feedbackPills=$$('#feedback-positive .feedback-pill, #feedback-improvements .feedback-pill');
 feedbackPills.forEach(pill=>pill.addEventListener('click',()=>{
  const pressed=pill.getAttribute('aria-pressed')==='true';
  pill.setAttribute('aria-pressed',String(!pressed));
