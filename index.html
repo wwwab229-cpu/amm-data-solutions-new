@@ -1258,63 +1258,7 @@ feedbackPills.forEach(pill=>pill.addEventListener('click',()=>{
  $('#feedback-review-error').textContent='';
 }));
 $('#feedback-review').addEventListener('input',e=>$('#feedback-count').textContent=e.target.value.length+' / 250');
-feedbackForm.addEventListener('submit',async e=>{
- e.preventDefault();
- e.stopPropagation();
- e.stopImmediatePropagation();
- window.__ammFeedbackInteracting=true;
- // Preserve the current feedback-form position while the request completes.
- const feedbackScrollY=window.scrollY;
- const preserveFeedbackPosition=()=>{
-  requestAnimationFrame(()=>window.scrollTo({top:feedbackScrollY,left:0,behavior:'instant'}));
-  requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo({top:feedbackScrollY,left:0,behavior:'instant'})));
- };
- const name=$('#feedback-name').value.trim(),business=$('#feedback-business').value.trim(),typedReview=$('#feedback-review').value.trim(),consent=$('#feedback-consent').checked;
- const selectedPills=feedbackPills.filter(p=>p.getAttribute('aria-pressed')==='true').map(p=>p.textContent.trim());
- const review=[...selectedPills,typedReview].filter(Boolean).join(' — ');
- $('#feedback-name-error').textContent=name?'':'Please enter your name.';
- chosenRating=chosenRating||Number(window.ammFeedbackRating)||0;
- $('#feedback-rating-error').textContent=chosenRating?'':'Please choose a star rating.';
- $('#feedback-review-error').textContent=review.length>=10?'':'Please select a suggestion or enter at least 10 characters.';
- $('#feedback-consent-error').textContent=consent?'':'Please confirm before submitting.';
- const status=$('#feedback-status');status.textContent='';
- if(!name||!chosenRating||review.length<10||!consent){
-  const firstInvalid=!name?$('#feedback-name'):!chosenRating?$('#feedback-stars .feedback-star'):review.length<10?$('#feedback-review'):$('#feedback-consent');
-  status.textContent=!name?'Please enter your name to continue.':!chosenRating?'Please select a star rating to continue.':review.length<10?'Please choose a feedback suggestion or enter at least 10 characters.':'Please confirm the consent checkbox before submitting.';
-  firstInvalid?.focus?.();
-  return;
- }
- const submit=feedbackForm.querySelector('button[type="submit"]');
- submit.disabled=true;submit.setAttribute('aria-busy','true');status.textContent='Sending your feedback…';
- try{
-  const response=await fetch('https://yvfumgrywsqhsvjfnmzu.supabase.co/rest/v1/review_feedback_submissions',{
-   method:'POST',
-   headers:{'Content-Type':'application/json','apikey':'sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk','Authorization':'Bearer sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk','Prefer':'return=minimal'},
-   body:JSON.stringify({submission_type:'review',display_name:name,business:business||null,rating:chosenRating,message:review,status:'pending'})
-  });
-  if(!response.ok){
-   const detail=await response.text().catch(()=> '');
-   console.error('AMM feedback API response:',response.status,detail);
-   if(response.status===400)throw new Error('The database rejected this submission. Please check your rating and ensure the feedback message has at least 10 characters.');
-   if(response.status===401||response.status===403)throw new Error('The feedback service denied this request. Please try again later.');
-   throw new Error('Your feedback could not be saved (HTTP '+response.status+'). Please try again.');
-  }
-  status.textContent='Thank you! Your review has been received and will be checked by AMM Data Solutions before it appears publicly.';
-  feedbackForm.reset();chosenRating=0;setRating(0);$('#feedback-count').textContent='0 / 250';
-  feedbackPills.forEach(p=>p.setAttribute('aria-pressed','false'));
-  $('#feedback-preview').classList.add('hidden');
-  // Keep the panel open and prevent focus from jumping the page to the header.
-  status.setAttribute('tabindex','-1');
-  status.focus({preventScroll:true});
-  preserveFeedbackPosition();
- }catch(error){
-  console.error('AMM feedback submission failed:',error);
-  const message=error instanceof Error?error.message:'';
-  status.textContent=(message.startsWith('The database rejected')||message.startsWith('The feedback service is temporarily unavailable')||message.startsWith('Your feedback could not be sent right now'))?message:'Your feedback could not be sent. Please check your connection and try again. If the problem continues, contact ammdatasolutions229@gmail.com.';
-  preserveFeedbackPosition();
- }
- finally{submit.disabled=false;submit.removeAttribute('aria-busy');}
-},true);
+
 // FAQ
 $$('.faq button').forEach(b=>b.onclick=()=>{const c=b.parentElement,o=c.classList.toggle('open');b.setAttribute('aria-expanded',o);b.lastChild.textContent=o?'\u2212':'+'});
 // form validation; connect to Formspree by replacing YOUR_ID in the form action
@@ -1619,6 +1563,91 @@ window.addEventListener('load', () => {
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && emailDetails.open) emailDetails.open = false;
   });
+})();
+</script>
+
+
+<script>
+/* Standalone feedback submission handler: independent of the main page script. */
+(function(){
+ 'use strict';
+ const form=document.getElementById('feedback-form');
+ if(!form || form.dataset.ammSubmitReady==='true') return;
+ form.dataset.ammSubmitReady='true';
+ const byId=id=>document.getElementById(id);
+ const status=byId('feedback-status');
+ const submit=form.querySelector('button[type="submit"]');
+ const setError=(id,message)=>{const el=byId(id);if(el)el.textContent=message;};
+ const stars=[...form.querySelectorAll('#feedback-stars .feedback-star')];
+ const pills=[...form.querySelectorAll('#feedback-positive .feedback-pill, #feedback-improvements .feedback-pill')];
+ form.addEventListener('submit',async function(event){
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation();
+  window.__ammFeedbackInteracting=true;
+  if(!status||!submit)return;
+  status.setAttribute('role','status');
+  status.setAttribute('aria-live','polite');
+  const name=(byId('feedback-name')?.value||'').trim();
+  const business=(byId('feedback-business')?.value||'').trim();
+  const typedReview=(byId('feedback-review')?.value||'').trim();
+  const consent=Boolean(byId('feedback-consent')?.checked);
+  const selectedPills=pills.filter(p=>p.getAttribute('aria-pressed')==='true').map(p=>p.textContent.trim());
+  const message=[...selectedPills,typedReview].filter(Boolean).join(' — ').trim();
+  const rating=Number(stars.find(s=>s.getAttribute('aria-checked')==='true')?.dataset.rating||window.ammFeedbackRating||0);
+  setError('feedback-name-error',name?'':'Please enter your name.');
+  setError('feedback-rating-error',rating?'':'Please choose a star rating.');
+  setError('feedback-review-error',message.length>=10?'':'Please choose a suggestion or enter at least 10 characters.');
+  setError('feedback-consent-error',consent?'':'Please confirm before submitting.');
+  if(!name||!rating||message.length<10||!consent){
+   status.textContent=!name?'Please enter your name to continue.':!rating?'Please select a star rating to continue.':message.length<10?'Please choose a feedback suggestion or enter at least 10 characters.':'Please confirm the consent checkbox before submitting.';
+   const invalid=!name?byId('feedback-name'):!rating?byId('feedback-stars'):message.length<10?byId('feedback-review'):byId('feedback-consent');
+   invalid?.focus?.({preventScroll:true});
+   return;
+  }
+  submit.disabled=true;
+  submit.setAttribute('aria-busy','true');
+  status.textContent='Sending your feedback…';
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),15000);
+  try{
+   const response=await fetch('https://yvfumgrywsqhsvjfnmzu.supabase.co/rest/v1/review_feedback_submissions',{
+    method:'POST',
+    headers:{
+     'Content-Type':'application/json',
+     'apikey':'sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk',
+     'Prefer':'return=minimal'
+    },
+    body:JSON.stringify({submission_type:'review',display_name:name,business:business||null,rating:rating,message:message,status:'pending'}),
+    signal:controller.signal
+   });
+   if(!response.ok){
+    const detail=await response.text().catch(()=> '');
+    console.error('AMM feedback API response:',response.status,detail);
+    if(response.status===401||response.status===403)throw new Error('The feedback service rejected access. Please try again later.');
+    if(response.status===400)throw new Error('Please check the feedback details and try again.');
+    throw new Error('Feedback could not be saved (HTTP '+response.status+'). Please try again.');
+   }
+   form.reset();
+   stars.forEach(s=>{s.setAttribute('aria-checked','false');s.classList.remove('is-filled');s.tabIndex=-1;});
+   if(stars[0])stars[0].tabIndex=0;
+   window.ammFeedbackRating=0;
+   const ratingLabel=byId('feedback-rating-label');if(ratingLabel)ratingLabel.textContent='Choose a rating from 1 to 5.';
+   const count=byId('feedback-count');if(count)count.textContent='0 / 250';
+   pills.forEach(p=>p.setAttribute('aria-pressed','false'));
+   byId('feedback-preview')?.classList.add('hidden');
+   status.textContent='Thank you! Your review has been received and will be checked by AMM Data Solutions before it appears publicly.';
+  }catch(error){
+   console.error('AMM feedback submission failed:',error);
+   status.textContent=error?.name==='AbortError'
+    ?'The request timed out. Please check your connection and try again.'
+    :(error instanceof Error?error.message:'Your feedback could not be sent. Please check your connection and try again.');
+  }finally{
+   clearTimeout(timeout);
+   submit.disabled=false;
+   submit.removeAttribute('aria-busy');
+  }
+ },true);
 })();
 </script>
 
