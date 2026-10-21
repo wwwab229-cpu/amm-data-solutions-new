@@ -1155,7 +1155,7 @@ function nextT(){if(T.length<2)return;ti=(ti+1)%T.length;renderT()}
 $('#tn').onclick=nextT;$('#tp').onclick=()=>{if(T.length<2)return;ti=(ti+T.length-1)%T.length;renderT()};
 renderT();
 const openFeedback=$('#open-feedback'),feedbackPanel=$('#feedback-panel'),feedbackForm=$('#feedback-form');
-openFeedback.onclick=()=>{feedbackPanel.classList.remove('hidden');openFeedback.setAttribute('aria-expanded','true');$('#feedback-status').textContent='';$('#feedback-name').focus();feedbackPanel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});};
+openFeedback.onclick=()=>{feedbackPanel.classList.remove('hidden');openFeedback.setAttribute('aria-expanded','true');$('#feedback-status').textContent='';feedbackPanel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});};
 $('#close-feedback').onclick=()=>{feedbackPanel.classList.add('hidden');openFeedback.setAttribute('aria-expanded','false');openFeedback.focus()};
 let chosenRating=0;
 const ratingNames=['','Poor','Fair','Good','Very good','Excellent'];
