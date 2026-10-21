@@ -1477,5 +1477,24 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
 })();
 </script>
 
+
+<script>
+/* Keep header contact CTAs pointed directly at the contact section, below the sticky navbar. */
+document.querySelectorAll('#nav a[href="#contact"]').forEach(link=>{
+  link.addEventListener('click',event=>{
+    const contactSection=document.getElementById('contact');
+    if(!contactSection)return;
+    event.preventDefault();
+    document.getElementById('menu')?.classList.add('hidden');
+    document.getElementById('burger')?.setAttribute('aria-expanded','false');
+    contactSection.scrollIntoView({
+      behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',
+      block:'start'
+    });
+    if(location.hash!=='#contact') history.replaceState(null,'','#contact');
+  });
+});
+</script>
+
 </body>
 </html>
