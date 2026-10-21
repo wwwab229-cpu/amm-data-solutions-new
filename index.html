@@ -1181,6 +1181,18 @@ function renderT(){
 function nextT(){if(T.length<2)return;ti=(ti+1)%T.length;renderT()}
 $('#tn').onclick=nextT;$('#tp').onclick=()=>{if(T.length<2)return;ti=(ti+T.length-1)%T.length;renderT()};
 renderT();
+async function loadApprovedReviews(){
+ try{
+  const response=await fetch('https://yvfumgrywsqhsvjfnmzu.supabase.co/rest/v1/review_feedback_submissions?select=display_name,business,rating,message&submission_type=eq.review&status=eq.approved&order=created_at.desc&limit=20',{
+   headers:{'apikey':'sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk','Authorization':'Bearer sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk'}
+  });
+  if(!response.ok)return;
+  const reviews=await response.json();
+  T.splice(0,T.length,...reviews.map(r=>({name:r.display_name||'AMM customer',business:r.business||'',rating:Number(r.rating)||5,review:r.message||''})));
+  ti=0;renderT();
+ }catch(error){/* Keep the accessible empty state if reviews cannot be loaded. */}
+}
+loadApprovedReviews();
 const openFeedback=$('#open-feedback'),feedbackPanel=$('#feedback-panel'),feedbackForm=$('#feedback-form');
 openFeedback.onclick=()=>{feedbackPanel.classList.remove('hidden');openFeedback.setAttribute('aria-expanded','true');$('#feedback-status').textContent='';feedbackPanel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});};
 $('#close-feedback').onclick=()=>{feedbackPanel.classList.add('hidden');openFeedback.setAttribute('aria-expanded','false');openFeedback.focus()};
