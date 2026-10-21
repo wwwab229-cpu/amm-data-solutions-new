@@ -1261,7 +1261,14 @@ $('#feedback-review').addEventListener('input',e=>$('#feedback-count').textConte
 feedbackForm.onsubmit=async e=>{
  e.preventDefault();
  e.stopPropagation();
+ e.stopImmediatePropagation();
  window.__ammFeedbackInteracting=true;
+ // Preserve the current feedback-form position while the request completes.
+ const feedbackScrollY=window.scrollY;
+ const preserveFeedbackPosition=()=>{
+  requestAnimationFrame(()=>window.scrollTo({top:feedbackScrollY,left:0,behavior:'instant'}));
+  requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo({top:feedbackScrollY,left:0,behavior:'instant'})));
+ };
  const name=$('#feedback-name').value.trim(),business=$('#feedback-business').value.trim(),typedReview=$('#feedback-review').value.trim(),consent=$('#feedback-consent').checked;
  const selectedPills=feedbackPills.filter(p=>p.getAttribute('aria-pressed')==='true').map(p=>p.textContent.trim());
  const review=[...selectedPills,typedReview].filter(Boolean).join(' — ');
@@ -1296,10 +1303,15 @@ feedbackForm.onsubmit=async e=>{
   feedbackForm.reset();chosenRating=0;setRating(0);$('#feedback-count').textContent='0 / 250';
   feedbackPills.forEach(p=>p.setAttribute('aria-pressed','false'));
   $('#feedback-preview').classList.add('hidden');
+  // Keep the panel open and prevent focus from jumping the page to the header.
+  status.setAttribute('tabindex','-1');
+  status.focus({preventScroll:true});
+  preserveFeedbackPosition();
  }catch(error){
   console.error('AMM feedback submission failed:',error);
   const message=error instanceof Error?error.message:'';
   status.textContent=(message.startsWith('The database rejected')||message.startsWith('The feedback service is temporarily unavailable')||message.startsWith('Your feedback could not be sent right now'))?message:'Your feedback could not be sent. Please check your connection and try again. If the problem continues, contact ammdatasolutions229@gmail.com.';
+  preserveFeedbackPosition();
  }
  finally{submit.disabled=false;submit.removeAttribute('aria-busy');}
 };
