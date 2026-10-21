@@ -1388,7 +1388,7 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(previousFocus&&previousFocus.isConnected){try{previousFocus.focus({preventScroll:true})}catch(e){previousFocus.focus()}}
   sourceCard=null;
  }
- serviceCards.forEach(card=>card.addEventListener('click',()=>openService(Number(card.dataset.serviceIndex),card)));
+ document.addEventListener('click',function(e){const card=e.target&&e.target.closest?e.target.closest('.amm-service-card[data-service-index]'):null;if(!card)return;if(!document.querySelector('.amm-service-overlay.is-open')){e.preventDefault();openService(Number(card.dataset.serviceIndex),card);}},true);
  close.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();closeService()});
  overlay.addEventListener('click',e=>{if(e.target===overlay)closeService()});
  document.addEventListener('keydown',e=>{if(!overlay.classList.contains('is-open'))return;if(e.key==='Escape'){e.preventDefault();closeService()}});
