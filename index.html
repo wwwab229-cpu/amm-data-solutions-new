@@ -887,6 +887,48 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
   #services .amm-stage-foot{display:flex!important;font-size:.58rem!important;line-height:1.45!important;margin-top:9px!important}
 }
 
+
+/* Mobile service cards: allow content to grow so headings and actions never get clipped. */
+@media(max-width:640px){
+  #work .grid{grid-template-columns:minmax(0,1fr)!important;gap:14px!important}
+  #work .amm-service-card{
+    aspect-ratio:auto!important;
+    min-height:0!important;
+    height:auto!important;
+    overflow:visible!important;
+    align-self:stretch;
+  }
+  #work .amm-service-card>div:nth-child(2){
+    flex:1 1 auto!important;
+    min-height:0!important;
+    padding:18px!important;
+    gap:18px!important;
+  }
+  #work .amm-service-card h3{
+    font-size:clamp(17px,4.5vw,20px)!important;
+    line-height:1.35!important;
+    overflow-wrap:anywhere!important;
+    word-break:normal!important;
+    margin-top:10px!important;
+  }
+  #work .amm-service-card p{
+    font-size:14px!important;
+    line-height:1.55!important;
+    overflow-wrap:anywhere!important;
+  }
+  #work .amm-service-card>div:nth-child(2)>span:last-child{
+    display:inline-flex!important;
+    flex-wrap:wrap!important;
+    white-space:normal!important;
+    line-height:1.4!important;
+    margin-top:18px!important;
+  }
+  #work .amm-service-card>div:nth-child(2)>div>span{
+    font-size:10px!important;
+    letter-spacing:.08em!important;
+  }
+}
+
 </style>
 </head>
 <body>
