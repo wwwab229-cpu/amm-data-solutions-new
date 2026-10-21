@@ -1056,15 +1056,13 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 <p class="text-xs mt-4" style="color:var(--muted)">Reviews are submitted securely and checked by AMM Data Solutions before publication.</p></div>
 <div id="feedback-panel" class="card p-6 md:p-8 mt-5 hidden" aria-labelledby="feedback-title"><div class="flex items-start justify-between gap-4 mb-6"><div><h3 id="feedback-title" class="text-xl font-extrabold">Share your experience</h3><p class="text-sm mt-2" style="color:var(--muted)">Your feedback helps us improve.</p></div><button type="button" id="close-feedback" class="btn btn-o" aria-label="Close feedback form">✕</button></div>
 <form id="feedback-form" class="space-y-4" novalidate onsubmit="event.preventDefault();">
-<div><label for="feedback-name" class="block text-sm font-semibold mb-2">Your name *</label><input id="feedback-name" name="name" autocomplete="name" maxlength="80" required placeholder="Enter your name"><p class="err" id="feedback-name-error"></p></div>
-<div><label for="feedback-business" class="block text-sm font-semibold mb-2">Business / role <span class="font-normal" style="color:var(--muted)">(optional)</span></label><input id="feedback-business" name="business" maxlength="100" placeholder="e.g. Shop owner"></div>
-<fieldset><legend class="block text-sm font-semibold mb-2">Your rating *</legend><div id="feedback-stars" class="flex flex-wrap gap-2" role="radiogroup" aria-label="Rate your experience">
+<div><label for="feedback-name" class="block text-sm font-semibold mb-2">Your name (optional)</label><input id="feedback-name" name="name" autocomplete="name" placeholder="Enter your name (optional)"><p class="err" id="feedback-name-error"></p></div>
+<div><label for="feedback-business" class="block text-sm font-semibold mb-2">Business / role <span class="font-normal" style="color:var(--muted)">(optional)</span></label><input id="feedback-business" name="business" placeholder="e.g. Shop owner (optional)"></div>
+<fieldset><legend class="block text-sm font-semibold mb-2">Your rating (optional)</legend><div id="feedback-stars" class="flex flex-wrap gap-2" role="radiogroup" aria-label="Rate your experience">
 <button type="button" class="feedback-star" data-rating="1" role="radio" aria-checked="false" aria-label="1 star" title="1 star">★</button><button type="button" class="feedback-star" data-rating="2" role="radio" aria-checked="false" aria-label="2 stars" title="2 stars">★</button><button type="button" class="feedback-star" data-rating="3" role="radio" aria-checked="false" aria-label="3 stars" title="3 stars">★</button><button type="button" class="feedback-star" data-rating="4" role="radio" aria-checked="false" aria-label="4 stars" title="4 stars">★</button><button type="button" class="feedback-star" data-rating="5" role="radio" aria-checked="false" aria-label="5 stars" title="5 stars">★</button>
-</div><p id="feedback-rating-label" class="text-sm mt-2" style="color:var(--muted)">Choose a rating from 1 to 5.</p><p class="err" id="feedback-rating-error"></p></fieldset>
+</div><p id="feedback-rating-label" class="text-sm mt-2" style="color:var(--muted)">Add a star rating if you want, or leave it blank.</p><p class="err" id="feedback-rating-error"></p></fieldset>
 <fieldset class="space-y-3"><legend class="block text-sm font-semibold mb-1">What would you like to say?</legend><p class="text-sm" style="color:var(--muted)">Tap any that match your experience.</p><div><p class="text-sm font-semibold mb-2">Positive feedback</p><div id="feedback-positive" class="feedback-pill-list"><button type="button" class="feedback-pill" aria-pressed="false">🤩 Great experience!</button><button type="button" class="feedback-pill" aria-pressed="false">👍🏼 Really helpful!</button><button type="button" class="feedback-pill" aria-pressed="false">Everything was good</button><button type="button" class="feedback-pill" aria-pressed="false">Quick and easy</button><button type="button" class="feedback-pill" aria-pressed="false">🌟 Exactly what I needed</button></div></div><div><p class="text-sm font-semibold mb-2">Complaints &amp; suggestions</p><div id="feedback-improvements" class="feedback-pill-list"><button type="button" class="feedback-pill" aria-pressed="false">Please reply faster</button><button type="button" class="feedback-pill" aria-pressed="false">Keep me updated</button><button type="button" class="feedback-pill" aria-pressed="false">Explain things better</button><button type="button" class="feedback-pill" aria-pressed="false">Improve the work</button><button type="button" class="feedback-pill" aria-pressed="false">😡 Something needs to be better</button><button type="button" class="feedback-pill" aria-pressed="false">Make the process simpler</button><button type="button" class="feedback-pill" aria-pressed="false">More regular updates</button><button type="button" class="feedback-pill" aria-pressed="false">More affordable options</button><button type="button" class="feedback-pill" aria-pressed="false">Better attention to details</button><button type="button" class="feedback-pill" aria-pressed="false">Deliver on time</button><button type="button" class="feedback-pill" aria-pressed="false">Offer more guidance</button><button type="button" class="feedback-pill" aria-pressed="false">Other suggestion</button></div></div><p class="err" id="feedback-review-error"></p></fieldset>
-<div><label for="feedback-review" class="block text-sm font-semibold mb-2">Anything else you’d like to share? <span class="font-normal" style="color:var(--muted)">(optional)</span></label><textarea id="feedback-review" name="review" rows="3" maxlength="250" placeholder="Type your feedback here..."></textarea><div class="flex justify-between gap-3 text-xs mt-2" style="color:var(--muted)"><span>Your message is optional.</span><span id="feedback-count">0 / 250</span></div></div>
-<label class="flex items-start gap-3 text-sm" style="color:var(--muted)"><input id="feedback-consent" type="checkbox" required style="width:18px;height:18px;flex:0 0 18px;margin-top:2px"><span>I confirm this feedback reflects my own experience and understand that public display will require AMM DS review.</span></label>
-<p class="err" id="feedback-consent-error"></p>
+<div><label for="feedback-review" class="block text-sm font-semibold mb-2">Anything else you’d like to share? <span class="font-normal" style="color:var(--muted)">(optional)</span></label><textarea id="feedback-review" name="review" rows="3" placeholder="Type any feedback here (optional)..."></textarea><div class="flex justify-between gap-3 text-xs mt-2" style="color:var(--muted)"><span>No name, star rating, or written message is required.</span></div></div>
 <button class="btn btn-p w-full justify-center" type="submit">Submit Feedback</button><p id="feedback-status" class="text-sm" role="status" aria-live="polite"></p>
 </form></div>
 <div id="feedback-preview" class="hidden card mt-5 p-6" aria-live="polite"></div>
@@ -1170,7 +1168,7 @@ function renderT(){
  if(!T.length){tq.innerHTML='<div class="py-4"><div class="feedback-mood-icon mx-auto mb-4 grid place-items-center rounded-2xl" style="width:64px;height:64px;background:#fff7d6;color:#5b2ee8" aria-label="A little smile, then a heartfelt face"><span class="feedback-mood feedback-mood-happy" aria-hidden="true">😊</span><span class="feedback-mood feedback-mood-touched" aria-hidden="true">🥹</span><span class="feedback-mood feedback-mood-angry" aria-hidden="true">😡</span><span class="feedback-mood feedback-mood-amazing" aria-hidden="true">🤩</span><span class="feedback-mood feedback-mood-star" aria-hidden="true">🌟</span><span class="feedback-mood feedback-mood-thumbs" aria-hidden="true">👍🏼</span></div><p class="f text-xl md:text-2xl font-bold">Your feedback could be featured here.</p><p class="mt-3 text-sm" style="color:var(--muted)">We are getting ready to share verified customer experiences.</p></div>';$('#tp').disabled=true;$('#tn').disabled=true;return;}
  const t=T[ti];tq.style.opacity='0';setTimeout(()=>{tq.replaceChildren();
  const badge=document.createElement('span');badge.className='feedback-pending';badge.textContent='Preview · Not published';tq.appendChild(badge);
- const stars=document.createElement('p');stars.className='feedback-preview-stars mt-4';stars.textContent='★'.repeat(t.rating)+'☆'.repeat(5-t.rating);stars.setAttribute('aria-label',t.rating+' out of 5 stars');tq.appendChild(stars);
+ if(t.rating){const stars=document.createElement('p');stars.className='feedback-preview-stars mt-4';stars.textContent='★'.repeat(t.rating)+'☆'.repeat(5-t.rating);stars.setAttribute('aria-label',t.rating+' out of 5 stars');tq.appendChild(stars);}
  const quote=document.createElement('p');quote.className='f text-xl md:text-2xl font-bold mt-4';quote.textContent='“'+t.review+'”';tq.appendChild(quote);
  const name=document.createElement('p');name.className='mt-4 font-semibold';name.textContent=t.name;tq.appendChild(name);
  if(t.business){const business=document.createElement('p');business.className='text-sm';business.style.color='var(--muted)';business.textContent=t.business;tq.appendChild(business);}
@@ -1188,7 +1186,7 @@ async function loadApprovedReviews(){
   });
   if(!response.ok)return;
   const reviews=await response.json();
-  T.splice(0,T.length,...reviews.map(r=>({name:r.display_name||'AMM customer',business:r.business||'',rating:Number(r.rating)||5,review:r.message||''})));
+  T.splice(0,T.length,...reviews.map(r=>({name:r.display_name||'Anonymous',business:r.business||'',rating:Number(r.rating)||0,review:r.message||''})));
   ti=0;renderT();
  }catch(error){/* Keep the accessible empty state if reviews cannot be loaded. */}
 }
@@ -1593,20 +1591,9 @@ window.addEventListener('load', () => {
   const name=(byId('feedback-name')?.value||'').trim();
   const business=(byId('feedback-business')?.value||'').trim();
   const typedReview=(byId('feedback-review')?.value||'').trim();
-  const consent=Boolean(byId('feedback-consent')?.checked);
   const selectedPills=pills.filter(p=>p.getAttribute('aria-pressed')==='true').map(p=>p.textContent.trim());
   const message=[...selectedPills,typedReview].filter(Boolean).join(' — ').trim();
   const rating=Number(stars.find(s=>s.getAttribute('aria-checked')==='true')?.dataset.rating||window.ammFeedbackRating||0);
-  setError('feedback-name-error',name?'':'Please enter your name.');
-  setError('feedback-rating-error',rating?'':'Please choose a star rating.');
-  setError('feedback-review-error','');
-  setError('feedback-consent-error',consent?'':'Please confirm before submitting.');
-  if(!name||!rating||!consent){
-   status.textContent=!name?'Please enter your name to continue.':!rating?'Please select a star rating to continue.':'Please confirm the consent checkbox before submitting.';
-   const invalid=!name?byId('feedback-name'):!rating?byId('feedback-stars'):byId('feedback-consent');
-   invalid?.focus?.({preventScroll:true});
-   return;
-  }
   submit.disabled=true;
   submit.setAttribute('aria-busy','true');
   status.textContent='Sending your feedback…';
@@ -1621,7 +1608,7 @@ window.addEventListener('load', () => {
      'Authorization':'Bearer sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk',
      'Prefer':'return=minimal'
     },
-    body:JSON.stringify({submission_type:'review',display_name:name,business:business||null,rating:rating,message:message,status:'pending'}),
+    body:JSON.stringify({submission_type:'review',display_name:name||null,business:business||null,rating:rating||null,message:message,status:'pending'}),
     signal:controller.signal
    });
    if(!response.ok){
@@ -1635,8 +1622,7 @@ window.addEventListener('load', () => {
    stars.forEach(s=>{s.setAttribute('aria-checked','false');s.classList.remove('is-filled');s.tabIndex=-1;});
    if(stars[0])stars[0].tabIndex=0;
    window.ammFeedbackRating=0;
-   const ratingLabel=byId('feedback-rating-label');if(ratingLabel)ratingLabel.textContent='Choose a rating from 1 to 5.';
-   const count=byId('feedback-count');if(count)count.textContent='0 / 250';
+   const ratingLabel=byId('feedback-rating-label');if(ratingLabel)ratingLabel.textContent='Add a star rating if you want, or leave it blank.';
    pills.forEach(p=>p.setAttribute('aria-pressed','false'));
    byId('feedback-preview')?.classList.add('hidden');
    status.textContent='Thank you for your feedback.';
