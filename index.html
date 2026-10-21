@@ -1291,7 +1291,8 @@ feedbackForm.onsubmit=async e=>{
   $('#feedback-preview').classList.add('hidden');
  }catch(error){
   console.error('AMM feedback submission failed:',error);
-  status.textContent='Your feedback could not be sent. Please check your connection and try again. If the problem continues, contact ammdatasolutions229@gmail.com.';
+  const message=error instanceof Error?error.message:'';
+  status.textContent=(message.startsWith('The database rejected')||message.startsWith('The feedback service is temporarily unavailable')||message.startsWith('Your feedback could not be sent right now'))?message:'Your feedback could not be sent. Please check your connection and try again. If the problem continues, contact ammdatasolutions229@gmail.com.';
  }
  finally{submit.disabled=false;submit.removeAttribute('aria-busy');}
 };
