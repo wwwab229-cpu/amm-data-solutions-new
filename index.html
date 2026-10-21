@@ -1388,9 +1388,10 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
   if(previousFocus&&previousFocus.isConnected){try{previousFocus.focus({preventScroll:true})}catch(e){previousFocus.focus()}}
   sourceCard=null;
  }
- serviceCards.forEach(function(card){card.onclick=function(e){e.preventDefault();if(overlay.classList.contains('is-open'))return;openService(Number(card.dataset.serviceIndex),card);};});
+ serviceCards.forEach(function(card){card.onclick=function(e){e.preventDefault();if(overlay.classList.contains('is-open')){if(sourceCard===card)closeService();return;}openService(Number(card.dataset.serviceIndex),card);};});
  close.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();closeService()});
  overlay.addEventListener('click',e=>{if(e.target===overlay)closeService()});
+ dialog.addEventListener('click',e=>{if(e.target.closest('button,a,input,textarea,select'))return;closeService()});
  document.addEventListener('keydown',e=>{if(!overlay.classList.contains('is-open'))return;if(e.key==='Escape'){e.preventDefault();closeService()}});
  window.addEventListener('resize',()=>{if(overlay.classList.contains('is-open')&&!overlay.classList.contains('is-closing'))dialog.style.transform='translate(-50%,-50%)';});
 })();
