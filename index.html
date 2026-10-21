@@ -1390,11 +1390,17 @@ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Ac
  }
  // Use one document-level CAPTURE handler so nested elements, existing page handlers,
  // and dynamically animated cards cannot swallow the service-card click.
- document.addEventListener('click',function(e){
-  const card=e.target&&e.target.closest?e.target.closest('#services [data-service-index], #work [data-service-index]'):null;
+ // Listen at window capture phase: this runs before document/section handlers,
+ // so unrelated page scripts cannot cancel the card interaction first.
+ window.addEventListener('click',function(e){
+  const target=e.target;
+  const card=target&&typeof target.closest==='function'
+   ?target.closest('#services [data-service-index], #work [data-service-index]')
+   :null;
   if(!card||overlay.contains(card))return;
   e.preventDefault();
   e.stopPropagation();
+  if(typeof e.stopImmediatePropagation==='function')e.stopImmediatePropagation();
   if(overlay.classList.contains('is-open')){
    closeService();
    return;
