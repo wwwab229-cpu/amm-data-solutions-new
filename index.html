@@ -1284,28 +1284,7 @@ starButtons.forEach((b,i)=>{
   starButtons[next-1].focus();
  });
 });
-const feedbackPills=$$('#feedback-positive .feedback-pill, #feedback-improvements .feedback-pill');
-const feedbackMessageBox=$('#feedback-review');
-let generatedPillText='';
-feedbackPills.forEach(pill=>pill.addEventListener('click',()=>{
- const pressed=pill.getAttribute('aria-pressed')==='true';
- pill.setAttribute('aria-pressed',String(!pressed));
- if(pill.textContent.trim()==='Everything was good'&&!pressed){
-  $('#feedback-improvements .feedback-pill').forEach(other=>other.setAttribute('aria-pressed','false'));
- }
- if(pill.closest('#feedback-improvements')&&!pressed){
-  const allGood=$('#feedback-positive .feedback-pill').find(p=>p.textContent.trim()==='Everything was good');
-  if(allGood)allGood.setAttribute('aria-pressed','false');
- }
- const current=(feedbackMessageBox.value||'').trim();
- const manualText=generatedPillText&&current.startsWith(generatedPillText)
-  ?current.slice(generatedPillText.length).replace(/^\s*[—-]\s*/,'').trim()
-  :current;
- generatedPillText=feedbackPills.filter(p=>p.getAttribute('aria-pressed')==='true').map(p=>p.textContent.trim()).join(' — ');
- feedbackMessageBox.value=[generatedPillText,manualText].filter(Boolean).join(' — ');
- feedbackMessageBox.dispatchEvent(new Event('input',{bubbles:true}));
- $('#feedback-review-error').textContent='';
-}));
+/* Pill clicks are handled by the independent feedback script below. */
 /* Feedback text is unrestricted; no character counter or length limit. */
 
 // FAQ
@@ -1619,6 +1598,25 @@ window.addEventListener('load', () => {
  let successMessageTimer=0;
  const stars=[...form.querySelectorAll('#feedback-stars .feedback-star')];
  const pills=[...form.querySelectorAll('#feedback-positive .feedback-pill, #feedback-improvements .feedback-pill')];
+ const feedbackText=byId('feedback-review');
+ const updatePillMessage=()=>{
+  const selected=pills.filter(p=>p.getAttribute('aria-pressed')==='true').map(p=>p.textContent.trim());
+  if(feedbackText)feedbackText.value=selected.join(' — ');
+  const err=byId('feedback-review-error');if(err)err.textContent='';
+ };
+ pills.forEach(pill=>pill.addEventListener('click',event=>{
+  event.preventDefault();
+  const pressed=pill.getAttribute('aria-pressed')==='true';
+  pill.setAttribute('aria-pressed',String(!pressed));
+  if(pill.textContent.trim()==='Everything was good'&&!pressed){
+   pills.filter(p=>p.closest('#feedback-improvements')).forEach(p=>p.setAttribute('aria-pressed','false'));
+  }
+  if(pill.closest('#feedback-improvements')&&!pressed){
+   const allGood=pills.find(p=>p.textContent.trim()==='Everything was good');
+   if(allGood)allGood.setAttribute('aria-pressed','false');
+  }
+  updatePillMessage();
+ },true));
  form.addEventListener('submit',async function(event){
   event.preventDefault();
   event.stopPropagation();
