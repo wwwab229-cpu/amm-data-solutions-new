@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f7f9f4">
+<title>Review Admin | AMM Data Solutions</title>
+<style>
+:root{color-scheme:light;--ink:#172019;--muted:#59645b;--line:#e1e7dc;--paper:#fff;--bg:#f7f9f4;--lime:#e1f58a;--green:#245b3a;--red:#9d3030}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{width:min(100% - 32px,960px);margin:40px auto 72px}.brand{font-weight:800;letter-spacing:-.04em;font-size:clamp(24px,4vw,34px)}.brand span{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(26px,4vw,38px);line-height:1.12;letter-spacing:-.04em;margin:8px 0}p{color:var(--muted)}.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,30px);box-shadow:0 12px 40px #1720190a}
+input,select,button{font:inherit}input[type=email]{width:100%;border:1px solid #cbd4c7;border-radius:12px;padding:13px 14px;background:#fff;color:var(--ink);margin:8px 0 14px}button{border:0;border-radius:999px;padding:11px 17px;font-weight:750;cursor:pointer;transition:transform .15s ease,opacity .15s ease}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #8da832;outline-offset:3px}button:disabled{opacity:.55;cursor:wait}.primary{background:var(--lime);color:#1b2415}.secondary{background:#eef1ea;color:var(--ink)}.approve{background:#e4f5e8;color:#205a34}.reject{background:#fbe8e6;color:#8d2929}.logout{background:#eef1ea;font-size:14px}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.row>*{flex:0 0 auto}.row .primary{min-width:140px}.hidden{display:none!important}.notice{padding:12px 14px;border-radius:12px;background:#f0f4e8;color:#293b20;margin:14px 0}.notice.error{background:#fff0ee;color:#8d2929}.notice.success{background:#eef8e9;color:#245b3a}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:22px 0}.toolbar select{border:1px solid var(--line);border-radius:10px;background:#fff;padding:10px 12px}.count{font-size:13px;color:var(--muted)}.list{display:grid;gap:14px}.submission{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.submission-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}.tag{display:inline-block;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:#edf0e8;color:#455044}.tag.pending{background:#fff2c9;color:#76540b}.tag.approved{background:#e4f5e8;color:#205a34}.tag.rejected{background:#fbe8e6;color:#8d2929}.message{white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink);margin:14px 0}.meta{font-size:13px;color:var(--muted);display:flex;gap:8px 16px;flex-wrap:wrap}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed #cbd4c7;border-radius:16px}.small{font-size:13px}.star{color:#7a6000;letter-spacing:2px}@media(max-width:540px){main{width:min(100% - 20px,960px);margin:20px auto 48px}header{align-items:flex-start}.panel{border-radius:18px}.submission{padding:14px}.actions button{flex:1}}
+</style>
+</head>
+<body>
+<main>
+<header><div class="brand">AMM Data Solutions<span>Let's Make Solutions</span></div><button id="logout" class="logout hidden" type="button">Sign out</button></header>
+<section id="loginPanel" class="panel">
+<div class="eyebrow">Private admin area</div><h1>Review approval</h1>
+<p>Sign in with the AMM admin email. A secure sign-in link will be sent to your inbox.</p>
+<form id="loginForm"><label for="email"><strong>Admin email</strong></label><input id="email" type="email" autocomplete="email" value="ammdatasolutions229@gmail.com" required readonly aria-readonly="true"><button id="sendLink" class="primary" type="submit">Email me a sign-in link</button></form>
+<div id="loginNotice" class="notice hidden" role="status" aria-live="polite"></div>
+</section>
+<section id="dashboard" class="hidden">
+<div class="panel"><div class="eyebrow">Moderation dashboard</div><h1>Feedback inbox</h1><p>Approve a review to publish it on the website, or reject it to keep it off the public site.</p>
+<div class="toolbar"><label for="statusFilter"><strong>Show</strong> <select id="statusFilter"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All submissions</option></select></label><span id="count" class="count" aria-live="polite"></span></div>
+<div id="dashboardNotice" class="notice hidden" role="status" aria-live="polite"></div><div id="submissions" class="list"><div class="empty">Loading submissions…</div></div>
+</div>
+</section>
+</main>
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+const SUPABASE_URL = 'https://yvfumgrywsqhsvjfnmzu.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk';
+const ADMIN_EMAIL = 'ammdatasolutions229@gmail.com';
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const loginPanel=document.querySelector('#loginPanel'),dashboard=document.querySelector('#dashboard'),logout=document.querySelector('#logout');
+const loginNotice=document.querySelector('#loginNotice'),dashboardNotice=document.querySelector('#dashboardNotice'),list=document.querySelector('#submissions'),filter=document.querySelector('#statusFilter'),count=document.querySelector('#count');
+let records=[];
+function notice(el,msg,type='success'){el.textContent=msg;el.className='notice'+(type==='error'?' error':type==='success'?' success':'');}
+function clearNotice(el){el.textContent='';el.className='notice hidden';}
+function safeText(value){return value==null?'':String(value);}
+function dateText(value){try{return new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'}).format(new Date(value));}catch{return safeText(value);}}
+async function adminRequest(payload){
+ const {data:{session}}=await supabase.auth.getSession();
+ if(!session?.access_token)throw new Error('Your session has expired. Sign in again.');
+ const response=await fetch(SUPABASE_URL+'/functions/v1/amm-review-admin',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+session.access_token},body:JSON.stringify(payload),cache:'no-store'});
+ let body={};try{body=await response.json();}catch{}
+ if(!response.ok)throw new Error(body.error||'Request failed. Please try again.');
+ return body;
+}
+function element(tag,cls,text){const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node;}
+function render(){
+ const status=filter.value;const shown=records.filter(r=>status==='all'||r.status===status);
+ count.textContent=shown.length+' shown · '+records.filter(r=>r.status==='pending').length+' pending';
+ list.replaceChildren();
+ if(!shown.length){list.append(element('div','empty',status==='pending'?'No pending submissions. You’re all caught up.':'No submissions in this view.'));return;}
+ for(const r of shown){
+  const card=element('article','submission');const top=element('div','submission-top');const heading=element('div','');heading.append(element('strong','',r.submission_type==='review'?'Website review':'Feedback message'));
+  const tag=element('span','tag '+r.status,r.status);top.append(heading,tag);card.append(top);
+  const message=element('p','message',safeText(r.message)||'(No written message)');
+  if(Number(r.rating)>0)message.prepend(element('span','star','★'.repeat(Number(r.rating))+' '));
+  card.append(message);
+  const meta=element('div','meta');meta.append(element('span','',safeText(r.display_name)||'Anonymous'),element('span','',dateText(r.created_at)));
+  if(r.business)meta.append(element('span','',safeText(r.business)));
+  card.append(meta);
+  if(r.status==='pending'){
+   const actions=element('div','actions');const approve=element('button','approve','✓ Approve');approve.type='button';approve.addEventListener('click',()=>updateStatus(r.id,'approved',approve));
+   const reject=element('button','reject','✕ Reject');reject.type='button';reject.addEventListener('click',()=>updateStatus(r.id,'rejected',reject));actions.append(approve,reject);card.append(actions);
+  }
+  list.append(card);
+ }
+}
+async function loadRecords(){
+ clearNotice(dashboardNotice);list.replaceChildren(element('div','empty','Loading submissions…'));
+ try{const result=await adminRequest({action:'list'});records=Array.isArray(result.submissions)?result.submissions:[];render();}
+ catch(err){notice(dashboardNotice,err.message,'error');list.replaceChildren(element('div','empty','Could not load submissions.'));if(/session|sign in/i.test(err.message))showSignedOut();}
+}
+async function updateStatus(id,status,button){
+ button.disabled=true;clearNotice(dashboardNotice);
+ try{await adminRequest({action:'update',id,status});records=records.map(r=>r.id===id?{...r,status}:r);render();notice(dashboardNotice,status==='approved'?'Approved. Website reviews will be eligible to display.':'Rejected. This submission will stay off the public website.');}
+ catch(err){notice(dashboardNotice,err.message,'error');button.disabled=false;}
+}
+function showSignedOut(){loginPanel.classList.remove('hidden');dashboard.classList.add('hidden');logout.classList.add('hidden');}
+async function showSignedIn(session){
+ if(!session?.user){showSignedOut();return;}
+ if((session.user.email||'').toLowerCase()!==ADMIN_EMAIL){await supabase.auth.signOut();showSignedOut();notice(loginNotice,'This email is not authorized for AMM admin access.','error');return;}
+ loginPanel.classList.add('hidden');dashboard.classList.remove('hidden');logout.classList.remove('hidden');await loadRecords();
+}
+document.querySelector('#loginForm').addEventListener('submit',async e=>{
+ e.preventDefault();clearNotice(loginNotice);const btn=document.querySelector('#sendLink');btn.disabled=true;btn.textContent='Sending link…';
+ try{const {error}=await supabase.auth.signInWithOtp({email:ADMIN_EMAIL,options:{emailRedirectTo:window.location.origin+window.location.pathname,shouldCreateUser:true}});if(error)throw error;notice(loginNotice,'Sign-in link sent. Open the email for AMM Data Solutions and click the link on this device.');}
+ catch(err){notice(loginNotice,err.message||'Could not send sign-in link.','error');}
+ finally{btn.disabled=false;btn.textContent='Email me a sign-in link';}
+});
+logout.addEventListener('click',async()=>{await supabase.auth.signOut();showSignedOut();notice(loginNotice,'You have signed out.');});
+filter.addEventListener('change',render);
+supabase.auth.onAuthStateChange((_event,session)=>{setTimeout(()=>showSignedIn(session),0);});
+const {data:{session}}=await supabase.auth.getSession();await showSignedIn(session);
+</script>
+</body>
+</html>
