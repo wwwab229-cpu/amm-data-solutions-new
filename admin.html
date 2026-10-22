@@ -71,8 +71,6 @@ function render(){
   if(r.status==='pending'){
    const actions=element('div','actions');const approve=element('button','approve','✓ Approve');approve.type='button';approve.addEventListener('click',()=>updateStatus(r.id,'approved',approve));
    const reject=element('button','reject','✕ Reject');reject.type='button';reject.addEventListener('click',()=>updateStatus(r.id,'rejected',reject));actions.append(approve,reject);card.append(actions);
-  }else if(r.status!=='pending'){
-   const actions=element('div','actions');const reopen=element('button','secondary','Move back to pending');reopen.type='button';reopen.addEventListener('click',()=>notice(dashboardNotice,'For safety, changing a processed item back to pending is not available here.','error'));actions.append(reopen);card.append(actions);
   }
   list.append(card);
  }
@@ -83,7 +81,6 @@ async function loadRecords(){
  catch(err){notice(dashboardNotice,err.message,'error');list.replaceChildren(element('div','empty','Could not load submissions.'));if(/session|sign in/i.test(err.message))showSignedOut();}
 }
 async function updateStatus(id,status,button){
- if(!confirm(status==='approved'?'Approve this submission?':'Reject this submission?'))return;
  button.disabled=true;clearNotice(dashboardNotice);
  try{await adminRequest({action:'update',id,status});records=records.map(r=>r.id===id?{...r,status}:r);render();notice(dashboardNotice,status==='approved'?'Approved. Website reviews will be eligible to display.':'Rejected. This submission will stay off the public website.');}
  catch(err){notice(dashboardNotice,err.message,'error');button.disabled=false;}
