@@ -1152,6 +1152,7 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 <p class="mt-4 text-sm" style="color:var(--muted)">Prefer not to email directly? Submit your project details using the contact form below.</p>
 </div>
 <form id="cf" class="card p-6 space-y-3" style="display:block;visibility:visible;opacity:1;position:relative;min-width:0;width:100%;align-self:start" novalidate action="https://formspree.io/f/mgaojnap" method="POST">
+ <div aria-hidden="true" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"><label for="cf-website">Leave this field empty</label><input id="cf-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
 <label class="block text-sm font-semibold" for="n">Name</label><input id="n" name="name" autocomplete="name" placeholder="Your name" required class="w-full"><p class="err" id="en"></p>
 <label class="block text-sm font-semibold" for="e">Email</label><input id="e" name="email" type="email" autocomplete="email" placeholder="you@example.com" required class="w-full"><p class="err" id="ee"></p>
 <label class="block text-sm font-semibold" for="m">Message</label><textarea id="m" name="message" rows="4" placeholder="Tell us about your project..." required class="w-full"></textarea><p class="err" id="em"></p>
@@ -1314,11 +1315,31 @@ starButtons.forEach((b,i)=>{
 
 // FAQ
 $$('.faq button').forEach(b=>b.onclick=()=>{const c=b.parentElement,o=c.classList.toggle('open');b.setAttribute('aria-expanded',o);b.lastChild.textContent=o?'\u2212':'+'});
-// Contact form validation and Formspree submission
-$('#cf').onsubmit=async e=>{e.preventDefault();const f=e.target,n=f.elements.namedItem('name').value.trim(),m=f.elements.namedItem('email').value.trim(),g=f.elements.namedItem('message').value.trim();
-$('#en').textContent=n?'':'Enter your name.';$('#ee').textContent=/^\S+@\S+\.\S+$/.test(m)?'':'Enter a valid email.';$('#em').textContent=g?'':'Enter a message.';$('#ok').textContent='';
-if(!n||!/^\S+@\S+\.\S+$/.test(m)||!g)return;
-try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}});$('#ok').textContent=r.ok?'Thanks. We will reply soon.':'Could not send right now. Please try the email button above.';if(r.ok)f.reset()}catch{$('#ok').textContent='Could not send. Please try the email button above.'}};
+// Contact form validation, spam honeypot, timeout and duplicate-submit protection
+$('#cf').onsubmit=async e=>{
+ e.preventDefault();
+ const f=e.target,submit=f.querySelector('button[type="submit"]'),status=$('#ok');
+ const n=f.elements.namedItem('name').value.trim(),m=f.elements.namedItem('email').value.trim(),g=f.elements.namedItem('message').value.trim();
+ $('#en').textContent=n?'':'Enter your name.';
+ $('#ee').textContent=/^\S+@\S+\.\S+$/.test(m)?'':'Enter a valid email.';
+ $('#em').textContent=g?'':'Enter a message.';
+ status.textContent='';
+ if(!n||!/^\S+@\S+\.\S+$/.test(m)||!g)return;
+ // Formspree's _gotcha field catches simple automated submissions without changing the visible form.
+ if(f.elements.namedItem('_gotcha')?.value)return;
+ if(submit.disabled)return;
+ submit.disabled=true;submit.setAttribute('aria-busy','true');
+ const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),15000);
+ try{
+  const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'},signal:controller.signal});
+  status.textContent=r.ok?'Thanks. We will reply soon.':'Could not send right now. Please try the email button above.';
+  if(r.ok)f.reset();
+ }catch{
+  status.textContent='Could not send. Please try the email button above.';
+ }finally{
+  clearTimeout(timeout);submit.disabled=false;submit.removeAttribute('aria-busy');
+ }
+};
 
 // Slow, staged AMM workflow demo with a typed customer order and calm handoffs
 (function(){
