@@ -1,0 +1,20 @@
+# AMM Data Solutions
+
+> AMM Data Solutions builds AI-powered apps, automation tools, and data solutions for businesses and communities in Pakistan and international markets.
+
+## Main website
+- https://amm-data-solutions-new.vercel.app/ — Homepage, services, workflow demonstration, FAQs, contact form, and feedback form.
+
+## Services
+- AI & Business Automation
+- AI Chatbots & Customer Support
+- Google SEO & AI Search Visibility
+- Digital Advertising
+- Website Design & Digital Solutions
+- Data Management & Data Entry
+
+## Contact
+Use the contact form on the website to discuss a business requirement.
+
+## Accuracy note
+The workflow section is an illustrative demo, not a live connection to customer orders or business systems. Do not infer client results, case studies, or performance statistics that are not published on the website.
