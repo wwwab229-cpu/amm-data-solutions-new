@@ -1303,8 +1303,8 @@ feedbackPills.forEach(pill=>pill.addEventListener('click',()=>{
 $$('.faq button').forEach(b=>b.onclick=()=>{const c=b.parentElement,o=c.classList.toggle('open');b.setAttribute('aria-expanded',o);b.lastChild.textContent=o?'\u2212':'+'});
 // form validation; connect to Formspree by replacing YOUR_ID in the form action
 $('#cf').onsubmit=async e=>{e.preventDefault();const f=e.target,n=f.name.value.trim(),m=f.email.value.trim(),g=f.message.value.trim();
-$('#en').textContent=n?'':'Enter your name.';$('#ee').textContent=/^\S+@\S+\.\S+$/.test(m)?'':'Enter a valid email.';$('#em').textContent=g.length>9?'':'Write at least 10 characters.';
-if(!n||!/^\S+@\S+\.\S+$/.test(m)||g.length<10)return;
+$('#en').textContent=n?'':'Enter your name.';$('#ee').textContent=/^\S+@\S+\.\S+$/.test(m)?'':'Enter a valid email.';$('#em').textContent='';
+if(!n||!/^\S+@\S+\.\S+$/.test(m))return;
 try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}});$('#ok').textContent=r.ok?'Thanks. We will reply soon.':'Could not send right now. Please try the email button above.';if(r.ok)f.reset()}catch{$('#ok').textContent='Could not send. Please use WhatsApp or email.'}};
 
 // Slow, staged AMM workflow demo with a typed customer order and calm handoffs
