@@ -41,6 +41,7 @@ jobs:
           }
           check_page "https://amm-data-solutions-new.vercel.app/"
           check_page "https://amm-data-solutions-new.vercel.app/admin.html"
+          check_page "https://amm-data-solutions-new.vercel.app/privacy.html"
       - name: Check required production integrations are present
         shell: bash
         run: |
@@ -49,6 +50,12 @@ jobs:
           grep -q 'https://formspree.io/f/mgaojnap' <<< "$page"
           grep -q 'https://yvfumgrywsqhsvjfnmzu.supabase.co/rest/v1/review_feedback_submissions' <<< "$page"
           grep -q 'id="feedback-form"' <<< "$page"
+          grep -q 'name="_gotcha"' <<< "$page"
+          grep -q 'AbortController' <<< "$page"
+          grep -q 'Thank you for your feedback.' <<< "$page"
+          grep -q 'href="/privacy.html"' <<< "$page"
+          sitemap="$(curl --connect-timeout 10 --max-time 25 -fsS https://amm-data-solutions-new.vercel.app/sitemap.xml)"
+          grep -q 'https://amm-data-solutions-new.vercel.app/privacy.html' <<< "$sitemap"
       - name: Check approved-review API availability
         shell: bash
         env:
