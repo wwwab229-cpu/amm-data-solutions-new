@@ -1,0 +1,67 @@
+name: Production smoke monitoring
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: amm-production-smoke
+  cancel-in-progress: true
+
+jobs:
+  production-smoke:
+    name: Check live website and public review API
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check public pages and security headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_page() {
+            local url="$1"
+            local headers
+            local status
+            headers="$(mktemp)"
+            status="$(curl --connect-timeout 10 --max-time 25 -sS -D "$headers" -o /dev/null -w '%{http_code}' "$url")"
+            echo "$url -> HTTP $status"
+            if [ "$status" != "200" ]; then
+              cat "$headers"
+              rm -f "$headers"
+              return 1
+            fi
+            grep -qi '^content-security-policy:' "$headers"
+            grep -qi '^strict-transport-security:' "$headers"
+            grep -qi '^x-content-type-options: nosniff' "$headers"
+            rm -f "$headers"
+          }
+          check_page "https://amm-data-solutions-new.vercel.app/"
+          check_page "https://amm-data-solutions-new.vercel.app/admin.html"
+      - name: Check required production integrations are present
+        shell: bash
+        run: |
+          set -euo pipefail
+          page="$(curl --connect-timeout 10 --max-time 25 -fsS https://amm-data-solutions-new.vercel.app/)"
+          grep -q 'https://formspree.io/f/mgaojnap' <<< "$page"
+          grep -q 'https://yvfumgrywsqhsvjfnmzu.supabase.co/rest/v1/review_feedback_submissions' <<< "$page"
+          grep -q 'id="feedback-form"' <<< "$page"
+      - name: Check approved-review API availability
+        shell: bash
+        env:
+          SUPABASE_URL: https://yvfumgrywsqhsvjfnmzu.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk
+        run: |
+          set -euo pipefail
+          status="$(curl --connect-timeout 10 --max-time 25 -sS -o /dev/null -w '%{http_code}' \
+            -G "$SUPABASE_URL/rest/v1/review_feedback_submissions" \
+            --data-urlencode 'select=submission_type' \
+            --data-urlencode 'submission_type=eq.review' \
+            --data-urlencode 'status=eq.approved' \
+            --data-urlencode 'limit=1' \
+            -H "apikey: $SUPABASE_PUBLISHABLE_KEY")"
+          echo "Approved-review API -> HTTP $status"
+          test "$status" = "200"
