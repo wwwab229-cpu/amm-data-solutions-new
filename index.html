@@ -1249,6 +1249,15 @@ async function loadApprovedReviews(){
  }catch(error){/* Keep the accessible empty state if reviews cannot be loaded. */}
 }
 loadApprovedReviews();
+// Automatically rotate approved reviews without moving the page. Pause while visitors interact with the review card.
+const reviewSection=$('#feedback'), reviewCard=reviewSection?.querySelector('.card');
+if(reviewSection && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+ setInterval(()=>{
+  if(T.length<2 || document.hidden || reviewCard?.matches(':hover') || reviewCard?.contains(document.activeElement))return;
+  const rect=reviewSection.getBoundingClientRect();
+  if(rect.bottom>0 && rect.top<innerHeight)nextT();
+ },6000);
+}
 const openFeedback=$('#open-feedback'),feedbackPanel=$('#feedback-panel'),feedbackForm=$('#feedback-form');
 window.__ammFeedbackInteracting=false;
 openFeedback.addEventListener('click',(event)=>{
