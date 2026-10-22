@@ -13,7 +13,7 @@ main{width:min(100% - 32px,960px);margin:40px auto 72px}.brand{font-weight:800;l
 header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 h1{font-size:clamp(26px,4vw,38px);line-height:1.12;letter-spacing:-.04em;margin:8px 0}p{color:var(--muted)}.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,30px);box-shadow:0 12px 40px #1720190a}
 input,select,button{font:inherit}input[type=email]{width:100%;border:1px solid #cbd4c7;border-radius:12px;padding:13px 14px;background:#fff;color:var(--ink);margin:8px 0 14px}button{border:0;border-radius:999px;padding:11px 17px;font-weight:750;cursor:pointer;transition:transform .15s ease,opacity .15s ease}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #8da832;outline-offset:3px}button:disabled{opacity:.55;cursor:wait}.primary{background:var(--lime);color:#1b2415}.secondary{background:#eef1ea;color:var(--ink)}.approve{background:#e4f5e8;color:#205a34}.reject{background:#fbe8e6;color:#8d2929}.logout{background:#eef1ea;font-size:14px}
-.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.row>*{flex:0 0 auto}.row .primary{min-width:140px}.hidden{display:none!important}.notice{padding:12px 14px;border-radius:12px;background:#f0f4e8;color:#293b20;margin:14px 0}.notice.error{background:#fff0ee;color:#8d2929}.notice.success{background:#eef8e9;color:#245b3a}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:22px 0}.toolbar select{border:1px solid var(--line);border-radius:10px;background:#fff;padding:10px 12px}.count{font-size:13px;color:var(--muted)}.list{display:grid;gap:14px}.submission{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.submission-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}.tag{display:inline-block;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:#edf0e8;color:#455044}.tag.pending{background:#fff2c9;color:#76540b}.tag.approved{background:#e4f5e8;color:#205a34}.tag.rejected{background:#fbe8e6;color:#8d2929}.message{white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink);margin:14px 0}.meta{font-size:13px;color:var(--muted);display:flex;gap:8px 16px;flex-wrap:wrap}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed #cbd4c7;border-radius:16px}.small{font-size:13px}.star{color:#7a6000;letter-spacing:2px}@media(max-width:540px){main{width:min(100% - 20px,960px);margin:20px auto 48px}header{align-items:flex-start}.panel{border-radius:18px}.submission{padding:14px}.actions button{flex:1}}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.row>*{flex:0 0 auto}.row .primary{min-width:140px}.hidden{display:none!important}.notice{padding:12px 14px;border-radius:12px;background:#f0f4e8;color:#293b20;margin:14px 0}.notice.error{background:#fff0ee;color:#8d2929}.notice.success{background:#eef8e9;color:#245b3a}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:22px 0}.toolbar select{border:1px solid var(--line);border-radius:10px;background:#fff;padding:10px 12px}.count{font-size:13px;color:var(--muted)}.list{display:grid;gap:14px}.submission{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.submission-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}.tag{display:inline-block;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:#edf0e8;color:#455044}.tag.pending{background:#fff2c9;color:#76540b}.tag.approved{background:#e4f5e8;color:#205a34}.tag.rejected{background:#fbe8e6;color:#8d2929}.message{white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink);margin:14px 0}.meta{font-size:13px;color:var(--muted);display:flex;gap:8px 16px;flex-wrap:wrap}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed #cbd4c7;border-radius:16px}.small{font-size:13px}.star{color:#7a6000;letter-spacing:2px}.bulk-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 18px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fbfcf8}.bulk-toolbar label{display:flex;align-items:center;gap:8px;font-weight:700}.bulk-toolbar input{width:18px;height:18px;accent-color:#55732a}.bulk-toolbar .spacer{flex:1}.submission-select{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;color:var(--muted)}.submission-select input{width:18px;height:18px;accent-color:#55732a}@media(max-width:540px){.bulk-toolbar button{flex:1}}@media(max-width:540px){main{width:min(100% - 20px,960px);margin:20px auto 48px}header{align-items:flex-start}.panel{border-radius:18px}.submission{padding:14px}.actions button{flex:1}}
 </style>
 </head>
 <body>
@@ -28,7 +28,7 @@ input,select,button{font:inherit}input[type=email]{width:100%;border:1px solid #
 <section id="dashboard" class="hidden">
 <div class="panel"><div class="eyebrow">Moderation dashboard</div><h1>Feedback inbox</h1><p>Approve a review to publish it on the website, or reject it to keep it off the public site.</p>
 <div class="toolbar"><label for="statusFilter"><strong>Show</strong> <select id="statusFilter"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All submissions</option></select></label><span id="count" class="count" aria-live="polite"></span></div>
-<div id="dashboardNotice" class="notice hidden" role="status" aria-live="polite"></div><div id="submissions" class="list"><div class="empty">Loading submissions…</div></div>
+<div id="dashboardNotice" class="notice hidden" role="status" aria-live="polite"></div><div id="bulkToolbar" class="bulk-toolbar hidden"><label><input id="selectAllPending" type="checkbox"> Select all pending</label><span id="selectedCount" class="count">0 selected</span><span class="spacer"></span><button id="bulkApprove" class="approve" type="button" disabled>✓ Approve selected</button><button id="bulkReject" class="reject" type="button" disabled>✕ Reject selected</button></div><div id="submissions" class="list"><div class="empty">Loading submissions…</div></div>
 </div>
 </section>
 </main>
@@ -40,7 +40,8 @@ const ADMIN_EMAIL = 'ammdatasolutions229@gmail.com';
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 const loginPanel=document.querySelector('#loginPanel'),dashboard=document.querySelector('#dashboard'),logout=document.querySelector('#logout');
 const loginNotice=document.querySelector('#loginNotice'),dashboardNotice=document.querySelector('#dashboardNotice'),list=document.querySelector('#submissions'),filter=document.querySelector('#statusFilter'),count=document.querySelector('#count');
-let records=[];
+const bulkToolbar=document.querySelector('#bulkToolbar'),selectAllPending=document.querySelector('#selectAllPending'),selectedCount=document.querySelector('#selectedCount'),bulkApprove=document.querySelector('#bulkApprove'),bulkReject=document.querySelector('#bulkReject');
+let records=[];const selectedIds=new Set();
 function notice(el,msg,type='success'){el.textContent=msg;el.className='notice'+(type==='error'?' error':type==='success'?' success':'');}
 function clearNotice(el){el.textContent='';el.className='notice hidden';}
 function safeText(value){return value==null?'':String(value);}
@@ -56,12 +57,23 @@ async function adminRequest(payload){
 function element(tag,cls,text){const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node;}
 function render(){
  const status=filter.value;const shown=records.filter(r=>status==='all'||r.status===status);
+ const pendingShown=shown.filter(r=>r.status==='pending');
+ for(const id of [...selectedIds])if(!records.some(r=>r.id===id&&r.status==='pending'))selectedIds.delete(id);
+ bulkToolbar.classList.toggle('hidden',status!=='pending'||pendingShown.length===0);
+ const selectedVisible=pendingShown.filter(r=>selectedIds.has(r.id)).length;
+ selectedCount.textContent=selectedVisible+' selected';
+ selectAllPending.checked=pendingShown.length>0&&selectedVisible===pendingShown.length;
+ selectAllPending.indeterminate=selectedVisible>0&&selectedVisible<pendingShown.length;
+ bulkApprove.disabled=selectedVisible===0;bulkReject.disabled=selectedVisible===0;
  count.textContent=shown.length+' shown · '+records.filter(r=>r.status==='pending').length+' pending';
  list.replaceChildren();
  if(!shown.length){list.append(element('div','empty',status==='pending'?'No pending submissions. You’re all caught up.':'No submissions in this view.'));return;}
  for(const r of shown){
   const card=element('article','submission');const top=element('div','submission-top');const heading=element('div','');heading.append(element('strong','',r.submission_type==='review'?'Website review':'Feedback message'));
   const tag=element('span','tag '+r.status,r.status);top.append(heading,tag);card.append(top);
+  if(r.status==='pending'){
+   const selectLabel=element('label','submission-select');const check=element('input','');check.type='checkbox';check.checked=selectedIds.has(r.id);check.setAttribute('aria-label','Select submission from '+(safeText(r.display_name)||'Anonymous'));check.addEventListener('change',()=>{if(check.checked)selectedIds.add(r.id);else selectedIds.delete(r.id);render();});selectLabel.append(check,element('span','','Select for bulk action'));card.append(selectLabel);
+  }
   const message=element('p','message',safeText(r.message)||'(No written message)');
   if(Number(r.rating)>0)message.prepend(element('span','star','★'.repeat(Number(r.rating))+' '));
   card.append(message);
@@ -80,6 +92,27 @@ async function loadRecords(){
  try{const result=await adminRequest({action:'list'});records=Array.isArray(result.submissions)?result.submissions:[];render();}
  catch(err){notice(dashboardNotice,err.message,'error');list.replaceChildren(element('div','empty','Could not load submissions.'));if(/session|sign in/i.test(err.message))showSignedOut();}
 }
+async function bulkUpdate(status){
+ const ids=[...selectedIds].filter(id=>records.some(r=>r.id===id&&r.status==='pending')).slice(0,100);
+ if(!ids.length)return;
+ bulkApprove.disabled=true;bulkReject.disabled=true;selectAllPending.disabled=true;clearNotice(dashboardNotice);
+ try{
+  const result=await adminRequest({action:'bulk_update',ids,status});
+  const updatedIds=new Set((result.submissions||[]).map(r=>r.id));
+  records=records.map(r=>updatedIds.has(r.id)?{...r,status}:r);
+  ids.forEach(id=>selectedIds.delete(id));
+  render();
+  notice(dashboardNotice,(result.updated||0)+' submission(s) '+(status==='approved'?'approved. Approved reviews are now eligible to display on the website.':'rejected and kept off the public website.'));
+ }catch(err){notice(dashboardNotice,err.message,'error');}
+ finally{selectAllPending.disabled=false;render();}
+}
+selectAllPending.addEventListener('change',()=>{
+ const pending=records.filter(r=>r.status==='pending');
+ if(selectAllPending.checked)pending.forEach(r=>selectedIds.add(r.id));else pending.forEach(r=>selectedIds.delete(r.id));
+ render();
+});
+bulkApprove.addEventListener('click',()=>bulkUpdate('approved'));
+bulkReject.addEventListener('click',()=>bulkUpdate('rejected'));
 async function updateStatus(id,status,button){
  button.disabled=true;clearNotice(dashboardNotice);
  try{await adminRequest({action:'update',id,status});records=records.map(r=>r.id===id?{...r,status}:r);render();notice(dashboardNotice,status==='approved'?'Approved. Website reviews will be eligible to display.':'Rejected. This submission will stay off the public website.');}
