@@ -25,7 +25,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -s assets/tailwind.min.css
+          test -s dist/assets/tailwind.min.css
           ! grep -q 'cdn.tailwindcss.com' index.html
           python - <<'PY'
           import re
