@@ -133,3 +133,12 @@ This section records a second pass after the latest main-branch commit, `9bf4cc2
 The Playwright browser workflow now exercises feedback form opening/closing, 3-star selection (expects three filled stars and one selected radio), and a suggestion pill populating the text field on mobile and desktop. [Latest run passed](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/39949729708). This verifies client-side interactions only; it intentionally does not create production submissions.
 
 Supabase advisors rechecked after this run: performance advisor returned no findings; security advisor still reports `auth_leaked_password_protection` disabled. That setting remains an outstanding account-level action.
+
+
+## Live database verification — 23 October 2026 (additional pass)
+
+- Queried the live `public.review_feedback_submissions` table without retrieving or exposing review text or submitter names.
+- Current inventory: **2 approved reviews** and **8 pending reviews**; 1 approved and 4 pending entries have no star rating, which is valid under the intended optional-rating design.
+- RLS remains enabled. The two active policies are: public INSERT only for `review`/`feedback` rows with `status='pending'` and a nullable-or-1-to-5 rating; public SELECT only for `submission_type='review' AND status='approved'`.
+- Column grants permit the public client to submit and query the table, while row-level SELECT policy limits returned rows to approved reviews. The admin/service-role workflow remains a separate end-to-end check.
+- This is a live database state and policy check, **not** proof that the website submission UI successfully inserts records or that admin approval works end-to-end. The 8 pending submissions were not modified or approved as part of this audit.
