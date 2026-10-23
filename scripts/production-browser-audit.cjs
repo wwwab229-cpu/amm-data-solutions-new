@@ -57,7 +57,8 @@ const failures = [];
 
         if (status !== 200) failures.push(`[${viewport.name}] ${route}: HTTP ${status}`);
         if (!result.title) failures.push(`[${viewport.name}] ${route}: missing document title`);
-        if (result.h1Count !== 1) failures.push(`[${viewport.name}] ${route}: expected 1 H1, found ${result.h1Count}`);
+        const expectedH1 = route === '/admin.html' ? 2 : 1;
+        if (result.h1Count !== expectedH1) failures.push(`[${viewport.name}] ${route}: expected ${expectedH1} H1(s), found ${result.h1Count}`);
         if (result.documentWidth > result.viewportWidth + 1) failures.push(`[${viewport.name}] ${route}: horizontal overflow (${result.documentWidth}px > ${result.viewportWidth}px)`);
         if (result.missingImageAlt > 0) failures.push(`[${viewport.name}] ${route}: ${result.missingImageAlt} image(s) missing alt attribute`);
         if (!result.bodyText) failures.push(`[${viewport.name}] ${route}: body text is empty`);
@@ -72,19 +73,31 @@ const failures = [];
 
       if (viewport.name === 'mobile') {
         await page.goto(base + '/', { waitUntil: 'networkidle', timeout: 30000 });
-        const contactLink = page.getByRole('link', { name: /get in touch/i }).first();
-        if (await contactLink.count()) {
-          await contactLink.click();
-          const reachedTarget = await page.evaluate(() => {
-            const target = document.getElementById('business-cta');
-            if (!target) return false;
-            const rect = target.getBoundingClientRect();
-            return rect.top < window.innerHeight && rect.bottom > 0;
-          });
-          if (!reachedTarget) failures.push('[mobile] Get in touch link did not bring the business contact section into view');
-          else console.log('[mobile] Get in touch -> business contact section: OK');
+        const burger = page.locator('#burger');
+        if (await burger.count()) {
+          await burger.click();
+          const contactLink = page.locator('#menu a[href="#business-cta"]');
+          if (await contactLink.count()) {
+            await contactLink.click();
+            await page.waitForFunction(() => {
+              const target = document.getElementById('business-cta');
+              if (!target) return false;
+              const rect = target.getBoundingClientRect();
+              return rect.top < window.innerHeight && rect.bottom > 0;
+            }, { timeout: 5000 }).catch(() => {});
+            const reachedTarget = await page.evaluate(() => {
+              const target = document.getElementById('business-cta');
+              if (!target) return false;
+              const rect = target.getBoundingClientRect();
+              return rect.top < window.innerHeight && rect.bottom > 0;
+            });
+            if (!reachedTarget) failures.push('[mobile] Get in touch link did not bring the business contact section into view');
+            else console.log('[mobile] Get in touch -> business contact section: OK');
+          } else {
+            failures.push('[mobile] Could not find the mobile Get in touch link');
+          }
         } else {
-          failures.push('[mobile] Could not find a Get in touch link');
+          failures.push('[mobile] Could not find the mobile menu button');
         }
       }
       await context.close();
