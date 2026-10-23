@@ -12,7 +12,7 @@ The two source audits agree on the main opportunities: service discovery, mobile
 
 This implementation adds service-specific crawlable URLs and metadata, compiles Tailwind at build time instead of running the browser CDN, improves workflow contrast and keyboard access, aligns the workflow heading with its four visible stages, and strengthens response headers. These changes are designed to keep the homepage's existing purple/lavender, white and lime-green identity and layout intact.
 
-**Important status:** The remediation PR is merged. The GitHub build/static SEO workflow completed successfully on the PR head, and Vercel reported the preview deployment as Ready. This confirms build/deployment readiness, not visual parity or full production behaviour. Production smoke tests, post-change Lighthouse, Search Console indexing and end-to-end production tests remain outstanding.
+**Updated verification (23 October 2026):** The remediation is merged and the production smoke workflow passed. A Playwright browser audit also passed for all nine routes at 390px mobile and 1365px desktop widths: all pages returned HTTP 200, each had the expected H1/title, no horizontal overflow or missing image-alt attributes were detected, service-page canonical/description checks passed, no uncaught page errors were recorded, and the mobile Get in touch link reached the business contact section. This is automated browser coverage, not a full visual comparison or a Lighthouse measurement. Live form delivery, feedback submission/approval end-to-end, Search Console indexing and post-change Lighthouse remain outstanding.
 
 ## Source findings consolidated
 
@@ -44,12 +44,12 @@ This implementation adds service-specific crawlable URLs and metadata, compiles 
 | On-page metadata | Refined homepage title/description; added Open Graph and Twitter metadata | Clearer page summary and share metadata | Source updated; external preview validation pending |
 | Favicon | Added a branded SVG favicon file and linked it from the homepage | Replaces data-URI favicon with a stable asset | Browser verification pending |
 | Structured data | Added FAQPage JSON-LD for the visible homepage FAQs; kept existing Organization JSON-LD | Better machine-readable page context | JSON-LD validation pending |
-| Mobile enquiry | Made the existing hero support line a keyboard-accessible link to the existing contact section; no new visible button or layout element | Provides an above-the-fold contact path while preserving appearance | Browser/tap testing pending |
+| Mobile enquiry | Made the existing hero support line a keyboard-accessible link to the existing contact section; no new visible button or layout element | Provides an above-the-fold contact path while preserving appearance | Automated mobile menu navigation passed; hero-link keyboard/tap usability still needs manual confirmation |
 | Accessibility | Darkened workflow headings/supporting text and added visible focus treatment to the hero enquiry link | Better text contrast and keyboard discoverability | Re-measure contrast and keyboard-test after deployment |
 | Workflow consistency | Changed “Three Stages” to “Four Stages” to match the four visible workflow cards | Removes a factual inconsistency without changing the animation layout | Source updated |
 | Performance | Added a pinned Tailwind 3.4.17 build and changed the homepage to load generated local CSS instead of the browser Tailwind CDN | Removes the runtime CDN from the critical rendering path | CI and Vercel preview passed; Lighthouse gain not yet measured |
-| Security headers | Added HSTS and explicit noindex response header for `/admin.html`; disallowed admin page in robots.txt | More consistent HTTPS policy and reduced crawler discovery of admin URL | Config updated; production header checks pending |
-| Continuous checks | Added CI build/static checks and extended scheduled production smoke checks to the six service pages | Detects build, sitemap and endpoint regressions earlier | CI passed; production smoke workflow must run successfully |
+| Security headers | Added HSTS and explicit noindex response header for `/admin.html`; disallowed admin page in robots.txt | More consistent HTTPS policy and reduced crawler discovery of admin URL | Production smoke check passed for CSP, HSTS and `X-Content-Type-Options: nosniff`; admin noindex header should be separately rechecked if deployment configuration changes |
+| Continuous checks | Added CI build/static checks, production smoke checks and Playwright browser regression checks | Detects build, SEO, endpoint and mobile-layout regressions earlier | Build/static SEO, production smoke, and browser UX audit all passed on commit `214dfaf6e1242a9f313386e8d6a4be6ce6968751` |
 
 ## Live Supabase review/feedback check
 
@@ -59,15 +59,15 @@ The connected database reports `public.review_feedback_submissions` has RLS enab
 - Public roles have column-level SELECT/INSERT grants rather than broad table-level privileges.
 - The admin Edge Function independently checks the signed-in email and uses the service-role key only server-side.
 
-The audit-time migration history and matching source files record the approved-review read policy and cleanup of a duplicate insert policy. The duplicate was removed; the existing pending-only insert policy was retained. This check does **not** by itself prove that the public form succeeds end-to-end; submit and read behaviour must be smoke-tested without exposing pending submissions.
+The live `pg_policies` inspection on 23 October reconfirmed exactly two policies on this table: public INSERT for `review`/`feedback` only with `status='pending'` and a nullable-or-1-to-5 rating; public SELECT only for `submission_type='review' AND status='approved'`. The performance advisor returned no findings. This database-policy inspection does **not** prove that the public form succeeds end-to-end; submit and read behaviour must still be tested through the real client flow without exposing pending submissions.
 
 Supabase's security advisor also reports **Leaked Password Protection Disabled**. This setting remains outstanding and should be enabled in the Supabase Auth password-security settings. It is an account configuration task, not a website CSS change.
 
 ## Remaining risks / external dependencies
 
-1. **Production build and visual regression:** CI and Vercel preview builds passed. Compare the production homepage at desktop and 390px mobile against the existing look; the preview was not independently visually inspected in this audit.
+1. **Visual regression and accessibility:** automated browser checks passed on production at 390px mobile and 1365px desktop, with no horizontal overflow, missing image alt attributes, uncaught JavaScript errors, or broken mobile Get in touch navigation detected. A human visual comparison, keyboard-only review, and screen-reader pass remain outstanding.
 2. **Performance re-test:** rerun Lighthouse at least three times per device after deployment. Compare median LCP/CLS/TBT with the original single-run baseline; do not claim an improvement until measured.
-3. **Live form tests:** test Formspree contact delivery and anonymous feedback insertion, optional name/rating, success/error states, and public display of approved reviews. Do not create fake reviews or publish unapproved feedback.
+3. **Live form tests:** Formspree contact delivery and feedback submission/approval are not yet end-to-end verified. Test contact inbox delivery, anonymous feedback with and without a rating/name, success/error states, admin approval, and approved-only public display. Do not publish unapproved feedback.
 4. **Security verification:** confirm HSTS and all security headers on production, run Supabase advisors again, test that anonymous clients cannot read pending feedback or set status to approved, and verify admin login/approval flow.
 5. **Search Console:** verify property ownership, sitemap processing, indexed URL inventory, manual actions and crawl/indexing errors. This was not accessible from the supplied report.
 6. **Custom domain:** not changed because domain ownership and DNS configuration are not available in the repository. Choose and connect a domain before switching canonical URLs; then update sitemap, metadata, allowed Edge Function origins and Search Console together.
@@ -81,10 +81,12 @@ Supabase's security advisor also reports **Leaked Password Protection Disabled**
 **Status: REMEDIATION MERGED; FINAL LAUNCH APPROVAL STILL PENDING.**
 
 The merged release contains substantial fixes, but final production approval depends on:
-- green CI and Vercel preview build;
-- visual parity checks on desktop/mobile;
-- successful live contact and feedback tests;
-- confirmation of public RLS boundaries and admin moderation;
+- green build/static SEO, production smoke and automated browser UX workflows;
+- manual visual parity, keyboard and screen-reader checks on desktop/mobile;
+- successful live contact and feedback end-to-end tests;
+- admin approval/login verification and confirmation of public RLS boundaries;
+- resolve or formally accept the Supabase leaked-password-protection warning;
+- post-change Lighthouse and Search Console checksration;
 - production security-header checks;
 - repeat Lighthouse runs and Search Console verification.
 
@@ -117,3 +119,10 @@ This section records a second pass after the latest main-branch commit, `9bf4cc2
 5. Verify the sitemap and indexed URLs in Google Search Console. Search Console access and a custom domain are not part of the repository checks.
 
 **Updated status:** source-level audit, database policy review, production HTTP/header smoke checks, and build/static SEO checks are complete and green. Final launch sign-off remains conditional on the manual checks and the outstanding Supabase Auth warning above. No ranking or performance uplift is claimed without measurements.
+
+
+## Latest run links
+
+- [Production smoke monitoring — passed](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/39949561762)
+- [Website build and static SEO checks](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/39949561699)
+- [Browser UX regression audit — passed](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/39949561693)
