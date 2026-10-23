@@ -12,7 +12,7 @@ The two source audits agree on the main opportunities: service discovery, mobile
 
 This implementation adds service-specific crawlable URLs and metadata, compiles Tailwind at build time instead of running the browser CDN, improves workflow contrast and keyboard access, aligns the workflow heading with its four visible stages, and strengthens response headers. These changes are designed to keep the homepage's existing purple/lavender, white and lime-green identity and layout intact.
 
-**Updated verification (23 October 2026):** The remediation is merged and the production smoke workflow passed. A Playwright browser audit also passed for all nine routes at 390px mobile and 1365px desktop widths: all pages returned HTTP 200, each had the expected H1/title, no horizontal overflow or missing image-alt attributes were detected, service-page canonical/description checks passed, no uncaught page errors were recorded, and the mobile Get in touch link reached the business contact section. This is automated browser coverage, not a full visual comparison or a Lighthouse measurement. Live form delivery, feedback submission/approval end-to-end, Search Console indexing and post-change Lighthouse remain outstanding.
+**Updated verification (23 October 2026):** The remediation is merged and the production smoke workflow passed. A Playwright browser audit also passed for all nine routes at 390px mobile and 1365px desktop widths: all pages returned HTTP 200, each had the expected H1/title, no horizontal overflow or missing image-alt attributes were detected, service-page canonical/description checks passed, no uncaught page errors were recorded, the mobile Get in touch link reached the business contact section, and feedback-form open/close, 3-star selection and suggestion-pill interactions passed at both viewport sizes. This is automated browser coverage, not a full visual comparison or a Lighthouse measurement. Live form delivery, feedback submission/approval end-to-end, Search Console indexing and post-change Lighthouse remain outstanding.
 
 ## Source findings consolidated
 
@@ -65,7 +65,7 @@ Supabase's security advisor also reports **Leaked Password Protection Disabled**
 
 ## Remaining risks / external dependencies
 
-1. **Visual regression and accessibility:** automated browser checks passed on production at 390px mobile and 1365px desktop, with no horizontal overflow, missing image alt attributes, uncaught JavaScript errors, or broken mobile Get in touch navigation detected. A human visual comparison, keyboard-only review, and screen-reader pass remain outstanding.
+1. **Visual regression and accessibility:** automated browser checks passed on production at 390px mobile and 1365px desktop, with no horizontal overflow, missing image alt attributes, uncaught JavaScript errors, or broken mobile Get in touch navigation detected. Feedback panel open/close, cumulative star selection and suggestion pills also passed; the test did not submit or create production feedback. A human visual comparison, keyboard-only review, and screen-reader pass remain outstanding.
 2. **Performance re-test:** rerun Lighthouse at least three times per device after deployment. Compare median LCP/CLS/TBT with the original single-run baseline; do not claim an improvement until measured.
 3. **Live form tests:** Formspree contact delivery and feedback submission/approval are not yet end-to-end verified. Test contact inbox delivery, anonymous feedback with and without a rating/name, success/error states, admin approval, and approved-only public display. Do not publish unapproved feedback.
 4. **Security verification:** confirm HSTS and all security headers on production, run Supabase advisors again, test that anonymous clients cannot read pending feedback or set status to approved, and verify admin login/approval flow.
@@ -126,3 +126,10 @@ This section records a second pass after the latest main-branch commit, `9bf4cc2
 - [Production smoke monitoring — passed](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/39949561762)
 - [Website build and static SEO checks](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/39949561699)
 - [Browser UX regression audit — passed](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/39949561693)
+
+
+## Latest feedback UI regression test
+
+The Playwright browser workflow now exercises feedback form opening/closing, 3-star selection (expects three filled stars and one selected radio), and a suggestion pill populating the text field on mobile and desktop. [Latest run passed](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/39949729708). This verifies client-side interactions only; it intentionally does not create production submissions.
+
+Supabase advisors rechecked after this run: performance advisor returned no findings; security advisor still reports `auth_leaked_password_protection` disabled. That setting remains an outstanding account-level action.
