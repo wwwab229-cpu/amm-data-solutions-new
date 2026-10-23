@@ -78,9 +78,15 @@ const failures = [];
         const burger = page.locator('#burger');
         if (await burger.count()) {
           await burger.click();
+          if (await burger.getAttribute('aria-expanded') !== 'true' || await burger.getAttribute('aria-label') !== 'Close menu') {
+            failures.push(`[${viewport.name}] mobile menu open state or accessible label is incorrect`);
+          }
           const contactLink = page.locator('#menu a[href="#business-cta"]');
           if (await contactLink.count()) {
             await contactLink.click();
+            if (await burger.getAttribute('aria-expanded') !== 'false' || await burger.getAttribute('aria-label') !== 'Open menu') {
+              failures.push(`[${viewport.name}] mobile menu state did not reset after navigation`);
+            }
             await page.waitForFunction(() => {
               const target = document.getElementById('business-cta');
               if (!target) return false;
