@@ -1819,7 +1819,15 @@ window.addEventListener('load', () => {
     }catch(err){
       const count=$('feedback-average-count');
       if(count)count.textContent='Reviews are temporarily unavailable.';
-      // Keep any already-rendered review visible if the request fails.
+      const target=$('tq');
+      if(target && !rows.length){
+        target.replaceChildren();
+        const note=document.createElement('p');
+        note.className='mt-4 text-sm';
+        note.style.color='var(--muted)';
+        note.textContent='Reviews are temporarily unavailable. Please try again later.';
+        target.appendChild(note);
+      }
     }
   }
   function step(delta){if(rows.length<2)return;index=(index+delta+rows.length)%rows.length;render();}
