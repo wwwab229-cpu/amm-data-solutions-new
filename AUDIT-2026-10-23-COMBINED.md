@@ -89,3 +89,31 @@ The merged release contains substantial fixes, but final production approval dep
 - repeat Lighthouse runs and Search Console verification.
 
 No traffic, ranking, lead, or performance uplift is claimed before measurement.
+
+## Second-pass verification — 23 October 2026
+
+This section records a second pass after the latest main-branch commit, `9bf4cc2a3400063185750c8c82fc95432e728bf1`. It supersedes earlier statements that the production smoke workflow had not yet run, but does not replace the outstanding manual checks below.
+
+### Verified in source / database
+- All six service pages exist, each has one H1, a unique title, meta description, canonical URL, and two JSON-LD blocks that parse as valid JSON.
+- All six service pages are linked from the homepage, present in `sitemap.xml`, and referenced in `llms.txt`.
+- Homepage has one H1, a title, meta description, canonical URL, two parseable JSON-LD blocks, Formspree contact endpoint, Supabase feedback endpoint, and the requested feedback confirmation string.
+- The homepage contains no `tel:` or `wa.me` contact links. WhatsApp appears in informational FAQ copy only, not as a contact channel.
+- The review table has RLS enabled. The only public SELECT policy filters to `submission_type = 'review'` and `status = 'approved'`. The public INSERT policy accepts only `review` or `feedback` with `status = 'pending'`; optional ratings are null or 1–5.
+- Supabase performance advisor returned no findings. Security advisor still reports `auth_leaked_password_protection` as a warning.
+
+### Automated production checks — passed
+- GitHub Actions [Production smoke monitoring](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/39947045692) completed successfully on 23 October 2026.
+- The workflow returned HTTP 200 for the homepage, admin page, privacy page, and all six service pages; required Content-Security-Policy, HSTS, and `X-Content-Type-Options: nosniff` headers were present.
+- The workflow confirmed that the production HTML contains the expected Formspree and Supabase integrations and that the approved-review API responds HTTP 200.
+- GitHub Actions [Website build and static SEO checks](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/39947043804) completed successfully on the same commit, including dependency installation, Tailwind production CSS build, and page metadata checks.
+- The production smoke workflow now also runs on pushes to `main`, in addition to its scheduled checks and manual trigger.
+
+### Still required before calling the site fully launch-verified
+1. Enable Supabase Auth leaked-password protection in the project’s Auth security/password settings; the available database and project tools cannot change this Auth dashboard setting.
+2. Perform one real contact-form submission and confirm delivery to the intended inbox. The smoke check verifies the integration markup, not email delivery.
+3. Perform one real feedback submission and verify the pending row, success/error UI, and approved-only public display end-to-end. Do not publish test feedback or any pending submission.
+4. Re-run Lighthouse on production mobile and desktop, test keyboard-only navigation and reduced-motion behaviour, and inspect actual phone layouts. CI does not measure Core Web Vitals or visual parity.
+5. Verify the sitemap and indexed URLs in Google Search Console. Search Console access and a custom domain are not part of the repository checks.
+
+**Updated status:** source-level audit, database policy review, production HTTP/header smoke checks, and build/static SEO checks are complete and green. Final launch sign-off remains conditional on the manual checks and the outstanding Supabase Auth warning above. No ranking or performance uplift is claimed without measurements.
