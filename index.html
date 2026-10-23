@@ -1810,7 +1810,7 @@ window.addEventListener('load', () => {
   async function load(){
     const target=$('tq'); if(!target)return;
     try{
-      const response=await fetch(endpoint,{headers:{apikey:apiKey},cache:'no-store'});
+      const response=await fetch(endpoint,{headers:{apikey:apiKey,'Authorization':'Bearer '+apiKey,'Accept':'application/json'},cache:'no-store'});
       if(!response.ok)throw new Error('HTTP '+response.status);
       const data=await response.json();
       if(!Array.isArray(data))throw new Error('Unexpected response');
@@ -1843,8 +1843,8 @@ window.addEventListener('load', () => {
     }
   }
   function step(delta){if(rows.length<2)return;index=(index+delta+rows.length)%rows.length;render();}
-  document.addEventListener('DOMContentLoaded',load,{once:true});
-  if(document.readyState!=='loading')load();
+  // Script is at the end of the document; load once to avoid duplicate requests.
+  load();
   const prev=$('tp'),next=$('tn');
   if(prev)prev.addEventListener('click',()=>step(-1));
   if(next)next.addEventListener('click',()=>step(1));
