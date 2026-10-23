@@ -13,8 +13,10 @@ const routes = [
   '/services/data-management-data-entry.html',
 ];
 const viewports = [
-  { name: 'mobile', width: 390, height: 844, isMobile: true, hasTouch: true },
-  { name: 'desktop', width: 1365, height: 900, isMobile: false, hasTouch: false },
+  { name: 'mobile-320', width: 320, height: 740, isMobile: true, hasTouch: true },
+  { name: 'mobile-390', width: 390, height: 844, isMobile: true, hasTouch: true },
+  { name: 'tablet-768', width: 768, height: 1024, isMobile: true, hasTouch: true },
+  { name: 'desktop-1365', width: 1365, height: 900, isMobile: false, hasTouch: false },
 ];
 const failures = [];
 
@@ -71,7 +73,7 @@ const failures = [];
         page.off('pageerror', onPageError);
       }
 
-      if (viewport.name === 'mobile') {
+      if (viewport.isMobile) {
         await page.goto(base + '/', { waitUntil: 'networkidle', timeout: 30000 });
         const burger = page.locator('#burger');
         if (await burger.count()) {
@@ -144,6 +146,6 @@ const failures = [];
     for (const failure of failures) console.error(' - ' + failure);
     process.exitCode = 1;
   } else {
-    console.log('\nBrowser audit passed for all pages at mobile and desktop viewports.');
+    console.log('\nBrowser audit passed for all pages at 320px, 390px, 768px and 1365px viewports.');
   }
 })();
