@@ -1,0 +1,32 @@
+name: Browser UX regression audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "41 5 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: amm-browser-ux-audit
+  cancel-in-progress: true
+
+jobs:
+  browser-audit:
+    name: Mobile and desktop browser checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+      - name: Test production pages and mobile UX
+        run: node scripts/production-browser-audit.cjs
