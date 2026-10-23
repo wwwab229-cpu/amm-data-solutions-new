@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
 
 Sitemap: https://amm-data-solutions-new.vercel.app/sitemap.xml
