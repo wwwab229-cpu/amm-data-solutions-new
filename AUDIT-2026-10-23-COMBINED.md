@@ -142,3 +142,39 @@ Supabase advisors rechecked after this run: performance advisor returned no find
 - RLS remains enabled. The two active policies are: public INSERT only for `review`/`feedback` rows with `status='pending'` and a nullable-or-1-to-5 rating; public SELECT only for `submission_type='review' AND status='approved'`.
 - Column grants permit the public client to submit and query the table, while row-level SELECT policy limits returned rows to approved reviews. The admin/service-role workflow remains a separate end-to-end check.
 - This is a live database state and policy check, **not** proof that the website submission UI successfully inserts records or that admin approval works end-to-end. The 8 pending submissions were not modified or approved as part of this audit.
+
+
+## Release-readiness re-audit — 23 October 2026 (latest production release)
+
+### Additional source defects fixed
+- Fixed a fatal selector misuse in the homepage's main script: the mobile menu handler attempted to call `.forEach()` on the single element returned by `querySelector`. That exception prevented subsequent handlers in the same script from registering, including the feedback close control. It now iterates the menu links correctly.
+- Removed the feedback form's redundant inline submit handler; the registered JavaScript submit listener remains responsible for preventing native submission.
+- Set explicit `type="button"` on the mobile menu and review navigation buttons so they cannot accidentally submit a form if markup is rearranged.
+- Corrected a missing class selector in the service-detail overlay CSS, which could prevent the intended modal content overflow rules from applying.
+- Reset the mobile menu's accessible label when the Get in touch CTA navigates to the contact section.
+- Replaced non-standard `behavior: 'instant'` scroll options with `'auto'` in the position-preservation fallback.
+- Removed a redundant legacy bearer-token header from public feedback submission and use the Supabase publishable key through the `apikey` header for public reads. No service-role key is exposed in client code.
+
+### Production verification
+- Latest production release commit: `57c11a366a669c412737a8ca4752f5a0eab56d9f`; Vercel reports the deployment as READY and the production alias points to it.
+- [Production smoke monitoring — passed](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/40000954748).
+- [Website build and static SEO checks — passed](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/40000954931).
+- [Browser UX regression audit — passed](https://github.com/wwwab229-cpu/amm-data-solutions-new/actions/runs/40000954869).
+- Browser automation checked the nine public/admin routes at 320px, 390px, 768px and 1365px. All route requests returned HTTP 200; no horizontal overflow, missing image-alt attributes, or uncaught page errors were detected. Mobile navigation, contact navigation, service-detail overlay opening/closing, feedback panel opening/closing, three-star selection, suggestion pills, and visible approved-review rendering passed at the tested viewport sizes.
+- The browser test intentionally does not submit new production feedback or send contact emails. Those real-world delivery and moderation paths remain manual launch checks.
+
+### Database and security recheck
+- The review/feedback table contains 11 rows at the last inventory check, including 6 approved reviews. RLS remains enabled and public reads are restricted to approved review rows; public submissions remain pending until an administrator approves them.
+- Supabase performance advisor returned no findings. Existing indexes already support the approved-review query and admin moderation queue.
+- Supabase security advisor still reports **Leaked Password Protection Disabled**. This Auth setting cannot be changed through the connected project/database actions available during this pass; enable it in Supabase Auth password-security settings before launch.
+- Security headers remain present in production: Content-Security-Policy, HSTS, and `X-Content-Type-Options: nosniff`. The CSP still permits inline scripts/styles for the current single-file implementation; stricter hash/nonce-based CSP is a separate hardening change and must be regression-tested before removing those allowances.
+
+### Remaining launch sign-off items (not represented as completed)
+1. Send one real contact-form test and verify Formspree delivery to the intended inbox.
+2. Submit one test review, confirm its pending row, approve it through the admin flow, and confirm only the approved review appears publicly. Do not approve unrelated or real pending submissions as part of testing.
+3. Confirm the admin magic-link login and approval/rejection actions work with the production Supabase Auth redirect configuration.
+4. Enable Supabase leaked-password protection.
+5. Run fresh Lighthouse measurements on mobile and desktop and do keyboard-only/reduced-motion and screen-reader checks; browser automation does not replace these checks.
+6. Verify sitemap processing and indexing in Google Search Console. No ranking or performance uplift is claimed before measurement.
+
+**Current status:** source fixes and automated production checks are green; the site is technically improved and ready for the final controlled manual launch verification, but it is not honestly marked as fully launch-signed-off until the items above are completed.
