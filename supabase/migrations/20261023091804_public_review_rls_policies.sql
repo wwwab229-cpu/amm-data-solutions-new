@@ -12,5 +12,15 @@ USING (
   AND status = 'approved'
 );
 
--- The existing "Public can submit review feedback" policy is intentionally
--- retained. It allows review/feedback submissions only when status = pending.
+-- This temporary duplicate policy was removed by the next migration.
+DROP POLICY IF EXISTS "Public can submit pending feedback only"
+ON public.review_feedback_submissions;
+
+CREATE POLICY "Public can submit pending feedback only"
+ON public.review_feedback_submissions
+FOR INSERT
+TO anon, authenticated
+WITH CHECK (
+  status = 'pending'
+  AND submission_type IN ('review', 'feedback')
+);
