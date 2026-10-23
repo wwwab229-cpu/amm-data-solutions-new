@@ -73,7 +73,7 @@ const failures = [];
         page.off('pageerror', onPageError);
       }
 
-      if (viewport.isMobile) {
+      if (viewport.width < 768) {
         await page.goto(base + '/', { waitUntil: 'networkidle', timeout: 30000 });
         const burger = page.locator('#burger');
         if (await burger.count()) {
