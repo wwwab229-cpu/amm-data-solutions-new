@@ -1,0 +1,57 @@
+name: Website build and static SEO checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install pinned dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build production CSS
+        run: npm run build
+      - name: Verify production CSS and page metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s dist/assets/tailwind.min.css
+          ! grep -q 'cdn.tailwindcss.com' index.html
+          python - <<'PY'
+          import re
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          base = "https://amm-data-solutions-new.vercel.app"
+          pages = [
+              "index.html",
+              "services/ai-business-automation.html",
+              "services/ai-chatbots-customer-support.html",
+              "services/google-seo-ai-search-visibility.html",
+              "services/digital-advertising.html",
+              "services/website-design-digital-solutions.html",
+              "services/data-management-data-entry.html",
+          ]
+          for filename in pages:
+              html = Path(filename).read_text(encoding="utf-8")
+              assert re.search(r"<title>[^<]+</title>", html, re.I), f"{filename}: title missing"
+              assert re.search(r'<link rel="canonical" href="https://[^"]+"', html, re.I), f"{filename}: canonical missing"
+              assert len(re.findall(r"<h1\b", html, re.I)) == 1, f"{filename}: expected one H1"
+              assert "name=\"robots\"" in html, f"{filename}: robots meta missing"
+          sitemap = ET.parse("sitemap.xml").getroot()
+          urls = {node.text for node in sitemap.iter() if node.tag.endswith("loc")}
+          for filename in pages:
+              expected = base + ("/" if filename == "index.html" else "/" + filename)
+              assert expected in urls, f"sitemap missing {expected}"
+          print(f"Validated {len(pages)} public pages and {len(urls)} sitemap URLs.")
+          PY

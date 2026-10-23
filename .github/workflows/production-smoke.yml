@@ -42,6 +42,12 @@ jobs:
           check_page "https://amm-data-solutions-new.vercel.app/"
           check_page "https://amm-data-solutions-new.vercel.app/admin.html"
           check_page "https://amm-data-solutions-new.vercel.app/privacy.html"
+          check_page "https://amm-data-solutions-new.vercel.app/services/ai-business-automation.html"
+          check_page "https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html"
+          check_page "https://amm-data-solutions-new.vercel.app/services/google-seo-ai-search-visibility.html"
+          check_page "https://amm-data-solutions-new.vercel.app/services/digital-advertising.html"
+          check_page "https://amm-data-solutions-new.vercel.app/services/website-design-digital-solutions.html"
+          check_page "https://amm-data-solutions-new.vercel.app/services/data-management-data-entry.html"
       - name: Check required production integrations are present
         shell: bash
         run: |

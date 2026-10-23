@@ -1,8 +1,14 @@
 # AMM Data Solutions — Sitemap
 
-## Public website
-- [Homepage](https://amm-data-solutions-new.vercel.app/): Company overview and service introduction.
-- [Services](https://amm-data-solutions-new.vercel.app/#services): AI automation, chatbots, SEO, advertising, web solutions, and data management.
-- [Process](https://amm-data-solutions-new.vercel.app/#process): Overview of the delivery process and illustrative workflow.
-- [FAQs](https://amm-data-solutions-new.vercel.app/#faq): Common service questions.
-- [Contact](https://amm-data-solutions-new.vercel.app/#contact): Business inquiry form.
+Production base URL: https://amm-data-solutions-new.vercel.app/
+
+- Homepage: /
+- Privacy policy: /privacy.html
+- AI & Business Automation: /services/ai-business-automation.html
+- AI Chatbots & Customer Support: /services/ai-chatbots-customer-support.html
+- Google SEO & AI Search Visibility: /services/google-seo-ai-search-visibility.html
+- Digital Advertising: /services/digital-advertising.html
+- Website Design & Digital Solutions: /services/website-design-digital-solutions.html
+- Data Management & Data Entry: /services/data-management-data-entry.html
+
+The XML sitemap at /sitemap.xml is the machine-readable source for search engines. Keep this list and the XML sitemap aligned when pages change.
