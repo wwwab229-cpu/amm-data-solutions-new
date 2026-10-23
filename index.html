@@ -1275,7 +1275,7 @@ loadApprovedReviews();
   const scoreEl=$('#feedback-average-score'),starsEl=$('#feedback-average-stars'),countEl=$('#feedback-average-count');
   if(!scoreEl||!starsEl||!countEl)return;
   try{
-   const response=await fetch('https://yvfumgrywsqhsvjfnmzu.supabase.co/rest/v1/review_feedback_submissions?select=rating&submission_type=eq.review&status=eq.approved&rating=not.is.null&limit=1000',{
+   const response=await fetch('https://yvfumgrywsqhsvjfnmzu.supabase.co/rest/v1/review_feedback_submissions?select=rating&submission_type=eq.review&status=eq.approved&order=created_at.desc&limit=1000',{
     headers:{'apikey':'sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2ZnVtZ3dzaHN2amZubXp1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1NzE0NzgsImV4cCI6MjEwODE0NzQ3OH0.3CGgzgnq3mELazdraxvxbXIF_sJ6NM3V_i4zwxBvvr8'},cache:'no-store'
    });
    if(!response.ok)throw new Error('Average rating request failed');
