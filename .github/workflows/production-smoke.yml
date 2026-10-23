@@ -39,6 +39,11 @@ jobs:
             grep -qi '^content-security-policy:' "$headers"
             grep -qi '^strict-transport-security:' "$headers"
             grep -qi '^x-content-type-options: nosniff' "$headers"
+            if [[ "$url" == */admin.html ]]; then
+              grep -qi '^x-robots-tag: noindex, nofollow, noarchive' "$headers"
+              grep -Eqi '^cache-control:.*no-store' "$headers"
+              grep -qi '^pragma: no-cache' "$headers"
+            fi
             rm -f "$headers"
           }
           check_page "https://amm-data-solutions-new.vercel.app/"
