@@ -115,6 +115,18 @@ const failures = [];
         await openFeedback.click();
         const panel = page.locator('#feedback-panel');
         const panelVisible = await panel.isVisible();
+        const feedbackDiagnostic = await page.evaluate(() => {
+          const panel = document.querySelector('#feedback-panel');
+          const star = document.querySelector('#feedback-stars .feedback-star[data-rating="3"]');
+          const style = el => {
+            if (!el) return null;
+            const cs = getComputedStyle(el);
+            const r = el.getBoundingClientRect();
+            return { tag: el.tagName, id: el.id, className: el.className, display: cs.display, visibility: cs.visibility, opacity: cs.opacity, width: r.width, height: r.height };
+          };
+          return { panel: style(panel), star: style(star), starAncestors: star ? [star.parentElement, star.parentElement?.parentElement, star.parentElement?.parentElement?.parentElement].map(style) : [] };
+        });
+        console.log(`[${viewport.name}] feedback visibility diagnostic: ${JSON.stringify({ panelVisible, ...feedbackDiagnostic })}`);
         if (!panelVisible) failures.push(`[${viewport.name}] feedback form did not open`);
         const thirdStar = page.locator('#feedback-stars .feedback-star[data-rating="3"]');
         if (await thirdStar.count()) {
