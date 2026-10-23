@@ -1808,5 +1808,94 @@ window.addEventListener('load', () => {
 })();
 </script>
 
+
+<script>
+/* AMM_APPROVED_REVIEW_RENDERER_V2: independent approved-review renderer */
+(function(){
+  const endpoint='https://yvfumgrywsqhsvjfnmzu.supabase.co/rest/v1/review_feedback_submissions?select=display_name,business,rating,message&submission_type=eq.review&status=eq.approved&order=created_at.desc&limit=100';
+  const apiKey='sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk';
+  const $=id=>document.getElementById(id);
+  let rows=[],index=0;
+  function render(){
+    const target=$('tq'); if(!target)return;
+    target.replaceChildren();
+    if(!rows.length){
+      const note=document.createElement('p');
+      note.className='mt-4';
+      note.textContent='No approved feedback is available to display yet.';
+      target.appendChild(note);
+    } else {
+      const row=rows[index];
+      if(Number(row.rating)>=1&&Number(row.rating)<=5){
+        const stars=document.createElement('p');
+        stars.className='feedback-preview-stars mt-4';
+        stars.textContent='★'.repeat(Number(row.rating))+'☆'.repeat(5-Number(row.rating));
+        stars.setAttribute('aria-label',Number(row.rating)+' out of 5 stars');
+        target.appendChild(stars);
+      }
+      if(typeof row.message==='string'&&row.message.trim()){
+        const quote=document.createElement('p');
+        quote.className='text-xl md:text-2xl font-bold mt-4';
+        quote.style.cssText='overflow-wrap:anywhere;max-width:100%;line-height:1.5';
+        quote.textContent='“'+row.message.trim()+'”';
+        target.appendChild(quote);
+      } else {
+        const quote=document.createElement('p');
+        quote.className='text-xl md:text-2xl font-bold mt-4';
+        quote.textContent='Shared a rating without a written comment.';
+        target.appendChild(quote);
+      }
+      const name=document.createElement('p');
+      name.className='mt-4 font-semibold';
+      name.textContent=(row.display_name&&row.display_name.trim())?row.display_name.trim():'Anonymous';
+      target.appendChild(name);
+      if(row.business&&row.business.trim()){
+        const business=document.createElement('p');
+        business.className='text-sm mt-1';
+        business.style.color='var(--muted)';
+        business.textContent=row.business.trim();
+        target.appendChild(business);
+      }
+    }
+    target.style.cssText+=';display:block!important;visibility:visible!important;opacity:1!important;min-height:80px';
+    const prev=$('tp'),next=$('tn');
+    if(prev)prev.disabled=rows.length<2;
+    if(next)next.disabled=rows.length<2;
+  }
+  async function load(){
+    const target=$('tq'); if(!target)return;
+    try{
+      const response=await fetch(endpoint,{headers:{apikey:apiKey},cache:'no-store'});
+      if(!response.ok)throw new Error('HTTP '+response.status);
+      const data=await response.json();
+      if(!Array.isArray(data))throw new Error('Unexpected response');
+      rows=data.filter(r=>((typeof r.message==='string'&&r.message.trim())||(Number(r.rating)>=1&&Number(r.rating)<=5)));
+      index=0;render();
+      const score=$('feedback-average-score'),stars=$('feedback-average-stars'),count=$('feedback-average-count');
+      const ratings=rows.map(r=>Number(r.rating)).filter(n=>Number.isFinite(n)&&n>=1&&n<=5);
+      if(score&&stars&&count){
+        if(ratings.length){
+          const avg=ratings.reduce((a,b)=>a+b,0)/ratings.length;
+          score.textContent=avg.toFixed(1)+' / 5';
+          stars.textContent='★'.repeat(Math.round(avg))+'☆'.repeat(5-Math.round(avg));
+          count.textContent=ratings.length+' approved '+(ratings.length===1?'rating':'ratings')+' overall';
+        }else{
+          score.textContent='—';stars.textContent='☆☆☆☆☆';count.textContent='No approved ratings yet';
+        }
+      }
+    }catch(err){
+      const count=$('feedback-average-count');
+      if(count)count.textContent='Reviews are temporarily unavailable.';
+      // Keep any already-rendered review visible if the request fails.
+    }
+  }
+  function step(delta){if(rows.length<2)return;index=(index+delta+rows.length)%rows.length;render();}
+  document.addEventListener('DOMContentLoaded',load,{once:true});
+  if(document.readyState!=='loading')load();
+  const prev=$('tp'),next=$('tn');
+  if(prev)prev.addEventListener('click',()=>step(-1));
+  if(next)next.addEventListener('click',()=>step(1));
+})();
+</script>
 </body>
 </html>
