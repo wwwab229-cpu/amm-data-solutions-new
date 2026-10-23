@@ -118,6 +118,9 @@ const failures = [];
         if (!panelVisible) failures.push(`[${viewport.name}] feedback form did not open`);
         const thirdStar = page.locator('#feedback-stars .feedback-star[data-rating="3"]');
         if (await thirdStar.count()) {
+          // Opening the inline panel preserves the visitor's scroll position on the next animation frame.
+          await page.waitForTimeout(120);
+          await thirdStar.scrollIntoViewIfNeeded();
           await thirdStar.click();
           const ratingState = await page.locator('#feedback-stars .feedback-star').evaluateAll(nodes => nodes.map(n => ({ rating: n.dataset.rating, checked: n.getAttribute('aria-checked'), filled: n.classList.contains('is-filled') })));
           if (ratingState.filter(x => x.checked === 'true').length !== 1 || ratingState.filter(x => x.filled).length !== 3 || ratingState[2]?.checked !== 'true') {
