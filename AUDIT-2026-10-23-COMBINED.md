@@ -2,7 +2,8 @@
 
 **Audit date:** 23 October 2026  
 **Inputs:** Claude source-level audit notes and the seven-page Website & SEO Audit supplied by AMM Data Solutions  
-**Implementation branch:** `audit/combined-launch-readiness-fixes`  
+**Implementation PR:** [#39](https://github.com/wwwab229-cpu/amm-data-solutions-new/pull/39) — merged 23 October 2026
+**Production merge commit:** `d58485a79e501fb7868272e78297ebb43edb18cd`  
 **Scope:** Preserve the existing homepage design system, theme, colors, layout, service cards, contact flow and feedback experience while fixing verifiable issues.
 
 ## Executive assessment
@@ -11,7 +12,7 @@ The two source audits agree on the main opportunities: service discovery, mobile
 
 This implementation adds service-specific crawlable URLs and metadata, compiles Tailwind at build time instead of running the browser CDN, improves workflow contrast and keyboard access, aligns the workflow heading with its four visible stages, and strengthens response headers. These changes are designed to keep the homepage's existing purple/lavender, white and lime-green identity and layout intact.
 
-**Important status:** This is a remediation audit, not a final production sign-off. The code changes are on a review branch until the preview build and regression checks pass. Post-change Lighthouse results, Search Console indexing and end-to-end production tests must be measured after deployment.
+**Important status:** The remediation PR is merged. The GitHub build/static SEO workflow completed successfully on the PR head, and Vercel reported the preview deployment as Ready. This confirms build/deployment readiness, not visual parity or full production behaviour. Production smoke tests, post-change Lighthouse, Search Console indexing and end-to-end production tests remain outstanding.
 
 ## Source findings consolidated
 
@@ -37,18 +38,18 @@ This implementation adds service-specific crawlable URLs and metadata, compiles 
 
 | Area | Change | Expected benefit | Verification status |
 |---|---|---|---|
-| Service discovery | Added six dedicated service pages with unique titles, descriptions, canonical URLs, visible service details and FAQs | Search engines and visitors can reach each service directly | Static source checks pending CI |
-| Internal discovery | Service dialog now links to its matching full page; service cards and homepage layout remain | Connects existing card UX to crawlable URLs without redesigning cards | Browser regression pending |
-| Sitemap / AI discovery | Added all six service URLs to XML sitemap and updated `llms.txt` and human-readable sitemap | More complete public URL inventory | Static validation pending CI |
+| Service discovery | Added six dedicated service pages with unique titles, descriptions, canonical URLs, visible service details and FAQs | Search engines and visitors can reach each service directly | CI build/static checks passed on PR head |
+| Internal discovery | Service dialog now links to its matching full page; service cards and homepage layout remain | Connects existing card UX to crawlable URLs without redesigning cards | Vercel preview deployed; visual regression not independently verified |
+| Sitemap / AI discovery | Added all six service URLs to XML sitemap and updated `llms.txt` and human-readable sitemap | More complete public URL inventory | Sitemap and metadata static checks passed on PR head |
 | On-page metadata | Refined homepage title/description; added Open Graph and Twitter metadata | Clearer page summary and share metadata | Source updated; external preview validation pending |
 | Favicon | Added a branded SVG favicon file and linked it from the homepage | Replaces data-URI favicon with a stable asset | Browser verification pending |
 | Structured data | Added FAQPage JSON-LD for the visible homepage FAQs; kept existing Organization JSON-LD | Better machine-readable page context | JSON-LD validation pending |
 | Mobile enquiry | Made the existing hero support line a keyboard-accessible link to the existing contact section; no new visible button or layout element | Provides an above-the-fold contact path while preserving appearance | Browser/tap testing pending |
 | Accessibility | Darkened workflow headings/supporting text and added visible focus treatment to the hero enquiry link | Better text contrast and keyboard discoverability | Re-measure contrast and keyboard-test after deployment |
 | Workflow consistency | Changed “Three Stages” to “Four Stages” to match the four visible workflow cards | Removes a factual inconsistency without changing the animation layout | Source updated |
-| Performance | Added a pinned Tailwind 3.4.17 build and changed the homepage to load generated local CSS instead of the browser Tailwind CDN | Removes the runtime CDN from the critical rendering path | Vercel/CI build must pass; Lighthouse gain not yet measured |
-| Security headers | Added HSTS and explicit noindex response header for `/admin.html`; disallowed admin page in robots.txt | More consistent HTTPS policy and reduced crawler discovery of admin URL | Header checks run after production deployment |
-| Continuous checks | Added CI build/static checks and extended scheduled production smoke checks to the six service pages | Detects build, sitemap and endpoint regressions earlier | CI and production workflow must run successfully |
+| Performance | Added a pinned Tailwind 3.4.17 build and changed the homepage to load generated local CSS instead of the browser Tailwind CDN | Removes the runtime CDN from the critical rendering path | CI and Vercel preview passed; Lighthouse gain not yet measured |
+| Security headers | Added HSTS and explicit noindex response header for `/admin.html`; disallowed admin page in robots.txt | More consistent HTTPS policy and reduced crawler discovery of admin URL | Config updated; production header checks pending |
+| Continuous checks | Added CI build/static checks and extended scheduled production smoke checks to the six service pages | Detects build, sitemap and endpoint regressions earlier | CI passed; production smoke workflow must run successfully |
 
 ## Live Supabase review/feedback check
 
@@ -64,7 +65,7 @@ Supabase's security advisor also reports **Leaked Password Protection Disabled**
 
 ## Remaining risks / external dependencies
 
-1. **Production build and visual regression:** the Tailwind build pipeline must pass in CI and Vercel. Compare the deployed homepage at desktop and 390px mobile against the existing look before merging.
+1. **Production build and visual regression:** CI and Vercel preview builds passed. Compare the production homepage at desktop and 390px mobile against the existing look; the preview was not independently visually inspected in this audit.
 2. **Performance re-test:** rerun Lighthouse at least three times per device after deployment. Compare median LCP/CLS/TBT with the original single-run baseline; do not claim an improvement until measured.
 3. **Live form tests:** test Formspree contact delivery and anonymous feedback insertion, optional name/rating, success/error states, and public display of approved reviews. Do not create fake reviews or publish unapproved feedback.
 4. **Security verification:** confirm HSTS and all security headers on production, run Supabase advisors again, test that anonymous clients cannot read pending feedback or set status to approved, and verify admin login/approval flow.
@@ -77,9 +78,9 @@ Supabase's security advisor also reports **Leaked Password Protection Disabled**
 
 ## Launch decision
 
-**Status: NOT YET APPROVED — verification pending.**
+**Status: REMEDIATION MERGED; FINAL LAUNCH APPROVAL STILL PENDING.**
 
-The branch contains substantial fixes, but production approval depends on:
+The merged release contains substantial fixes, but final production approval depends on:
 - green CI and Vercel preview build;
 - visual parity checks on desktop/mobile;
 - successful live contact and feedback tests;
