@@ -1264,8 +1264,8 @@ async function loadApprovedReviews(){
   });
   if(!response.ok)return;
   const reviews=await response.json();
-  const publishableReviews=reviews.filter(r=>typeof r.message==='string'&&r.message.trim().length>0);
-  T.splice(0,T.length,...publishableReviews.map(r=>({name:r.display_name||'Anonymous',business:r.business||'',rating:Number(r.rating)||0,review:r.message.trim()})));
+  const publishableReviews=reviews.filter(r=>(typeof r.message==='string'&&r.message.trim().length>0)||(Number(r.rating)>=1&&Number(r.rating)<=5));
+  T.splice(0,T.length,...publishableReviews.map(r=>({name:r.display_name||'Anonymous',business:r.business||'',rating:Number(r.rating)||0,review:(typeof r.message==='string'&&r.message.trim())?r.message.trim():(Number(r.rating)>=1?'Shared a rating without a written comment.':'')})));
   ti=0;renderT();
  }catch(error){/* Keep the accessible empty state if reviews cannot be loaded. */}
 }
