@@ -229,6 +229,23 @@ button,a,input,textarea{touch-action:manipulation}
 @media(max-width:767px){#feedback-panel{padding:20px}.feedback-star{width:42px;height:42px}}
 @media(prefers-reduced-motion:reduce){.feedback-star{transition:none}}
 
+/* Mobile feedback/review visibility and text wrapping fix */
+#feedback{display:block;width:100%;min-width:0;visibility:visible}
+#feedback .wrap,#feedback .card,#feedback #tq{min-width:0;max-width:100%}
+#feedback #tq{display:block;width:100%;overflow-wrap:anywhere;word-break:normal}
+#feedback #tq>*{max-width:100%;min-width:0}
+#feedback-average{max-width:100%;box-sizing:border-box}
+#feedback-average .flex{flex-wrap:wrap}
+@media(max-width:767px){
+  #feedback{padding-bottom:48px}
+  #feedback .wrap{width:100%}
+  #feedback .card{padding:20px!important;overflow-wrap:anywhere}
+  #feedback #tq{font-size:1rem;line-height:1.65}
+  #feedback #tq .f{font-size:clamp(1.05rem,5vw,1.35rem);line-height:1.5;overflow-wrap:anywhere}
+  #feedback-average{padding:14px!important}
+  #feedback-rating-breakdown{min-width:0!important;width:100%}
+}
+
 /* AMM premium workflow: quiet motion, editorial shapes, clear visual storytelling */
 .amm-demo-label{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:11px 15px;border:1px solid #5b2ee81c;border-radius:999px;background:#fff;color:#585d78;font-size:.68rem;font-weight:800;letter-spacing:.09em;white-space:nowrap}
 .amm-live-dot{width:7px;height:7px;border-radius:50%;background:#55b98a;box-shadow:0 0 0 4px #55b98a1a}
