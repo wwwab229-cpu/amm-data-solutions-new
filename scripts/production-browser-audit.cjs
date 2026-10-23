@@ -100,6 +100,39 @@ const failures = [];
           failures.push('[mobile] Could not find the mobile menu button');
         }
       }
+      // Exercise the feedback controls without submitting or creating production records.
+      await page.goto(base + '/', { waitUntil: 'networkidle', timeout: 30000 });
+      const openFeedback = page.locator('#open-feedback');
+      if (await openFeedback.count()) {
+        await openFeedback.click();
+        const panel = page.locator('#feedback-panel');
+        const panelVisible = await panel.isVisible();
+        if (!panelVisible) failures.push(`[${viewport.name}] feedback form did not open`);
+        const thirdStar = page.locator('#feedback-stars .feedback-star[data-rating="3"]');
+        if (await thirdStar.count()) {
+          await thirdStar.click();
+          const ratingState = await page.locator('#feedback-stars .feedback-star').evaluateAll(nodes => nodes.map(n => ({ rating: n.dataset.rating, checked: n.getAttribute('aria-checked'), filled: n.classList.contains('is-filled') })));
+          if (ratingState.filter(x => x.checked === 'true').length !== 1 || ratingState.filter(x => x.filled).length !== 3 || ratingState[2]?.checked !== 'true') {
+            failures.push(`[${viewport.name}] feedback star selection did not set cumulative three-star rating correctly`);
+          } else {
+            console.log(`[${viewport.name}] feedback form open + 3-star selection: OK`);
+          }
+        } else {
+          failures.push(`[${viewport.name}] feedback star controls not found`);
+        }
+        const positivePill = page.locator('#feedback-positive .feedback-pill').first();
+        if (await positivePill.count()) {
+          await positivePill.click();
+          const reviewText = await page.locator('#feedback-review').inputValue();
+          if (!reviewText.trim()) failures.push(`[${viewport.name}] feedback suggestion did not populate the message field`);
+          else console.log(`[${viewport.name}] feedback suggestion pill: OK`);
+        }
+        await page.locator('#close-feedback').click();
+        if (await panel.isVisible()) failures.push(`[${viewport.name}] feedback form did not close`);
+      } else {
+        failures.push(`[${viewport.name}] feedback open button not found`);
+      }
+
       await context.close();
     }
   } finally {
