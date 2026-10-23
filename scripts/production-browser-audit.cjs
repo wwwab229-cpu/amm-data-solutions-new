@@ -135,6 +135,32 @@ const failures = [];
         failures.push(`[${viewport.name}] feedback open button not found`);
       }
 
+      // Check the service-details overlay fits and closes cleanly on each viewport.
+      const firstService = page.locator('#work [data-service-index="0"]');
+      if (await firstService.count()) {
+        await firstService.click();
+        const overlay = page.locator('.amm-service-overlay');
+        const visible = await overlay.isVisible().catch(() => false);
+        if (!visible) {
+          failures.push(`[${viewport.name}] service details overlay did not open`);
+        } else {
+          const bounds = await page.locator('.amm-service-dialog').evaluate(el => {
+            const r = el.getBoundingClientRect();
+            return { left: r.left, right: r.right, top: r.top, bottom: r.bottom, width: r.width, height: r.height, vw: innerWidth, vh: innerHeight };
+          });
+          if (bounds.left < -1 || bounds.right > bounds.vw + 1 || bounds.top < -1 || bounds.bottom > bounds.vh + 1) {
+            failures.push(`[${viewport.name}] service dialog exceeds viewport bounds: ${JSON.stringify(bounds)}`);
+          } else {
+            console.log(`[${viewport.name}] service details dialog fits viewport: OK`);
+          }
+          await page.locator('.amm-service-close').click();
+          await page.waitForTimeout(450);
+          if (await overlay.isVisible().catch(() => false)) failures.push(`[${viewport.name}] service details overlay did not close`);
+        }
+      } else {
+        failures.push(`[${viewport.name}] service card not found for overlay test`);
+      }
+
       await context.close();
     }
   } finally {
