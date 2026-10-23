@@ -1859,8 +1859,8 @@ window.addEventListener('load', () => {
     }
     target.style.cssText+=';display:block!important;visibility:visible!important;opacity:1!important;min-height:80px';
     const prev=$('tp'),next=$('tn');
-    if(prev)prev.disabled=rows.length<2;
-    if(next)next.disabled=rows.length<2;
+    if(prev){prev.hidden=rows.length<2;prev.disabled=rows.length<2;}
+    if(next){next.hidden=rows.length<2;next.disabled=rows.length<2;}
   }
   async function load(){
     const target=$('tq'); if(!target)return;
@@ -1895,6 +1895,10 @@ window.addEventListener('load', () => {
   const prev=$('tp'),next=$('tn');
   if(prev)prev.addEventListener('click',()=>step(-1));
   if(next)next.addEventListener('click',()=>step(1));
+  // Rotate reviews automatically without scrolling the page; pause when the visitor is interacting.
+  let rotationTimer=null;
+  function startRotation(){if(rotationTimer!==null)return;rotationTimer=setInterval(()=>{if(rows.length<2||document.hidden)return;const section=$('feedback');const card=section&&section.querySelector('.card');if(card&&(card.matches(':hover')||card.contains(document.activeElement)))return;step(1);},5000);}
+  startRotation();
 })();
 </script>
 </body>
