@@ -768,8 +768,9 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 #services .amm-stage.is-active .amm-window{border-color:var(--stage-accent)!important}
 #services .amm-stage.is-sending .amm-window{border-color:var(--stage-accent)!important}
 /* AMM service card detail overlay */
-.amm-service-card{appearance:none;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
-.amm-service-card:hover,.amm-service-card:focus-visible{transform:none!important;box-shadow:0 14px 34px rgba(35,24,74,.13)!important;border-color:#c8b9ff!important;outline:none}
+.amm-service-card{appearance:none;color:inherit;text-decoration:none;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.amm-service-card:hover{transform:none!important;box-shadow:0 14px 34px rgba(35,24,74,.13)!important;border-color:#c8b9ff!important}
+.amm-service-card:focus-visible{transform:none!important;box-shadow:0 14px 34px rgba(35,24,74,.13)!important;border-color:#c8b9ff!important;outline:3px solid #5b2ee8!important;outline-offset:3px!important}
 .amm-service-overlay{position:fixed;inset:0;z-index:9999;background:rgba(17,13,34,.64);backdrop-filter:none;-webkit-backdrop-filter:none;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .24s ease,visibility .24s ease}
 .amm-service-overlay.is-open{opacity:1;visibility:visible}
 .amm-service-overlay.is-closing{opacity:0;visibility:visible;transition:opacity .28s ease}
@@ -1064,42 +1065,42 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 <!-- 7. SERVICES -->
 <section id="work"><div class="wrap"><h2 class="mb-3" style="color:#171329"><span style="display:inline;padding:.045em .13em .09em;background:#FFD83D;color:#111111;-webkit-box-decoration-break:clone;box-decoration-break:clone;border-radius:.08em;box-shadow:0 .08em 0 #e8b91b">Explore Our Services</span></h2><p class="mb-10" style="color:#49445b;font-size:clamp(15px,1.6vw,18px);line-height:1.7;max-width:680px">Discover how AMM DS can simplify your work, spark new ideas, and turn possibilities into practical solutions.</p>
 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="0" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
+<a href="/services/ai-business-automation.html" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="0" aria-label="Explore AI and Business Automation" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#5b2ee8,#d6f25b)" aria-hidden="true"></div>
 <div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
 <div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">01 / AMM DS SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">AI & Business Automation</h3><p class="text-sm mt-2" style="color:#625d72">Automate repetitive work</p></div>
 <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
-</div></button>
-<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="1" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
+</div></a>
+<a href="/services/ai-chatbots-customer-support.html" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="1" aria-label="Explore AI Chatbots and Customer Support" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#d6f25b,#5b2ee8)" aria-hidden="true"></div>
 <div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
 <div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">02 / AMM DS SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">AI Chatbots & Customer Support</h3><p class="text-sm mt-2" style="color:#625d72">Helpful support, around the clock</p></div>
 <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
-</div></button>
-<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="2" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
+</div></a>
+<a href="/services/google-seo-ai-search-visibility.html" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="2" aria-label="Explore Google SEO and AI Search Visibility" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#5b2ee8,#b9a5ff)" aria-hidden="true"></div>
 <div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
 <div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">03 / AMM DS SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">Google SEO & AI Search Visibility</h3><p class="text-sm mt-2" style="color:#625d72">Be easier to discover</p></div>
 <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
-</div></button>
-<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="3" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
+</div></a>
+<a href="/services/digital-advertising.html" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="3" aria-label="Explore Digital Advertising" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#b9a5ff,#d6f25b)" aria-hidden="true"></div>
 <div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
 <div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">04 / AMM DS SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">Digital Advertising</h3><p class="text-sm mt-2" style="color:#625d72">Campaigns built around your goals</p></div>
 <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
-</div></button>
-<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="4" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
+</div></a>
+<a href="/services/website-design-digital-solutions.html" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="4" aria-label="Explore Website Design and Digital Solutions" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#d6f25b,#8fd6a8)" aria-hidden="true"></div>
 <div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
 <div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">05 / AMM DS SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">Website Design & Digital Solutions</h3><p class="text-sm mt-2" style="color:#625d72">Clear, responsive digital experiences</p></div>
 <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
-</div></button>
-<button type="button" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="5" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
+</div></a>
+<a href="/services/data-management-data-entry.html" class="card overflow-hidden rv aspect-square flex flex-col text-left amm-service-card" data-service-index="5" aria-label="Explore Data Management and Data Entry" style="background:#fff;border:1px solid #e8e4f4;box-shadow:0 8px 24px rgba(35,24,74,.06);cursor:pointer">
 <div class="w-full h-1.5 shrink-0" style="background:linear-gradient(90deg,#8fd6a8,#5b2ee8)" aria-hidden="true"></div>
 <div class="flex-1 flex flex-col justify-between p-4 sm:p-5" style="background:linear-gradient(145deg,#ffffff 0%,#fbfaff 100%)">
 <div><span class="text-xs font-bold tracking-widest" style="color:#5b2ee8">06 / AMM DS SERVICE</span><h3 class="f font-bold mt-3 text-lg sm:text-xl leading-snug" style="color:#171329">Data Management & Data Entry</h3><p class="text-sm mt-2" style="color:#625d72">Organized, dependable business data</p></div>
 <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:#5b2ee8">Explore service <span aria-hidden="true">↗</span></span>
-</div></button>
+</div></a>
 </div></div></section>
 
 <!-- 8. PROCESS -->
