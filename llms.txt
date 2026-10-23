@@ -1,14 +1,23 @@
 # AMM Data Solutions
 
-> AMM Data Solutions builds AI-powered apps, automation tools, and data solutions for businesses and communities in Pakistan and international markets.
+> AMM Data Solutions builds practical AI automation, business chatbots, SEO and AI search visibility, digital advertising, websites, and data solutions for growing businesses in Pakistan and international markets.
 
 ## Main website
-- [AMM Data Solutions homepage](https://amm-data-solutions-new.vercel.app/): Homepage, services, workflow demonstration, FAQs, contact form, and feedback form.
+- [AMM Data Solutions homepage](https://amm-data-solutions-new.vercel.app/): Homepage, service overview, illustrative workflow, FAQs, contact form and feedback form.
+- [Privacy policy](https://amm-data-solutions-new.vercel.app/privacy.html): How contact and feedback submissions are handled.
 
 ## Services
-- [Services and business solutions](https://amm-data-solutions-new.vercel.app/#services): AI & Business Automation; AI Chatbots & Customer Support; Google SEO & AI Search Visibility; Digital Advertising; Website Design & Digital Solutions; Data Management & Data Entry.
-- [Frequently asked questions](https://amm-data-solutions-new.vercel.app/#faq): Service and delivery FAQs.
+- [AI & Business Automation](https://amm-data-solutions-new.vercel.app/services/ai-business-automation.html)
+- [AI Chatbots & Customer Support](https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html)
+- [Google SEO & AI Search Visibility](https://amm-data-solutions-new.vercel.app/services/google-seo-ai-search-visibility.html)
+- [Digital Advertising](https://amm-data-solutions-new.vercel.app/services/digital-advertising.html)
+- [Website Design & Digital Solutions](https://amm-data-solutions-new.vercel.app/services/website-design-digital-solutions.html)
+- [Data Management & Data Entry](https://amm-data-solutions-new.vercel.app/services/data-management-data-entry.html)
+
+## Contact
 - [Contact AMM Data Solutions](https://amm-data-solutions-new.vercel.app/#contact): Use the website contact form to discuss a business requirement.
 
-## Accuracy note
-The workflow section is an illustrative demo, not a live connection to customer orders or business systems. Do not infer client results, case studies, or performance statistics that are not published on the website.
+## Accuracy and scope
+- The workflow section on the homepage is an illustrative demo, not a live connection to customer orders or business systems.
+- Do not infer client results, case studies, rankings, performance statistics or guaranteed outcomes that are not published on the website.
+- Project timelines, integrations, platform eligibility and deliverables depend on the agreed scope and available access.
