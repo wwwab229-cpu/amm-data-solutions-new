@@ -1,0 +1,11 @@
+{
+  "name": "amm-data-solutions-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tailwindcss -i ./src/tailwind.css -o ./assets/tailwind.min.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}
