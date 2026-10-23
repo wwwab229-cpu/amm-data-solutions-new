@@ -110,6 +110,20 @@ const failures = [];
       }
       // Exercise the feedback controls without submitting or creating production records.
       await page.goto(base + '/', { waitUntil: 'networkidle', timeout: 30000 });
+      // Ensure the approved-review renderer finishes loading instead of remaining blank.
+      await page.waitForFunction(() => {
+        const target = document.getElementById('tq');
+        return target && !target.innerText.includes('Loading approved reviews');
+      }, { timeout: 10000 }).catch(() => {});
+      const reviewText = (await page.locator('#tq').innerText().catch(() => '')).trim();
+      if (!reviewText || /temporarily unavailable|Loading approved reviews/i.test(reviewText)) {
+        failures.push(`[${viewport.name}] approved-review renderer did not reach a stable visible state`);
+      }
+      if (/No approved feedback is available/i.test(reviewText)) {
+        failures.push(`[${viewport.name}] no approved feedback rendered on the homepage`);
+      }
+      console.log(`[${viewport.name}] approved-review renderer: ${reviewText && !/temporarily unavailable|Loading approved reviews|No approved feedback/i.test(reviewText) ? 'OK' : 'FAILED'}`);
+
       const openFeedback = page.locator('#open-feedback');
       if (await openFeedback.count()) {
         await openFeedback.click();
