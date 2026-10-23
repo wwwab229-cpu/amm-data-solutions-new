@@ -1302,7 +1302,7 @@ $('#close-feedback').onclick=()=>{
 };
 let chosenRating=0;
 const ratingNames=['','Poor','Fair','Good','Very good','Excellent'];
-const starButtons=$('#feedback-stars .feedback-star');
+const starButtons=$$('#feedback-stars .feedback-star');
 function setRating(n){
  chosenRating=Math.max(0,Math.min(5,Number(n)||0));
  window.ammFeedbackRating=chosenRating;
