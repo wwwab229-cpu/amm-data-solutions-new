@@ -1263,8 +1263,8 @@ if (heroHeading && heroSubtitle && heroCursor) {
 }
 // navbar blur + mobile menu
 addEventListener('scroll',()=>{const n=$('#nav');n.style.background=scrollY>20?'#fafaffd9':'transparent';n.style.backdropFilter=scrollY>20?'blur(14px)':'none'});
-$('#burger').onclick=e=>{const m=$('#menu');m.classList.toggle('hidden');e.currentTarget.setAttribute('aria-expanded',!m.classList.contains('hidden'))};
-$$('#menu a').forEach(a=>a.onclick=()=>$('#menu').classList.add('hidden'));
+$('#burger').onclick=e=>{const m=$('#menu');m.classList.toggle('hidden');const expanded=!m.classList.contains('hidden');e.currentTarget.setAttribute('aria-expanded',String(expanded));e.currentTarget.setAttribute('aria-label',expanded?'Close menu':'Open menu')};
+$('#menu a').forEach(a=>a.addEventListener('click',()=>{$('#menu').classList.add('hidden');$('#burger')?.setAttribute('aria-expanded','false');$('#burger')?.setAttribute('aria-label','Open menu')}));
 // fade-up + counters
 const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.15});
 $$('.rv').forEach(e=>io.observe(e));
