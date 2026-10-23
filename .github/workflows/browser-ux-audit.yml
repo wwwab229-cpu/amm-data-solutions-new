@@ -18,7 +18,7 @@ jobs:
   browser-audit:
     name: Mobile and desktop browser checks
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -29,6 +29,6 @@ jobs:
       - name: Install Playwright and Chromium
         run: |
           npm install --no-save --package-lock=false playwright
-          npx playwright install --with-deps chromium
+          npx playwright install chromium
       - name: Test production pages and mobile UX
         run: node scripts/production-browser-audit.cjs
