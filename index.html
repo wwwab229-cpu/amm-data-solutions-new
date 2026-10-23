@@ -1648,6 +1648,20 @@ window.addEventListener('load', () => {
  if(!form || form.dataset.ammSubmitReady==='true') return;
  form.dataset.ammSubmitReady='true';
  const byId=id=>document.getElementById(id);
+ // Independent fallback: open the inline feedback form if its primary handler did not run.
+ if(!document.documentElement.dataset.ammFeedbackOpenFallback){
+  document.documentElement.dataset.ammFeedbackOpenFallback='true';
+  document.addEventListener('click',function(event){
+   const trigger=event.target&&event.target.closest?event.target.closest('#open-feedback'):null;
+   const panel=byId('feedback-panel');
+   if(!trigger||!panel||!panel.classList.contains('hidden'))return;
+   const keepY=window.scrollY;
+   panel.classList.remove('hidden');
+   trigger.setAttribute('aria-expanded','true');
+   window.__ammFeedbackInteracting=true;
+   requestAnimationFrame(()=>window.scrollTo({top:keepY,left:0,behavior:'instant'}));
+  },true);
+ }
  const status=byId('feedback-status');
  const submit=form.querySelector('button[type="submit"]');
  const setError=(id,message)=>{const el=byId(id);if(el)el.textContent=message;};
