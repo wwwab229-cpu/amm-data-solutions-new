@@ -1741,7 +1741,7 @@ window.addEventListener('load', () => {
    const ratingLabel=byId('feedback-rating-label');if(ratingLabel)ratingLabel.textContent='Add a star rating if you want, or leave it blank.';
    pills.forEach(p=>p.setAttribute('aria-pressed','false'));
    byId('feedback-preview')?.classList.add('hidden');
-   status.textContent='Thank you for your feedback.';
+   status.textContent='Thank you for your feedback';
    status.style.color='#166534';
    status.style.fontWeight='700';
    status.setAttribute('tabindex','-1');
