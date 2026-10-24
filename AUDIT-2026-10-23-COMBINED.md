@@ -186,3 +186,7 @@ Supabase advisors rechecked after this run: performance advisor returned no find
 - The social preview image is still SVG. A PNG Open Graph asset and metadata replacement remain outstanding; do not mark social-preview compatibility as resolved until a real PNG is committed and validated.
 - Production contact delivery, the full feedback moderation path, production admin magic-link login, Search Console indexing, and fresh Lighthouse runs require direct live verification. Source inspection or CI markup checks alone do not prove these end-to-end behaviors.
 - Supabase leaked-password protection remains an accepted free-plan limitation per the project owner; no plan upgrade was performed.
+
+
+### Owner-verified production checks (context update, 24 October 2026)
+The site owner has reported successful live testing of contact-form email delivery, feedback submission and approval/public display, and admin access in prior sessions. These are owner-verified checks, not independently repeated by the read-only audit author on 24 October. If any integration code/configuration changes, repeat the corresponding test.
