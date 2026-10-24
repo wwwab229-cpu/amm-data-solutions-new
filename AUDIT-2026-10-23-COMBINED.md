@@ -178,3 +178,11 @@ Supabase advisors rechecked after this run: performance advisor returned no find
 6. Verify sitemap processing and indexing in Google Search Console. No ranking or performance uplift is claimed before measurement.
 
 **Current status:** source fixes and automated production checks are green; the site is technically improved and ready for the final controlled manual launch verification, but it is not honestly marked as fully launch-signed-off until the items above are completed.
+
+
+## Follow-up actions — 24 October 2026
+
+- Replaced non-standard `behavior: 'instant'` scroll options in `index.html` with the standards-compatible `behavior: 'auto'`.
+- The social preview image is still SVG. A PNG Open Graph asset and metadata replacement remain outstanding; do not mark social-preview compatibility as resolved until a real PNG is committed and validated.
+- Production contact delivery, the full feedback moderation path, production admin magic-link login, Search Console indexing, and fresh Lighthouse runs require direct live verification. Source inspection or CI markup checks alone do not prove these end-to-end behaviors.
+- Supabase leaked-password protection remains an accepted free-plan limitation per the project owner; no plan upgrade was performed.
