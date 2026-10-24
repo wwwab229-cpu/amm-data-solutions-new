@@ -997,13 +997,20 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 
 /* Hide review navigation controls; reviews continue rotating automatically. */
 #tp,#tn{display:none!important;visibility:hidden!important}
+
+/* Official AMM Data Solutions wordmark placement */
+.amm-brand-link{display:inline-flex;align-items:center;flex:0 0 auto;line-height:0}
+.amm-brand-logo{display:block;width:clamp(108px,12vw,132px);height:auto;max-height:44px;object-fit:contain}
+.amm-footer-brand{min-width:0}
+.amm-footer-logo{display:block;width:clamp(160px,22vw,195px);height:auto;max-height:64px;object-fit:contain}
+@media(max-width:767px){.amm-brand-logo{width:108px;max-height:38px}.amm-footer-logo{width:170px}}
 </style>
 </head>
 <body>
 <!-- 1. NAVBAR -->
 <header id="nav" class="sticky top-0 z-50 transition" style="padding-top:env(safe-area-inset-top,0)">
 <div class="wrap flex items-center justify-between py-4">
-<a href="#top" class="f text-2xl font-extrabold" aria-label="AMM home">AMM<span class="v">.</span></a>
+<a href="#top" class="amm-brand-link" aria-label="AMM Data Solutions home"><img src="/amm-logo.svg" class="amm-brand-logo" width="130" height="43" alt="AMM Data Solutions"></a>
 <nav class="hidden md:flex gap-8 font-medium text-sm" aria-label="Main"><a href="#about">About</a><a href="#services">Services</a><a href="#process">Process</a><a href="#faq">FAQ</a></nav>
 <a href="#business-cta" class="btn btn-l hidden md:inline-flex">Get in touch</a>
 <button id="burger" type="button" class="md:hidden p-2" aria-label="Open menu" aria-expanded="false"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -1213,7 +1220,7 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 
 <!-- 13. FOOTER -->
 <footer class="dark" style="padding:48px 0 calc(32px + env(safe-area-inset-bottom,0))"><div class="wrap flex flex-col md:flex-row justify-between gap-6">
-<div><p class="f text-2xl font-extrabold">AMM<span style="color:var(--lime)">.</span></p><p class="text-sm opacity-70 mt-1">AMM Data Solutions<br>Let’s Make Solutions</p></div>
+<div class="amm-footer-brand"><img src="/amm-logo-light.svg" class="amm-footer-logo" width="190" height="62" alt="AMM Data Solutions"><p class="text-sm opacity-70 mt-2">Let’s Make Solutions</p></div>
 <nav class="flex flex-wrap gap-5 text-sm" aria-label="Footer"><a href="#services">Services</a><a href="#work">Work</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="/privacy.html">Privacy</a></nav></div>
 <p class="wrap text-xs opacity-60 mt-8">&copy; 2026 AMM Data Solutions. All rights reserved.</p></footer>
 
