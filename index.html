@@ -1035,6 +1035,44 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 .btn-l,.btn.secondary,.btn-o,#burger,.amm-service-close,.amm-service-page-link,.feedback-pill,.feedback-star{background:#D6F25B!important;color:#14172B!important;border-color:#D6F25B!important}
 .feedback-star[aria-checked=true],.feedback-pill[aria-pressed=true]{background:#5B2EE8!important;color:#fff!important;border-color:#5B2EE8!important}
 #hero-title{background:transparent;box-shadow:none;padding:0}
+
+/* Mobile header refinements */
+@media (max-width: 767px) {
+  #burger {
+    background: transparent !important;
+    color: #000 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none;
+    padding: 8px !important;
+    min-width: 40px;
+    min-height: 40px;
+  }
+  #burger svg {
+    stroke: #000 !important;
+  }
+  #burger:hover,
+  #burger:focus,
+  #burger:focus-visible,
+  #burger:active {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  #menu a.btn,
+  #menu a.btn-l,
+  #menu a.btn.secondary {
+    align-self: flex-start;
+    width: auto;
+    min-height: 40px;
+    padding: 8px 16px !important;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+}
+
 </style>
 </head>
 <body>
