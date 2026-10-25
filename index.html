@@ -1005,6 +1005,39 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 .amm-footer-brand{min-width:0}
 .amm-footer-wordmark{color:#fff;font-weight:900;letter-spacing:-.035em;font-size:clamp(18px,2vw,24px);line-height:1.2}
 @media(max-width:767px){.amm-brand-wordmark{font-size:16px}.amm-footer-wordmark{font-size:20px}}
+
+/* AMM DS brand consistency: purple/lime actions and yellow heading highlights */
+:where(a.btn, button.btn, .amm-service-cta, .amm-service-page-link) {
+  border-color: #5B2EE8;
+}
+:where(a.btn:not(.btn-l):not(.secondary), button.btn:not(.btn-l):not(.secondary), .amm-service-cta) {
+  background: #5B2EE8 !important;
+  color: #ffffff !important;
+}
+:where(a.btn-l, button.btn-l, a.btn.secondary, button.btn.secondary, .btn-o, #burger, .amm-service-close, .feedback-pill, .feedback-star, .amm-service-page-link) {
+  background: #D6F25B !important;
+  color: #14172B !important;
+  border-color: #D6F25B !important;
+}
+:where(.feedback-star[aria-checked="true"], .feedback-pill[aria-pressed="true"]) {
+  background: #5B2EE8 !important;
+  color: #ffffff !important;
+  border-color: #5B2EE8 !important;
+}
+:where(a.btn, button.btn, .btn-o, #burger, .amm-service-cta, .amm-service-page-link, .amm-service-close, .feedback-pill, .feedback-star) {
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+:where(a.btn, button.btn, .btn-o, #burger, .amm-service-cta, .amm-service-page-link, .amm-service-close):hover {
+  box-shadow: 0 8px 20px rgba(91, 46, 232, .16);
+}
+:where(h1:not(#hero-title), h2:not(.hero-support-line), h3) {
+  width: fit-content;
+  max-width: 100%;
+  background-image: linear-gradient(transparent 64%, #FFD83D 64%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 </style>
 </head>
 <body>
