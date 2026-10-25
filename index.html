@@ -1061,18 +1061,16 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
     box-shadow: none !important;
     outline: none !important;
   }
-  #menu a.btn,
-  #menu a.btn-l,
-  #menu a.btn.secondary {
-    align-self: flex-start;
-    width: auto;
-    min-height: 40px;
-    padding: 8px 16px !important;
-    font-size: 14px;
-    line-height: 1.2;
-  }
 }
 
+
+  #nav > .wrap > a.btn-l {
+    min-height: 36px;
+    padding: 7px 12px !important;
+    font-size: 13px;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
 </style>
 </head>
 <body>
@@ -1084,7 +1082,7 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 <a href="#business-cta" class="btn btn-l hidden md:inline-flex">Get in touch</a>
 <button id="burger" type="button" class="md:hidden p-2" aria-label="Open menu" aria-expanded="false"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </div>
-<div id="menu" class="hidden md:hidden wrap pb-4"><div class="card p-4 flex flex-col gap-3 font-semibold"><a href="#about">About</a><a href="#services">Services</a><a href="#process">Process</a><a href="#faq">FAQ</a><a href="#business-cta" class="btn btn-l justify-center">Get in touch</a></div></div>
+<div id="menu" class="hidden md:hidden wrap pb-4"><div class="card p-4 flex flex-col gap-3 font-semibold"><a href="#about">About</a><a href="#services">Services</a><a href="#process">Process</a><a href="#faq">FAQ</a></div></div>
 </header>
 
 <main id="top">
