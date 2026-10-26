@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" role="img" aria-labelledby="title"><title id="title">AMM Data Solutions</title><rect width="900" height="460" fill="none"/><g fill="#000"><path d="M30 315 150 45h74l120 270h-75l-25-61H130l-25 61Zm124-120h68l-34-83Z"/><path d="M370 315V45h78l82 143 82-143h78v270h-72V158l-67 114h-42l-67-114v157Z"/><path d="M670 315V45h78l82 143 40-70v197h-72V158l-67 114h-42l-67-114v157Z"/></g><path d="M125 215h145l-18 42H107Z" fill="#FFC107"/><text x="30" y="430" font-family="Arial,Helvetica,sans-serif" font-size="105" font-weight="700" letter-spacing="-3" fill="#000">Data Solutions</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 610" role="img" aria-labelledby="title desc">
+  <title id="title">AMM Data Solutions</title>
+  <desc id="desc">Black AMM wordmark with a yellow bar across the A and Data Solutions beneath.</desc>
+  <rect width="1200" height="610" fill="#fff"/>
+  <path fill="#000" fill-rule="evenodd" d="M60 340 200 30h78l140 310h-82l-29-70H171l-29 70Zm142-140h75l-38-91Z"/>
+  <path fill="#FFC107" d="M158 222h220l-18 43H140Z"/>
+  <path fill="#000" d="M430 340V30h78l99 169L706 30h78v310h-75V151l-82 130h-40l-82-130v189Z"/>
+  <path fill="#000" d="M810 340V30h78l99 169L1086 30h78v310h-75V151l-82 130h-40l-82-130v189Z"/>
+  <text x="58" y="550" font-family="Arial, Helvetica, sans-serif" font-size="108" font-weight="500" letter-spacing="-3" fill="#000">Data Solutions</text>
+</svg>
