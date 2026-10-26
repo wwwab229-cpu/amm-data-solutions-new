@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="610" viewBox="0 0 1200 610" role="img" aria-labelledby="title desc">
+  <title id="title">AMM Data Solutions</title>
+  <desc id="desc">The AMM Data Solutions wordmark: bold black AMM letters, a yellow stripe through the A, and Data Solutions underneath.</desc>
+  <rect width="1200" height="610" fill="#fff"/>
+  <text x="48" y="344" font-family="Arial Black,Arial,Helvetica,sans-serif" font-size="390" font-weight="900" letter-spacing="-18" textLength="1100" lengthAdjust="spacingAndGlyphs" fill="#000">AMM</text>
+  <rect x="112" y="213" width="274" height="57" fill="#FFC107"/>
+  <text x="58" y="548" font-family="Arial,Helvetica,sans-serif" font-size="116" font-weight="500" letter-spacing="-2.5" fill="#000">Data Solutions</text>
+</svg>
