@@ -22,34 +22,40 @@
   const send=root.querySelector('#amm-webbot-send'),status=root.querySelector('#amm-webbot-status'),language=root.querySelector('#amm-webbot-language');
   const history=[];
   const tip=root.querySelector('#amm-webbot-tip'),tipText=root.querySelector('#amm-webbot-tip-text'),tipDismiss=root.querySelector('#amm-webbot-tip-dismiss');
-  let tipShown=false, scrollTipTimer=null;
+  let tipShown=false, scrollTipTimer=null, hideTipTimer=null, lastTipY=-900, tipIndex=0;
   const path=window.location.pathname.toLowerCase();
   function getGuidance(){
-    if(path.includes('ai-chatbots'))return ['Want to see what an AI chatbot can do? 🤖','Ask me about customer support, lead capture, or multilingual bots.'];
-    if(path.includes('ai-business-automation'))return ['Less repetitive work, more time for business ✨','I can explain how automation may fit your workflow.'];
-    if(path.includes('google-seo'))return ['Curious how customers find you online? 🔎','Ask me about Google SEO and AI search visibility.'];
-    if(path.includes('digital-advertising'))return ['Planning your next campaign? 📣','I can explain our ad service and what details matter.'];
-    if(path.includes('data-management'))return ['Messy spreadsheets? We can help tidy the data 📊','Ask about data entry, cleanup, and quality checks.'];
-    if(path.includes('website-design'))return ['Thinking about a website refresh? ✨','I can guide you through website and digital-solution options.'];
-    if(path.includes('pricing'))return ['Need help understanding starting prices? 💡','Tap me and I’ll explain estimates versus a final quote.'];
-    if(path.includes('privacy'))return ['Have a question about sharing information? 🔒','I can explain what to avoid sharing in this chat.'];
-    const headings=Array.from(document.querySelectorAll('main h1, main h2, section h1, section h2')).map(el=>(el.textContent||'').trim().toLowerCase());
-    if(headings.some(h=>/contact|need a solution|talk to/.test(h)))return ['Ready to talk through an idea? 💬','I can help you figure out what to discuss with AMM.'];
-    if(headings.some(h=>/service|what we do|solutions/.test(h)))return ['Not sure which service fits? 👀','Tell me your goal and I’ll help narrow down the options.'];
-    return ['Exploring AMM Data Solutions? 👋','I can guide you through services, starting prices, and next steps.'];
+    let first='Exploring AMM Data Solutions? 👋',second='I can guide you through services, starting prices, and next steps.',third='Have a question about your project? Tap me and let’s figure it out 💬';
+    if(path.includes('ai-chatbots')){first='Want to see what an AI chatbot can do? 🤖';second='Ask me about customer support, lead capture, or multilingual bots.';third='Every chatbot can be tailored to the client’s needs ✨';}
+    else if(path.includes('ai-business-automation')){first='Less repetitive work, more time for business ✨';second='I can explain how automation may fit your workflow.';third='Tell me what task takes too much time 💬';}
+    else if(path.includes('google-seo')){first='Curious how customers find you online? 🔎';second='Ask me about Google SEO and AI search visibility.';third='SEO takes a clear plan—rankings can’t be guaranteed.';}
+    else if(path.includes('digital-advertising')){first='Planning your next campaign? 📣';second='I can explain our ad service and what details matter.';third='Ad spend is separate from our service fee 💡';}
+    else if(path.includes('data-management')){first='Messy spreadsheets? We can help tidy the data 📊';second='Ask about data entry, cleanup, and quality checks.';third='You can describe your data task without sharing private records 🔒';}
+    else if(path.includes('website-design')){first='Thinking about a website refresh? ✨';second='I can guide you through website and digital-solution options.';third='Tell me what you want your website to help people do 💬';}
+    else if(path.includes('pricing')){first='Need help understanding starting prices? 💡';second='These are estimates; the final quote depends on scope.';third='I can help you identify which service may fit your goal.';}
+    else if(path.includes('privacy')){first='Have a question about sharing information? 🔒';second='Please don’t share passwords or sensitive details in chat.';third='Ask me about the bot’s basic privacy approach.';}
+    else {
+      const headings=Array.from(document.querySelectorAll('main h1, main h2, section h1, section h2')).map(el=>(el.textContent||'').trim().toLowerCase());
+      if(headings.some(h=>/contact|need a solution|talk to/.test(h))){first='Ready to talk through an idea? 💬';second='I can help you figure out what to discuss with AMM.';third='Project details are reviewed before a final quote is confirmed.';}
+      else if(headings.some(h=>/service|what we do|solutions/.test(h))){first='Not sure which service fits? 👀';second='Tell me your goal and I’ll help narrow down the options.';third='You can ask me about any of AMM’s six services.';}
+    }
+    return [first,second,third];
   }
   function showTip(){
-    if(tipShown||!panel.hidden||sessionStorage.getItem('ammBotTipsDismissed')==='1')return;
-    const key='ammBotTipSeen:'+path;
-    if(sessionStorage.getItem(key)==='1')return;
+    if(tipShown||!panel.hidden||window.scrollY<180||tipIndex>=3)return;
+    const key='ammBotTipSeen:'+path+':'+tipIndex;
+    if(sessionStorage.getItem(key)==='1'){tipIndex++;return;}
     const tips=getGuidance();
-    tipText.textContent=tips[Math.min(Math.floor(window.scrollY/850),tips.length-1)];
-    tip.hidden=false;tipShown=true;sessionStorage.setItem(key,'1');
+    tipText.textContent=tips[tipIndex];
+    tip.hidden=false;tipShown=true;lastTipY=window.scrollY;
+    sessionStorage.setItem(key,'1');
+    if(hideTipTimer)clearTimeout(hideTipTimer);
+    hideTipTimer=setTimeout(()=>{tip.hidden=true;tipShown=false;},6500);
   }
-  function dismissTip(){tip.hidden=true;sessionStorage.setItem('ammBotTipsDismissed','1');}
+  function dismissTip(){tip.hidden=true;tipShown=false;tipIndex++;if(hideTipTimer)clearTimeout(hideTipTimer);}
   tipDismiss.addEventListener('click',dismissTip);
   window.addEventListener('scroll',()=>{
-    if(tipShown||!panel.hidden||window.scrollY<180)return;
+    if(!panel.hidden||tipShown||tipIndex>=3||window.scrollY<180||window.scrollY-lastTipY<700)return;
     if(scrollTipTimer)clearTimeout(scrollTipTimer);
     scrollTipTimer=setTimeout(showTip,450);
   },{passive:true});
