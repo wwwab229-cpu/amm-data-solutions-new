@@ -1,0 +1,36 @@
+/* AMM custom website assistant — isolated styles; no global selectors */
+#amm-webbot-root{font-family:inherit;color:#171717}
+#amm-webbot-root *{box-sizing:border-box}
+#amm-webbot-launcher{position:fixed;right:22px;bottom:22px;z-index:9998;display:flex;align-items:center;gap:10px;min-height:54px;padding:0 19px;border:1px solid #171717;border-radius:999px;background:#ffc107;color:#111;font:700 14px/1.2 inherit;box-shadow:0 8px 28px #0002;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
+#amm-webbot-launcher:hover{transform:translateY(-2px);box-shadow:0 12px 32px #0003}
+#amm-webbot-launcher:focus-visible,#amm-webbot-panel button:focus-visible,#amm-webbot-panel input:focus-visible,#amm-webbot-panel select:focus-visible{outline:3px solid #111;outline-offset:3px}
+#amm-webbot-launcher .amm-bot-dot{width:9px;height:9px;border-radius:50%;background:#111;box-shadow:0 0 0 4px #1111}
+#amm-webbot-panel{position:fixed;right:22px;bottom:88px;z-index:9999;display:flex;flex-direction:column;width:min(390px,calc(100vw - 28px));height:min(590px,calc(100dvh - 120px));min-height:350px;overflow:hidden;border:1px solid #dedede;border-radius:22px;background:#fff;box-shadow:0 18px 60px #0002}
+#amm-webbot-panel[hidden]{display:none}
+#amm-webbot-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 17px;background:#171717;color:#fff}
+#amm-webbot-heading{margin:0;font-size:15px;font-weight:800;line-height:1.3}
+#amm-webbot-subheading{margin:4px 0 0;color:#dedede;font-size:12px;line-height:1.4}
+#amm-webbot-close{display:grid;place-items:center;width:34px;height:34px;flex:0 0 auto;border:1px solid #ffffff50;border-radius:50%;background:transparent;color:#fff;font-size:21px;cursor:pointer}
+#amm-webbot-tools{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid #eee;background:#fafafa}
+#amm-webbot-language{width:100%;min-width:0;padding:7px 9px;border:1px solid #d8d8d8;border-radius:9px;background:#fff;color:#222;font:inherit;font-size:12px}
+#amm-webbot-status{margin-left:auto;white-space:nowrap;color:#555;font-size:11px}
+#amm-webbot-messages{display:flex;flex:1;flex-direction:column;gap:10px;overflow:auto;padding:15px;background:#fff;overscroll-behavior:contain}
+.amm-bot-message{max-width:90%;padding:10px 12px;border-radius:15px;font-size:13px;line-height:1.55;overflow-wrap:anywhere;white-space:pre-wrap}
+.amm-bot-message.assistant{align-self:flex-start;border:1px solid #e8e8e8;border-bottom-left-radius:5px;background:#f7f7f7;color:#202020}
+.amm-bot-message.user{align-self:flex-end;border-bottom-right-radius:5px;background:#ffc107;color:#111}
+.amm-bot-message a{color:inherit;text-decoration:underline}
+#amm-webbot-quick-prompts{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 12px}
+#amm-webbot-quick-prompts button{padding:7px 10px;border:1px solid #dedede;border-radius:999px;background:#fff;color:#222;font:inherit;font-size:11px;cursor:pointer}
+#amm-webbot-quick-prompts button:hover{border-color:#b28a00;background:#fff9e3}
+#amm-webbot-form{display:flex;align-items:flex-end;gap:8px;padding:12px 13px;border-top:1px solid #eee;background:#fff}
+#amm-webbot-input{flex:1;min-width:0;max-height:100px;resize:none;padding:11px 12px;border:1px solid #d8d8d8;border-radius:13px;background:#fff;color:#111;font:inherit;font-size:13px;line-height:1.4}
+#amm-webbot-send{display:grid;place-items:center;width:42px;height:42px;flex:0 0 auto;border:1px solid #171717;border-radius:13px;background:#ffc107;color:#111;font-size:18px;font-weight:800;cursor:pointer}
+#amm-webbot-send:disabled{opacity:.5;cursor:wait}
+#amm-webbot-privacy{margin:0;padding:0 14px 10px;color:#666;font-size:10px;line-height:1.4;background:#fff}
+#amm-webbot-panel[dir="rtl"] #amm-webbot-messages{direction:rtl}
+@media(max-width:520px){
+ #amm-webbot-launcher{right:14px;bottom:14px;min-height:50px;padding:0 15px}
+ #amm-webbot-panel{right:8px;bottom:74px;width:calc(100vw - 16px);height:min(650px,calc(100dvh - 90px));min-height:320px;border-radius:18px}
+ #amm-webbot-header{padding:14px}
+}
+@media(prefers-reduced-motion:reduce){#amm-webbot-launcher{transition:none}}
