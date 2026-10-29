@@ -77,7 +77,7 @@
     if(lang==='ar')return 'مرحبًا! أنا مساعد AMM Data Solutions. يمكنك السؤال عن خدماتنا والأسعار المبدئية وخطوات بدء المشروع.';
     return 'Hello! I’m the AMM Data Solutions assistant. Ask me about our services, starting prices, languages, or how to discuss a project.';
   }
-  function openChat(){tip.hidden=true;panel.hidden=false;launcher.setAttribute('aria-expanded','true');if(!messages.childElementCount)addMessage(greeting(),'assistant');input.focus();}
+  function openChat(){if(!tip.hidden){tipIndex++;}tip.hidden=true;tipShown=false;panel.hidden=false;launcher.setAttribute('aria-expanded','true');if(!messages.childElementCount)addMessage(greeting(),'assistant');input.focus();}
   function closeChat(){panel.hidden=true;launcher.setAttribute('aria-expanded','false');launcher.focus();}
   function fallback(text){
     const q=text.toLowerCase();
