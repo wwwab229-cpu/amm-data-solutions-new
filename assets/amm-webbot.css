@@ -177,10 +177,10 @@
 
 
 /* Final premium orb polish: signature orbital rings and refined glass surfaces */
-#amm-webbot-launcher{position:fixed;isolation:isolate;overflow:visible}
+#amm-webbot-launcher{position:fixed;isolation:isolate;overflow:visible;z-index:9998}
 #amm-webbot-launcher::before,
 #amm-webbot-launcher::after{
-  content:"";position:absolute;left:50%;top:50%;z-index:-1;pointer-events:none;
+  content:"";position:absolute;left:50%;top:50%;z-index:0;pointer-events:none;
   width:112px;height:38px;border:2px solid #b8f27cbb;border-radius:50%;
   box-shadow:0 0 12px #a8ef7040,inset 0 0 8px #fff7;
   transform:translate(-50%,-50%) rotate(-28deg);
