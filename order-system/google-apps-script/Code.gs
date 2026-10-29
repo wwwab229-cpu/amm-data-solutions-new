@@ -28,7 +28,7 @@ function createAmmOrderSystem() {
   form.addPageBreakItem().setTitle('2. Choose your AMM service');
   form.addListItem().setTitle('Which service are you interested in?').setChoiceValues([
     'Digital Advertising','Data Management & Data Entry','Website Design & Digital Solutions',
-    'AI Chatbots & Customer Support','AI Business Automation','Google SEO & AI Search Visibility',
+    'AI Chatbots & Customer Support','AI & Business Automation','Google SEO & AI Search Visibility',
     'Not sure — please recommend a suitable service'
   ]).setRequired(true);
   form.addTextItem().setTitle('Project or website link (optional)').setRequired(false);
