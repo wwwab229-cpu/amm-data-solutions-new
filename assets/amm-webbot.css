@@ -174,3 +174,29 @@
   #amm-webbot-launcher,.amm-avatar,.amm-avatar-eyes i,.amm-avatar-mouth,.amm-bot-typing span{animation:none!important}
   #amm-webbot-launcher:hover{transform:translateY(-50%)}
 }
+
+
+/* Final premium orb polish: signature orbital rings and refined glass surfaces */
+#amm-webbot-launcher{position:fixed;isolation:isolate;overflow:visible}
+#amm-webbot-launcher::before,
+#amm-webbot-launcher::after{
+  content:"";position:absolute;left:50%;top:50%;z-index:-1;pointer-events:none;
+  width:112px;height:38px;border:2px solid #b8f27cbb;border-radius:50%;
+  box-shadow:0 0 12px #a8ef7040,inset 0 0 8px #fff7;
+  transform:translate(-50%,-50%) rotate(-28deg);
+}
+#amm-webbot-launcher::after{
+  width:102px;height:32px;border-color:#ffe56ac9;
+  transform:translate(-50%,-50%) rotate(48deg);
+}
+#amm-webbot-launcher .amm-avatar{position:relative;z-index:1}
+#amm-webbot-panel{background:linear-gradient(145deg,#ffffffd9 0%,#edffe5d9 48%,#fff3cbd9 100%);border-color:#ffffffd9}
+#amm-webbot-header{background:linear-gradient(115deg,#17241dF5 0%,#315c3df0 55%,#72964ceF 100%)}
+#amm-webbot-tip{max-width:290px;box-shadow:0 16px 42px #18341f26}
+@media(max-width:520px){
+  #amm-webbot-launcher::before{width:94px;height:31px}
+  #amm-webbot-launcher::after{width:86px;height:27px}
+}
+@media(prefers-reduced-motion:reduce){
+  #amm-webbot-launcher::before,#amm-webbot-launcher::after{animation:none!important}
+}
