@@ -7,9 +7,9 @@
   root.id='amm-webbot-root';
   root.innerHTML=`
     <div id="amm-webbot-tip" hidden role="status"><span id="amm-webbot-tip-text"></span><button id="amm-webbot-tip-dismiss" type="button" aria-label="Dismiss tip">×</button></div>
-    <button id="amm-webbot-launcher" type="button" aria-expanded="false" aria-controls="amm-webbot-panel" aria-label="Open AMM AI assistant"><span class="amm-bot-dot" aria-hidden="true"></span><span>Ask AMM</span></button>
+    <button id="amm-webbot-launcher" type="button" aria-expanded="false" aria-controls="amm-webbot-panel" aria-label="Open AMM AI assistant"><span class="amm-avatar" aria-hidden="true"><span class="amm-avatar-face"><i class="amm-avatar-antenna"></i><span class="amm-avatar-eyes"><i></i><i></i></span><i class="amm-avatar-mouth"></i></span></span><span>Ask AMM <span aria-hidden="true">✦</span></span></button>
     <section id="amm-webbot-panel" role="dialog" aria-modal="false" aria-labelledby="amm-webbot-heading" hidden>
-      <header id="amm-webbot-header"><div><h2 id="amm-webbot-heading">AMM AI Assistant</h2><p id="amm-webbot-subheading">Ask about our services and next steps.</p></div><button id="amm-webbot-close" type="button" aria-label="Close chat">×</button></header>
+      <header id="amm-webbot-header"><span class="amm-avatar" id="amm-webbot-character" aria-hidden="true"><span class="amm-avatar-face"><i class="amm-avatar-antenna"></i><span class="amm-avatar-eyes"><i></i><i></i></span><i class="amm-avatar-mouth"></i></span></span><div><h2 id="amm-webbot-heading">AMM AI Assistant</h2><p id="amm-webbot-subheading">Your friendly guide to smarter solutions.</p></div><button id="amm-webbot-close" type="button" aria-label="Close chat">×</button></header>
       <div id="amm-webbot-tools"><label for="amm-webbot-language" class="amm-webbot-visually-hidden">Chat language</label><select id="amm-webbot-language" aria-label="Chat language"><option value="auto">Auto-detect language</option><option value="en">English</option><option value="roman-urdu">Roman Urdu</option><option value="hi">Hindi</option><option value="ar">العربية — Arabic</option></select><span id="amm-webbot-status" role="status">Ready</span></div>
       <div id="amm-webbot-messages" role="log" aria-live="polite" aria-relevant="additions text"></div>
       <div id="amm-webbot-quick-prompts"><button type="button" data-prompt="What services does AMM offer?">Our services</button><button type="button" data-prompt="What are your starting prices?">Starting prices</button><button type="button" data-prompt="How can I discuss a project with AMM?">Discuss a project</button></div>
@@ -19,7 +19,7 @@
   document.body.appendChild(root);
   const panel=root.querySelector('#amm-webbot-panel'),launcher=root.querySelector('#amm-webbot-launcher'),close=root.querySelector('#amm-webbot-close');
   const messages=root.querySelector('#amm-webbot-messages'),form=root.querySelector('#amm-webbot-form'),input=root.querySelector('#amm-webbot-input');
-  const send=root.querySelector('#amm-webbot-send'),status=root.querySelector('#amm-webbot-status'),language=root.querySelector('#amm-webbot-language');
+  const send=root.querySelector('#amm-webbot-send'),status=root.querySelector('#amm-webbot-status'),language=root.querySelector('#amm-webbot-language'),character=root.querySelector('#amm-webbot-character');
   const history=[];
   const tip=root.querySelector('#amm-webbot-tip'),tipText=root.querySelector('#amm-webbot-tip-text'),tipDismiss=root.querySelector('#amm-webbot-tip-dismiss');
   let tipShown=false, scrollTipTimer=null, hideTipTimer=null, lastTipY=-900, tipIndex=0;
@@ -70,6 +70,7 @@
   function addMessage(text,who){
     const el=document.createElement('div');el.className='amm-bot-message '+who;el.textContent=text;messages.appendChild(el);messages.scrollTop=messages.scrollHeight;return el;
   }
+  function addTyping(){const el=document.createElement('div');el.className='amm-bot-message assistant amm-bot-typing';el.setAttribute('role','status');el.setAttribute('aria-label','Assistant is thinking');el.innerHTML='<span></span><span></span><span></span>';messages.appendChild(el);messages.scrollTop=messages.scrollHeight;return el;}
   function greeting(){
     const lang=language.value;
     if(lang==='roman-urdu')return 'Assalam-o-alaikum! Main AMM Data Solutions ka assistant hoon. Aap services, starting prices ya apne project ke bare mein pooch sakte hain.';
@@ -99,23 +100,26 @@
     const clean=text.trim();if(!clean)return;
     addMessage(clean,'user');history.push({role:'user',content:clean});
     if(history.length>12)history.splice(0,history.length-12);
-    input.value='';input.style.height='auto';send.disabled=true;status.textContent='Thinking…';
+    input.value='';input.style.height='auto';send.disabled=true;status.textContent='Thinking…';status.dataset.state='thinking';character.classList.add('is-thinking');
+    const typing=addTyping();
     const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),18000);
     try{
       const response=await fetch(API_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history,language:language.value}),signal:controller.signal,cache:'no-store'});
       if(!response.ok)throw new Error('Assistant unavailable');
       const data=await response.json();
       if(typeof data.reply!=='string'||!data.reply.trim())throw new Error('Empty assistant response');
+      typing.remove();character.classList.remove('is-thinking');character.classList.add('is-speaking');setTimeout(()=>character.classList.remove('is-speaking'),1200);
       history.push({role:'assistant',content:data.reply});
       if(history.length>12)history.splice(0,history.length-12);
       addMessage(data.reply,'assistant');status.textContent='AI assistant';
     }catch(error){
+      typing.remove();character.classList.remove('is-thinking');character.classList.add('is-speaking');setTimeout(()=>character.classList.remove('is-speaking'),1200);
       const answer=fallback(clean);
       addMessage(answer,'assistant');
       status.textContent='Basic help mode';
       // Do not add the fallback to AI conversation history.
       if(error.name==='AbortError')console.warn('AMM webbot request timed out.');
-    }finally{clearTimeout(timer);send.disabled=false;input.focus();}
+    }finally{clearTimeout(timer);status.dataset.state='ready';send.disabled=false;input.focus();}
   }
   launcher.addEventListener('click',openChat);close.addEventListener('click',closeChat);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)closeChat();});
