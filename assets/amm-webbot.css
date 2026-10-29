@@ -36,3 +36,12 @@
 @media(prefers-reduced-motion:reduce){#amm-webbot-launcher{transition:none}}
 
 #amm-webbot-root .amm-webbot-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+
+#amm-webbot-tip{position:fixed;right:26px;bottom:88px;z-index:9997;display:flex;align-items:flex-start;gap:10px;width:min(300px,calc(100vw - 40px));padding:13px 14px;border:1px solid #eadca7;border-radius:17px 17px 5px 17px;background:#fffdf4;color:#252525;box-shadow:0 10px 32px #00000018;font-size:12px;line-height:1.5;animation:amm-tip-in .22s ease-out}
+#amm-webbot-tip[hidden]{display:none}
+#amm-webbot-tip-text{flex:1}
+#amm-webbot-tip-dismiss{display:grid;place-items:center;flex:0 0 auto;width:23px;height:23px;margin:-4px -5px 0 0;border:0;border-radius:50%;background:transparent;color:#555;font-size:17px;cursor:pointer}
+#amm-webbot-tip-dismiss:hover{background:#f4edcf}
+@keyframes amm-tip-in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:520px){#amm-webbot-tip{right:15px;bottom:75px;width:min(280px,calc(100vw - 30px));font-size:11px}}
+@media(prefers-reduced-motion:reduce){#amm-webbot-tip{animation:none}}
