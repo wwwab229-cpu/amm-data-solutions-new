@@ -100,3 +100,77 @@
 @keyframes amm-message-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:520px){#amm-webbot-launcher{min-height:55px;padding-right:15px}#amm-webbot-panel{border:1px solid #e7dfc9;box-shadow:0 16px 55px #0003}#amm-webbot-header{padding:14px}}
 @media(prefers-reduced-motion:reduce){#amm-webbot-launcher,.amm-avatar,.amm-avatar-antenna:after,.amm-avatar-eyes i,.amm-avatar-mouth,.amm-bot-typing span,#amm-webbot-tip,.amm-bot-message{animation:none!important;transition:none!important}}
+
+
+/* Round emoji-style companion + colourful glass chat */
+#amm-webbot-launcher{
+  top:50%;right:22px;bottom:auto;transform:translateY(-50%);
+  display:grid;place-items:center;gap:0;width:78px;height:78px;min-height:78px;padding:0;
+  border:2px solid #ffffffd9;border-radius:50%;
+  background:linear-gradient(145deg,#d9ff9d 0%,#bdf078 34%,#ffe66b 68%,#ffc928 100%);
+  box-shadow:0 12px 32px #29451c2b,0 0 0 7px #c9f58c35, inset 0 2px 5px #ffffffc9;
+  animation:amm-orbit-float 4.2s ease-in-out infinite;
+}
+#amm-webbot-launcher:hover{transform:translateY(calc(-50% - 4px)) scale(1.045);box-shadow:0 16px 38px #29451c38,0 0 0 10px #c9f58c32,inset 0 2px 5px #ffffffc9}
+#amm-webbot-launcher>span:last-child{display:none}
+#amm-webbot-launcher .amm-avatar{width:66px;height:66px;border:0;border-radius:50%;background:transparent;box-shadow:none;animation:none}
+.amm-avatar{width:48px;height:48px;border:1px solid #ffffffb8;border-radius:50%;background:linear-gradient(145deg,#d8ff9b 0%,#b8f16f 40%,#ffe46a 100%);box-shadow:inset 0 2px 7px #ffffffbd,0 5px 16px #4b8e2925;animation:amm-character-float 3.6s ease-in-out infinite}
+.amm-avatar-face{width:42px;height:42px;border:0;border-radius:50%;background:linear-gradient(145deg,#f8ffdf,#fff0a6);box-shadow:inset 0 -3px 7px #e8c54b42,0 1px 3px #ffffffc9}
+.amm-avatar-antenna{display:none}
+.amm-avatar-eyes{top:13px;left:10px;gap:10px}
+.amm-avatar-eyes i{width:5px;height:7px;border-radius:50%;background:#31552b;transform-origin:center;animation:amm-blink 4.6s infinite}
+.amm-avatar-mouth{bottom:10px;width:10px;height:5px;border-bottom:2px solid #31552b;border-radius:0 0 12px 12px}
+.amm-avatar.is-thinking .amm-avatar-eyes i{animation:amm-curious-look .65s ease-in-out infinite alternate}
+.amm-avatar.is-thinking .amm-avatar-mouth{width:7px;height:7px;border:2px solid #31552b;border-radius:50%;background:transparent}
+.amm-avatar.is-speaking .amm-avatar-mouth{animation:amm-talk .22s ease-in-out infinite alternate}
+#amm-webbot-panel{
+  top:50%;right:116px;bottom:auto;transform:translateY(-50%);
+  border:1px solid #ffffffb8;border-radius:26px;
+  background:linear-gradient(145deg,#ffffffd9 0%,#f6ffe8d9 46%,#fff5cbd9 100%);
+  box-shadow:0 24px 70px #19321f30,0 0 0 1px #d9f5b433;
+  backdrop-filter:blur(24px) saturate(155%);-webkit-backdrop-filter:blur(24px) saturate(155%);
+}
+#amm-webbot-header{
+  background:linear-gradient(120deg,#264d38f2 0%,#467d43ed 50%,#a2bd4bf0 100%);
+  border-bottom:1px solid #ffffff65;color:#fff;
+}
+#amm-webbot-subheading{color:#f4ffe9}
+#amm-webbot-tools{background:#f7ffe9b8;border-bottom-color:#d6e9b7}
+#amm-webbot-language{border-color:#d5e7bd;background:#ffffffb8}
+#amm-webbot-status{color:#31552b}
+#amm-webbot-messages{background:linear-gradient(180deg,#fafff5b8 0%,#fff9e8b8 100%)}
+.amm-bot-message.assistant{
+  border:1px solid #ffffffd9;background:linear-gradient(145deg,#ffffffed,#f0ffdfed);
+  border-radius:17px 17px 17px 5px;color:#243c24;
+  box-shadow:0 5px 16px #31552b0b, inset 0 1px #ffffff;
+}
+.amm-bot-message.user{
+  border:1px solid #e6e9a1;background:linear-gradient(135deg,#d8ff9b 0%,#fff08a 100%);
+  border-radius:17px 17px 5px 17px;color:#253a20;
+  box-shadow:0 5px 16px #86b94d1c;
+}
+#amm-webbot-quick-prompts{background:#fffbeab8}
+#amm-webbot-quick-prompts button{border-color:#cfe4b5;background:#ffffffc9;color:#31552b}
+#amm-webbot-quick-prompts button:hover{border-color:#9bc66a;background:#efffdb}
+#amm-webbot-form{background:#fffbeab8;border-top-color:#dce9c8}
+#amm-webbot-input{border-color:#cfe0b9;background:#ffffffd9;color:#243c24}
+#amm-webbot-input:focus{border-color:#8fbd57;box-shadow:0 0 0 4px #b8ef7b3d}
+#amm-webbot-send{border:1px solid #94c65f;border-radius:50%;background:linear-gradient(145deg,#d8ff9b,#ffe66b);color:#2d4d24}
+#amm-webbot-privacy{background:#fffbeab8;color:#52644b}
+#amm-webbot-close{background:#ffffff18;border-color:#ffffff66}
+#amm-webbot-tip{right:112px;top:50%;bottom:auto;transform:translateY(-50%);border:1px solid #ffffffc9;border-radius:20px 20px 6px 20px;background:linear-gradient(140deg,#f4ffe7f2,#fff3c9f2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 16px 40px #263e1f24;color:#2b4326}
+#amm-webbot-tip:before{background:#a8e765;box-shadow:0 0 0 4px #b9ef7b40}
+#amm-webbot-tip-dismiss:hover{background:#dff5c6}
+@keyframes amm-orbit-float{0%,100%{transform:translateY(-50%) translateX(0) rotate(0)}25%{transform:translateY(calc(-50% - 7px)) translateX(-2px) rotate(-3deg)}50%{transform:translateY(calc(-50% - 1px)) translateX(1px) rotate(2deg)}75%{transform:translateY(calc(-50% + 4px)) translateX(-1px) rotate(-1deg)}}
+@keyframes amm-character-float{0%,100%{transform:translateY(0) rotate(0)}40%{transform:translateY(-3px) rotate(-2deg)}70%{transform:translateY(1px) rotate(2deg)}}
+@keyframes amm-curious-look{from{transform:translateY(-1px) scaleY(.9)}to{transform:translateY(2px) scaleY(1.1)}}
+@media(max-width:520px){
+  #amm-webbot-launcher{right:12px;top:52%;width:66px;height:66px;min-height:66px}
+  #amm-webbot-launcher .amm-avatar{width:58px;height:58px}
+  #amm-webbot-panel{top:auto;right:8px;bottom:10px;transform:none;width:calc(100vw - 16px);height:min(650px,calc(100dvh - 24px));min-height:320px;border-radius:23px}
+  #amm-webbot-tip{top:calc(52% - 6px);right:88px;bottom:auto;width:min(240px,calc(100vw - 112px));transform:translateY(-50%)}
+}
+@media(prefers-reduced-motion:reduce){
+  #amm-webbot-launcher,.amm-avatar,.amm-avatar-eyes i,.amm-avatar-mouth,.amm-bot-typing span{animation:none!important}
+  #amm-webbot-launcher:hover{transform:translateY(-50%)}
+}
