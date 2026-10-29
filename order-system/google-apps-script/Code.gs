@@ -44,14 +44,16 @@ function createAmmOrderSystem() {
   form.addCheckboxItem().setTitle('Consent to follow-up').setChoiceValues(['I agree that AMM Data Solutions may use these details to review this request and contact me about it.']).setRequired(true);
 
   const spreadsheet = SpreadsheetApp.create('AMM Data Solutions — Order Requests');
+  // Save IDs before checking the response tab so finishAmmOrderSystem() can recover
+  // if Google Forms creates the linked response sheet asynchronously.
+  props.setProperty('AMM_ORDER_FORM_ID', form.getId());
+  props.setProperty('AMM_ORDER_SHEET_ID', spreadsheet.getId());
   form.setDestination(FormApp.DestinationType.SPREADSHEET, spreadsheet.getId());
   SpreadsheetApp.flush();
   const responseSheet = findResponseSheet_(spreadsheet);
-  if (!responseSheet) throw new Error('Form and spreadsheet were created, but the response tab was not ready. Wait briefly, then run finishAmmOrderSystem().');
+  if (!responseSheet) throw new Error('Form and spreadsheet were created. The response tab is not ready yet; wait briefly, then run finishAmmOrderSystem().');
   ensureTrackingColumns_(responseSheet);
   ScriptApp.newTrigger('onAmmOrderFormSubmit').forSpreadsheet(spreadsheet).onFormSubmit().create();
-  props.setProperty('AMM_ORDER_FORM_ID', form.getId());
-  props.setProperty('AMM_ORDER_SHEET_ID', spreadsheet.getId());
   Logger.log('ORDER FORM (share with clients): ' + form.getPublishedUrl());
   Logger.log('EDIT FORM (keep private): ' + form.getEditUrl());
   Logger.log('ORDER TRACKER: ' + spreadsheet.getUrl());
