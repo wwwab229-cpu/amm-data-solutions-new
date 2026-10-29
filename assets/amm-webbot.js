@@ -6,6 +6,7 @@
   const root=document.createElement('div');
   root.id='amm-webbot-root';
   root.innerHTML=`
+    <div id="amm-webbot-tip" hidden role="status"><span id="amm-webbot-tip-text"></span><button id="amm-webbot-tip-dismiss" type="button" aria-label="Dismiss tip">×</button></div>
     <button id="amm-webbot-launcher" type="button" aria-expanded="false" aria-controls="amm-webbot-panel" aria-label="Open AMM AI assistant"><span class="amm-bot-dot" aria-hidden="true"></span><span>Ask AMM</span></button>
     <section id="amm-webbot-panel" role="dialog" aria-modal="false" aria-labelledby="amm-webbot-heading" hidden>
       <header id="amm-webbot-header"><div><h2 id="amm-webbot-heading">AMM AI Assistant</h2><p id="amm-webbot-subheading">Ask about our services and next steps.</p></div><button id="amm-webbot-close" type="button" aria-label="Close chat">×</button></header>
@@ -13,13 +14,45 @@
       <div id="amm-webbot-messages" role="log" aria-live="polite" aria-relevant="additions text"></div>
       <div id="amm-webbot-quick-prompts"><button type="button" data-prompt="What services does AMM offer?">Our services</button><button type="button" data-prompt="What are your starting prices?">Starting prices</button><button type="button" data-prompt="How can I discuss a project with AMM?">Discuss a project</button></div>
       <form id="amm-webbot-form"><textarea id="amm-webbot-input" rows="1" maxlength="500" required placeholder="Type your question…" aria-label="Your question"></textarea><button id="amm-webbot-send" type="submit" aria-label="Send message">➤</button></form>
-      <p id="amm-webbot-privacy">Please don’t share passwords or sensitive personal information. Chat is not stored by this widget.</p>
+      <p id="amm-webbot-privacy">Please don’t share passwords or sensitive personal information. Chat messages are kept only in this tab; a small session preference remembers dismissed tips.</p>
     </section>`;
   document.body.appendChild(root);
   const panel=root.querySelector('#amm-webbot-panel'),launcher=root.querySelector('#amm-webbot-launcher'),close=root.querySelector('#amm-webbot-close');
   const messages=root.querySelector('#amm-webbot-messages'),form=root.querySelector('#amm-webbot-form'),input=root.querySelector('#amm-webbot-input');
   const send=root.querySelector('#amm-webbot-send'),status=root.querySelector('#amm-webbot-status'),language=root.querySelector('#amm-webbot-language');
   const history=[];
+  const tip=root.querySelector('#amm-webbot-tip'),tipText=root.querySelector('#amm-webbot-tip-text'),tipDismiss=root.querySelector('#amm-webbot-tip-dismiss');
+  let tipShown=false, scrollTipTimer=null;
+  const path=window.location.pathname.toLowerCase();
+  function getGuidance(){
+    if(path.includes('ai-chatbots'))return ['Want to see what an AI chatbot can do? 🤖','Ask me about customer support, lead capture, or multilingual bots.'];
+    if(path.includes('ai-business-automation'))return ['Less repetitive work, more time for business ✨','I can explain how automation may fit your workflow.'];
+    if(path.includes('google-seo'))return ['Curious how customers find you online? 🔎','Ask me about Google SEO and AI search visibility.'];
+    if(path.includes('digital-advertising'))return ['Planning your next campaign? 📣','I can explain our ad service and what details matter.'];
+    if(path.includes('data-management'))return ['Messy spreadsheets? We can help tidy the data 📊','Ask about data entry, cleanup, and quality checks.'];
+    if(path.includes('website-design'))return ['Thinking about a website refresh? ✨','I can guide you through website and digital-solution options.'];
+    if(path.includes('pricing'))return ['Need help understanding starting prices? 💡','Tap me and I’ll explain estimates versus a final quote.'];
+    if(path.includes('privacy'))return ['Have a question about sharing information? 🔒','I can explain what to avoid sharing in this chat.'];
+    const headings=Array.from(document.querySelectorAll('main h1, main h2, section h1, section h2')).map(el=>(el.textContent||'').trim().toLowerCase());
+    if(headings.some(h=>/contact|need a solution|talk to/.test(h)))return ['Ready to talk through an idea? 💬','I can help you figure out what to discuss with AMM.'];
+    if(headings.some(h=>/service|what we do|solutions/.test(h)))return ['Not sure which service fits? 👀','Tell me your goal and I’ll help narrow down the options.'];
+    return ['Exploring AMM Data Solutions? 👋','I can guide you through services, starting prices, and next steps.'];
+  }
+  function showTip(){
+    if(tipShown||!panel.hidden||sessionStorage.getItem('ammBotTipsDismissed')==='1')return;
+    const key='ammBotTipSeen:'+path;
+    if(sessionStorage.getItem(key)==='1')return;
+    const tips=getGuidance();
+    tipText.textContent=tips[Math.min(Math.floor(window.scrollY/850),tips.length-1)];
+    tip.hidden=false;tipShown=true;sessionStorage.setItem(key,'1');
+  }
+  function dismissTip(){tip.hidden=true;sessionStorage.setItem('ammBotTipsDismissed','1');}
+  tipDismiss.addEventListener('click',dismissTip);
+  window.addEventListener('scroll',()=>{
+    if(tipShown||!panel.hidden||window.scrollY<180)return;
+    if(scrollTipTimer)clearTimeout(scrollTipTimer);
+    scrollTipTimer=setTimeout(showTip,450);
+  },{passive:true});
   const services=[
     ['AI & Business Automation','$150','Workflow assessment, supported integrations, task routing, notifications, error handling and testing.'],
     ['AI Chatbots & Customer Support','$170','Website FAQ bots, lead qualification, customer-support flows, booking/product guidance where supported, and human handoff.'],
@@ -38,7 +71,7 @@
     if(lang==='ar')return 'مرحبًا! أنا مساعد AMM Data Solutions. يمكنك السؤال عن خدماتنا والأسعار المبدئية وخطوات بدء المشروع.';
     return 'Hello! I’m the AMM Data Solutions assistant. Ask me about our services, starting prices, languages, or how to discuss a project.';
   }
-  function openChat(){panel.hidden=false;launcher.setAttribute('aria-expanded','true');if(!messages.childElementCount)addMessage(greeting(),'assistant');input.focus();}
+  function openChat(){tip.hidden=true;panel.hidden=false;launcher.setAttribute('aria-expanded','true');if(!messages.childElementCount)addMessage(greeting(),'assistant');input.focus();}
   function closeChat(){panel.hidden=true;launcher.setAttribute('aria-expanded','false');launcher.focus();}
   function fallback(text){
     const q=text.toLowerCase();
