@@ -22,7 +22,7 @@
   const send=root.querySelector('#amm-webbot-send'),status=root.querySelector('#amm-webbot-status'),language=root.querySelector('#amm-webbot-language'),character=root.querySelector('#amm-webbot-character');
   const history=[];
   const tip=root.querySelector('#amm-webbot-tip'),tipText=root.querySelector('#amm-webbot-tip-text'),tipDismiss=root.querySelector('#amm-webbot-tip-dismiss');
-  let tipShown=false, scrollTipTimer=null, hideTipTimer=null, lastTipY=-900, tipIndex=0;
+  let tipShown=false, scrollTipTimer=null, hideTipTimer=null, welcomeTimer=null, lastTipY=-900, tipIndex=0;
   const path=window.location.pathname.toLowerCase();
   function getGuidance(){
     let first='Exploring AMM Data Solutions? 👋',second='I can guide you through services, starting prices, and next steps.',third='Have a question about your project? Tap me and let’s figure it out 💬';
@@ -41,24 +41,30 @@
     }
     return [first,second,third];
   }
+  function showWelcomeTip(){
+    if(!panel.hidden||!tip.hidden)return;
+    tipText.textContent='Hi! 👋 Need help finding the right AMM solution? Tap your AI assistant anytime.';
+    tip.hidden=false;tipShown=true;
+    if(hideTipTimer)clearTimeout(hideTipTimer);
+    hideTipTimer=setTimeout(()=>{tip.hidden=true;tipShown=false;},7000);
+  }
   function showTip(){
     if(tipShown||!panel.hidden||window.scrollY<180||tipIndex>=3)return;
-    const key='ammBotTipSeen:'+path+':'+tipIndex;
-    if(sessionStorage.getItem(key)==='1'){tipIndex++;return;}
     const tips=getGuidance();
-    tipText.textContent=tips[tipIndex];
+    tipText.textContent=tips[tipIndex++];
     tip.hidden=false;tipShown=true;lastTipY=window.scrollY;
-    sessionStorage.setItem(key,'1');
     if(hideTipTimer)clearTimeout(hideTipTimer);
     hideTipTimer=setTimeout(()=>{tip.hidden=true;tipShown=false;},6500);
   }
-  function dismissTip(){tip.hidden=true;tipShown=false;tipIndex++;if(hideTipTimer)clearTimeout(hideTipTimer);}
+  function dismissTip(){tip.hidden=true;tipShown=false;if(hideTipTimer)clearTimeout(hideTipTimer);}
   tipDismiss.addEventListener('click',dismissTip);
   window.addEventListener('scroll',()=>{
     if(!panel.hidden||tipShown||tipIndex>=3||window.scrollY<180||window.scrollY-lastTipY<700)return;
     if(scrollTipTimer)clearTimeout(scrollTipTimer);
     scrollTipTimer=setTimeout(showTip,450);
   },{passive:true});
+  // Show a fresh welcome notification on each page load/reopen; no persistent storage is used.
+  welcomeTimer=setTimeout(showWelcomeTip,1100);
   const services=[
     ['AI & Business Automation','$150','Workflow assessment, supported integrations, task routing, notifications, error handling and testing.'],
     ['AI Chatbots & Customer Support','$170','Website FAQ bots, lead qualification, customer-support flows, booking/product guidance where supported, and human handoff.'],
@@ -78,7 +84,7 @@
     if(lang==='ar')return 'مرحبًا! أنا مساعد AMM Data Solutions. يمكنك السؤال عن خدماتنا والأسعار المبدئية وخطوات بدء المشروع.';
     return 'Hello! I’m the AMM Data Solutions assistant. Ask me about our services, starting prices, languages, or how to discuss a project.';
   }
-  function openChat(){if(!tip.hidden){tipIndex++;}tip.hidden=true;tipShown=false;panel.hidden=false;launcher.setAttribute('aria-expanded','true');if(!messages.childElementCount)addMessage(greeting(),'assistant');input.focus();}
+  function openChat(){if(welcomeTimer)clearTimeout(welcomeTimer);tip.hidden=true;tipShown=false;if(hideTipTimer)clearTimeout(hideTipTimer);panel.hidden=false;launcher.setAttribute('aria-expanded','true');if(!messages.childElementCount)addMessage(greeting(),'assistant');input.focus();}
   function closeChat(){panel.hidden=true;launcher.setAttribute('aria-expanded','false');launcher.focus();}
   function fallback(text){
     const q=text.toLowerCase();
