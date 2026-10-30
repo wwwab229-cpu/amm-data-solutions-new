@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "mkdir -p dist/assets dist/services dist/logos && cp index.html admin.html privacy.html pricing.html sitemap.xml sitemap.md robots.txt llms.txt dist/ && cp -R logos/. dist/logos/ && cp services/*.html dist/services/ && tailwindcss -i ./src/tailwind.css -o ./dist/assets/tailwind.min.css --minify"
+    "build": "mkdir -p dist/assets dist/services dist/logos && cp index.html admin.html privacy.html pricing.html sitemap.xml sitemap.md robots.txt llms.txt dist/ && cp 69fxse6pzkq2emvy75z9wv4ncrpvcfj2.txt dist/ && cp -R logos/. dist/logos/ && cp services/*.html dist/services/ && tailwindcss -i ./src/tailwind.css -o ./dist/assets/tailwind.min.css --minify"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"
