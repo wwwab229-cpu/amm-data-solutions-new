@@ -123,6 +123,12 @@
       });
       if (!response.ok) throw new Error('The enquiry could not be sent. Please try again or use the contact form on the homepage.');
       form.reset();
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+          form_type: 'service_contact',
+          service_name: form.querySelector('[name="service"]')?.value || 'unspecified'
+        });
+      }
       status.textContent = 'Thank you. Your project enquiry has been sent successfully.';
     } catch (error) {
       status.textContent = error && error.message ? error.message : 'Something went wrong. Please try again.';
