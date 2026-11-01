@@ -1427,7 +1427,10 @@ $('#cf').onsubmit=async e=>{
  try{
   const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'},signal:controller.signal});
   status.textContent=r.ok?'Thanks. We will reply soon.':'Could not send right now. Please try the email button above.';
-  if(r.ok)f.reset();
+  if(r.ok){
+   if(typeof window.gtag==='function')window.gtag('event','generate_lead',{form_type:'homepage_contact'});
+   f.reset();
+  }
  }catch{
   status.textContent='Could not send. Please try the email button above.';
  }finally{
