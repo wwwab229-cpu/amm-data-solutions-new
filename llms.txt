@@ -14,6 +14,9 @@
 - [Website Design & Digital Solutions](https://amm-data-solutions-new.vercel.app/services/website-design-digital-solutions.html)
 - [Data Management & Data Entry](https://amm-data-solutions-new.vercel.app/services/data-management-data-entry.html)
 
+## Practical resources
+- [Business workflow automation guide](https://amm-data-solutions-new.vercel.app/resources/business-workflow-automation-guide.html): A practical guide to identifying suitable processes, mapping steps, choosing rules or AI, and testing workflows safely.
+
 ## Contact
 - [Contact AMM Data Solutions](https://amm-data-solutions-new.vercel.app/#contact): Use the website contact form to discuss a business requirement.
 
