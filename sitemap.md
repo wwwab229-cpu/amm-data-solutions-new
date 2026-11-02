@@ -6,6 +6,7 @@ Production base URL: https://amm-data-solutions-new.vercel.app/
 - Pricing and quotes: /services/pricing-and-quotes.html
 - Privacy policy: /privacy.html
 - AI & Business Automation: /services/ai-business-automation.html
+- Business workflow automation guide: /resources/business-workflow-automation-guide.html
 - AI Chatbots & Customer Support: /services/ai-chatbots-customer-support.html
 - Google SEO & AI Search Visibility: /services/google-seo-ai-search-visibility.html
 - Digital Advertising: /services/digital-advertising.html
