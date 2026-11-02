@@ -16,6 +16,8 @@
 
 ## Practical resources
 - [Business workflow automation guide](https://amm-data-solutions-new.vercel.app/resources/business-workflow-automation-guide.html): A practical guide to identifying suitable processes, mapping steps, choosing rules or AI, and testing workflows safely.
+- [Business website chatbot guide](https://amm-data-solutions-new.vercel.app/resources/business-website-chatbot-guide.html): How to define a chatbot purpose, prepare approved knowledge, plan languages and human hand-off, protect customer information and test quality.
+- [Website search visibility: SEO and AI guide](https://amm-data-solutions-new.vercel.app/resources/website-search-visibility-seo-ai-guide.html): Practical foundations for crawlability, useful service content, structured data, AI search readiness, genuine references and measurement.
 
 ## Contact
 - [Contact AMM Data Solutions](https://amm-data-solutions-new.vercel.app/#contact): Use the website contact form to discuss a business requirement.
