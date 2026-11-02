@@ -18,6 +18,9 @@
 - [Business workflow automation guide](https://amm-data-solutions-new.vercel.app/resources/business-workflow-automation-guide.html): A practical guide to identifying suitable processes, mapping steps, choosing rules or AI, and testing workflows safely.
 - [Business website chatbot guide](https://amm-data-solutions-new.vercel.app/resources/business-website-chatbot-guide.html): How to define a chatbot purpose, prepare approved knowledge, plan languages and human hand-off, protect customer information and test quality.
 - [Website search visibility: SEO and AI guide](https://amm-data-solutions-new.vercel.app/resources/website-search-visibility-seo-ai-guide.html): Practical foundations for crawlability, useful service content, structured data, AI search readiness, genuine references and measurement.
+- [Digital advertising campaign planning guide](https://amm-data-solutions-new.vercel.app/resources/digital-advertising-campaign-planning-guide.html): How to set campaign goals, select suitable channels, prepare landing pages, validate measurement and review performance responsibly.
+- [Small business website planning guide](https://amm-data-solutions-new.vercel.app/resources/small-business-website-planning-guide.html): How to plan website goals, page structure, content, mobile usability, integrations, SEO, ownership and maintenance.
+- [Spreadsheet data cleaning and management guide](https://amm-data-solutions-new.vercel.app/resources/spreadsheet-data-cleaning-management-guide.html): How to standardize fields, identify duplicates, validate records, process documents and handle business data carefully.
 
 ## Contact
 - [Contact AMM Data Solutions](https://amm-data-solutions-new.vercel.app/#contact): Use the website contact form to discuss a business requirement.
