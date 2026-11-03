@@ -583,8 +583,10 @@ window.addEventListener('load', () => {
   }
   async function load(){
     const target=$('tq'); if(!target)return;
+    const controller=new AbortController();
+    const timeout=setTimeout(()=>controller.abort(),10000);
     try{
-      const response=await fetch(endpoint,{headers:{apikey:apiKey,'Accept':'application/json'},cache:'no-store'});
+      const response=await fetch(endpoint,{headers:{apikey:apiKey,'Accept':'application/json'},cache:'no-store',signal:controller.signal});
       if(!response.ok)throw new Error('HTTP '+response.status);
       const data=await response.json();
       if(!Array.isArray(data))throw new Error('Unexpected response');
@@ -614,6 +616,8 @@ window.addEventListener('load', () => {
         note.textContent='Reviews are temporarily unavailable. Please try again later.';
         target.appendChild(note);
       }
+    }finally{
+      clearTimeout(timeout);
     }
   }
   function step(delta){if(rows.length<2)return;index=(index+delta+rows.length)%rows.length;render();}
