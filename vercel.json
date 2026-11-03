@@ -53,5 +53,17 @@
   ],
   "buildCommand": "npm run build",
   "installCommand": "npm install --no-audit --no-fund",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/services/ai-business-automation.html",
+      "destination": "/services/ai-bots-intelligent-agents.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/website-design-digital-solutions.html",
+      "destination": "/services/creative-design-digital-content.html",
+      "permanent": true
+    }
+  ]
 }
