@@ -1,17 +1,17 @@
 # AMM Data Solutions
 
-> AMM Data Solutions builds practical AI automation, business chatbots, SEO and AI search visibility, digital advertising, websites, and data solutions for growing businesses in Pakistan and international markets.
+> AMM Data Solutions provides AI bots and intelligent agents, website AI chatbots, Google SEO and AI SEO, digital advertising, creative design and digital content, and data management for growing businesses in Pakistan and international markets.
 
 ## Main website
 - [AMM Data Solutions homepage](https://amm-data-solutions-new.vercel.app/): Homepage, service overview, illustrative workflow, FAQs, contact form and feedback form.
 - [Privacy policy](https://amm-data-solutions-new.vercel.app/privacy.html): How contact and feedback submissions are handled.
 
 ## Services
-- [AI & Business Automation](https://amm-data-solutions-new.vercel.app/services/ai-business-automation.html)
+- [AI Bots & Intelligent Agents](https://amm-data-solutions-new.vercel.app/services/ai-bots-intelligent-agents.html)
 - [AI Chatbots & Customer Support](https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html)
 - [Google SEO & AI Search Visibility](https://amm-data-solutions-new.vercel.app/services/google-seo-ai-search-visibility.html)
 - [Digital Advertising](https://amm-data-solutions-new.vercel.app/services/digital-advertising.html)
-- [Website Design & Digital Solutions](https://amm-data-solutions-new.vercel.app/services/website-design-digital-solutions.html)
+- [Creative Design & Digital Content](https://amm-data-solutions-new.vercel.app/services/creative-design-digital-content.html)
 - [Data Management & Data Entry](https://amm-data-solutions-new.vercel.app/services/data-management-data-entry.html)
 
 ## Practical resources
