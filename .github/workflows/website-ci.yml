@@ -36,6 +36,9 @@ jobs:
           pages = [
               "index.html",
               "services/ai-business-automation.html",
+              "services/ai-bots-intelligent-agents.html",
+              "services/creative-design-digital-content.html",
+              "resources/small-business-digital-design-assets-guide.html",
               "services/ai-chatbots-customer-support.html",
               "services/google-seo-ai-search-visibility.html",
               "services/digital-advertising.html",
