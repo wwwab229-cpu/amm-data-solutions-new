@@ -41,7 +41,6 @@ jobs:
               "services/ai-chatbots-customer-support.html",
               "services/google-seo-ai-search-visibility.html",
               "services/digital-advertising.html",
-              "services/website-design-digital-solutions.html",
               "services/data-management-data-entry.html",
           ]
           for filename in pages:
