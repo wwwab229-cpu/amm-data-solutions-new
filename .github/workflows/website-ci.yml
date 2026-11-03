@@ -35,11 +35,12 @@ jobs:
           base = "https://amm-data-solutions-new.vercel.app"
           pages = [
               "index.html",
-              "services/ai-business-automation.html",
+              "services/ai-bots-intelligent-agents.html",
+              "services/creative-design-digital-content.html",
+              "resources/small-business-digital-design-assets-guide.html",
               "services/ai-chatbots-customer-support.html",
               "services/google-seo-ai-search-visibility.html",
               "services/digital-advertising.html",
-              "services/website-design-digital-solutions.html",
               "services/data-management-data-entry.html",
           ]
           for filename in pages:
