@@ -17,6 +17,7 @@
 - Data Management & Data Entry: spreadsheet updates, Excel/CSV organization, document-to-sheet processing, cleanup and agreed quality checks.
 ## Main website
 - [Blog and practical business guides](https://amm-data-solutions-new.vercel.app/blog/): Articles and guides covering AI automation, chatbots and practical digital operations.
+- [Blog and practical business guides](https://amm-data-solutions-new.vercel.app/blog/): Articles and guides covering AI automation, chatbots and practical digital operations.
 - [AMM Data Solutions homepage](https://amm-data-solutions-new.vercel.app/): Homepage, service overview, illustrative workflow, FAQs, contact form and feedback form.
 - [Privacy policy](https://amm-data-solutions-new.vercel.app/privacy.html): How contact and feedback submissions are handled.
 
@@ -40,6 +41,10 @@
 
 ## Contact
 - [Contact AMM Data Solutions](https://amm-data-solutions-new.vercel.app/#contact): Use the website contact form to discuss a business requirement.
+
+## Discovery and crawling
+- [XML sitemap](https://amm-data-solutions-new.vercel.app/sitemap.xml): Canonical list of important public pages.
+- [Robots.txt](https://amm-data-solutions-new.vercel.app/robots.txt): Public crawl access rules.
 
 ## Discovery and crawling
 - [XML sitemap](https://amm-data-solutions-new.vercel.app/sitemap.xml): Canonical list of important public pages.
