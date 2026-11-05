@@ -81,28 +81,17 @@ const failures = [];
           if (await burger.getAttribute('aria-expanded') !== 'true' || await burger.getAttribute('aria-label') !== 'Close menu') {
             failures.push(`[${viewport.name}] mobile menu open state or accessible label is incorrect`);
           }
-          const contactLink = page.locator('#menu a[href="#business-cta"]');
-          if (await contactLink.count()) {
-            await contactLink.click();
-            if (await burger.getAttribute('aria-expanded') !== 'false' || await burger.getAttribute('aria-label') !== 'Open menu') {
-              failures.push(`[${viewport.name}] mobile menu state did not reset after navigation`);
-            }
-            await page.waitForFunction(() => {
-              const target = document.getElementById('business-cta');
-              if (!target) return false;
-              const rect = target.getBoundingClientRect();
-              return rect.top < window.innerHeight && rect.bottom > 0;
-            }, { timeout: 5000 }).catch(() => {});
-            const reachedTarget = await page.evaluate(() => {
-              const target = document.getElementById('business-cta');
-              if (!target) return false;
-              const rect = target.getBoundingClientRect();
-              return rect.top < window.innerHeight && rect.bottom > 0;
-            });
-            if (!reachedTarget) failures.push('[mobile] Get in touch link did not bring the business contact section into view');
-            else console.log('[mobile] Get in touch -> business contact section: OK');
+          // The approved mobile header keeps "Get in touch" outside the hamburger menu.
+          // Do not add it to the menu; verify the menu opens and closes accessibly instead.
+          const contactLinkInMenu = page.locator('#menu a[href="#business-cta"]');
+          if (await contactLinkInMenu.count()) {
+            failures.push('[mobile] Get in touch was unexpectedly placed inside the mobile menu');
+          }
+          await burger.click();
+          if (await burger.getAttribute('aria-expanded') !== 'false' || await burger.getAttribute('aria-label') !== 'Open menu') {
+            failures.push(`[${viewport.name}] mobile menu did not close with the expected accessible state`);
           } else {
-            failures.push('[mobile] Could not find the mobile Get in touch link');
+            console.log('[mobile] menu open/close state: OK; contact CTA remains outside menu');
           }
         } else {
           failures.push('[mobile] Could not find the mobile menu button');
@@ -210,3 +199,4 @@ const failures = [];
     console.log('\nBrowser audit passed for all pages at 320px, 390px, 768px and 1365px viewports.');
   }
 })();
+
