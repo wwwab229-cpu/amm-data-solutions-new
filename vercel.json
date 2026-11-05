@@ -62,12 +62,12 @@
     },
     {
       "source": "/services/ai-business-automation.html",
-      "destination": "/services/ai-chatbots-customer-support.html",
+      "destination": "/services/ai-automation-business-everyday-work.html",
       "permanent": true
     },
     {
       "source": "/services/website-design-digital-solutions.html",
-      "destination": "/services/creative-design-digital-content.html",
+      "destination": "/services/website-development-improvement.html",
       "permanent": true
     }
   ]
