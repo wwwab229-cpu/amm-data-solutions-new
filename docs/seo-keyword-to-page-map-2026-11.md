@@ -4,7 +4,7 @@
 **Purpose:** Assign one clear search-intent cluster to each existing URL and reduce keyword cannibalization.
 
 ## Evidence and limitations
-- The six service URLs and six supporting resource URLs were checked against the repository's current canonical tags, titles and H1s.
+- The service URLs and supporting resource URLs were checked against the repository's current canonical tags, titles and H1s.
 - Google autocomplete-style suggestions were sampled with Pakistan / English settings, and live Pakistan-facing search results were reviewed for the six service categories.
 - Keyword Tool guest access returned suggestion phrases but no cached volume or competition metrics for the sampled seeds. VibeSEO keyword tools were unavailable on the connected plan. Ahrefs Keywords Explorer previously returned **Insufficient plan**.
 - Search Console's effective page-level window reviewed on 3 November was 4–31 October 2026. The latest page changes are too recent to evaluate.
@@ -14,8 +14,7 @@
 
 | Service URL | Primary keyword theme (one owner) | Supporting phrases / long-tail intent | Keep off this page |
 |---|---|---|---|
-| `/services/ai-bots-intelligent-agents.html` | AI automation services for businesses in Pakistan | AI automation agency Pakistan; business automation services; business process automation; workflow automation for small business; AI agents for business tasks; automate repetitive business tasks | website chatbot, customer support chatbot |
-| `/services/ai-chatbots-customer-support.html` | AI chatbot development for business websites in Pakistan | AI chatbot for business website; website chatbot for small business; chatbot for customer support; multilingual website chatbot; website chatbot to answer customer questions | internal workflow automation, broad AI agent platforms |
+| `/services/ai-chatbots-customer-support.html` | AI chatbots and intelligent agents for businesses in Pakistan | AI chatbot for business website; website chatbot for small business; chatbot for customer support; multilingual website chatbot; AI assistant for business; AI agent development; business knowledge assistant; task-focused AI agent; AI chatbot development Pakistan | end-to-end workflow automation (owned by the separate AI Automation service page) |
 | `/services/google-seo-ai-search-visibility.html` | SEO services in Pakistan | SEO services for businesses; Google SEO services; local SEO services Pakistan; SEO audit for business website; AI search visibility; Google and AI search optimization | paid ads, social media post design |
 | `/services/digital-advertising.html` | Google and Meta ads management in Pakistan | Google Ads management services; Facebook ads management Pakistan; Meta ads management; TikTok ads management; paid advertising for small business | organic SEO, social media post design as a standalone design service |
 | `/services/creative-design-digital-content.html` | social media design services in Pakistan | social media post design; Instagram post design for business; Facebook post design for business; social media graphics for small business; branded social media templates | ad campaign management, video production/editing |
@@ -25,8 +24,8 @@
 
 | Resource URL | Informational topic | Link to the service page for |
 |---|---|---|
-| `/resources/business-workflow-automation-guide.html` | business workflow automation: where to start | AI Bots & Intelligent Agents |
-| `/resources/business-website-chatbot-guide.html` | planning a useful business website chatbot | Website AI Chatbots |
+| `/resources/business-workflow-automation-guide.html` | business workflow automation: where to start | AI Chatbots & Intelligent Agents |
+| `/resources/business-website-chatbot-guide.html` | planning a useful business website chatbot | AI Chatbots & Intelligent Agents |
 | `/resources/website-search-visibility-seo-ai-guide.html` | improving website visibility across search and AI experiences | Google SEO & AI Search Visibility |
 | `/resources/digital-advertising-campaign-planning-guide.html` | planning digital advertising around business goals | Digital Advertising |
 | `/resources/small-business-digital-design-assets-guide.html` | digital design assets for small businesses | Creative Design & Digital Content |
