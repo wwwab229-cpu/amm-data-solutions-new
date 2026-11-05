@@ -37,7 +37,6 @@ jobs:
           from pathlib import Path
           from urllib.parse import urlparse
 
-          base = "https://amm-data-solutions-new.vercel.app"
           pages = [
               "index.html",
               "services/ai-automation-business-everyday-work.html",
@@ -79,7 +78,7 @@ jobs:
               assert re.search(r'<link\s+rel="canonical"\s+href="https://[^"]+"', html, re.I), f"{filename}: canonical missing"
               assert len(re.findall(r"<h1\b", html, re.I)) == 1, f"{filename}: expected exactly one H1"
 
-              for match in re.finditer(r'<script\s+type=["\\']application/ld\\+json["\\']>([\\s\\S]*?)</script>', html, re.I):
+              for match in re.finditer(r"<script\s+type=['\"]application/ld\+json['\"]>([\s\S]*?)</script>", html, re.I):
                   data = json.loads(match.group(1), object_pairs_hook=reject_duplicate_keys)
                   if data.get("@type") == "FAQPage":
                       for question in data.get("mainEntity", []):
@@ -87,8 +86,9 @@ jobs:
                           assert question.get("acceptedAnswer", {}).get("@type") == "Answer", f"{filename}: FAQ answer type missing"
 
           sitemap = ET.parse("sitemap.xml").getroot()
-          urls = {node.text for node in sitemap.iter() if node.tag.endswith("loc")}
-          assert len(urls) == len([node for node in sitemap.iter() if node.tag.endswith("loc")]), "duplicate sitemap URLs"
+          locs = [node.text for node in sitemap.iter() if node.tag.endswith("loc")]
+          urls = set(locs)
+          assert len(urls) == len(locs), "duplicate sitemap URLs"
           for url in urls:
               parsed = urlparse(url)
               assert parsed.scheme == "https" and parsed.netloc == "amm-data-solutions-new.vercel.app", f"unexpected sitemap host: {url}"
@@ -97,8 +97,8 @@ jobs:
               assert Path(source).is_file(), f"sitemap URL has no source file: {url} -> {source}"
 
           home = Path("index.html").read_text(encoding="utf-8")
-          ids = set(re.findall(r'\bid=["\\']([^"\\']+)["\\']', home))
-          for target in re.findall(r'href=["\\']#([^"\\']+)["\\']', home):
+          ids = set(re.findall(r"\bid=['\"]([^'\"]+)['\"]", home))
+          for target in re.findall(r"href=['\"]#([^'\"]+)['\"]", home):
               assert target in ids, f"homepage anchor target missing: #{target}"
 
           print(f"Validated {len(pages)} public HTML pages, JSON-LD blocks, homepage anchors and {len(urls)} sitemap URLs.")
