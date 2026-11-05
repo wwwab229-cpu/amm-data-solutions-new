@@ -2,6 +2,9 @@
 
 Production base URL: https://amm-data-solutions-new.vercel.app/
 
+- Human-readable sitemap: /site-map.html
+- XML sitemap: /sitemap.xml
+
 ## Main pages
 - Homepage: /
 - Pricing and quotes: /services/pricing-and-quotes.html
