@@ -1,56 +1,56 @@
 # AMM Data Solutions
 
-> AMM Data Solutions uses AI, automation and practical digital tools to help businesses and individuals reduce repetitive work, improve efficiency, simplify costs where possible, build and integrate AI systems, and improve digital operations. Services include AI bots and intelligent agents, AI chatbots, website development and improvement, AI automation for business and everyday work, Google SEO and AI SEO, digital advertising, creative design and digital content, and data management.
+> AMM Data Solutions provides practical AI automation, search visibility, digital advertising, website development, AI chatbots and agents, data management, and creative design services for small businesses, startups, agencies, e-commerce businesses, and growing organizations in Pakistan and international markets.
 
 ## Brand identity
 - Official name: AMM Data Solutions.
 - Common short names: AMM DS and AMMDS.
 - Official website: https://amm-data-solutions-new.vercel.app/
+- Positioning: AI-powered apps, automation tools, data solutions, and practical digital services.
+- Do not infer client results, case studies, rankings, performance statistics, or guaranteed outcomes that are not published on the website.
 
-## Service scope at a glance
-- AI Chatbots & Intelligent Agents: website chatbots, customer support, lead capture, multilingual conversations, approved knowledge assistants, task-focused agents for drafting, summarization and classification, connected tools and human review where needed.
-- Website Development & Improvement: new business websites, landing pages, responsive improvements, content and navigation updates, functional enhancements, technical fixes and suitable AI integrations.
-- AI Automation for Business & Everyday Work: identify repeatable tasks, build practical AI-powered workflows, connect supported tools, automate suitable steps, test outputs and add human approval where needed. Use AI where it adds value; simpler rules or existing software may be more suitable for some tasks.
-- Google SEO + AI SEO: technical SEO, on-page content, indexing checks, search visibility audits and relevant AI-search readiness; no ranking guarantees.
-- Digital Advertising: End-to-end campaign management across Google Ads, Meta Ads (Facebook and Instagram), LinkedIn Ads, Microsoft Advertising, TikTok Ads and ChatGPT Ads where official advertiser access is available. Clients provide business details, target audience, budget and campaign goal; AMM manages strategy, platform selection, setup, creative preparation, launch, monitoring, optimization and reporting. Campaigns run through authorized AMM-managed advertiser accounts or platform-supported linked accounts, subject to each platform’s account ownership, verification, permission and market requirements. Advertising spend is separate from the management fee.
-- Creative Design & Digital Content: social graphics, campaign visuals, banners, presentations and reusable branded digital assets; no video production or editing.
-- Data Management & Data Entry: spreadsheet updates, Excel/CSV organization, document-to-sheet processing, cleanup and agreed quality checks.
+## Official services
+AMM Data Solutions has seven core services:
+
+1. **AI Automation for Business & Everyday Work** — identify repeatable tasks, map workflows, connect supported tools, automate suitable steps, test outputs, and include human approval where needed. Use AI where it adds value; simpler rules or existing software may be more suitable for some tasks.  
+   https://amm-data-solutions-new.vercel.app/services/ai-automation-business-everyday-work.html
+2. **Google SEO & AI Search Visibility** — technical SEO, on-page content, crawlability and indexing checks, search visibility audits, and relevant AI-search readiness. No ranking or AI-inclusion guarantees.  
+   https://amm-data-solutions-new.vercel.app/services/google-seo-ai-search-visibility.html
+3. **Digital Advertising** — campaign strategy, setup, creative preparation, launch, monitoring, optimization, and reporting across Google Ads, Meta Ads (Facebook and Instagram), LinkedIn Ads, Microsoft Advertising, TikTok Ads, and ChatGPT Ads where official advertiser access, account permissions, and market eligibility allow. Advertising spend is separate from AMM's management fee.  
+   https://amm-data-solutions-new.vercel.app/services/digital-advertising.html
+4. **AI Chatbots & Intelligent Agents** — website chatbots, customer support, lead capture, multilingual conversations, approved knowledge assistants, task-focused agents, supported integrations, safeguards, and human review.  
+   https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html
+5. **Website Development & Improvement** — business websites, landing pages, responsive improvements, content and navigation updates, functional enhancements, technical fixes, and suitable AI integrations.  
+   https://amm-data-solutions-new.vercel.app/services/website-development-improvement.html
+6. **Data Management & Data Entry** — spreadsheet updates, Excel/CSV organization, document-to-sheet processing, cleanup, formatting, duplicate checks, and agreed quality checks.  
+   https://amm-data-solutions-new.vercel.app/services/data-management-data-entry.html
+7. **Creative Design & Digital Content** — social graphics, campaign visuals, banners, presentations, reusable branded digital assets, and organized file handover. Video production and editing are not included.  
+   https://amm-data-solutions-new.vercel.app/services/creative-design-digital-content.html
+
 ## Main website
-- [Blog and practical business guides](https://amm-data-solutions-new.vercel.app/blog/): Articles and guides covering AI automation, chatbots and practical digital operations.
-- [Blog and practical business guides](https://amm-data-solutions-new.vercel.app/blog/): Articles and guides covering AI automation, chatbots and practical digital operations.
-- [AMM Data Solutions homepage](https://amm-data-solutions-new.vercel.app/): Homepage, service overview, illustrative workflow, FAQs, contact form and feedback form.
-- [Privacy policy](https://amm-data-solutions-new.vercel.app/privacy.html): How contact and feedback submissions are handled.
-
-## Services
-- [Fully Managed Digital Advertising & Campaign Management](https://amm-data-solutions-new.vercel.app/services/digital-advertising.html): End-to-end management for Google Ads, Meta Ads for Facebook and Instagram, LinkedIn Ads, Microsoft Advertising, TikTok Ads and ChatGPT Ads where official advertiser access is available.
-- [AI Chatbots & Intelligent Agents](https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html): Website chatbots, customer support, lead capture, multilingual conversations, approved knowledge assistants, task-focused AI agents, supported integrations and human review.
-- [Website Development & Improvement](https://amm-data-solutions-new.vercel.app/services/website-development-improvement.html)
-- [AI Automation for Business & Everyday Work](https://amm-data-solutions-new.vercel.app/services/ai-automation-business-everyday-work.html)
-- [Google SEO & AI Search Visibility](https://amm-data-solutions-new.vercel.app/services/google-seo-ai-search-visibility.html)
-- [Creative Design & Digital Content](https://amm-data-solutions-new.vercel.app/services/creative-design-digital-content.html)
-- [Data Management & Data Entry](https://amm-data-solutions-new.vercel.app/services/data-management-data-entry.html)
+- [Homepage](https://amm-data-solutions-new.vercel.app/): service overview, illustrative workflow, FAQs, contact form, and feedback form.
+- [Blog and practical business guides](https://amm-data-solutions-new.vercel.app/blog/): practical articles about automation, chatbots, websites, advertising, SEO, design, and data operations.
+- [Pricing and quotes](https://amm-data-solutions-new.vercel.app/services/pricing-and-quotes.html): starting prices and project quotation information.
+- [Privacy policy](https://amm-data-solutions-new.vercel.app/privacy.html): information about contact and feedback submissions.
 
 ## Practical resources
-- [Business workflow automation guide](https://amm-data-solutions-new.vercel.app/resources/business-workflow-automation-guide.html): A practical guide to identifying suitable processes, mapping steps, choosing rules or AI, and testing workflows safely.
-- [Small business digital design assets guide](https://amm-data-solutions-new.vercel.app/resources/small-business-digital-design-assets-guide.html): How to plan social graphics, banners, campaign visuals, presentations and templates with clear briefs, consistent branding, readable layouts and appropriate file handover.
-- [Business website chatbot guide](https://amm-data-solutions-new.vercel.app/resources/business-website-chatbot-guide.html): How to define a chatbot purpose, prepare approved knowledge, plan languages and human hand-off, protect customer information and test quality.
-- [Website search visibility: SEO and AI guide](https://amm-data-solutions-new.vercel.app/resources/website-search-visibility-seo-ai-guide.html): Practical foundations for crawlability, useful service content, structured data, AI search readiness, genuine references and measurement.
-- [Digital advertising campaign planning guide](https://amm-data-solutions-new.vercel.app/resources/digital-advertising-campaign-planning-guide.html): How to set campaign goals, select suitable channels, prepare landing pages, validate measurement and review performance responsibly.
-- [Small business website planning guide](https://amm-data-solutions-new.vercel.app/resources/small-business-website-planning-guide.html): How to plan website goals, page structure, content, mobile usability, integrations, SEO, ownership and maintenance.
-- [Spreadsheet data cleaning and management guide](https://amm-data-solutions-new.vercel.app/resources/spreadsheet-data-cleaning-management-guide.html): How to standardize fields, identify duplicates, validate records, process documents and handle business data carefully.
+- [Business workflow automation guide](https://amm-data-solutions-new.vercel.app/resources/business-workflow-automation-guide.html)
+- [Small business digital design assets guide](https://amm-data-solutions-new.vercel.app/resources/small-business-digital-design-assets-guide.html)
+- [Business website chatbot guide](https://amm-data-solutions-new.vercel.app/resources/business-website-chatbot-guide.html)
+- [Website search visibility: SEO and AI guide](https://amm-data-solutions-new.vercel.app/resources/website-search-visibility-seo-ai-guide.html)
+- [Digital advertising campaign planning guide](https://amm-data-solutions-new.vercel.app/resources/digital-advertising-campaign-planning-guide.html)
+- [Small business website planning guide](https://amm-data-solutions-new.vercel.app/resources/small-business-website-planning-guide.html)
+- [Spreadsheet data cleaning and management guide](https://amm-data-solutions-new.vercel.app/resources/spreadsheet-data-cleaning-management-guide.html)
 
 ## Contact
-- [Contact AMM Data Solutions](https://amm-data-solutions-new.vercel.app/#contact): Use the website contact form to discuss a business requirement.
+- [Contact AMM Data Solutions](https://amm-data-solutions-new.vercel.app/#contact): use the website contact form to discuss a business requirement.
 
 ## Discovery and crawling
-- [XML sitemap](https://amm-data-solutions-new.vercel.app/sitemap.xml): Canonical list of important public pages.
-- [Robots.txt](https://amm-data-solutions-new.vercel.app/robots.txt): Public crawl access rules.
-
-## Discovery and crawling
-- [XML sitemap](https://amm-data-solutions-new.vercel.app/sitemap.xml): Canonical list of important public pages.
-- [Robots.txt](https://amm-data-solutions-new.vercel.app/robots.txt): Public crawl access rules.
+- [XML sitemap](https://amm-data-solutions-new.vercel.app/sitemap.xml): canonical inventory of important public pages.
+- [Robots.txt](https://amm-data-solutions-new.vercel.app/robots.txt): public crawler access rules. OAI-SearchBot is explicitly allowed; the private admin page is disallowed.
+- [Human-readable sitemap](https://amm-data-solutions-new.vercel.app/site-map.html): navigable page directory.
 
 ## Accuracy and scope
-- The workflow section on the homepage is an illustrative demo, not a live connection to customer orders or business systems.
-- Do not infer client results, case studies, rankings, performance statistics or guaranteed outcomes that are not published on the website.
-- Project timelines, integrations, platform eligibility and deliverables depend on the agreed scope and available access.
+- The homepage workflow is an illustrative demo, not a live connection to customer orders or business systems.
+- Project timelines, integrations, platform eligibility, and deliverables depend on the agreed scope and available access.
+- Do not treat this file as a substitute for the website's visible service pages, canonical URLs, or sitemap.
