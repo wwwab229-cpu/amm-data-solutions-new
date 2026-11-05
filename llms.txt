@@ -11,7 +11,7 @@
 - AI Bots & Intelligent Agents: task-focused assistants, approved information support, drafting, summarization, classification and scoped workflow tasks with permissions and human review where needed.
 - Website AI Chatbots: website FAQs, service information, lead capture, multilingual configuration where agreed, and human hand-off.
 - Google SEO + AI SEO: technical SEO, on-page content, indexing checks, search visibility audits and relevant AI-search readiness; no ranking guarantees.
-- Digital Advertising: Google Ads, Meta Ads and TikTok campaigns where account and market eligibility allow; advertising spend is separate.
+- Digital Advertising: Campaign planning and management for eligible Google Ads, Meta Ads (Facebook and Instagram), LinkedIn Ads and Microsoft Advertising; TikTok Ads subject to account and market eligibility. ChatGPT Ads readiness and planning are conditional on official advertiser access and target-market availability. Account permissions, billing setup and platform eligibility are checked before activation; advertising spend is separate.
 - Creative Design & Digital Content: social graphics, campaign visuals, banners, presentations and reusable branded digital assets; no video production or editing.
 - Data Management & Data Entry: spreadsheet updates, Excel/CSV organization, document-to-sheet processing, cleanup and agreed quality checks.
 ## Main website
@@ -19,6 +19,7 @@
 - [Privacy policy](https://amm-data-solutions-new.vercel.app/privacy.html): How contact and feedback submissions are handled.
 
 ## Services
+- [Digital Advertising & Campaign Management](https://amm-data-solutions-new.vercel.app/services/digital-advertising.html): Google Ads, Meta Ads for Facebook and Instagram, LinkedIn Ads, Microsoft Advertising, eligible TikTok Ads and conditional ChatGPT Ads readiness/planning.
 - [AI Bots & Intelligent Agents](https://amm-data-solutions-new.vercel.app/services/ai-bots-intelligent-agents.html)
 - [AI Chatbots & Customer Support](https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html)
 - [Google SEO & AI Search Visibility](https://amm-data-solutions-new.vercel.app/services/google-seo-ai-search-visibility.html)
