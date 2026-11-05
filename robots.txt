@@ -2,4 +2,10 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
 Sitemap: https://amm-data-solutions-new.vercel.app/sitemap.xml
