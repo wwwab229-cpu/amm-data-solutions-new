@@ -21,39 +21,85 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Build production CSS
         run: npm run build
-      - name: Verify production CSS and page metadata
+      - name: Verify production assets, metadata, structured data, links and sitemap
         shell: bash
         run: |
           set -euo pipefail
           test -s dist/assets/tailwind.min.css
+          test -s dist/assets/homepage.css
+          test -s dist/assets/homepage.js
+          test -s dist/site-map.html
           ! grep -q 'cdn.tailwindcss.com' index.html
           python - <<'PY'
+          import json
           import re
           import xml.etree.ElementTree as ET
           from pathlib import Path
+          from urllib.parse import urlparse
 
           base = "https://amm-data-solutions-new.vercel.app"
           pages = [
               "index.html",
-              "services/creative-design-digital-content.html",
-              "resources/small-business-digital-design-assets-guide.html",
-              "services/ai-chatbots-customer-support.html",
-              "services/website-development-improvement.html",
               "services/ai-automation-business-everyday-work.html",
               "services/google-seo-ai-search-visibility.html",
               "services/digital-advertising.html",
+              "services/ai-chatbots-customer-support.html",
+              "services/website-development-improvement.html",
               "services/data-management-data-entry.html",
+              "services/creative-design-digital-content.html",
+              "services/pricing-and-quotes.html",
+              "resources/business-workflow-automation-guide.html",
+              "resources/small-business-digital-design-assets-guide.html",
+              "resources/business-website-chatbot-guide.html",
+              "resources/website-search-visibility-seo-ai-guide.html",
+              "resources/digital-advertising-campaign-planning-guide.html",
+              "resources/small-business-website-planning-guide.html",
+              "resources/spreadsheet-data-cleaning-management-guide.html",
+              "blog/index.html",
+              "blog/ai-automation-for-modern-businesses.html",
+              "blog/website-chatbot-vs-contact-form.html",
+              "privacy.html",
+              "site-map.html",
           ]
+
+          def reject_duplicate_keys(pairs):
+              result = {}
+              for key, value in pairs:
+                  if key in result:
+                      raise ValueError(f"duplicate JSON property: {key}")
+                  result[key] = value
+              return result
+
           for filename in pages:
-              html = Path(filename).read_text(encoding="utf-8")
+              path = Path(filename)
+              assert path.is_file(), f"{filename}: source file missing"
+              html = path.read_text(encoding="utf-8")
               assert re.search(r"<title>[^<]+</title>", html, re.I), f"{filename}: title missing"
-              assert re.search(r'<link rel="canonical" href="https://[^"]+"', html, re.I), f"{filename}: canonical missing"
-              assert len(re.findall(r"<h1\b", html, re.I)) == 1, f"{filename}: expected one H1"
-              assert "name=\"robots\"" in html, f"{filename}: robots meta missing"
+              assert re.search(r'<meta\s+name="description"\s+content="[^"]+"', html, re.I), f"{filename}: meta description missing"
+              assert re.search(r'<link\s+rel="canonical"\s+href="https://[^"]+"', html, re.I), f"{filename}: canonical missing"
+              assert len(re.findall(r"<h1\b", html, re.I)) == 1, f"{filename}: expected exactly one H1"
+
+              for match in re.finditer(r'<script\s+type=["\\']application/ld\\+json["\\']>([\\s\\S]*?)</script>', html, re.I):
+                  data = json.loads(match.group(1), object_pairs_hook=reject_duplicate_keys)
+                  if data.get("@type") == "FAQPage":
+                      for question in data.get("mainEntity", []):
+                          assert question.get("@type") == "Question", f"{filename}: FAQ question type missing"
+                          assert question.get("acceptedAnswer", {}).get("@type") == "Answer", f"{filename}: FAQ answer type missing"
+
           sitemap = ET.parse("sitemap.xml").getroot()
           urls = {node.text for node in sitemap.iter() if node.tag.endswith("loc")}
-          for filename in pages:
-              expected = base + ("/" if filename == "index.html" else "/" + filename)
-              assert expected in urls, f"sitemap missing {expected}"
-          print(f"Validated {len(pages)} public pages and {len(urls)} sitemap URLs.")
+          assert len(urls) == len([node for node in sitemap.iter() if node.tag.endswith("loc")]), "duplicate sitemap URLs"
+          for url in urls:
+              parsed = urlparse(url)
+              assert parsed.scheme == "https" and parsed.netloc == "amm-data-solutions-new.vercel.app", f"unexpected sitemap host: {url}"
+              route = parsed.path
+              source = "index.html" if route in ("", "/") else ("blog/index.html" if route == "/blog/" else route.lstrip("/"))
+              assert Path(source).is_file(), f"sitemap URL has no source file: {url} -> {source}"
+
+          home = Path("index.html").read_text(encoding="utf-8")
+          ids = set(re.findall(r'\bid=["\\']([^"\\']+)["\\']', home))
+          for target in re.findall(r'href=["\\']#([^"\\']+)["\\']', home):
+              assert target in ids, f"homepage anchor target missing: #{target}"
+
+          print(f"Validated {len(pages)} public HTML pages, JSON-LD blocks, homepage anchors and {len(urls)} sitemap URLs.")
           PY
