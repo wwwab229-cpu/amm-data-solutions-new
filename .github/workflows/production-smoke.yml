@@ -29,7 +29,7 @@ jobs:
             local headers
             local status
             headers="$(mktemp)"
-            status="$(curl --connect-timeout 10 --max-time 25 -sS -D "$headers" -o /dev/null -w '%{http_code}' "$url")"
+            status="$(curl --connect-timeout 10 --max-time 25 -sS -L -D "$headers" -o /dev/null -w '%{http_code}' "$url")"
             echo "$url -> HTTP $status"
             if [ "$status" != "200" ]; then
               cat "$headers"
