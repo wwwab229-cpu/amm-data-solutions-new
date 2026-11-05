@@ -1,6 +1,6 @@
 # AMM Data Solutions
 
-> AMM Data Solutions provides AI bots and intelligent agents, website AI chatbots, Google SEO and AI SEO, digital advertising, creative design and digital content, and data management for growing businesses in Pakistan and international markets.
+> AMM Data Solutions uses AI, automation and practical digital tools to help businesses and individuals reduce repetitive work, improve efficiency, simplify costs where possible, build and integrate AI systems, and improve digital operations. Services include AI bots and intelligent agents, AI chatbots, website development and improvement, AI automation for business and everyday work, Google SEO and AI SEO, digital advertising, creative design and digital content, and data management.
 
 ## Brand identity
 - Official name: AMM Data Solutions.
@@ -9,7 +9,9 @@
 
 ## Service scope at a glance
 - AI Bots & Intelligent Agents: task-focused assistants, approved information support, drafting, summarization, classification and scoped workflow tasks with permissions and human review where needed.
-- Website AI Chatbots: website FAQs, service information, lead capture, multilingual configuration where agreed, and human hand-off.
+- AI Chatbots: website chatbots, business knowledge assistants, website FAQs, service information, lead capture, multilingual configuration where agreed, and human hand-off.
+- Website Development & Improvement: new business websites, landing pages, responsive improvements, content and navigation updates, functional enhancements, technical fixes and suitable AI integrations.
+- AI Automation for Business & Everyday Work: identify repeatable tasks, build practical AI-powered workflows, connect supported tools, automate suitable steps, test outputs and add human approval where needed. Use AI where it adds value; simpler rules or existing software may be more suitable for some tasks.
 - Google SEO + AI SEO: technical SEO, on-page content, indexing checks, search visibility audits and relevant AI-search readiness; no ranking guarantees.
 - Digital Advertising: End-to-end campaign management across Google Ads, Meta Ads (Facebook and Instagram), LinkedIn Ads, Microsoft Advertising, TikTok Ads and ChatGPT Ads where official advertiser access is available. Clients provide business details, target audience, budget and campaign goal; AMM manages strategy, platform selection, setup, creative preparation, launch, monitoring, optimization and reporting. Campaigns run through authorized AMM-managed advertiser accounts or platform-supported linked accounts, subject to each platform’s account ownership, verification, permission and market requirements. Advertising spend is separate from the management fee.
 - Creative Design & Digital Content: social graphics, campaign visuals, banners, presentations and reusable branded digital assets; no video production or editing.
@@ -21,7 +23,11 @@
 ## Services
 - [Fully Managed Digital Advertising & Campaign Management](https://amm-data-solutions-new.vercel.app/services/digital-advertising.html): End-to-end management for Google Ads, Meta Ads for Facebook and Instagram, LinkedIn Ads, Microsoft Advertising, TikTok Ads and ChatGPT Ads where official advertiser access is available. AMM handles strategy, setup, creative preparation, launch, monitoring, optimization and reporting.
 - [AI Bots & Intelligent Agents](https://amm-data-solutions-new.vercel.app/services/ai-bots-intelligent-agents.html)
-- [AI Chatbots & Customer Support](https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html)
+- [Website Development & Improvement](https://amm-data-solutions-new.vercel.app/services/website-development-improvement.html)
+- [AI Automation for Business & Everyday Work](https://amm-data-solutions-new.vercel.app/services/ai-automation-business-everyday-work.html)
+- [AI Chatbots](https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html)
+- [Website Development & Improvement](https://amm-data-solutions-new.vercel.app/services/website-development-improvement.html)
+- [AI Automation for Business & Everyday Work](https://amm-data-solutions-new.vercel.app/services/ai-automation-business-everyday-work.html)
 - [Google SEO & AI Search Visibility](https://amm-data-solutions-new.vercel.app/services/google-seo-ai-search-visibility.html)
 - [Digital Advertising](https://amm-data-solutions-new.vercel.app/services/digital-advertising.html)
 - [Creative Design & Digital Content](https://amm-data-solutions-new.vercel.app/services/creative-design-digital-content.html)
