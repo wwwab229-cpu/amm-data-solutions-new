@@ -4,7 +4,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const heroHeading = $('#hero-heading-text'), heroSubtitle = $('#hero-subtitle-text'), heroCursor = $('#hero-cursor'), heroTypeBox = $('#hero-type-box');
 if (heroHeading && heroSubtitle && heroCursor) {
   const headingText = 'What If Work Could Do Itself?';
-  const subtitleText = 'Less busywork. More brainpower. We turn the “ugh, not this again” tasks into smart, connected tools—so your best ideas get the spotlight.';
+  const subtitleText = 'We use AI, automation and connected tools to reduce repetitive work, improve efficiency and build smarter, more cost-aware ways to get things done.';
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion) {
     heroHeading.textContent = headingText;
