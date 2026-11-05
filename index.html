@@ -83,44 +83,62 @@
   </div>
 </section>
 
-<!-- 5. INSIDE THE AMM DS WORKFLOW -->
-<section id="workflow-demo" class="amm-chat-workflow">
-<div class="wrap">
-<div class="amm-chat-heading rv">
-<p class="amm-chat-eyebrow">INSIDE THE AMM DS WORKFLOW</p>
-<h2>One Request. <span class="v">Four Stages.</span></h2>
-<p>From the first conversation to a solution ready to use, see how AMM DS turns a business need into practical work.</p>
-</div>
-<div class="amm-chat-shell rv" role="region" aria-label="Illustrative AMM customer conversation and workflow">
-<div class="amm-chat-topbar"><span class="amm-chat-brand-mark">AMM</span><span class="amm-chat-topcopy"><strong>AMM DS project conversation</strong><small>How a request moves forward</small></span><span class="amm-chat-demo-tag">WORKFLOW PREVIEW</span></div>
-<div class="amm-chat-thread" aria-live="polite" aria-atomic="false">
-<div class="amm-chat-date">A NEW PROJECT REQUEST</div>
-<div class="amm-chat-row customer"><span class="amm-chat-avatar customer-avatar" aria-hidden="true">C</span><div class="amm-chat-bubble"><span class="amm-chat-sender">CUSTOMER</span><p id="amm-chat-customer">Hi AMM DS! We need a smarter way to manage customer orders and keep everything organised. Can you help us build a solution?</p><small>Request received</small></div></div>
-<div class="amm-chat-row amm"><span class="amm-chat-avatar amm-avatar" aria-hidden="true">A</span><div class="amm-chat-bubble"><span class="amm-chat-sender">AMM DATA SOLUTIONS</span><p id="amm-chat-reply">Absolutely. We’ll first understand your process, identify what needs to improve, and plan a practical solution around your requirements.</p><small>AMM DS response</small></div></div>
-<div class="amm-chat-work-card"><div class="amm-chat-work-head"><span class="amm-chat-work-icon" aria-hidden="true">✳</span><span><strong id="amm-chat-stage-title">01 · Understand the request</strong><small id="amm-chat-stage-subtitle">Discover the goal and requirements</small></span><span class="amm-chat-stage-pill" id="amm-chat-stage-status">DISCOVER</span></div><div class="amm-chat-work-visual" aria-hidden="true"><div class="amm-chat-work-track"><span id="amm-chat-work-progress"></span></div><div class="amm-chat-work-steps"><span class="is-current" data-chat-step="0">Understand</span><span data-chat-step="1">Plan</span><span data-chat-step="2">Build</span><span data-chat-step="3">Deliver</span></div></div><p id="amm-chat-work-caption" class="amm-chat-work-caption">We clarify the challenge before choosing the right tools.</p></div>
-<div class="amm-chat-next" id="amm-chat-next" aria-live="polite">Next: turn the request into a clear plan</div>
-</div>
-<div class="amm-chat-footer"><span class="amm-chat-live-dot"></span><span>Illustrative workflow · sample conversation, not a live customer chat</span><span class="amm-chat-cycle" id="amm-chat-cycle">STAGE 01 / 04</span></div>
-</div></div></section>
-<script>
-(function(){
-const root=document.querySelector('#workflow-demo.amm-chat-workflow');if(!root)return;
-const $=id=>root.querySelector('#'+id);
-const customer=$('amm-chat-customer'),reply=$('amm-chat-reply'),title=$('amm-chat-stage-title'),subtitle=$('amm-chat-stage-subtitle'),status=$('amm-chat-stage-status'),caption=$('amm-chat-work-caption'),next=$('amm-chat-next'),progress=$('amm-chat-work-progress'),counter=$('amm-chat-cycle'),steps=[...root.querySelectorAll('[data-chat-step]')];
-if(!customer||!reply||!title||!progress)return;
-const scenes=[
-{customer:'Hi AMM DS! We need a smarter way to manage customer orders and keep everything organised. Can you help us build a solution?',reply:'Absolutely. We’ll first understand your process, identify what needs to improve, and plan a practical solution around your requirements.',title:'01 · Understand the request',subtitle:'Discover the goal and requirements',status:'DISCOVER',caption:'We clarify the challenge before choosing the right tools.',next:'Next: turn the request into a clear plan'},
-{customer:'We want fewer manual steps and a clearer way to track every order.',reply:'Understood. We’ll map the key steps, agree on what the solution should do, and select suitable tools for the job.',title:'02 · Design the approach',subtitle:'Map the process, tools and priorities',status:'DESIGN',caption:'The request becomes a clear plan with practical steps and agreed requirements.',next:'Next: build and test the agreed solution'},
-{customer:'That sounds good. How will the new process fit into our daily work?',reply:'We’ll build around your workflow, connect the agreed parts, and test the result so it is practical to use.',title:'03 · Build & improve',subtitle:'Create, connect and check the solution',status:'BUILD',caption:'The solution takes shape through implementation, checks and refinements.',next:'Next: prepare the final handover'},
-{customer:'Great. We’re ready to start using the improved process.',reply:'Your agreed solution is ready. We’ll share the deliverables, explain how to use them, and provide the support included in the project.',title:'04 · Deliver & support',subtitle:'Review, hand over and guide the client',status:'DELIVER',caption:'The completed work is handed over with clear guidance for the next steps.',next:'The workflow is complete · starting the next example'}
-];
-const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;let current=0,timer=null;
-function show(i){current=i;const s=scenes[i];customer.textContent=s.customer;reply.textContent=s.reply;title.textContent=s.title;subtitle.textContent=s.subtitle;status.textContent=s.status;caption.textContent=s.caption;next.textContent=s.next;progress.style.width=((i+1)*25)+'%';counter.textContent='STAGE 0'+(i+1)+' / 04';steps.forEach((el,n)=>el.classList.toggle('is-current',n===i));}
-function stop(){if(timer){clearTimeout(timer);timer=null;}}
-function schedule(){stop();if(!reduced&&!document.hidden)timer=setTimeout(()=>{show((current+1)%4);schedule()},5200);}
-show(0);if(!reduced)schedule();document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else schedule();});
-})();
-</script>
+<!-- 5. AMM ORDER-TO-DELIVERY EXPERIENCE -->
+<section id="workflow-demo" class="relative">
+  <div class="wrap relative">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 rv">
+      <div><p class="text-xs font-bold uppercase tracking-widest mb-3" style="color:var(--primary)">Inside the AMM DS workflow</p><h2>One Request. <span class="v">Four Stages.</span></h2><p class="mt-3 max-w-2xl" style="color:var(--muted);line-height:1.8">From understanding the challenge to building and improving the solution, we combine people, AI and practical tools to make work more efficient.</p></div>
+      <span class="amm-demo-label"><span class="amm-live-dot" aria-hidden="true"></span> A LIVE-STYLE DEMO</span>
+    </div>
+    <div class="amm-workflow" role="region" aria-label="Simulated animated customer order workflow">
+      <article class="amm-stage amm-stage-order is-active" data-flow-stage="0">
+        <div class="amm-stage-head"><span class="amm-stage-index">01 <i> / 04</i></span><span class="amm-stage-status">NEW REQUEST</span></div>
+        <h3>Order Intake</h3><p class="amm-stage-intro">Every great result starts with a message.</p>
+        <div class="amm-window amm-message-window">
+          <div class="amm-window-bar"><span class="amm-window-dots"><i></i><i></i><i></i></span><span>customer message</span><span class="amm-window-secure">●</span></div>
+          <div class="amm-message-body"><div class="amm-avatar amm-customer-3d" role="img" aria-label="Customer avatar" title="Customer"><span>👨🏻‍💼</span><i></i></div><div class="amm-message-bubble"><span class="amm-message-from">NEW CLIENT REQUEST</span><p id="amm-order-typed" aria-live="polite"></p><span class="amm-typing-cursor" aria-hidden="true"></span></div></div>
+          <div class="amm-message-foot"><span class="amm-mini-dot"></span> Incoming request <span class="amm-time">09:41 AM</span></div>
+        </div>
+        <div class="amm-stage-foot"><span class="amm-foot-mark">↳</span><span>Request received by AMM DS</span></div>
+      </article>
+      <article class="amm-stage amm-stage-team" data-flow-stage="1">
+        <div class="amm-stage-head"><span class="amm-stage-index">02 <i> / 04</i></span><span class="amm-stage-status">TEAM BRIEF</span></div>
+        <h3>Team Workflow</h3><p class="amm-stage-intro">The request becomes a clear, workable plan.</p>
+        <div class="amm-window amm-task-window">
+          <div class="amm-window-bar"><span>AMM DS project desk</span><span class="amm-window-pill">NEW TASK</span></div>
+
+          <div class="amm-task-row" data-task="0"><span class="amm-check">✓</span><span><b>Understand the request</b><small>Goal & requirements</small></span><em>DONE</em></div>
+          <div class="amm-task-row" data-task="1"><span class="amm-check">✓</span><span><b>Map the solution</b><small>Plan the right approach</small></span><em>DONE</em></div>
+          <div class="amm-task-row" data-task="2"><span class="amm-check">✓</span><span><b>Prepare the build</b><small>Tools & next steps</small></span><em>READY</em>
+        </div>
+                </div>
+        <div class="amm-stage-foot"><span class="amm-foot-mark">↳</span><span>People, process & tools aligned</span></div>
+      </article>
+      <article class="amm-stage amm-stage-build" data-flow-stage="2">
+        <div class="amm-stage-head"><span class="amm-stage-index">03 <i> / 04</i></span><span class="amm-stage-status">IN THE MAKING</span></div>
+        <h3>Build &amp; Automate</h3><p class="amm-stage-intro">Ideas turn into connected, useful work.</p>
+        <div class="amm-window amm-build-window">
+          <div class="amm-window-bar"><span>Solution workspace</span><span class="amm-window-pill">BUILDING</span></div>
+          <div class="amm-system-map" aria-hidden="true"><div class="amm-system-node node-request"><span>✳</span><b>Input</b></div><div class="amm-system-link link-one"></div><div class="amm-system-node node-process"><span>◈</span><b>Process</b></div><div class="amm-system-link link-two"></div><div class="amm-system-node node-output"><span>↗</span><b>Output</b></div><div class="amm-system-orbit orbit-one"></div><div class="amm-system-orbit orbit-two"></div></div>
+          <div class="amm-build-bottom"><span>Building your solution</span><div class="amm-build-meter"><i></i></div><b id="amm-build-percent">0%</b></div>
+        </div>
+        <div class="amm-stage-foot"><span class="amm-foot-mark">↳</span><span>Create. Connect. Check.</span></div>
+      </article>
+      <article class="amm-stage amm-stage-delivery" data-flow-stage="3">
+        <div class="amm-stage-head"><span class="amm-stage-index">04 <i> / 04</i></span><span class="amm-stage-status">DELIVERED</span></div>
+        <h3>Client Delivery</h3><p class="amm-stage-intro">The finished result reaches the customer.</p>
+        <div class="amm-window amm-delivery-window">
+          <div class="amm-delivery-glow"></div><div class="amm-delivery-check">✓</div><span class="amm-delivery-kicker">PROJECT COMPLETE</span><strong>Ready to make an impact.</strong><div class="amm-delivery-file"><span class="amm-file-icon">↗</span><span><b>Final solution</b><small>Reviewed · ready to use</small></span><span class="amm-file-check">✓</span></div><div class="amm-customer-reaction"><span class="amm-reaction-spark">✦</span><span><small>CUSTOMER REACTION</small><b>“Wow. This is exactly what we needed!”</b></span></div>
+        </div>
+        <div class="amm-stage-foot"><span class="amm-foot-mark">✦</span><span>Delivered with care by AMM DS</span></div>
+      </article>
+    </div>
+    <div class="amm-flow-bottom rv"><div class="amm-flow-bottom-copy"><span class="amm-flow-pulse"></span><span id="amm-flow-caption" aria-live="polite">A customer is writing a request…</span></div><div class="amm-flow-progress" aria-hidden="true"><span id="amm-flow-progress"></span></div><span class="amm-flow-count" id="amm-flow-count">STAGE 01 / 04</span></div>
+    <p class="amm-demo-note">Illustrative workflow demo · not connected to live customer orders or internal systems.</p>
+  </div>
+</section>
+
+
 
 <!-- 7. SERVICES -->
 <section id="services"><div class="wrap" id="work"><h2 class="mb-3" style="color:#171329">Explore Our Services</h2><p class="mb-10" style="color:#49445b;font-size:clamp(15px,1.6vw,18px);line-height:1.7;max-width:760px">We use AI, automation and practical digital tools to reduce repetitive work, improve efficiency, simplify costs where possible and build smarter systems around real needs.</p>
