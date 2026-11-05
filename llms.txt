@@ -47,7 +47,7 @@ AMM Data Solutions has seven core services:
 
 ## Discovery and crawling
 - [XML sitemap](https://amm-data-solutions-new.vercel.app/sitemap.xml): canonical inventory of important public pages.
-- [Robots.txt](https://amm-data-solutions-new.vercel.app/robots.txt): public crawler access rules. OAI-SearchBot is explicitly allowed; the private admin page is disallowed.
+- [Robots.txt](https://amm-data-solutions-new.vercel.app/robots.txt): public crawler access rules. OAI-SearchBot is explicitly allowed; the admin page is marked noindex; OAI-SearchBot is disallowed from that route.
 - [Human-readable sitemap](https://amm-data-solutions-new.vercel.app/site-map.html): navigable page directory.
 
 ## Accuracy and scope
