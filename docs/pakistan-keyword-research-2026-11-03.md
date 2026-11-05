@@ -29,11 +29,11 @@ Search Console data is finalized with an approximately three-day delay. The page
 
 ## Keyword-to-page map
 
-### 1. AI Bots & Intelligent Agents
+### 1. AI Chatbots & Intelligent Agents
 
-**Existing page:** `/services/ai-bots-intelligent-agents.html`  
+**Existing page:** `/services/ai-chatbots-customer-support.html`  
 **Existing guide:** `/resources/business-workflow-automation-guide.html`  
-**Primary target cluster:** AI automation services for businesses in Pakistan
+**Primary target cluster:** AI chatbot and intelligent agent services for businesses in Pakistan
 
 **Commercial phrases to target naturally**
 - AI automation services Pakistan
@@ -55,7 +55,7 @@ Search Console data is finalized with an approximately three-day delay. The page
 
 **Positioning recommendation:** Explain practical business workflows AMM can scope and automate, the tools/accounts involved, testing, handover and human review. Keep this page about internal workflows and agents—not website customer-support chatbots.
 
-**Do not target on this page:** website chatbot, customer support chatbot, chatbot development.
+**Do not target on this page:** end-to-end workflow automation (separate AI Automation service page), chatbot development.
 
 ### 2. Website AI Chatbots
 
@@ -235,7 +235,7 @@ This is a qualitative assessment based on sampled result pages, not a numeric ke
 2. Creative Design — concrete deliverables and a clear distinction from advertising.
 3. Website AI Chatbots — clear buyer problem and distinct page intent.
 4. Digital Advertising — clear campaign-management intent; separate from creative.
-5. AI Bots & Intelligent Agents — valuable but broad category; use specific workflow examples.
+5. AI Chatbots & Intelligent Agents — valuable but broad category; use specific workflow examples.
 6. SEO + AI Search Visibility — important core service, but broad SEO agency terms are established and require stronger evidence and differentiation.
 
 ## Search Console evidence for AMM
