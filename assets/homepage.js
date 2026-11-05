@@ -164,7 +164,7 @@ $('#cf').onsubmit=async e=>{
   }
  });
  function sendWork(from,to){
-  const a=cards[from]?.querySelector('.amm-window'),b=cards[to]?.querySelector('.amm-window'),wrap=document.querySelector('#services .amm-workflow');
+  const a=cards[from]?.querySelector('.amm-window'),b=cards[to]?.querySelector('.amm-window'),wrap=document.querySelector('#workflow-demo .amm-workflow');
   if(!a||!b||!wrap||reduce)return;
   const wr=wrap.getBoundingClientRect(),ar=a.getBoundingClientRect(),br=b.getBoundingClientRect();
   const sx=ar.left+ar.width/2-wr.left,sy=ar.top+ar.height/2-wr.top;
@@ -322,7 +322,7 @@ $('#cf').onsubmit=async e=>{
 /* Independent safety net: keep the AMM workflow demo animated if the main page script fails early. */
 (function(){
   if(window.__ammWorkflowController) return;
-  const root=document.querySelector('#services .amm-workflow');
+  const root=document.querySelector('#workflow-demo .amm-workflow');
   if(!root) return;
   const cards=[...root.querySelectorAll('[data-flow-stage]')];
   const typed=document.getElementById('amm-order-typed');
