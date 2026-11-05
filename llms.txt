@@ -8,7 +8,7 @@
 - Official website: https://amm-data-solutions-new.vercel.app/
 
 ## Service scope at a glance
-- AI Bots & Intelligent Agents: task-focused assistants, approved information support, drafting, summarization, classification and scoped workflow tasks with permissions and human review where needed.
+- AI Chatbots & Intelligent Agents: website chatbots, customer support, lead capture, multilingual conversations, approved knowledge assistants, task-focused agents for drafting, summarization and classification, connected tools and human review where needed.
 - AI Chatbots: website chatbots, business knowledge assistants, website FAQs, service information, lead capture, multilingual configuration where agreed, and human hand-off.
 - Website Development & Improvement: new business websites, landing pages, responsive improvements, content and navigation updates, functional enhancements, technical fixes and suitable AI integrations.
 - AI Automation for Business & Everyday Work: identify repeatable tasks, build practical AI-powered workflows, connect supported tools, automate suitable steps, test outputs and add human approval where needed. Use AI where it adds value; simpler rules or existing software may be more suitable for some tasks.
@@ -21,15 +21,11 @@
 - [Privacy policy](https://amm-data-solutions-new.vercel.app/privacy.html): How contact and feedback submissions are handled.
 
 ## Services
-- [Fully Managed Digital Advertising & Campaign Management](https://amm-data-solutions-new.vercel.app/services/digital-advertising.html): End-to-end management for Google Ads, Meta Ads for Facebook and Instagram, LinkedIn Ads, Microsoft Advertising, TikTok Ads and ChatGPT Ads where official advertiser access is available. AMM handles strategy, setup, creative preparation, launch, monitoring, optimization and reporting.
-- [AI Bots & Intelligent Agents](https://amm-data-solutions-new.vercel.app/services/ai-bots-intelligent-agents.html)
-- [Website Development & Improvement](https://amm-data-solutions-new.vercel.app/services/website-development-improvement.html)
-- [AI Automation for Business & Everyday Work](https://amm-data-solutions-new.vercel.app/services/ai-automation-business-everyday-work.html)
-- [AI Chatbots](https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html)
+- [Fully Managed Digital Advertising & Campaign Management](https://amm-data-solutions-new.vercel.app/services/digital-advertising.html): End-to-end management for Google Ads, Meta Ads for Facebook and Instagram, LinkedIn Ads, Microsoft Advertising, TikTok Ads and ChatGPT Ads where official advertiser access is available.
+- [AI Chatbots & Intelligent Agents](https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html): Website chatbots, customer support, lead capture, multilingual conversations, approved knowledge assistants, task-focused AI agents, supported integrations and human review.
 - [Website Development & Improvement](https://amm-data-solutions-new.vercel.app/services/website-development-improvement.html)
 - [AI Automation for Business & Everyday Work](https://amm-data-solutions-new.vercel.app/services/ai-automation-business-everyday-work.html)
 - [Google SEO & AI Search Visibility](https://amm-data-solutions-new.vercel.app/services/google-seo-ai-search-visibility.html)
-- [Digital Advertising](https://amm-data-solutions-new.vercel.app/services/digital-advertising.html)
 - [Creative Design & Digital Content](https://amm-data-solutions-new.vercel.app/services/creative-design-digital-content.html)
 - [Data Management & Data Entry](https://amm-data-solutions-new.vercel.app/services/data-management-data-entry.html)
 
