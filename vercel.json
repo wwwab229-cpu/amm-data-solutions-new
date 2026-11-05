@@ -56,6 +56,11 @@
   "outputDirectory": "dist",
   "redirects": [
     {
+      "source": "/services/ai-bots-intelligent-agents.html",
+      "destination": "/services/ai-chatbots-customer-support.html",
+      "permanent": true
+    },
+    {
       "source": "/services/ai-business-automation.html",
       "destination": "/services/ai-bots-intelligent-agents.html",
       "permanent": true
