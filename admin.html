@@ -80,6 +80,11 @@ function render(){
   card.append(message);
   const meta=element('div','meta');meta.append(element('span','',safeText(r.display_name)||'Anonymous'),element('span','',dateText(r.created_at)));
   if(r.business)meta.append(element('span','',safeText(r.business)));
+  if(r.respondent_type)meta.append(element('span','',r.respondent_type==='client'?'AMM client':'Public visitor'));
+  if(r.service_name)meta.append(element('span','','Service: '+safeText(r.service_name)));
+  if(r.client_id)meta.append(element('span','','Client ID: '+safeText(r.client_id)));
+  if(r.publication_consent!==null&&r.publication_consent!==undefined)meta.append(element('span','','Website permission: '+(r.publication_consent?'Yes':'No')));
+  if(r.marketing_consent!==null&&r.marketing_consent!==undefined)meta.append(element('span','','Social/PR permission: '+(r.marketing_consent?'Yes':'No')));
   card.append(meta);
   if(r.status==='pending'){
    const actions=element('div','actions');const approve=element('button','approve','✓ Approve');approve.type='button';approve.addEventListener('click',()=>updateStatus(r.id,'approved',approve));
