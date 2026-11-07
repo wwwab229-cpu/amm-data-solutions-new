@@ -76,7 +76,7 @@ Deno.serve(async (req: Request) => {
   if (payload.action === "list") {
     const { data, error } = await adminDb
       .from("review_feedback_submissions")
-      .select("id,submission_type,display_name,business,rating,message,status,created_at")
+      .select("id,submission_type,display_name,business,rating,message,status,created_at,respondent_type,client_id,service_name,publication_consent,marketing_consent")
       .in("status", ["pending", "approved", "rejected"])
       .order("created_at", { ascending: false })
       .limit(100);
