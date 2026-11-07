@@ -53,17 +53,7 @@ $$('[data-c]').forEach(e=>co.observe(e));
 // Approved reviews and rating summaries are rendered by AMM_APPROVED_REVIEW_RENDERER_V2 below.
 const openFeedback=$('#open-feedback'),feedbackPanel=$('#feedback-panel'),feedbackForm=$('#feedback-form');
 window.__ammFeedbackInteracting=false;
-openFeedback.onclick=(event)=>{
- event.preventDefault();
- const keepY=window.scrollY;
- window.__ammFeedbackInteracting=true;
- feedbackPanel.classList.remove('hidden');
- openFeedback.setAttribute('aria-expanded','true');
- $('#feedback-status').textContent='';
- // Preserve the visitor's exact position while the inline form opens.
- requestAnimationFrame(()=>window.scrollTo({top:keepY,left:0,behavior:'auto'}));
- requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo({top:keepY,left:0,behavior: 'auto'})));
-};
+openFeedback.onclick=(event)=>{event.preventDefault();window.location.href='/feedback.html';};
 $('#close-feedback').onclick=()=>{
  window.__ammFeedbackInteracting=false;
  feedbackPanel.classList.add('hidden');
