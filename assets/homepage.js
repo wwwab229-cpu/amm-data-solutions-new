@@ -583,32 +583,3 @@ window.addEventListener('load', () => {
 })();
 
 ;
-
-(function () {
-  'use strict';
-  const label = /^ask\\s+amm$/i;
-  function removeAskAmmLauncher() {
-    const candidates = document.querySelectorAll('button,a,[role="button"],iframe,[aria-label],[title]');
-    candidates.forEach(function (node) {
-      const text = (node.innerText || node.textContent || '').trim();
-      const aria = (node.getAttribute('aria-label') || '').trim();
-      const title = (node.getAttribute('title') || '').trim();
-      const isMatch = label.test(text) || label.test(aria) || label.test(title);
-      if (!isMatch) return;
-      let target = node;
-      if (node.tagName === 'IFRAME') {
-        target = node;
-      } else {
-        let parent = node;
-        for (let i = 0; i < 4 && parent && parent !== document.body; i++, parent = parent.parentElement) {
-          const style = window.getComputedStyle(parent);
-          if (style.position === 'fixed' || style.position === 'sticky') { target = parent; break; }
-        }
-      }
-      target.remove();
-    });
-  }
-  removeAskAmmLauncher();
-  const observer = new MutationObserver(removeAskAmmLauncher);
-  observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['aria-label', 'title'] });
-})();
