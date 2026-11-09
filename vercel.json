@@ -92,6 +92,11 @@
       "source": "/services/website-design-digital-solutions.html",
       "destination": "/services/website-development-improvement.html",
       "permanent": true
+    },
+    {
+      "source": "/services/ai-automation.html",
+      "destination": "/services/ai-automation-business-everyday-work.html",
+      "permanent": true
     }
   ]
 }
