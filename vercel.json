@@ -74,6 +74,11 @@
   "outputDirectory": "dist",
   "redirects": [
     {
+      "source": "/pricing.html",
+      "destination": "/services/pricing-and-quotes.html",
+      "permanent": true
+    },
+    {
       "source": "/services/ai-bots-intelligent-agents.html",
       "destination": "/services/ai-chatbots-customer-support.html",
       "permanent": true
