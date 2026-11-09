@@ -23,8 +23,9 @@ section{padding:clamp(48px,8vw,96px) 0}
 @keyframes g{from{transform:scaleY(.1)}}
 .ribbon{position:absolute;left:-5%;right:-5%;top:50%;height:120px;background:var(--lime);transform:rotate(-3deg);z-index:0;border-radius:20px}
 .pill{border-radius:999px 999px 32px 32px;padding:32px 24px;background:#fff;position:relative;z-index:1;box-shadow:0 12px 32px -12px #14172b33}
-.rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
-.rv.in{opacity:1;transform:none}
+.rv{opacity:1;transform:none}
+html.js .rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+html.js .rv.in{opacity:1;transform:none}
 .chip{border:1px solid #14172b1f;background:#fff;padding:8px 16px;border-radius:999px;font-weight:600;font-size:.9rem}
 .sp{position:absolute;color:var(--primary);animation:tw 3s ease-in-out infinite}
 @keyframes tw{50%{opacity:.3;transform:scale(.8) rotate(20deg)}}
@@ -85,12 +86,7 @@ input,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1.5px soli
   text-decoration:none!important;
 }
 .hero-support-line{
-  animation:hero-support-blink 1.05s ease-out both;
-}
-@keyframes hero-support-blink{
-  0%,24%,48%{opacity:0}
-  12%,36%{opacity:.22}
-  65%,100%{opacity:1}
+  opacity:1;
 }
 @media(prefers-reduced-motion:reduce){
   .hero-support-line{animation:none;opacity:1}
