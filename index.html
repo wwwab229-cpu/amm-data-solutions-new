@@ -30,21 +30,39 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://amm-data-solutions-new.vercel.app/#organization","name":"AMM Data Solutions","alternateName":["AMM DS","AMMDS"],"url":"https://amm-data-solutions-new.vercel.app/","logo":{"@type":"ImageObject","url":"https://amm-data-solutions-new.vercel.app/logos/AMM_Data_Solutions_1200x1200_transparent%20(1).png"},"description":"AI automation, Google SEO, AI chatbots, business websites, digital ads, data management and creative design for businesses in Pakistan and worldwide.","areaServed":[{"@type":"Country","name":"Pakistan"},{"@type":"Place","name":"International markets"}],"knowsAbout":["AI automation","Google SEO","AI search visibility","digital advertising","AI chatbots and intelligent agents","website development","data management","creative design"]},{"@type":"WebSite","@id":"https://amm-data-solutions-new.vercel.app/#website","url":"https://amm-data-solutions-new.vercel.app/","name":"AMM Data Solutions","publisher":{"@id":"https://amm-data-solutions-new.vercel.app/#organization"},"inLanguage":"en"},{"@type":"WebPage","@id":"https://amm-data-solutions-new.vercel.app/#webpage","url":"https://amm-data-solutions-new.vercel.app/","name":"AI Automation & SEO Services in Pakistan | AMM Data Solutions","description":"AI automation, Google SEO, AI chatbots, business websites, digital ads, data management and creative design for businesses in Pakistan and worldwide.","isPartOf":{"@id":"https://amm-data-solutions-new.vercel.app/#website"},"about":{"@id":"https://amm-data-solutions-new.vercel.app/#organization"},"inLanguage":"en"},{"@type":"FAQPage","@id":"https://amm-data-solutions-new.vercel.app/#faq","mainEntity":[{"@type":"Question","name":"Do I need technical knowledge to use AI automation?","acceptedAnswer":{"@type":"Answer","text":"No. AMM DS explains each solution in plain language and helps you understand how to use your AI automation or digital tool."}},{"@type":"Question","name":"How long does an AI automation or website project take?","acceptedAnswer":{"@type":"Answer","text":"AMM DS aims to deliver solutions efficiently. The timeline depends on your project’s size, requirements and complexity."}},{"@type":"Question","name":"Can WhatsApp AI automation send customer messages without approval?","acceptedAnswer":{"@type":"Answer","text":"The WhatsApp assistant workflow described here drafts replies and waits for your approval before sending. Automation rules depend on the final setup you choose."}},{"@type":"Question","name":"Which languages does AMM DS support?","acceptedAnswer":{"@type":"Answer","text":"AMM DS provides language support according to its service policies and the capabilities of the tools used for each project. Contact us to confirm language availability for your requirements."}},{"@type":"Question","name":"Which advertising platforms does AMM DS support?","acceptedAnswer":{"@type":"Answer","text":"AMM DS manages campaigns across Google Ads, Meta Ads for Facebook and Instagram, LinkedIn Ads, Microsoft Advertising, TikTok Ads and ChatGPT Ads where official advertiser access is available. Share your business details, advertising budget and goal; AMM handles the campaign process from strategy and setup to creative preparation, launch, optimization and reporting. Account structure follows each platform’s rules, and advertising spend is separate from AMM’s management fee."}},{"@type":"Question","name":"How much do AI automation and digital solutions cost?","acceptedAnswer":{"@type":"Answer","text":"Pricing depends on the project scope, features, integrations and ongoing support needed. Share your requirements with AMM DS to request a clear estimate."}}]}]}</script>
 <link rel="stylesheet" href="/assets/homepage.css">
 
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "z5omvvcz16");
-</script>
-
-<!-- Google Analytics 4: AMM Data Solutions -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEG13E86Z2"></script>
+<!-- Analytics are queued immediately, while third-party scripts load after the page's initial load/idle period. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-SEG13E86Z2');
+
+  (function(){
+    function loadThirdPartyAnalytics(){
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window,document,'clarity','script','z5omvvcz16');
+
+      var gaScript=document.createElement('script');
+      gaScript.async=true;
+      gaScript.src='https://www.googletagmanager.com/gtag/js?id=G-SEG13E86Z2';
+      document.head.appendChild(gaScript);
+    }
+    function scheduleAnalytics(){
+      if('requestIdleCallback' in window){
+        window.requestIdleCallback(loadThirdPartyAnalytics,{timeout:3000});
+      }else{
+        window.setTimeout(loadThirdPartyAnalytics,1500);
+      }
+    }
+    if(document.readyState==='complete'){
+      scheduleAnalytics();
+    }else{
+      window.addEventListener('load',scheduleAnalytics,{once:true});
+    }
+  })();
 </script>
 </head>
 <body>
