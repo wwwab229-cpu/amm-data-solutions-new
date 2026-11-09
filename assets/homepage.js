@@ -1,46 +1,6 @@
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-// One-time hero typewriter on each fresh page load; no looping
-const heroHeading = $('#hero-heading-text'), heroSubtitle = $('#hero-subtitle-text'), heroCursor = $('#hero-cursor'), heroTypeBox = $('#hero-type-box');
-if (heroHeading && heroSubtitle && heroCursor) {
-  const headingText = 'What If Work Could Do Itself?';
-  const subtitleText = 'We use AI, automation and connected tools to reduce repetitive work, improve efficiency and build smarter, more cost-aware ways to get things done.';
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduceMotion) {
-    heroHeading.textContent = headingText;
-    heroSubtitle.textContent = subtitleText;
-    heroCursor.style.display = 'none';
-  } else {
-    let hi = 0, si = 0;
-    const typeHeading = () => {
-      if (hi < headingText.length) {
-        heroHeading.textContent += headingText.charAt(hi++);
-        if (heroTypeBox) {
-          heroTypeBox.animate(
-            [{filter:'brightness(1)',boxShadow:'0 .08em 0 #e8b91b'},{filter:'brightness(1.12)',boxShadow:'0 .12em 0 #e8b91b,0 0 12px #FFD83D80'},{filter:'brightness(1)',boxShadow:'0 .08em 0 #e8b91b'}],
-            {duration:180,easing:'ease-out'}
-          );
-        }
-        setTimeout(typeHeading, headingText.charAt(hi - 1) === ' ' ? 105 : 62);
-      } else {
-        const title = $('#hero-title');
-        title.animate([{transform:'scale(1)',filter:'brightness(1)'},{transform:'scale(1.025)',filter:'brightness(1.08)'},{transform:'scale(1)',filter:'brightness(1)'}],{duration:420,easing:'ease-out'});
-        title.style.textShadow = '0 0 24px #5b2ee833';
-        setTimeout(() => { title.style.textShadow = 'none'; }, 650);
-        setTimeout(typeSubtitle, 420);
-      }
-    };
-    const typeSubtitle = () => {
-      if (si < subtitleText.length) {
-        heroSubtitle.textContent += subtitleText.charAt(si++);
-        setTimeout(typeSubtitle, subtitleText.charAt(si - 1) === ',' ? 180 : subtitleText.charAt(si - 1) === ' ' ? 38 : 19);
-      } else {
-        heroCursor.style.display = 'none';
-      }
-    };
-    setTimeout(typeHeading, 350);
-  }
-}
+// Hero heading and supporting copy are present in the initial HTML for immediate first paint.
 // navbar blur + mobile menu
 addEventListener('scroll',()=>{const n=$('#nav');n.style.background=scrollY>20?'#fafaffd9':'transparent';n.style.backdropFilter=scrollY>20?'blur(14px)':'none'});
 $('#burger').onclick=e=>{const m=$('#menu');m.classList.toggle('hidden');const expanded=!m.classList.contains('hidden');e.currentTarget.setAttribute('aria-expanded',String(expanded));e.currentTarget.setAttribute('aria-label',expanded?'Close menu':'Open menu')};
