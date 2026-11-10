@@ -2,7 +2,7 @@
 
 > AMM Data Solutions is a Pakistan-based, AI-powered technology and digital solutions company serving businesses in Pakistan and international markets. We engineer practical solutions using artificial intelligence, intelligent automation, data and modern digital technologies to simplify operations, reduce repetitive work and improve how businesses get things done.
 
-**Brand statement:** We Engineer Smarter Solutions for a Modern World.  
+**Brand statement:** AI-Powered Technology, Engineered for Better Work.  
 **International positioning:** Built in Pakistan. Powered by AI. Connected to the World.  
 **Tagline:** Let's Make Solutions.
 
@@ -32,23 +32,23 @@ AMM Data Solutions has seven core services:
 
 1. **AI Automation & Workflow Engineering** — identify repeatable tasks, map workflows, connect supported tools, automate suitable steps, test outputs, and include human approval where needed. Use AI where it adds value; simpler rules or existing software may be more suitable for some tasks.  
    https://amm-data-solutions-new.vercel.app/services/ai-automation-business-everyday-work.html
-2. **Search Visibility: SEO, GEO & AEO** — technical SEO, on-page content, crawlability and indexing checks, search visibility audits, and relevant AI-search readiness. No ranking or AI-inclusion guarantees.  
+2. **SEO, GEO & AEO Search Visibility** — technical SEO, on-page content, crawlability and indexing checks, search visibility audits, and relevant AI-search readiness. No ranking or AI-inclusion guarantees.  
    https://amm-data-solutions-new.vercel.app/services/google-seo-ai-search-visibility.html
 3. **Digital Advertising & Campaign Management** — campaign strategy, setup, creative preparation, launch, monitoring, optimization, and reporting across Google Ads, Meta Ads (Facebook and Instagram), LinkedIn Ads, Microsoft Advertising, TikTok Ads, and ChatGPT Ads where official advertiser access, account permissions, and market eligibility allow. Advertising spend is separate from AMM's management fee.  
    https://amm-data-solutions-new.vercel.app/services/digital-advertising.html
-4. **AI Agents, Chatbots & Intelligent Assistants** — website chatbots, customer support, lead capture, multilingual conversations, approved knowledge assistants, task-focused agents, supported integrations, safeguards, and human review.  
+4. **AI Agents & Intelligent Chatbots** — website chatbots, customer support, lead capture, multilingual conversations, approved knowledge assistants, task-focused agents, supported integrations, safeguards, and human review.  
    https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html
 5. **Website Development & Digital Experiences** — business websites, landing pages, responsive improvements, content and navigation updates, functional enhancements, technical fixes, and suitable AI integrations.  
    https://amm-data-solutions-new.vercel.app/services/website-development-improvement.html
 6. **Data Management & AI-Ready Data** (including data entry, spreadsheet and document processing) — spreadsheet updates, Excel/CSV organization, document-to-sheet processing, cleanup, formatting, duplicate checks, and agreed quality checks.  
    https://amm-data-solutions-new.vercel.app/services/data-management-data-entry.html
-7. **Creative Design & Brand Content** — social graphics, campaign visuals, banners, presentations, reusable branded digital assets, and organized file handover. Video production and editing are not included.  
+7. **Creative Design & Digital Brand Content** — social graphics, campaign visuals, banners, presentations, reusable branded digital assets, and organized file handover. Video production and editing are not included.  
    https://amm-data-solutions-new.vercel.app/services/creative-design-digital-content.html
 
 ## External brand identity consistency
 Use the same company identity across public business profiles, social channels, directories, proposals and partner introductions.
 
-**Approved company description:** AMM Data Solutions is a Pakistan-based AI-powered technology and digital solutions company. It helps businesses improve how work gets done through practical AI automation, intelligent agents, search visibility, digital advertising, website development, data management and creative design. Solutions are scoped to the client's needs, existing tools, permissions and measurable requirements.
+**Approved company description:** AMM Data Solutions is a Pakistan-based AI-powered technology company helping organizations modernize how work gets done. It engineers practical solutions by combining artificial intelligence, intelligent automation, connected software, structured data and digital experiences to reduce repetitive effort, prevent avoidable errors and improve operational speed, accuracy and control. Solutions are selected around the business problem and scoped to the client's requirements, available tools, permissions and safeguards.
 
 **Short profile description:** Pakistan-based AI-powered technology and digital solutions for smarter workflows, fewer repetitive tasks and more efficient business operations.
 
