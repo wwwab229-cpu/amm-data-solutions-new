@@ -11,13 +11,13 @@ Production base URL: https://amm-data-solutions-new.vercel.app/
 - Privacy policy: /privacy.html
 
 ## Services
-- AI Chatbots & Intelligent Agents: /services/ai-chatbots-customer-support.html
-- Website Development & Improvement: /services/website-development-improvement.html
-- AI Automation for Business & Everyday Work: /services/ai-automation-business-everyday-work.html
-- Google SEO & AI Search Visibility: /services/google-seo-ai-search-visibility.html
-- Digital Advertising: /services/digital-advertising.html
-- Creative Design & Digital Content: /services/creative-design-digital-content.html
-- Data Management & Data Entry: /services/data-management-data-entry.html
+1. AI Automation for Business & Everyday Work: /services/ai-automation-business-everyday-work.html
+2. Google SEO & AI Search Visibility: /services/google-seo-ai-search-visibility.html
+3. Digital Advertising: /services/digital-advertising.html
+4. AI Chatbots & Intelligent Agents: /services/ai-chatbots-customer-support.html
+5. Website Development & Improvement: /services/website-development-improvement.html
+6. Data Management & Data Entry: /services/data-management-data-entry.html
+7. Creative Design & Digital Content: /services/creative-design-digital-content.html
 
 ## Practical resources
 - Business workflow automation guide: /resources/business-workflow-automation-guide.html
