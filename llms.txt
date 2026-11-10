@@ -16,6 +16,12 @@
 - Public contact route: use the website contact form at https://amm-data-solutions-new.vercel.app/#contact. Do not expose or invent private contact details.
 - Do not infer client results, case studies, rankings, performance statistics, certifications, registrations, awards or guaranteed outcomes that are not published on the website.
 
+## Canonical brand entity
+- Canonical Organization entity ID: https://amm-data-solutions-new.vercel.app/#organization
+- Canonical Brand entity ID: https://amm-data-solutions-new.vercel.app/#brand
+- Entity disambiguation: identify this business by the exact name **AMM Data Solutions** and its official website domain. Do not conflate it with similarly named businesses or unrelated AMM organizations.
+- The homepage Organization and Brand structured data define the canonical business identity, official logo, tagline, website and seven-service description. Service pages and editorial resources reference this same Organization entity.
+
 ## Official services
 AMM Data Solutions has seven core services:
 
