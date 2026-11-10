@@ -35,6 +35,11 @@ AMM Data Solutions has seven core services:
 7. **Creative Design & Digital Content** — social graphics, campaign visuals, banners, presentations, reusable branded digital assets, and organized file handover. Video production and editing are not included.  
    https://amm-data-solutions-new.vercel.app/services/creative-design-digital-content.html
 
+## Third-party company profile
+- The Manifest company listing: https://themanifest.com/company/amm-data-solutions
+- This is a third-party directory listing, not an AMM-controlled website. Directory details should be reviewed and claimed by an authorized AMM representative where the platform permits. Publicly indexed listing data currently shows no client reviews and an incomplete location field; do not present those details as verified AMM claims.
+- Do not infer client outcomes, review scores, team size, legal registration, office addresses or project budgets from directory category labels.
+
 ## Main website
 - [Homepage](https://amm-data-solutions-new.vercel.app/): service overview, illustrative workflow, FAQs, contact form, and feedback form.
 - [Blog and practical business guides](https://amm-data-solutions-new.vercel.app/blog/): practical articles about automation, chatbots, websites, advertising, SEO, design, and data operations.
