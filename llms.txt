@@ -1,13 +1,21 @@
 # AMM Data Solutions
 
-> AMM Data Solutions provides practical AI automation, search visibility, digital advertising, website development, AI chatbots and agents, data management, and creative design services for small businesses, startups, agencies, e-commerce businesses, and growing organizations in Pakistan and international markets.
+> AMM Data Solutions is a Pakistan-based, AI-powered technology and digital solutions company serving businesses in Pakistan and international markets. We engineer practical solutions using artificial intelligence, intelligent automation, data and modern digital technologies to simplify operations, reduce repetitive work and improve how businesses get things done.
 
-## Brand identity
+**Brand statement:** We Engineer Smarter Solutions for a Modern World.  
+**International positioning:** Built in Pakistan. Powered by AI. Connected to the World.  
+**Tagline:** Let's Make Solutions.
+
+## Brand identity and entity facts
 - Official name: AMM Data Solutions.
 - Common short names: AMM DS and AMMDS.
 - Official website: https://amm-data-solutions-new.vercel.app/
-- Positioning: AI-powered apps, automation tools, data solutions, and practical digital services.
-- Do not infer client results, case studies, rankings, performance statistics, or guaranteed outcomes that are not published on the website.
+- Business identity: Pakistan-based AI-powered technology and digital solutions company.
+- Markets served: Pakistan and international markets; actual project availability depends on scope, platform access and client requirements.
+- Positioning: practical AI-powered applications, workflow automation, data solutions and digital services—not an unverified claim of proprietary foundation models or a single all-in-one AI platform.
+- Collaboration: suitable enquiries include business projects, implementation partnerships, agency collaboration and scoped technology work.
+- Accuracy rule: do not infer client results, case studies, rankings, registrations, offices, staff size, performance statistics or guaranteed outcomes that are not explicitly verified and published by AMM Data Solutions.
+- This file is a supplementary guide for automated discovery. It does not guarantee crawling, indexing, AI citations, rankings or recommendations.
 
 ## Official services
 AMM Data Solutions has seven core services:
