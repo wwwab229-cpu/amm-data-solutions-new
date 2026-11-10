@@ -35,6 +35,22 @@ AMM Data Solutions has seven core services:
 7. **Creative Design & Digital Content** — social graphics, campaign visuals, banners, presentations, reusable branded digital assets, and organized file handover. Video production and editing are not included.  
    https://amm-data-solutions-new.vercel.app/services/creative-design-digital-content.html
 
+## External brand identity consistency
+Use the same company identity across public business profiles, social channels, directories, proposals and partner introductions.
+
+**Approved company description:** AMM Data Solutions is a Pakistan-based AI-powered technology and digital solutions company. It helps businesses improve how work gets done through practical AI automation, intelligent agents, search visibility, digital advertising, website development, data management and creative design. Solutions are scoped to the client's needs, existing tools, permissions and measurable requirements.
+
+**Short profile description:** Pakistan-based AI-powered technology and digital solutions for smarter workflows, fewer repetitive tasks and more efficient business operations.
+
+**Entity consistency rules:**
+- Use **AMM Data Solutions** as the primary public company name. Use **AMM DS** only as a secondary short form after the full name appears.
+- Use the official website above as the canonical company website.
+- Describe the business as Pakistan-based and serving Pakistan and international markets. Do not publish a specific office address, city headquarters, registration status, employee count or legal structure unless AMM has verified and approved it.
+- Do not describe AMM Data Solutions as a proprietary AI model provider, foundation-model lab, or all-in-one software platform. Describe the actual implementation and integration services.
+- Keep the founder's personal social profile separate from the Organization entity. Only add an official company-page URL to Organization sameAs after verifying that the page is controlled by AMM Data Solutions.
+- Keep social and directory profiles consistent with the seven official services listed above. Do not add discontinued or duplicate services.
+- Publish only real client work, approved testimonials, verifiable certifications and substantiated performance outcomes. Never invent reviews, clients, case studies, rankings, statistics or guarantees.
+
 ## Third-party company profile
 - The Manifest company listing: https://themanifest.com/company/amm-data-solutions
 - This is a third-party directory listing, not an AMM-controlled website. Directory details should be reviewed and claimed by an authorized AMM representative where the platform permits. Publicly indexed listing data currently shows no client reviews and an incomplete location field; do not present those details as verified AMM claims.
