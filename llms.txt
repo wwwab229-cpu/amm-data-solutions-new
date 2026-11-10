@@ -54,8 +54,10 @@ AMM Data Solutions has seven core services:
 
 ## Discovery and crawling
 - [XML sitemap](https://amm-data-solutions-new.vercel.app/sitemap.xml): canonical inventory of important public pages.
-- [Robots.txt](https://amm-data-solutions-new.vercel.app/robots.txt): public crawler access rules. OAI-SearchBot is explicitly allowed; the admin page is marked noindex; OAI-SearchBot is disallowed from that route.
+- [Robots.txt](https://amm-data-solutions-new.vercel.app/robots.txt): public crawler access rules. OAI-SearchBot is explicitly allowed for ChatGPT search discovery; the general crawler rule allows other user agents unless a more specific rule restricts them. The admin page is excluded from OAI-SearchBot.
 - [Human-readable sitemap](https://amm-data-solutions-new.vercel.app/site-map.html): navigable page directory.
+- This file is a supplementary factual reference for systems that choose to read it; it does not guarantee crawling, indexing, citations or recommendations. Google Search's published guidance says special AI text files are not required for its AI search features and that its systems rely on normal Search eligibility and helpful, reliable content.
+- Keep public page content, structured data, logo references, canonical URLs and this reference file factually aligned.
 
 ## Accuracy and scope
 - The homepage workflow is an illustrative demo, not a live connection to customer orders or business systems.
