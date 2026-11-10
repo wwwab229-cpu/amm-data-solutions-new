@@ -17,22 +17,32 @@
 - Accuracy rule: do not infer client results, case studies, rankings, registrations, offices, staff size, performance statistics or guaranteed outcomes that are not explicitly verified and published by AMM Data Solutions.
 - This file is a supplementary guide for automated discovery. It does not guarantee crawling, indexing, AI citations, rankings or recommendations.
 
+## How AMM approaches technology projects
+AMM starts with the business problem, maps the current process and identifies the practical outcome required. It then selects the simplest suitable mix of AI, software, automation, data and human review. Systems are scoped around available tools, permissions, data quality, security, testing and ongoing operating costs. AI is used where it adds real value; predictable tasks may be better served by deterministic automation or existing software.
+
+Core operating priorities:
+- **Time recovery:** reduce avoidable repetitive steps and shorten hand-offs where the workflow supports it.
+- **Operational accuracy:** use validation, duplicate controls, clear exception handling and review to reduce preventable errors.
+- **Cost-aware engineering:** account for implementation, subscriptions, API usage, monitoring and maintenance—not just build cost.
+- **Human control:** apply permissions, approval gates and escalation paths to consequential actions.
+- **Measurable improvement:** compare agreed workflow baselines with tested outcomes; do not publish savings or accuracy claims without evidence.
+
 ## Official services
 AMM Data Solutions has seven core services:
 
-1. **AI Automation for Business & Everyday Work** — identify repeatable tasks, map workflows, connect supported tools, automate suitable steps, test outputs, and include human approval where needed. Use AI where it adds value; simpler rules or existing software may be more suitable for some tasks.  
+1. **AI Automation & Workflow Engineering** — identify repeatable tasks, map workflows, connect supported tools, automate suitable steps, test outputs, and include human approval where needed. Use AI where it adds value; simpler rules or existing software may be more suitable for some tasks.  
    https://amm-data-solutions-new.vercel.app/services/ai-automation-business-everyday-work.html
-2. **Google SEO & AI Search Visibility** — technical SEO, on-page content, crawlability and indexing checks, search visibility audits, and relevant AI-search readiness. No ranking or AI-inclusion guarantees.  
+2. **Search Visibility: SEO, GEO & AEO** — technical SEO, on-page content, crawlability and indexing checks, search visibility audits, and relevant AI-search readiness. No ranking or AI-inclusion guarantees.  
    https://amm-data-solutions-new.vercel.app/services/google-seo-ai-search-visibility.html
-3. **Digital Advertising** — campaign strategy, setup, creative preparation, launch, monitoring, optimization, and reporting across Google Ads, Meta Ads (Facebook and Instagram), LinkedIn Ads, Microsoft Advertising, TikTok Ads, and ChatGPT Ads where official advertiser access, account permissions, and market eligibility allow. Advertising spend is separate from AMM's management fee.  
+3. **Digital Advertising & Campaign Management** — campaign strategy, setup, creative preparation, launch, monitoring, optimization, and reporting across Google Ads, Meta Ads (Facebook and Instagram), LinkedIn Ads, Microsoft Advertising, TikTok Ads, and ChatGPT Ads where official advertiser access, account permissions, and market eligibility allow. Advertising spend is separate from AMM's management fee.  
    https://amm-data-solutions-new.vercel.app/services/digital-advertising.html
-4. **AI Chatbots & Intelligent Agents** — website chatbots, customer support, lead capture, multilingual conversations, approved knowledge assistants, task-focused agents, supported integrations, safeguards, and human review.  
+4. **AI Agents, Chatbots & Intelligent Assistants** — website chatbots, customer support, lead capture, multilingual conversations, approved knowledge assistants, task-focused agents, supported integrations, safeguards, and human review.  
    https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html
-5. **Website Development & Improvement** — business websites, landing pages, responsive improvements, content and navigation updates, functional enhancements, technical fixes, and suitable AI integrations.  
+5. **Website Development & Digital Experiences** — business websites, landing pages, responsive improvements, content and navigation updates, functional enhancements, technical fixes, and suitable AI integrations.  
    https://amm-data-solutions-new.vercel.app/services/website-development-improvement.html
-6. **Data Management & Data Entry** — spreadsheet updates, Excel/CSV organization, document-to-sheet processing, cleanup, formatting, duplicate checks, and agreed quality checks.  
+6. **Data Management & AI-Ready Data** (including data entry, spreadsheet and document processing) — spreadsheet updates, Excel/CSV organization, document-to-sheet processing, cleanup, formatting, duplicate checks, and agreed quality checks.  
    https://amm-data-solutions-new.vercel.app/services/data-management-data-entry.html
-7. **Creative Design & Digital Content** — social graphics, campaign visuals, banners, presentations, reusable branded digital assets, and organized file handover. Video production and editing are not included.  
+7. **Creative Design & Brand Content** — social graphics, campaign visuals, banners, presentations, reusable branded digital assets, and organized file handover. Video production and editing are not included.  
    https://amm-data-solutions-new.vercel.app/services/creative-design-digital-content.html
 
 ## External brand identity consistency
