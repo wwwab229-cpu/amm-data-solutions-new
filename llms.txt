@@ -1,31 +1,70 @@
 # AMM Data Solutions
 
-> AMM Data Solutions provides practical AI automation, search visibility, digital advertising, website development, AI chatbots and agents, data management, and creative design services for small businesses, startups, agencies, e-commerce businesses, and growing organizations in Pakistan and international markets.
+> AMM Data Solutions is a Pakistan-based, AI-powered technology and digital solutions company serving businesses in Pakistan and international markets. We engineer practical solutions using artificial intelligence, intelligent automation, data and modern digital technologies to simplify operations, reduce repetitive work and improve how businesses get things done.
 
-## Brand identity
+**Brand statement:** AI-Powered Technology, Engineered for Better Work.  
+**International positioning:** Built in Pakistan. Powered by AI. Connected to the World.  
+**Tagline:** Let's Make Solutions.
+
+## Brand identity and entity facts
 - Official name: AMM Data Solutions.
 - Common short names: AMM DS and AMMDS.
 - Official website: https://amm-data-solutions-new.vercel.app/
-- Positioning: AI-powered apps, automation tools, data solutions, and practical digital services.
-- Do not infer client results, case studies, rankings, performance statistics, or guaranteed outcomes that are not published on the website.
+- Business identity: Pakistan-based AI-powered technology and digital solutions company.
+- Markets served: Pakistan and international markets; actual project availability depends on scope, platform access and client requirements.
+- Positioning: practical AI-powered applications, workflow automation, data solutions and digital services—not an unverified claim of proprietary foundation models or a single all-in-one AI platform.
+- Collaboration: suitable enquiries include business projects, implementation partnerships, agency collaboration and scoped technology work.
+- Accuracy rule: do not infer client results, case studies, rankings, registrations, offices, staff size, performance statistics or guaranteed outcomes that are not explicitly verified and published by AMM Data Solutions.
+- This file is a supplementary guide for automated discovery. It does not guarantee crawling, indexing, AI citations, rankings or recommendations.
+
+## How AMM approaches technology projects
+AMM starts with the business problem, maps the current process and identifies the practical outcome required. It then selects the simplest suitable mix of AI, software, automation, data and human review. Systems are scoped around available tools, permissions, data quality, security, testing and ongoing operating costs. AI is used where it adds real value; predictable tasks may be better served by deterministic automation or existing software.
+
+Core operating priorities:
+- **Time recovery:** reduce avoidable repetitive steps and shorten hand-offs where the workflow supports it.
+- **Operational accuracy:** use validation, duplicate controls, clear exception handling and review to reduce preventable errors.
+- **Cost-aware engineering:** account for implementation, subscriptions, API usage, monitoring and maintenance—not just build cost.
+- **Human control:** apply permissions, approval gates and escalation paths to consequential actions.
+- **Measurable improvement:** compare agreed workflow baselines with tested outcomes; do not publish savings or accuracy claims without evidence.
 
 ## Official services
 AMM Data Solutions has seven core services:
 
-1. **AI Automation for Business & Everyday Work** — identify repeatable tasks, map workflows, connect supported tools, automate suitable steps, test outputs, and include human approval where needed. Use AI where it adds value; simpler rules or existing software may be more suitable for some tasks.  
+1. **AI Automation & Workflow Engineering** — identify repeatable tasks, map workflows, connect supported tools, automate suitable steps, test outputs, and include human approval where needed. Use AI where it adds value; simpler rules or existing software may be more suitable for some tasks.  
    https://amm-data-solutions-new.vercel.app/services/ai-automation-business-everyday-work.html
-2. **Google SEO & AI Search Visibility** — technical SEO, on-page content, crawlability and indexing checks, search visibility audits, and relevant AI-search readiness. No ranking or AI-inclusion guarantees.  
+2. **SEO, GEO & AEO Search Visibility** — technical SEO, on-page content, crawlability and indexing checks, search visibility audits, and relevant AI-search readiness. No ranking or AI-inclusion guarantees.  
    https://amm-data-solutions-new.vercel.app/services/google-seo-ai-search-visibility.html
-3. **Digital Advertising** — campaign strategy, setup, creative preparation, launch, monitoring, optimization, and reporting across Google Ads, Meta Ads (Facebook and Instagram), LinkedIn Ads, Microsoft Advertising, TikTok Ads, and ChatGPT Ads where official advertiser access, account permissions, and market eligibility allow. Advertising spend is separate from AMM's management fee.  
+3. **Digital Advertising & Campaign Management** — campaign strategy, setup, creative preparation, launch, monitoring, optimization, and reporting across Google Ads, Meta Ads (Facebook and Instagram), LinkedIn Ads, Microsoft Advertising, TikTok Ads, and ChatGPT Ads where official advertiser access, account permissions, and market eligibility allow. Advertising spend is separate from AMM's management fee.  
    https://amm-data-solutions-new.vercel.app/services/digital-advertising.html
-4. **AI Chatbots & Intelligent Agents** — website chatbots, customer support, lead capture, multilingual conversations, approved knowledge assistants, task-focused agents, supported integrations, safeguards, and human review.  
+4. **AI Agents & Intelligent Chatbots** — website chatbots, customer support, lead capture, multilingual conversations, approved knowledge assistants, task-focused agents, supported integrations, safeguards, and human review.  
    https://amm-data-solutions-new.vercel.app/services/ai-chatbots-customer-support.html
-5. **Website Development & Improvement** — business websites, landing pages, responsive improvements, content and navigation updates, functional enhancements, technical fixes, and suitable AI integrations.  
+5. **Website Development & Digital Experiences** — business websites, landing pages, responsive improvements, content and navigation updates, functional enhancements, technical fixes, and suitable AI integrations.  
    https://amm-data-solutions-new.vercel.app/services/website-development-improvement.html
-6. **Data Management & Data Entry** — spreadsheet updates, Excel/CSV organization, document-to-sheet processing, cleanup, formatting, duplicate checks, and agreed quality checks.  
+6. **Data Management & AI-Ready Data** (including data entry, spreadsheet and document processing) — spreadsheet updates, Excel/CSV organization, document-to-sheet processing, cleanup, formatting, duplicate checks, and agreed quality checks.  
    https://amm-data-solutions-new.vercel.app/services/data-management-data-entry.html
-7. **Creative Design & Digital Content** — social graphics, campaign visuals, banners, presentations, reusable branded digital assets, and organized file handover. Video production and editing are not included.  
+7. **Creative Design & Digital Brand Content** — social graphics, campaign visuals, banners, presentations, reusable branded digital assets, and organized file handover. Video production and editing are not included.  
    https://amm-data-solutions-new.vercel.app/services/creative-design-digital-content.html
+
+## External brand identity consistency
+Use the same company identity across public business profiles, social channels, directories, proposals and partner introductions.
+
+**Approved company description:** AMM Data Solutions is a Pakistan-based AI-powered technology company helping organizations modernize how work gets done. It engineers practical solutions by combining artificial intelligence, intelligent automation, connected software, structured data and digital experiences to reduce repetitive effort, prevent avoidable errors and improve operational speed, accuracy and control. Solutions are selected around the business problem and scoped to the client's requirements, available tools, permissions and safeguards.
+
+**Short profile description:** Pakistan-based AI-powered technology and digital solutions for smarter workflows, fewer repetitive tasks and more efficient business operations.
+
+**Entity consistency rules:**
+- Use **AMM Data Solutions** as the primary public company name. Use **AMM DS** only as a secondary short form after the full name appears.
+- Use the official website above as the canonical company website.
+- Describe the business as Pakistan-based and serving Pakistan and international markets. Do not publish a specific office address, city headquarters, registration status, employee count or legal structure unless AMM has verified and approved it.
+- Do not describe AMM Data Solutions as a proprietary AI model provider, foundation-model lab, or all-in-one software platform. Describe the actual implementation and integration services.
+- Keep the founder's personal social profile separate from the Organization entity. Only add an official company-page URL to Organization sameAs after verifying that the page is controlled by AMM Data Solutions.
+- Keep social and directory profiles consistent with the seven official services listed above. Do not add discontinued or duplicate services.
+- Publish only real client work, approved testimonials, verifiable certifications and substantiated performance outcomes. Never invent reviews, clients, case studies, rankings, statistics or guarantees.
+
+## Third-party company profile
+- The Manifest company listing: https://themanifest.com/company/amm-data-solutions
+- This is a third-party directory listing, not an AMM-controlled website. Directory details should be reviewed and claimed by an authorized AMM representative where the platform permits. Publicly indexed listing data currently shows no client reviews and an incomplete location field; do not present those details as verified AMM claims.
+- Do not infer client outcomes, review scores, team size, legal registration, office addresses or project budgets from directory category labels.
 
 ## Main website
 - [Homepage](https://amm-data-solutions-new.vercel.app/): service overview, illustrative workflow, FAQs, contact form, and feedback form.
