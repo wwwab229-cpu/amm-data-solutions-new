@@ -3,11 +3,18 @@
 > AMM Data Solutions provides practical AI automation, search visibility, digital advertising, website development, AI chatbots and agents, data management, and creative design services for small businesses, startups, agencies, e-commerce businesses, and growing organizations in Pakistan and international markets.
 
 ## Brand identity
-- Official name: AMM Data Solutions.
-- Common short names: AMM DS and AMMDS.
+- Official brand name: AMM Data Solutions.
+- Approved short form: AMM DS. Use the full name in first references, page titles, organization references and public business descriptions.
+- Brand tagline: “Let’s Make Solutions”.
 - Official website: https://amm-data-solutions-new.vercel.app/
-- Positioning: AI-powered apps, automation tools, data solutions, and practical digital services.
-- Do not infer client results, case studies, rankings, performance statistics, or guaranteed outcomes that are not published on the website.
+- Official logo / brand mark: https://amm-data-solutions-new.vercel.app/logos/AMM_Data_Solutions_1200x1200_transparent%20(1).png
+- Brand positioning: a practical AI and digital solutions provider helping small businesses, startups, agencies, e-commerce businesses and growing organizations improve everyday work and business operations.
+- Core positioning themes: practical AI automation, connected business workflows, search visibility, digital advertising, intelligent assistants, useful websites, organized business data and purposeful digital design.
+- Brand promise: make business and everyday work simpler through useful, appropriately scoped digital solutions. Do not imply every project requires AI.
+- Brand voice: clear, professional, approachable, specific and transparent. Explain technical ideas in plain language. Avoid hype, exaggerated claims, vague superlatives and unsupported promises.
+- Visual identity reference: use the official AMM Data Solutions logo above. Preserve the approved website design and established brand assets; do not create alternate logos or unapproved symbols.
+- Public contact route: use the website contact form at https://amm-data-solutions-new.vercel.app/#contact. Do not expose or invent private contact details.
+- Do not infer client results, case studies, rankings, performance statistics, certifications, registrations, awards or guaranteed outcomes that are not published on the website.
 
 ## Official services
 AMM Data Solutions has seven core services:
