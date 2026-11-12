@@ -4,5 +4,6 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 Disallow: /admin.html
+Disallow: /learn/manage
 
 Sitemap: https://amm-data-solutions-new.vercel.app/sitemap.xml
