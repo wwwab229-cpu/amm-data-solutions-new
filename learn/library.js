@@ -8,7 +8,7 @@ const filterHost=document.querySelector('[data-lh-filters]');
 const search=document.querySelector('[data-lh-search]');
 const empty=document.querySelector('[data-lh-empty]');
 let categories=[],resources=[],activeCategory=new URLSearchParams(location.search).get('category')||'all';
-const icons={'ai':'✳','automation':'↗','github-development':'⌘','prompts':'✎','roadmaps':'▤','ai-tools':'⚙','web-technology':'⌘','data-productivity':'▦','technology-trends':'◎'};
+const icons={'ai':'✳','automation':'↗','github-development':'⌘','prompts':'✎','roadmaps':'▤','ai-tools':'⚙','web-technology':'⌘','data-productivity':'▦','technology-trends':'◎'};const iconGlyphs={'brain-circuit':'✳','workflow':'↗','github':'⌘','message-square-text':'✎','map':'▤','app-window':'⚙','code':'⌘','chart-no-axes-combined':'▦','newspaper':'◎'};
 const typeLabels={guide:'Text guide',prompt:'Prompt',pdf:'PDF',link:'External link',image:'Image',code:'Code / skill',video:'Video',collection:'Collection'};
 function node(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;}
 function resourceHref(r){return '/learn/r/'+encodeURIComponent(r.slug)+'/';}
@@ -17,7 +17,7 @@ function categoryHref(slug){const url=new URL(location.href);url.searchParams.se
 function renderCategories(){
  if(!categoryHost)return;categoryHost.replaceChildren();
  if(!categories.length){categoryHost.append(node('p','lh-empty','Learning categories are being prepared.'));return;}
- categories.forEach(c=>{const a=node('a','lh-category');a.href=categoryHref(c.slug);const ico=node('span','lh-category-icon',icons[c.slug]||'▤');const title=node('strong','',c.name);const desc=node('small','',c.description||'Explore resources in this category.');a.append(ico,title,desc);categoryHost.append(a);});
+ categories.forEach(c=>{const a=node('a','lh-category');a.href=categoryHref(c.slug);const ico=node('span','lh-category-icon',iconGlyphs[c.icon]||icons[c.slug]||'▤');const title=node('strong','',c.name);const desc=node('small','',c.description||'Explore resources in this category.');a.append(ico,title,desc);categoryHost.append(a);});
 }
 function renderFilters(){
  if(!filterHost)return;filterHost.replaceChildren();
