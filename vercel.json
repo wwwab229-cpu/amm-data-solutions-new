@@ -67,6 +67,32 @@
           "value": "no-cache"
         }
       ]
+    },
+    {
+      "source": "/learn/manage",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/learn/manage/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0, must-revalidate"
+        }
+      ]
     }
   ],
   "buildCommand": "npm run build",
@@ -97,6 +123,12 @@
       "source": "/services/ai-automation.html",
       "destination": "/services/ai-automation-business-everyday-work.html",
       "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/learn/r/:slug",
+      "destination": "/learn/resource.html?slug=:slug"
     }
   ]
 }
