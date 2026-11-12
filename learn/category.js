@@ -22,7 +22,7 @@ function render(){
  const type=$('[data-category-type]')?.value||'all';
  const shown=resources.filter(r=>(type==='all'||r.content_type===type)&&(!q||[r.title,r.summary,r.body,(r.tags||[]).join(' ')].join(' ').toLowerCase().includes(q)));
  const host=$('[data-category-resources]');host.replaceChildren();shown.forEach(r=>host.append(card(r)));
- const empty=$('[data-category-empty]');if(empty)empty.hidden=shown.length>0;
+ const empty=$('[data-category-empty]');if(empty){empty.hidden=shown.length>0;empty.textContent=resources.length===0?'New resources for this category are being prepared. Explore another category or check back soon.':'No resources match this search. Try another keyword or resource type.';}
  const count=$('[data-category-count]');if(count)count.textContent=shown.length+' '+(shown.length===1?'resource':'resources')+' in this category';
 }
 async function load(){
