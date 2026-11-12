@@ -127,6 +127,14 @@
   ],
   "rewrites": [
     {
+      "source": "/learn/c/:slug/",
+      "destination": "/learn/category.html?slug=:slug"
+    },
+    {
+      "source": "/learn/c/:slug",
+      "destination": "/learn/category.html?slug=:slug"
+    },
+    {
       "source": "/learn/r/:slug/",
       "destination": "/learn/resource.html?slug=:slug"
     },
