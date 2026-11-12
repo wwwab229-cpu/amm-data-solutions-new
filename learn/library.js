@@ -13,7 +13,7 @@ const typeLabels={guide:'Text guide',prompt:'Prompt',pdf:'PDF',link:'External li
 function node(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;}
 function resourceHref(r){return '/learn/r/'+encodeURIComponent(r.slug)+'/';}
 function publicUrl(path){return path?supabase.storage.from('amm-learning').getPublicUrl(path).data.publicUrl:'';}
-function categoryHref(slug){const url=new URL(location.href);url.searchParams.set('category',slug);url.hash='resources';return url.pathname+url.search+url.hash;}
+function categoryHref(slug){return '/learn/c/'+encodeURIComponent(slug)+'/';}
 function renderCategories(){
  if(!categoryHost)return;categoryHost.replaceChildren();
  if(!categories.length){categoryHost.append(node('p','lh-empty','Learning categories are being prepared.'));return;}
