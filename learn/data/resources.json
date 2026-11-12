@@ -1,0 +1,114 @@
+[
+  {
+    "title": "Research a Topic Before Making a Decision",
+    "slug": "research-topic-before-decision-prompt",
+    "category_slug": "prompts",
+    "summary": "A structured learning prompt that separates established facts from assumptions and highlights sources to verify.",
+    "content_type": "prompt",
+    "body": "Help me understand this topic: [Insert topic].\n\nExplain it for a beginner using:\n- A short plain-language overview\n- Key terms and what they mean\n- A practical everyday example\n- Potential benefits and limitations\n- Questions I should investigate further\n\nSeparate established facts from assumptions. Do not invent statistics, sources or quotations. If you provide current or time-sensitive information, identify reliable original sources I should verify.",
+    "resource_url": null,
+    "attachments": [],
+    "thumbnail": null,
+    "metadata": {
+      "links": []
+    },
+    "tags": [
+      "research",
+      "learning",
+      "fact checking",
+      "prompt"
+    ],
+    "seo_title": "Research a Topic Prompt | AMM Learn",
+    "seo_description": "A reusable prompt for understanding a topic, checking assumptions and finding reliable sources.",
+    "related_video_url": null,
+    "status": "published",
+    "featured": false,
+    "sort_order": 0,
+    "published_at": "2026-11-12T02:20:04.084Z",
+    "updated_at": "2026-11-12T02:20:04.084Z"
+  },
+  {
+    "title": "Daily Task Planning Prompt",
+    "slug": "daily-task-planning-prompt",
+    "category_slug": "prompts",
+    "summary": "A copy-ready prompt that organises a task list into a realistic daily plan without inventing deadlines.",
+    "content_type": "prompt",
+    "body": "Help me organise my tasks into a realistic daily plan.\n\nHere is my task list:\n[Paste your tasks]\n\nMy available working hours:\n[Add start and end time]\n\nKnown deadlines:\n[Add deadlines, or write \"not specified\"]\n\nPlease:\n1. Group related tasks.\n2. Identify urgent tasks only when a deadline or clear reason supports it.\n3. Estimate effort as a rough suggestion, not a fact.\n4. Ask me about missing deadlines or unclear priorities.\n5. Include reasonable breaks and flexible time.\n6. Present the plan in a simple table.\n7. Do not schedule more work than the available time allows.",
+    "resource_url": null,
+    "attachments": [],
+    "thumbnail": null,
+    "metadata": {
+      "links": []
+    },
+    "tags": [
+      "daily planning",
+      "productivity",
+      "task management",
+      "prompt"
+    ],
+    "seo_title": "Daily Task Planning Prompt | AMM Learn",
+    "seo_description": "Copy a prompt to organise daily tasks, review priorities and build a realistic schedule.",
+    "related_video_url": null,
+    "status": "published",
+    "featured": false,
+    "sort_order": 0,
+    "published_at": "2026-11-12T02:20:04.084Z",
+    "updated_at": "2026-11-12T02:20:04.084Z"
+  },
+  {
+    "title": "Professional Email Assistant Prompt",
+    "slug": "professional-email-assistant-prompt",
+    "category_slug": "prompts",
+    "summary": "A reusable prompt to draft clear, polite business emails while avoiding invented names, dates and facts.",
+    "content_type": "prompt",
+    "body": "Act as a professional business communication assistant. Help me write a clear, polite and professional email.\n\nFirst, ask me for:\n- The purpose of the email\n- Who will receive it\n- The key points that must be included\n- The tone I want\n\nDo not invent names, dates, promises or facts. If important information is missing, ask before drafting. After writing the email, provide a concise subject line and check the message for clarity and tone.",
+    "resource_url": null,
+    "attachments": [],
+    "thumbnail": null,
+    "metadata": {
+      "links": []
+    },
+    "tags": [
+      "email",
+      "business communication",
+      "writing",
+      "prompt"
+    ],
+    "seo_title": "Professional Email Assistant Prompt | AMM Learn",
+    "seo_description": "Copy a practical prompt for drafting professional emails with clearer context and factual checks.",
+    "related_video_url": null,
+    "status": "published",
+    "featured": false,
+    "sort_order": 0,
+    "published_at": "2026-11-12T02:20:04.084Z",
+    "updated_at": "2026-11-12T02:20:04.084Z"
+  },
+  {
+    "title": "AI Productivity Roadmap: Organise Your Day",
+    "slug": "ai-productivity-roadmap",
+    "category_slug": "roadmaps",
+    "summary": "A beginner-friendly roadmap for using an AI assistant to organise daily tasks, review priorities and create a realistic plan.",
+    "content_type": "guide",
+    "body": "\n## What you will learn\n- How to give an AI assistant useful task context.\n- How to ask for priorities without letting it invent deadlines.\n- How to turn a rough list into a schedule you can review.\n\n**Tools:** ChatGPT or another AI assistant with text input. A calendar or task manager is optional.\n\n**Time:** About 10–15 minutes for a first trial.\n\n## Your step-by-step roadmap\n\n### 1. Collect your tasks\nWrite down the tasks you actually need to do. Include deadlines only when you know them. Keep private or confidential information out of the prompt.\n\n### 2. Tell the AI your available time\nShare your working hours, fixed appointments and any breaks you need. If you are unsure about effort, ask the AI to label estimates as suggestions.\n\n### 3. Ask it to organise the list\nUse the copy-ready prompt in the separate planning prompt resource. Ask it to group related tasks, highlight known deadlines and identify missing information.\n\n### 4. Review and correct the plan\nCheck whether the order makes sense, the time estimates are realistic and no important commitment is missing. AI can misunderstand context.\n\n### 5. Move the approved plan into your calendar\nAdd only the tasks you agree with. Keep some flexible time and adjust the plan as your day changes.\n\n## What impact can this have?\n- A clearer view of what needs attention.\n- Less manual effort spent formatting and sorting a task list.\n- A useful starting point for planning the day.\n\nThis workflow does not guarantee that you will finish more tasks or save a fixed amount of time. Its value depends on your task list, the quality of context you provide and how carefully you review the result.\n\n## Limitations and good practice\n- AI may misunderstand urgency or context.\n- Estimated task durations can be wrong.\n- Never treat an AI-generated plan as a replacement for your own judgement.\n- Do not share sensitive personal, financial or confidential work data unnecessarily.\n",
+    "resource_url": null,
+    "attachments": [],
+    "thumbnail": null,
+    "metadata": {
+      "links": []
+    },
+    "tags": [
+      "AI productivity",
+      "roadmap",
+      "daily planning",
+      "beginner"
+    ],
+    "seo_title": "AI Productivity Roadmap: Organise Your Day | AMM Learn",
+    "seo_description": "A beginner-friendly guide to using an AI assistant for daily planning, task organisation and realistic scheduling.",
+    "related_video_url": null,
+    "status": "published",
+    "featured": true,
+    "sort_order": 0,
+    "published_at": "2026-11-12T02:20:04.084Z",
+    "updated_at": "2026-11-12T02:20:04.084Z"
+  }
+]

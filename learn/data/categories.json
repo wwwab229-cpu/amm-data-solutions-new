@@ -1,0 +1,74 @@
+[
+  {
+    "name": "AI & Artificial Intelligence",
+    "slug": "ai",
+    "description": "AI concepts, models, agents and practical applications.",
+    "icon": "brain-circuit",
+    "sort_order": 1,
+    "is_active": true
+  },
+  {
+    "name": "Automation & Workflows",
+    "slug": "automation",
+    "description": "Practical automation for business and everyday work.",
+    "icon": "workflow",
+    "sort_order": 2,
+    "is_active": true
+  },
+  {
+    "name": "GitHub & Development",
+    "slug": "github-development",
+    "description": "Useful repositories, GitHub skills, code and developer resources.",
+    "icon": "github",
+    "sort_order": 3,
+    "is_active": true
+  },
+  {
+    "name": "Prompts & Templates",
+    "slug": "prompts",
+    "description": "Reusable prompts, templates and structured instructions.",
+    "icon": "message-square-text",
+    "sort_order": 4,
+    "is_active": true
+  },
+  {
+    "name": "Learning Roadmaps",
+    "slug": "roadmaps",
+    "description": "Step-by-step learning paths, roadmaps and downloadable guides.",
+    "icon": "map",
+    "sort_order": 5,
+    "is_active": true
+  },
+  {
+    "name": "AI Tools & Software",
+    "slug": "ai-tools",
+    "description": "Research-led guides to useful AI tools, software and websites.",
+    "icon": "app-window",
+    "sort_order": 6,
+    "is_active": true
+  },
+  {
+    "name": "Web & Digital Technology",
+    "slug": "web-technology",
+    "description": "Website development, digital platforms and practical technology.",
+    "icon": "code",
+    "sort_order": 7,
+    "is_active": true
+  },
+  {
+    "name": "Data & Productivity",
+    "slug": "data-productivity",
+    "description": "Data skills, analytics, organisation and productivity methods.",
+    "icon": "chart-no-axes-combined",
+    "sort_order": 8,
+    "is_active": true
+  },
+  {
+    "name": "Technology News & Trends",
+    "slug": "technology-trends",
+    "description": "Explainers on technology updates, changes and emerging trends.",
+    "icon": "newspaper",
+    "sort_order": 9,
+    "is_active": true
+  }
+]
