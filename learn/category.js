@@ -18,7 +18,7 @@ function card(r){
  const link=node('a','lh-card-link','Open resource →');link.href='/learn/r/'+encodeURIComponent(r.slug)+'/';body.append(link);a.append(body);return a;
 }
 function render(){
- const q=($('#category-search')?.value||'').trim().toLowerCase();
+ const q=($('[data-category-search]')?.value||'').trim().toLowerCase();
  const type=$('[data-category-type]')?.value||'all';
  const shown=resources.filter(r=>(type==='all'||r.content_type===type)&&(!q||[r.title,r.summary,r.body,(r.tags||[]).join(' ')].join(' ').toLowerCase().includes(q)));
  const host=$('[data-category-resources]');host.replaceChildren();shown.forEach(r=>host.append(card(r)));
