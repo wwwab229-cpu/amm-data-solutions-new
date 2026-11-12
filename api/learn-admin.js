@@ -1,10 +1,10 @@
 const OWNER='wwwab229-cpu';
 const REPO='amm-data-solutions-new';
-const BRANCH=process.env.AMM_LEARN_GITHUB_BRANCH||'feature/amm-learning-github-only';
+const BRANCH=process.env.AMM_LEARN_GITHUB_BRANCH||'main';
 const API='https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/';
 function json(res,status,payload){res.status(status).setHeader('Content-Type','application/json; charset=utf-8').setHeader('Cache-Control','no-store').end(JSON.stringify(payload));}
 function secureEqual(a,b){const crypto=require('crypto');const x=Buffer.from(String(a||''));const y=Buffer.from(String(b||''));return x.length===y.length&&crypto.timingSafeEqual(x,y);}
-async function github(path,options={}){const response=await fetch(API+path.split('/').map(encodeURIComponent).join('/'),{...options,headers:{Authorization:'Bearer '+process.env.AMM_LEARN_GITHUB_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(options.headers||{})}});const body=await response.json().catch(()=>({}));if(!response.ok){const error=new Error(body.message||'GitHub request failed ('+response.status+').');error.status=response.status;throw error;}return body;}
+async function github(path,options={}){const [filePath,query='']=path.split('?');const url=API+filePath.split('/').map(encodeURIComponent).join('/')+(query?'?'+query:'');const response=await fetch(url,{...options,headers:{Authorization:'Bearer '+process.env.AMM_LEARN_GITHUB_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(options.headers||{})}});const body=await response.json().catch(()=>({}));if(!response.ok){const error=new Error(body.message||'GitHub request failed ('+response.status+').');error.status=response.status;throw error;}return body;}
 function decodeContent(file){return Buffer.from(file.content||'','base64').toString('utf8');}
 module.exports=async function handler(req,res){
  res.setHeader('Vary','Origin');
@@ -34,7 +34,9 @@ module.exports=async function handler(req,res){
    const base64=String(body.base64||'');
    if(!base64||base64.length>Math.ceil(4.2*1024*1024*4/3))return json(res,413,{error:'File is empty or exceeds the 4 MB upload limit.'});
    const buffer=Buffer.from(base64,'base64');
-   if(buffer.length>4*1024*1024)return json(res,413,{error:'Maximum file size is 4 MB per upload.'});
+   if(buffer.length>3*1024*1024)return json(res,413,{error:'Maximum file size is 3 MB per upload.'});
+   const allowed=['application/pdf','image/jpeg','image/png','image/webp','text/plain','text/markdown','application/zip'];
+   if(!allowed.includes(mime))return json(res,415,{error:'Unsupported file type.'});
    const crypto=require('crypto');
    const path='learn/assets/uploads/'+crypto.randomUUID()+'-'+original;
    const saved=await github(path,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:'Upload AMM Learning resource asset: '+original,content:buffer.toString('base64'),branch:BRANCH})});
