@@ -2,7 +2,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 const SUPABASE_URL='https://yvfumgrywsqhsvjfnmzu.supabase.co';
 const SUPABASE_KEY='sb_publishable_n18tAZZZWSJtnNC_umyZcw_HQH5zYpk';
 const supabase=createClient(SUPABASE_URL,SUPABASE_KEY);
-const slug=decodeURIComponent(location.pathname.replace(/\\/+$/,'').split('/').pop()||new URLSearchParams(location.search).get('slug')||'');
+const slug=decodeURIComponent(location.pathname.replace(/\/+$/,'').split('/').pop()||new URLSearchParams(location.search).get('slug')||'');
 const $=s=>document.querySelector(s);
 const typeLabels={guide:'Text guide',prompt:'Prompt',pdf:'PDF',link:'External link',image:'Image',code:'Code / skill',video:'Video',collection:'Collection'};
 const typeIcons={guide:'GUIDE',prompt:'PROMPT',pdf:'PDF',link:'LINK',image:'IMAGE',code:'CODE',video:'VIDEO',collection:'COLLECTION'};
