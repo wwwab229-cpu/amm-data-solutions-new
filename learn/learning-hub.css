@@ -59,3 +59,10 @@
 .lh-nav .lh-main-site-link:hover{background:#ffcf1a;color:var(--ink);transform:translateY(-1px)}
 .lh-founder-site-link{margin-top:14px;min-height:42px;padding:10px 18px;box-shadow:0 6px 18px rgba(180,140,0,.13)}
 @media(max-width:600px){.lh-nav .lh-main-site-link{padding:8px 12px;font-size:11px;white-space:nowrap}.lh-founder-site-link{width:auto;max-width:100%;font-size:12px}}
+
+
+/* Prominent official-site CTA in the first-screen hero */
+.lh-hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px 16px;margin-top:16px}
+.lh-hero-main-site{min-height:44px;padding:12px 20px;box-shadow:0 7px 20px rgba(180,140,0,.18)}
+.lh-hero-actions>span{font-size:12px;font-weight:600;color:#686868}
+@media(max-width:600px){.lh-hero-actions{gap:9px}.lh-hero-main-site{width:100%;min-height:46px}.lh-hero-actions>span{font-size:11px}}
