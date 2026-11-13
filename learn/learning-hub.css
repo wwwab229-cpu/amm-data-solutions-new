@@ -65,4 +65,4 @@
 .lh-hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px 16px;margin-top:16px}
 .lh-hero-main-site{min-height:44px;padding:12px 20px;box-shadow:0 7px 20px rgba(180,140,0,.18)}
 .lh-hero-actions>span{font-size:12px;font-weight:600;color:#686868}
-@media(max-width:600px){.lh-hero-actions{gap:9px}.lh-hero-main-site{width:100%;min-height:46px}.lh-hero-actions>span{font-size:11px}}
+@media(max-width:600px){.lh-hero-actions{gap:9px}.lh-hero-actions>span{font-size:11px}}
