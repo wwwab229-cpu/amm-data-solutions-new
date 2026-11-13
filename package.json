@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "mkdir -p dist/assets dist/services dist/resources dist/logos dist/blog dist/learn && cp blog/*.html dist/blog/ && cp index.html feedback.html admin.html privacy.html pricing.html site-map.html sitemap.xml sitemap.md robots.txt llms.txt favicon.svg dist/ && cp 69fxse6pzkq2emvy75z9wv4ncrpvcfj2.txt dist/ && cp -R logos/. dist/logos/ && cp services/*.html dist/services/ && cp resources/*.html dist/resources/ && cp -R learn/. dist/learn/ && tailwindcss -i ./src/tailwind.css -o ./dist/assets/tailwind.min.css --minify && cp assets/homepage.css assets/homepage.js dist/assets/"
+    "build": "mkdir -p dist/assets dist/services dist/resources dist/logos dist/blog dist/learn && cp blog/*.html dist/blog/ && cp index.html feedback.html admin.html privacy.html pricing.html site-map.html sitemap.xml sitemap.md robots.txt llms.txt favicon.svg dist/ && cp 69fxse6pzkq2emvy75z9wv4ncrpvcfj2.txt dist/ && cp -R logos/. dist/logos/ && cp services/*.html dist/services/ && cp resources/*.html dist/resources/ && cp -R learn/. dist/learn/ && tailwindcss -i ./src/tailwind.css -o ./dist/assets/tailwind.min.css --minify && cp -R assets/. dist/assets/"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"
