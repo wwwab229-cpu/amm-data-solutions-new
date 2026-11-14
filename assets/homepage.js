@@ -11,6 +11,8 @@
  const supporting='We use AI, automation and connected tools to reduce repetitive work, improve efficiency and build smarter, more cost-aware ways to get things done.';
  title.textContent='';
  subtitle.textContent='';
+ title.style.visibility='visible';
+ subtitle.style.visibility='visible';
  cursor.style.display='inline-block';
  box.classList.add('hero-typing-active');
  let i=0,j=0;
