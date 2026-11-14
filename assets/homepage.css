@@ -1053,3 +1053,18 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 .amm-zoya-visual small{color:#82754d;font-size:.65rem;font-weight:800;letter-spacing:.14em}
 @media(max-width:767px){.amm-zoya-panel{grid-template-columns:minmax(0,1fr);gap:22px;padding:22px;border-radius:22px}.amm-zoya-visual{min-height:210px;padding:20px}.amm-zoya-orb{width:104px;height:104px}.amm-zoya-orb span{width:34px;height:34px}.amm-zoya-intro{font-size:.94rem;line-height:1.75}.amm-zoya-points{gap:7px}.amm-zoya-points span{font-size:.73rem}}
 @media(prefers-reduced-motion:reduce){.amm-zoya-launch{transition:none}}
+
+
+/* Inline Zoya conversation embed */
+.amm-zoya-panel{grid-template-columns:minmax(0,1fr) minmax(300px,.92fr);align-items:stretch}
+.amm-zoya-widget-column{min-width:0;display:flex;flex-direction:column;gap:12px}
+.amm-zoya-widget-heading{display:flex;align-items:center;gap:9px;color:#262316;font-size:.9rem;font-weight:800}
+.amm-zoya-live-dot{width:9px;height:9px;flex:0 0 9px;border-radius:50%;background:#27a56a;box-shadow:0 0 0 4px rgba(39,165,106,.12)}
+.amm-zoya-widget-wrap{width:100%;min-width:0;min-height:520px;overflow:hidden;border:1px solid #eee4bd;border-radius:20px;background:#fff;box-shadow:0 12px 28px -24px rgba(40,30,0,.35)}
+.amm-zoya-widget-wrap elevenlabs-convai{display:block;width:100%;min-height:520px}
+.amm-zoya-mic-note{margin:0;color:#696454;font-size:.73rem;line-height:1.55}
+@media(max-width:767px){
+  .amm-zoya-panel{grid-template-columns:minmax(0,1fr)}
+  .amm-zoya-widget-wrap{min-height:500px;border-radius:16px}
+  .amm-zoya-widget-wrap elevenlabs-convai{min-height:500px}
+}
