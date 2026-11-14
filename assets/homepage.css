@@ -1037,15 +1037,15 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 elevenlabs-convai{z-index:9999}
 
 
-/* Restore the approved one-time hero typewriter sequence and growing yellow highlight. */
+/* Approved one-time hero typewriter animation with per-character highlight progress. */
 #hero-type-box{background-image:linear-gradient(#FFD83D,#FFD83D);background-repeat:no-repeat;background-size:100% 100%}
-#hero-type-box.hero-typing-active{background-size:0% 100%;transition:background-size .12s linear}
+#hero-type-box.hero-typing-active{background-color:transparent;background-size:var(--hero-progress,0%) 100%;transition:background-size .07s linear;box-shadow:none}
 #hero-type-box.hero-typing-done{animation:ammHeroHeadingSettle .48s ease-out 1}
 #hero-cursor{animation:ammHeroCursorBlink .72s steps(1,end) infinite}
 @keyframes ammHeroCursorBlink{50%{opacity:0}}
 @keyframes ammHeroHeadingSettle{0%{transform:scale(1)}45%{transform:scale(1.025);filter:drop-shadow(0 5px 9px #e8b91b55)}100%{transform:scale(1);filter:none}}
 @media(prefers-reduced-motion:reduce){
- #hero-type-box.hero-typing-active{background-size:100% 100%;transition:none}
+ #hero-type-box.hero-typing-active{transition:none}
  #hero-type-box.hero-typing-done{animation:none}
  #hero-cursor{animation:none}
 }
