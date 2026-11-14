@@ -1035,7 +1035,7 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
 
 
 /* Zoya hero invitation and floating assistant */
-.amm-hero-zoya{display:flex;align-items:center;gap:16px;margin-top:24px;padding:16px 20px;border:1px solid #ead68a;border-radius:18px;background:linear-gradient(105deg,#fffdf5 0%,#fff8df 58%,#fff 100%);box-shadow:0 10px 28px -25px rgba(80,60,0,.35)}
+.amm-hero-zoya{grid-column:1 / -1;display:flex;align-items:center;gap:16px;margin-top:24px;padding:16px 20px;border:1px solid #ead68a;border-radius:18px;background:linear-gradient(105deg,#fffdf5 0%,#fff8df 58%,#fff 100%);box-shadow:0 10px 28px -25px rgba(80,60,0,.35)}
 .amm-hero-zoya-mark{display:grid;place-items:center;flex:0 0 48px;width:48px;height:48px;border-radius:15px;background:radial-gradient(circle at 35% 28%,#fff9dc 0%,#ffe27a 42%,#f2c94c 100%);color:#29220d;font-size:1.25rem;font-weight:900;box-shadow:0 0 0 5px rgba(242,201,76,.13)}
 .amm-hero-zoya-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:4px}
 .amm-hero-zoya-kicker{color:#80620b;font-size:.61rem;font-weight:900;letter-spacing:.13em}
