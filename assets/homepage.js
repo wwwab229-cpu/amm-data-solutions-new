@@ -9,8 +9,6 @@
  if(!title||!box||!cursor||!subtitle)return;
  const heading='What If Work Could Do Itself?';
  const supporting='We use AI, automation and connected tools to reduce repetitive work, improve efficiency and build smarter, more cost-aware ways to get things done.';
- const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- if(reduce){title.textContent=heading;subtitle.textContent=supporting;cursor.style.display='none';return;}
  title.textContent='';
  subtitle.textContent='';
  cursor.style.display='inline-block';
