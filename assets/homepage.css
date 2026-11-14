@@ -1031,3 +1031,25 @@ radial-gradient(ellipse at 0 100%,#d6f25b 0,transparent 52%),radial-gradient(ell
     line-height: 1.1;
     white-space: nowrap;
   }
+
+
+/* Inline Zoya section — added without altering existing homepage components */
+.amm-zoya-section{padding:clamp(42px,6vw,76px) 0;background:linear-gradient(180deg,#fff 0%,#fffdf4 100%)}
+.amm-zoya-panel{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);gap:clamp(24px,5vw,64px);align-items:center;padding:clamp(24px,4vw,48px);border:1px solid #f0df9a;border-radius:28px;background:linear-gradient(135deg,#fff 0%,#fffdf4 100%);box-shadow:0 16px 40px -30px rgba(30,25,10,.28)}
+.amm-zoya-copy{min-width:0}
+.amm-zoya-eyebrow{display:inline-block;margin:0 0 14px;padding:7px 10px;border-radius:5px;background:#fff1b8;color:#5b4800;font-size:.68rem;font-weight:850;letter-spacing:.12em}
+.amm-zoya-panel h2{margin:0;color:#171717;font-size:clamp(1.65rem,3.5vw,2.65rem);line-height:1.16}
+.amm-zoya-intro{max-width:690px;margin:17px 0 0;color:#454545;font-size:1rem;line-height:1.8}
+.amm-zoya-points{display:flex;flex-wrap:wrap;gap:9px;margin:20px 0 24px}
+.amm-zoya-points span{display:inline-flex;align-items:center;padding:8px 12px;border:1px solid #eee4bd;border-radius:999px;background:#fff;color:#45402f;font-size:.78rem;font-weight:650}
+.amm-zoya-launch{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:13px 23px;border:1px solid #e3b900;border-radius:999px;background:#ffd83d;color:#171717!important;font-size:.94rem;font-weight:800;text-decoration:none;box-shadow:0 7px 0 #e8b91b,0 12px 24px -16px rgba(80,60,0,.55);transition:transform .18s ease,box-shadow .18s ease}
+.amm-zoya-launch:hover{transform:translateY(-2px);box-shadow:0 9px 0 #e8b91b,0 16px 28px -16px rgba(80,60,0,.6)}
+.amm-zoya-launch:focus-visible{outline:3px solid #171717;outline-offset:4px}
+.amm-zoya-disclosure{margin:16px 0 0;color:#696454;font-size:.75rem;line-height:1.6}
+.amm-zoya-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:250px;padding:24px;border-radius:22px;background:radial-gradient(circle at 50% 38%,#fff3bf 0%,#fff9e7 42%,#fff 76%);text-align:center}
+.amm-zoya-orb{display:grid;place-items:center;width:124px;height:124px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fff9dc 0%,#ffe27a 36%,#f2c94c 72%,#dcae24 100%);box-shadow:0 0 0 12px rgba(242,201,76,.12),0 18px 40px rgba(150,112,10,.16)}
+.amm-zoya-orb span{width:42px;height:42px;border:2px solid rgba(80,60,0,.48);border-radius:50%;box-shadow:0 0 0 10px rgba(255,255,255,.22),0 0 0 20px rgba(255,255,255,.12)}
+.amm-zoya-visual p{margin:22px 0 5px;color:#3d3828;font-size:.9rem;font-weight:750}
+.amm-zoya-visual small{color:#82754d;font-size:.65rem;font-weight:800;letter-spacing:.14em}
+@media(max-width:767px){.amm-zoya-panel{grid-template-columns:minmax(0,1fr);gap:22px;padding:22px;border-radius:22px}.amm-zoya-visual{min-height:210px;padding:20px}.amm-zoya-orb{width:104px;height:104px}.amm-zoya-orb span{width:34px;height:34px}.amm-zoya-intro{font-size:.94rem;line-height:1.75}.amm-zoya-points{gap:7px}.amm-zoya-points span{font-size:.73rem}}
+@media(prefers-reduced-motion:reduce){.amm-zoya-launch{transition:none}}
