@@ -1049,3 +1049,7 @@ elevenlabs-convai{z-index:9999}
  #hero-type-box.hero-typing-done{animation:none}
  #hero-cursor{animation:none}
 }
+
+
+/* SEO fallback text: preserve approved hero typewriter while keeping copy in source HTML. */
+html.js #hero-heading-text,html.js #hero-subtitle-text{visibility:hidden}
