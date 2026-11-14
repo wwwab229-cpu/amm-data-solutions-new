@@ -236,14 +236,27 @@
           <span>Explore relevant AMM services</span>
           <span>Get clear, practical guidance</span>
         </div>
-        <a class="amm-zoya-launch" href="https://elevenlabs.io/app/talk-to?agent_id=agent_2401m7agtb35ejrtzwe0wgfz6bvz" target="_blank" rel="noopener noreferrer" aria-label="Open Zoya AI voice conversation in a new tab">Talk to Zoya <span aria-hidden="true">↗</span></a>
         <p class="amm-zoya-disclosure">Zoya is an AI assistant. Please don’t share passwords, payment details or other sensitive information.</p>
       </div>
-      <div class="amm-zoya-visual" aria-hidden="true">
-        <div class="amm-zoya-orb"><span></span></div>
-        <p>Ask. Explore. Find a practical next step.</p>
-        <small>ENGLISH · اردو</small>
+      <div class="amm-zoya-widget-column">
+        <div class="amm-zoya-widget-heading"><span class="amm-zoya-live-dot" aria-hidden="true"></span><span>Talk to Zoya here</span></div>
+        <div class="amm-zoya-widget-wrap">
+          <elevenlabs-convai
+            agent-id="agent_2401m7agtb35ejrtzwe0wgfz6bvz"
+            variant="expanded"
+            action-text="Talk to Zoya"
+            start-call-text="Start voice conversation"
+            end-call-text="End conversation"
+            listening-text="Zoya is listening"
+            speaking-text="Zoya is speaking"
+            avatar-orb-color-1="#F2C94C"
+            avatar-orb-color-2="#FFE9A6"
+            mobile-fullscreen="false"
+          ></elevenlabs-convai>
+        </div>
+        <p class="amm-zoya-mic-note">Allow microphone access when your browser asks, then start your conversation.</p>
       </div>
+      <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
     </div>
   </div>
 </section>
