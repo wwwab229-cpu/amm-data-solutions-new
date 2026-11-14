@@ -1,20 +1,44 @@
-(function(){
- if(window.__ammHeroAnimationStarted)return;
- const run=()=>{
-  const title=document.getElementById('hero-heading-text'),box=document.getElementById('hero-type-box'),cursor=document.getElementById('hero-cursor'),subtitle=document.getElementById('hero-subtitle-text');
-  if(!title||!box||!cursor||!subtitle)return;
-  window.__ammHeroAnimationStarted=true;
-  const heading='What If Work Could Do Itself?';
-  const supporting='We use AI, automation and connected tools to reduce repetitive work, improve efficiency and build smarter, more cost-aware ways to get things done.';
-  title.textContent='';subtitle.textContent='';cursor.style.display='inline-block';
-  box.style.setProperty('--hero-progress','0%');box.classList.remove('hero-typing-done');box.classList.add('hero-typing-active');
-  let i=0,j=0;
-  const typeSupporting=()=>{subtitle.textContent=supporting.slice(0,++j);if(j<supporting.length)window.setTimeout(typeSupporting,17)};
-  const typeHeading=()=>{i++;title.textContent=heading.slice(0,i);box.style.setProperty('--hero-progress',((i/heading.length)*100).toFixed(2)+'%');if(i<heading.length){window.setTimeout(typeHeading,60);return;}cursor.style.display='none';box.classList.remove('hero-typing-active');box.classList.add('hero-typing-done');window.setTimeout(typeSupporting,380)};
-  window.setTimeout(typeHeading,300);
- };
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
-})();
+// One-time hero typewriter on each fresh page load; no looping
+const heroHeading = $('#hero-heading-text'), heroSubtitle = $('#hero-subtitle-text'), heroCursor = $('#hero-cursor'), heroTypeBox = $('#hero-type-box');
+if (heroHeading && heroSubtitle && heroCursor) {
+  const headingText = 'What If Work Could Do Itself?';
+  const subtitleText = 'We use AI, automation and connected tools to reduce repetitive work, improve efficiency and build smarter, more cost-aware ways to get things done.';
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    heroHeading.textContent = headingText;
+    heroSubtitle.textContent = subtitleText;
+    heroCursor.style.display = 'none';
+  } else {
+    let hi = 0, si = 0;
+    const typeHeading = () => {
+      if (hi < headingText.length) {
+        heroHeading.textContent += headingText.charAt(hi++);
+        if (heroTypeBox) {
+          heroTypeBox.animate(
+            [{filter:'brightness(1)',boxShadow:'0 .08em 0 #e8b91b'},{filter:'brightness(1.12)',boxShadow:'0 .12em 0 #e8b91b,0 0 12px #FFD83D80'},{filter:'brightness(1)',boxShadow:'0 .08em 0 #e8b91b'}],
+            {duration:180,easing:'ease-out'}
+          );
+        }
+        setTimeout(typeHeading, headingText.charAt(hi - 1) === ' ' ? 105 : 62);
+      } else {
+        const title = $('#hero-title');
+        title.animate([{transform:'scale(1)',filter:'brightness(1)'},{transform:'scale(1.025)',filter:'brightness(1.08)'},{transform:'scale(1)',filter:'brightness(1)'}],{duration:420,easing:'ease-out'});
+        title.style.textShadow = '0 0 24px #5b2ee833';
+        setTimeout(() => { title.style.textShadow = 'none'; }, 650);
+        setTimeout(typeSubtitle, 420);
+      }
+    };
+    const typeSubtitle = () => {
+      if (si < subtitleText.length) {
+        heroSubtitle.textContent += subtitleText.charAt(si++);
+        setTimeout(typeSubtitle, subtitleText.charAt(si - 1) === ',' ? 180 : subtitleText.charAt(si - 1) === ' ' ? 38 : 19);
+      } else {
+        heroCursor.style.display = 'none';
+      }
+    };
+    setTimeout(typeHeading, 350);
+  }
+}
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 // Hero heading and supporting copy are present in the initial HTML for immediate first paint.
 // navbar blur + mobile menu
