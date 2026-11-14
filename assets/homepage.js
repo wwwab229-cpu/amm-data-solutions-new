@@ -1,36 +1,39 @@
-
-// Approved hero sequence: type the headline into its expanding yellow highlight,
-// then type the supporting sentence. Runs once per page load.
+// Hero headline and supporting copy: explicit one-time typewriter animation.
 (function(){
- const title=document.getElementById('hero-heading-text');
- const box=document.getElementById('hero-type-box');
- const cursor=document.getElementById('hero-cursor');
- const subtitle=document.getElementById('hero-subtitle-text');
- if(!title||!box||!cursor||!subtitle)return;
- const heading='What If Work Could Do Itself?';
- const supporting='We use AI, automation and connected tools to reduce repetitive work, improve efficiency and build smarter, more cost-aware ways to get things done.';
- const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- if(reduce){title.textContent=heading;subtitle.textContent=supporting;cursor.style.display='none';return;}
- title.textContent='';
- subtitle.textContent='';
- cursor.style.display='inline-block';
- box.classList.add('hero-typing-active');
- let i=0,j=0;
- function typeHeading(){
-  title.textContent=heading.slice(0,++i);
-  if(i<heading.length){setTimeout(typeHeading,58);return;}
-  cursor.style.display='none';
-  box.classList.remove('hero-typing-active');
-  box.classList.add('hero-typing-done');
-  setTimeout(typeSupporting,360);
- }
- function typeSupporting(){
-  subtitle.textContent=supporting.slice(0,++j);
-  if(j<supporting.length)setTimeout(typeSupporting,13);
- }
- setTimeout(typeHeading,260);
+ const run=()=>{
+  const title=document.getElementById('hero-heading-text');
+  const box=document.getElementById('hero-type-box');
+  const cursor=document.getElementById('hero-cursor');
+  const subtitle=document.getElementById('hero-subtitle-text');
+  if(!title||!box||!cursor||!subtitle)return;
+  const heading='What If Work Could Do Itself?';
+  const supporting='We use AI, automation and connected tools to reduce repetitive work, improve efficiency and build smarter, more cost-aware ways to get things done.';
+  title.textContent='';
+  subtitle.textContent='';
+  cursor.style.display='inline-block';
+  box.style.setProperty('--hero-progress','0%');
+  box.classList.remove('hero-typing-done');
+  box.classList.add('hero-typing-active');
+  let i=0,j=0;
+  const typeSupporting=()=>{
+   subtitle.textContent=supporting.slice(0,++j);
+   if(j<supporting.length)window.setTimeout(typeSupporting,18);
+  };
+  const typeHeading=()=>{
+   i++;
+   title.textContent=heading.slice(0,i);
+   box.style.setProperty('--hero-progress',((i/heading.length)*100).toFixed(2)+'%');
+   if(i<heading.length){window.setTimeout(typeHeading,62);return;}
+   cursor.style.display='none';
+   box.classList.remove('hero-typing-active');
+   box.classList.add('hero-typing-done');
+   window.setTimeout(typeSupporting,380);
+  };
+  window.setTimeout(typeHeading,350);
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});
+ else run();
 })();
-
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 // Hero heading and supporting copy are present in the initial HTML for immediate first paint.
 // navbar blur + mobile menu
