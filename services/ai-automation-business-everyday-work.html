@@ -43,6 +43,13 @@
 .service-contact-form button{border:0!important;outline:0;box-shadow:none!important;-webkit-appearance:none;appearance:none}
 .service-contact-form button:focus-visible{outline:3px solid #b6c94b!important;outline-offset:3px;box-shadow:none!important}
 
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.form-grid>div{min-width:0}.form-grid .form-full{grid-column:1/-1}
+.service-contact-form select{display:block;width:100%;min-width:0;min-height:46px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--navy);font:inherit}
+.service-contact-form select:focus{outline:3px solid rgba(214,242,91,.7);outline-offset:2px;border-color:#b6c94b}
+.form-privacy{margin:0;color:var(--muted);font-size:.82rem;line-height:1.5}
+@media(max-width:700px){.form-grid{grid-template-columns:1fr}.form-grid .form-full{grid-column:auto}}
+
 </style></head><body>
 <header class="wrap"><a class="brand" href="/" aria-label="AMM Data Solutions home"><img src="/logos/AMM_Data_Solutions_1200x1200_transparent%20(1).png" alt="AMM Data Solutions" width="56" height="56" style="width:56px;height:56px;object-fit:contain;flex:0 0 auto"></a><nav class="nav" aria-label="Main navigation"><a href="/#services">Services</a><a href="/#about">About</a><a href="#contact">Contact</a></nav></header>
 <main class="wrap"><section class="hero"><span class="eyebrow">AMM Data Solutions · Service overview</span><h1>AI Automation for Business &amp; Everyday Work</h1><p>AMM Data Solutions helps businesses and individuals identify repetitive digital tasks and turn them into clear, manageable workflows. We review the current process, inputs, expected outputs, tools and access permissions before recommending automation. Each project is scoped around practical integrations, testing, exception handling and an appropriate level of human review.</p><div class="actions"><a class="btn secondary" href="#contact-form">Discuss an automation idea <span aria-hidden="true">↗</span></a><a class="btn" href="/#services">Explore all services</a></div></section><section class="pricing-section" id="pricing" aria-labelledby="pricing-heading"><div class="pricing-panel"><span class="pricing-eyebrow">Transparent, flexible pricing</span><h2 id="pricing-heading">Flexible AI automation pricing</h2><p class="pricing-intro">A starting estimate for one simple, clearly defined business workflow using suitable automation tools. More involved AI workflows, multiple integrations and advanced logic are quoted after reviewing the scope.</p><div class="pricing-grid"><article class="pricing-market"><span class="pricing-market-label">Estimated starting price · same worldwide</span><strong class="pricing-amount">From $35</strong><span class="pricing-basis">ONE-TIME WORKFLOW · Starting estimate</span></article></div><p class="pricing-detail">This starting price applies to clients in Pakistan and internationally. It is an estimated starting price, not a fixed or guaranteed final charge. The actual price may be lower or higher depending on your project requirements, scope, complexity, workload and customization needs. Your <a href="/services/pricing-and-quotes.html">final quote</a> depends on your requirements, project scope, complexity and deliverables, and will be confirmed before work begins. Applicable taxes, transaction fees and additional terms may apply to international clients.</p><p class="pricing-note">The final quote depends on workflow steps, connected apps, data handling, approval requirements, testing and documentation. Software subscriptions, API usage and third-party platform fees are separate where applicable.</p><div class="actions"><a class="btn secondary" href="#contact-form">Discuss your project <span aria-hidden="true">↗</span></a></div></div></section>
@@ -54,12 +61,25 @@
 
 <section class="cta" id="contact"><h2>Discuss your AI automation project</h2><p>Tell AMM Data Solutions what you want to improve. Share your requirements and we’ll review the scope and suggest a practical next step.</p><a class="btn secondary" href="#contact-form">Discuss this project <span aria-hidden="true">↘</span></a>
 <form id="contact-form" class="service-contact-form" action="https://formspree.io/f/mgaojnap" method="POST" novalidate>
-<input type="hidden" name="_subject" value="AMM DS project enquiry — AI Automation for Business & Everyday Work"><input type="hidden" name="service" value="AI Automation for Business & Everyday Work">
-<div class="service-contact-honeypot" aria-hidden="true"><label for="service-website">Leave this field empty</label><input id="service-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
-<div><label for="service-name">Name</label><input id="service-name" name="name" type="text" autocomplete="name" placeholder="Your name" required></div>
-<div><label for="service-email">Email</label><input id="service-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
-<div><label for="service-message">Project details</label><textarea id="service-message" name="message" rows="4" placeholder="What would you like AMM Data Solutions to help with?" required></textarea></div>
-<button class="btn secondary" type="submit">Send project enquiry</button><p class="service-contact-status" data-form-status role="status" aria-live="polite"></p></form></section></main><footer><div class="wrap"><span style="display:inline-flex;flex-direction:column;align-items:flex-start;gap:5px"><span style="display:inline-flex;align-items:center;justify-content:center;background:#fff;border-radius:8px;padding:3px"><img src="/logos/AMM_Data_Solutions_1200x1200_transparent%20(1).png" alt="AMM Data Solutions" width="48" height="48" style="width:48px;height:48px;object-fit:contain"></span><span style="font-size:.875rem;opacity:.8">Let’s Make Solutions</span></span><span><a href="/privacy.html">Privacy policy</a> · <a href="/">Homepage</a></span></div><nav aria-label="Related AMM services"><a href="/services/ai-chatbots-customer-support.html">AI Chatbots &amp; Intelligent Agents</a> · <a href="/services/digital-advertising.html">Digital Advertising</a></nav></footer><script>
+<input type="hidden" name="_subject" value="New qualified lead — AMM AI Automation">
+<input type="hidden" name="service" value="AI Automation for Business & Everyday Work">
+<input type="hidden" name="lead_source" value="AMM AI Automation service page">
+<div class="service-contact-honeypot" aria-hidden="true"><label for="service-website-check">Leave this field empty</label><input id="service-website-check" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
+<div class="form-grid">
+<div><label for="lead-name">Your name *</label><input id="lead-name" name="name" type="text" autocomplete="name" placeholder="Full name" required></div>
+<div><label for="lead-business">Business / organization *</label><input id="lead-business" name="business_name" type="text" autocomplete="organization" placeholder="Business name" required></div>
+<div><label for="lead-email">Work email *</label><input id="lead-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+<div><label for="lead-whatsapp">WhatsApp (optional)</label><input id="lead-whatsapp" name="whatsapp" type="tel" autocomplete="tel" placeholder="+92… (optional)"></div>
+<div class="form-full"><label for="lead-site">Website / current tools (optional)</label><input id="lead-site" name="website_or_tools" type="text" placeholder="Website URL or tools you currently use"></div>
+<div class="form-full"><label for="lead-need">What would you like to automate? *</label><textarea id="lead-need" name="automation_need" rows="4" placeholder="Describe the repetitive task, current process and the result you want." required></textarea></div>
+<div><label for="lead-budget">Estimated project budget *</label><select id="lead-budget" name="budget_range" required><option value="">Choose a range</option><option>Under $100</option><option>$100–$300</option><option>$300–$750</option><option>$750–$1,500</option><option>$1,500+</option><option>Not sure — need guidance</option></select></div>
+<div><label for="lead-authority">Your role in the decision *</label><select id="lead-authority" name="decision_role" required><option value="">Choose one</option><option>Owner / Founder</option><option>Manager / Department lead</option><option>Decision-maker with approval</option><option>Researching on behalf of the decision-maker</option><option>Individual / personal project</option></select></div>
+<div class="form-full"><label for="lead-timeline">When would you like to start? *</label><select id="lead-timeline" name="project_timeline" required><option value="">Choose a timeline</option><option>As soon as possible</option><option>Within 2–4 weeks</option><option>Within 1–3 months</option><option>More than 3 months</option><option>Just exploring options</option></select></div>
+</div>
+<p class="form-privacy">Please do not submit passwords, API keys or sensitive personal/customer data. We only need enough information to understand your workflow and assess the next step.</p>
+<button class="btn secondary" type="submit">Submit project details <span aria-hidden="true">↗</span></button>
+<p class="service-contact-status" data-form-status role="status" aria-live="polite"></p>
+</form></section></main><footer><div class="wrap"><span style="display:inline-flex;flex-direction:column;align-items:flex-start;gap:5px"><span style="display:inline-flex;align-items:center;justify-content:center;background:#fff;border-radius:8px;padding:3px"><img src="/logos/AMM_Data_Solutions_1200x1200_transparent%20(1).png" alt="AMM Data Solutions" width="48" height="48" style="width:48px;height:48px;object-fit:contain"></span><span style="font-size:.875rem;opacity:.8">Let’s Make Solutions</span></span><span><a href="/privacy.html">Privacy policy</a> · <a href="/">Homepage</a></span></div><nav aria-label="Related AMM services"><a href="/services/ai-chatbots-customer-support.html">AI Chatbots &amp; Intelligent Agents</a> · <a href="/services/digital-advertising.html">Digital Advertising</a></nav></footer><script>
 (function () {
   const form = document.getElementById('contact-form');
   if (!form) return;
@@ -86,7 +106,7 @@
           service_name: form.querySelector('[name="service"]')?.value || 'unspecified'
         });
       }
-      status.textContent = 'Thank you. Your project enquiry has been sent successfully.';
+      window.location.assign('/thank-you-ai-automation.html');
     } catch (error) {
       status.textContent = error && error.message ? error.message : 'Something went wrong. Please try again.';
     } finally {
