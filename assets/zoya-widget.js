@@ -126,12 +126,14 @@ import { Conversation } from "https://esm.sh/@elevenlabs/client";
           if (rafId) cancelAnimationFrame(rafId);
           rafId = 0;
         },
-        onStatusChange: ({ status } = {}) => {
+        onStatusChange: (statusInfo = {}) => {
+          const status = typeof statusInfo === "string" ? statusInfo : statusInfo.status;
           if (status === "connecting") setState("connecting", "Connecting to Zoya…");
           if (status === "connected" && currentState === "connecting") setState("listening", "Zoya is listening");
           if (status === "disconnected" && !conversation) setState("idle", "Ready when you are");
         },
-        onModeChange: ({ mode } = {}) => {
+        onModeChange: (modeInfo = {}) => {
+          const mode = typeof modeInfo === "string" ? modeInfo : modeInfo.mode;
           const next = mode === "speaking" ? "speaking" : "listening";
           setState(next, next === "speaking" ? "Zoya is speaking" : "Zoya is listening");
           startWave();
