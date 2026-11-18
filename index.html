@@ -66,7 +66,7 @@
     }
   })();
 </script>
-  <link rel="stylesheet" href="/assets/zoya-widget.css?v=3">
+ 
 </head>
 <body>
 <!-- 1. NAVBAR -->
@@ -409,30 +409,20 @@
 </style>
 
 
-<button id="zoya-launcher" type="button" aria-label="Open Zoya AI assistant" aria-expanded="false"><span class="zoya-launch-core" aria-hidden="true"></span></button>
-<section id="zoya-panel" aria-label="Zoya AI assistant" aria-hidden="true" data-state="idle">
-  <header class="zoya-head">
-    <div class="zoya-brand"><span class="zoya-brand-mark" aria-hidden="true"></span><div><div class="zoya-name">Zoya</div><div class="zoya-sub">AMM AI Assistant</div></div></div>
-    <button class="zoya-close" type="button" data-zoya-close aria-label="Minimize Zoya">×</button>
-  </header>
-  <div class="zoya-stage">
-    <div class="zoya-orb-wrap" aria-hidden="true"><span class="zoya-orb-halo"></span><span class="zoya-orb-halo halo-two"></span><span class="zoya-orb"></span></div>
-    <div class="zoya-status" role="status" aria-live="polite">Ready when you are</div>
-    <div class="zoya-visualizer" role="img" aria-label="Live audio waveform"><!-- audio-reactive bars are added by the widget script --></div>
-  </div>
-  <div class="zoya-transcript" aria-live="polite" aria-label="Conversation messages"></div>
-  <p class="zoya-consent">Start a voice conversation to allow microphone access. Zoya is an AI assistant.</p>
-  <div class="zoya-controls">
-    <button class="zoya-action" type="button" data-zoya-start>Start conversation</button>
-    <button class="zoya-action secondary" type="button" data-zoya-mute hidden>Mute mic</button>
-    <button class="zoya-action danger" type="button" data-zoya-end hidden>End</button>
-  </div>
-  <form class="zoya-input-row">
-    <input id="zoya-text-input" type="text" autocomplete="off" placeholder="Type a message to Zoya…" aria-label="Type a message">
-    <button class="zoya-send" type="submit">Send</button>
-  </form>
-  <div class="zoya-error" role="status" aria-live="polite"></div>
-</section>
-<script type="module" src="/assets/zoya-widget.js?v=2"></script>
+<elevenlabs-convai
+  id="zoya-widget"
+  agent-id="agent_2401m7agtb35ejrtzwe0wgfz6bvz"
+  action-text="Talk to Zoya — AMM AI Assistant"
+  start-call-text="Start voice conversation"
+  end-call-text="End conversation"
+  expand-text="Open Zoya"
+  collapse-text="Close Zoya"
+  listening-text="Zoya is listening"
+  speaking-text="Zoya is speaking"
+  avatar-orb-color-1="#F2C94C"
+  avatar-orb-color-2="#FFE9A6"
+  mobile-fullscreen="false"
+></elevenlabs-convai>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
