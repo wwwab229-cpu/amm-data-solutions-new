@@ -88,6 +88,36 @@ import { Conversation } from "https://esm.sh/@elevenlabs/client";
     if (!rafId) rafId = requestAnimationFrame(renderWave);
   }
 
+  function showGreeting() {
+    const bubble = document.createElement("aside");
+    bubble.id = "zoya-greeting";
+    bubble.setAttribute("aria-label", "Greeting from Zoya");
+    const open = document.createElement("button");
+    open.type = "button";
+    open.className = "zoya-greeting-open";
+    open.innerHTML = "<strong>Assalam-o-Alaikum! I’m Zoya.</strong>How can I help you today?";
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "zoya-greeting-close";
+    close.setAttribute("aria-label", "Dismiss greeting");
+    close.textContent = "×";
+    const dismiss = () => {
+      bubble.classList.add("is-leaving");
+      window.setTimeout(() => bubble.remove(), 260);
+    };
+    open.addEventListener("click", () => {
+      dismiss();
+      openPanel();
+    });
+    close.addEventListener("click", dismiss);
+    bubble.append(open, close);
+    document.body.appendChild(bubble);
+    // Show again on every page load/reload; no visitor tracking or persistent storage.
+    window.setTimeout(() => {
+      if (bubble.isConnected) dismiss();
+    }, 10000);
+  }
+
   function openPanel() {
     root.classList.add("is-open");
     root.setAttribute("aria-hidden", "false");
@@ -200,4 +230,5 @@ import { Conversation } from "https://esm.sh/@elevenlabs/client";
   });
 
   setState("idle", "Ready when you are");
+  showGreeting();
 })();
