@@ -104,3 +104,11 @@
   #zoya-greeting{right:max(78px,calc(env(safe-area-inset-right) + 72px));bottom:max(20px,calc(env(safe-area-inset-bottom) + 18px));width:min(250px,calc(100vw - 92px));padding:10px 32px 10px 12px;font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){#zoya-greeting{animation:none}#zoya-greeting.is-leaving{transition:none}}
+
+
+/* Restore Zoya's simple original orb: remove all orbit rings */
+#zoya-launcher .zoya-launch-core::before,
+#zoya-launcher .zoya-launch-core::after,
+#zoya-panel .zoya-orb-halo,
+#zoya-panel .zoya-orb-halo.halo-two{display:none!important;content:none!important;animation:none!important}
+#zoya-panel .zoya-orb-wrap{border:0!important;outline:0!important}
