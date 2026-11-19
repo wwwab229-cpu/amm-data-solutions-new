@@ -112,3 +112,31 @@
 #zoya-panel .zoya-orb-halo,
 #zoya-panel .zoya-orb-halo.halo-two{display:none!important;content:none!important;animation:none!important}
 #zoya-panel .zoya-orb-wrap{border:0!important;outline:0!important}
+
+
+/* Zoya interface refinement: remove orb artwork and use a compact glass launcher */
+#zoya-launcher{
+  width:auto!important;height:44px!important;min-width:132px!important;
+  padding:0 17px!important;border-radius:999px!important;
+  background:rgba(255,255,255,.88)!important;
+  border:1px solid rgba(225,190,83,.48)!important;
+  box-shadow:0 8px 26px rgba(24,28,34,.16),inset 0 1px 0 rgba(255,255,255,.95)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(150%)!important;
+  backdrop-filter:blur(18px) saturate(150%)!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+}
+#zoya-launcher:hover{transform:translateY(-2px)!important}
+#zoya-launcher .zoya-launch-label{
+  color:#202020!important;font:700 12px/1 Inter,Arial,sans-serif!important;
+  letter-spacing:.01em!important;white-space:nowrap!important;
+}
+#zoya-panel .zoya-intro{
+  width:100%;padding:17px 8px 7px;text-align:center;
+  color:#777064;font:500 11px/1.5 Inter,Arial,sans-serif;
+}
+#zoya-panel .zoya-orb-wrap,#zoya-panel .zoya-orb,#zoya-panel .zoya-orb-halo,
+#zoya-launcher .zoya-launch-core{display:none!important}
+@media(max-width:480px){
+  #zoya-launcher{height:42px!important;min-width:126px!important;right:max(13px,env(safe-area-inset-right))!important;bottom:max(14px,env(safe-area-inset-bottom))!important}
+  #zoya-panel{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 52px)!important}
+}
