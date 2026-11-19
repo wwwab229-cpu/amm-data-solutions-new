@@ -409,6 +409,28 @@
 </style>
 
 
+<style>
+  /* Keep Zoya anchored to the viewport, independent of page scroll/parent layout. */
+  elevenlabs-convai#zoya-widget {
+    position: fixed !important;
+    top: auto !important;
+    left: auto !important;
+    right: 20px !important;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+    margin: 0 !important;
+    transform: none !important;
+    z-index: 2147483000 !important;
+    max-width: calc(100vw - 32px) !important;
+  }
+  @media (max-width: 600px) {
+    elevenlabs-convai#zoya-widget {
+      right: 12px !important;
+      bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+      max-width: calc(100vw - 24px) !important;
+    }
+  }
+</style>
+
 <elevenlabs-convai
   id="zoya-widget"
   agent-id="agent_1101m7s801p8ebfs8xm23ypq55v4"
@@ -422,7 +444,36 @@
   avatar-orb-color-1="#F2C94C"
   avatar-orb-color-2="#FFE9A6"
   mobile-fullscreen="false"
+  dismissible="true"
 ></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+<script>
+  (() => {
+    const widget = document.getElementById('zoya-widget');
+    if (!widget) return;
+
+    // Close only the expanded panel; do not end an active voice conversation.
+    const collapseZoya = () => {
+      const root = widget.shadowRoot;
+      if (!root) return;
+      const controls = Array.from(root.querySelectorAll('button,[role="button"]'));
+      const closeControl = controls.find((control) => {
+        const label = [
+          control.getAttribute('aria-label'),
+          control.getAttribute('title'),
+          control.textContent
+        ].filter(Boolean).join(' ');
+        return /close|collapse|minimi[sz]e/i.test(label);
+      });
+      if (closeControl) closeControl.click();
+    };
+
+    document.addEventListener('click', (event) => {
+      const path = typeof event.composedPath === 'function' ? event.composedPath() : [];
+      if (path.includes(widget) || widget.contains(event.target)) return;
+      collapseZoya();
+    }, true);
+  })();
+</script>
 </body>
 </html>
