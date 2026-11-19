@@ -33,7 +33,10 @@ try {
   let currentState = "idle";
   let rafId = 0;
   let muted = false;
-  let sdkReady = typeof Conversation?.startSession === "function";\n  if (!sdkReady) {\n    setTimeout(() => { errorEl.textContent = "Voice service could not load. Please refresh and try again."; }, 0);\n  }
+  let sdkReady = typeof Conversation?.startSession === "function";
+  if (!sdkReady) {
+    setTimeout(() => { errorEl.textContent = "Voice service could not load. Please refresh and try again."; }, 0);
+  }
 
   function setState(state, label) {
     currentState = state;
@@ -145,7 +148,12 @@ try {
   root.querySelector("[data-zoya-close]").addEventListener("click", closePanel);
 
   async function startConversation() {
-    if (conversation) return;\n    if (!sdkReady) {\n      errorEl.textContent = "Zoya voice service did not load. Please check your connection and refresh the page.";\n      setState("error", "Voice service unavailable");\n      return;\n    }
+    if (conversation) return;
+    if (!sdkReady) {
+      errorEl.textContent = "Zoya voice service did not load. Please check your connection and refresh the page.";
+      setState("error", "Voice service unavailable");
+      return;
+    }
     errorEl.textContent = "";
     setState("connecting", "Connecting to Zoya…");
     startWave();
