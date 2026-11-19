@@ -412,64 +412,31 @@
 
 
 <style>
-  /* Immediate branded launcher is visible while the voice widget downloads. */
-  #zoya-fast-launcher {
-    position: fixed;
-    right: 20px;
-    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-    z-index: 2147482999;
-    display: inline-flex;
-    align-items: center;
-    gap: 11px;
-    min-height: 58px;
-    padding: 9px 17px 9px 10px;
-    border: 1px solid rgba(23,23,23,.10);
-    border-radius: 999px;
-    background: #171717;
-    color: #fff;
-    box-shadow: 0 10px 34px rgba(0,0,0,.20), 0 0 0 1px rgba(242,201,76,.18);
-    font-family: inherit; font-size: 14px; font-weight: 600; line-height: 1.2;
-    letter-spacing: .01em;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
-  }
-  #zoya-fast-launcher:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(0,0,0,.24), 0 0 0 3px rgba(242,201,76,.24); }
-  #zoya-fast-launcher:focus-visible { outline: 3px solid #D9A900; outline-offset: 3px; }
-  #zoya-fast-launcher .zoya-launcher-orb {
-    width: 38px; height: 38px; flex: 0 0 38px; border-radius: 50%;
-    background: radial-gradient(circle at 34% 28%, #FFF4C7 0%, #F2C94C 42%, #D9A900 100%);
-    box-shadow: inset 0 1px 3px rgba(255,255,255,.75), 0 0 0 3px rgba(242,201,76,.14);
-  }
-  #zoya-fast-launcher .zoya-launcher-copy { display:flex; flex-direction:column; align-items:flex-start; gap:3px; }
-  #zoya-fast-launcher .zoya-launcher-title { font-size:14px; font-weight:750; }
-  #zoya-fast-launcher .zoya-launcher-subtitle { color:#F2C94C; font-size:10px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; }
+  /* One native ElevenLabs widget only: no duplicate custom launcher. */
   elevenlabs-convai#zoya-widget {
     position: fixed !important;
-    top: auto !important; left: auto !important;
+    top: auto !important;
+    left: auto !important;
     right: 20px !important;
     bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
-    margin: 0 !important; transform: none !important;
+    margin: 0 !important;
+    transform: none !important;
     z-index: 2147483000 !important;
     max-width: calc(100vw - 32px) !important;
-    visibility: hidden;
   }
   @media (max-width: 600px) {
-    #zoya-fast-launcher { right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
-    elevenlabs-convai#zoya-widget { right: 12px !important; bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important; max-width: calc(100vw - 24px) !important; }
+    elevenlabs-convai#zoya-widget {
+      right: 12px !important;
+      bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+      max-width: calc(100vw - 24px) !important;
+    }
   }
-  @media (prefers-reduced-motion: reduce) { #zoya-fast-launcher { transition:none; } }
 </style>
-
-<button id="zoya-fast-launcher" type="button" aria-label="Talk to Zoya, AMM AI Assistant">
-  <span class="zoya-launcher-orb" aria-hidden="true"></span>
-  <span class="zoya-launcher-copy"><span class="zoya-launcher-title">Talk to Zoya</span><span class="zoya-launcher-subtitle">AMM AI Assistant</span></span>
-</button>
 
 <elevenlabs-convai
   id="zoya-widget"
   agent-id="agent_1101m7s801p8ebfs8xm23ypq55v4"
-  action-text="Meet Zoya — AMM AI Assistant"
+  action-text="Talk to Zoya — AMM AI Assistant"
   start-call-text="Start voice conversation"
   end-call-text="End conversation"
   expand-text="Talk to Zoya"
@@ -481,48 +448,6 @@
   mobile-fullscreen="false"
   dismissible="true"
 ></elevenlabs-convai>
-<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" defer type="text/javascript"></script>
-<script>
-  (() => {
-    const widget = document.getElementById('zoya-widget');
-    const launcher = document.getElementById('zoya-fast-launcher');
-    if (!widget || !launcher) return;
-
-    let launchRequested = false;
-    const revealWidget = () => {
-      widget.style.visibility = 'visible';
-      launcher.hidden = true;
-      if (launchRequested && typeof widget.startConversation === 'function') {
-        launchRequested = false;
-        widget.startConversation();
-      }
-    };
-
-    launcher.addEventListener('click', () => {
-      launchRequested = true;
-      if (customElements.get('elevenlabs-convai')) revealWidget();
-    });
-
-    customElements.whenDefined('elevenlabs-convai').then(revealWidget);
-
-    // Close only the expanded panel; do not end an active voice conversation.
-    const collapseZoya = () => {
-      const root = widget.shadowRoot;
-      if (!root) return;
-      const controls = Array.from(root.querySelectorAll('button,[role="button"]'));
-      const closeControl = controls.find((control) => {
-        const label = [control.getAttribute('aria-label'), control.getAttribute('title'), control.textContent].filter(Boolean).join(' ');
-        return /close|collapse|minimi[sz]e/i.test(label);
-      });
-      if (closeControl) closeControl.click();
-    };
-
-    document.addEventListener('click', (event) => {
-      const path = typeof event.composedPath === 'function' ? event.composedPath() : [];
-      if (path.includes(widget) || path.includes(launcher) || widget.contains(event.target) || launcher.contains(event.target)) return;
-      collapseZoya();
-    }, true);
-  })();
-</script>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
