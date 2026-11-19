@@ -1,4 +1,13 @@
-import { Conversation } from "https://esm.sh/@elevenlabs/client";
+let Conversation = null;
+try {
+  ({ Conversation } = await import("https://cdn.jsdelivr.net/npm/@elevenlabs/client/+esm"));
+} catch (primaryError) {
+  try {
+    ({ Conversation } = await import("https://esm.sh/@elevenlabs/client"));
+  } catch (fallbackError) {
+    console.error("Zoya voice SDK failed to load from both CDNs.", primaryError, fallbackError);
+  }
+}
 
 (() => {
   const root = document.getElementById("zoya-panel");
@@ -24,7 +33,7 @@ import { Conversation } from "https://esm.sh/@elevenlabs/client";
   let currentState = "idle";
   let rafId = 0;
   let muted = false;
-  let sdkReady = true;
+  let sdkReady = typeof Conversation?.startSession === "function";\n  if (!sdkReady) {\n    setTimeout(() => { errorEl.textContent = "Voice service could not load. Please refresh and try again."; }, 0);\n  }
 
   function setState(state, label) {
     currentState = state;
@@ -136,7 +145,7 @@ import { Conversation } from "https://esm.sh/@elevenlabs/client";
   root.querySelector("[data-zoya-close]").addEventListener("click", closePanel);
 
   async function startConversation() {
-    if (conversation || !sdkReady) return;
+    if (conversation) return;\n    if (!sdkReady) {\n      errorEl.textContent = "Zoya voice service did not load. Please check your connection and refresh the page.";\n      setState("error", "Voice service unavailable");\n      return;\n    }
     errorEl.textContent = "";
     setState("connecting", "Connecting to Zoya…");
     startWave();
