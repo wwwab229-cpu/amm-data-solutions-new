@@ -108,7 +108,6 @@ import { Conversation } from "https://esm.sh/@elevenlabs/client";
     open.addEventListener("click", () => {
       dismiss();
       openPanel();
-      startConversation();
     });
     close.addEventListener("click", dismiss);
     bubble.append(open, close);
@@ -131,8 +130,8 @@ import { Conversation } from "https://esm.sh/@elevenlabs/client";
   }
 
   launcher.addEventListener("click", () => {
-    openPanel();
-    startConversation();
+    if (root.classList.contains("is-open")) closePanel();
+    else openPanel();
   });
   root.querySelector("[data-zoya-close]").addEventListener("click", closePanel);
 
