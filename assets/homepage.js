@@ -1,34 +1,16 @@
 
-// Approved hero sequence: type the headline into its expanding yellow highlight,
-// then type the supporting sentence. Runs once per page load.
+// Hero headline and supporting copy stay fully visible and fixed; no typewriter expansion.
 (function(){
  const title=document.getElementById('hero-heading-text');
- const box=document.getElementById('hero-type-box');
- const cursor=document.getElementById('hero-cursor');
  const subtitle=document.getElementById('hero-subtitle-text');
- if(!title||!box||!cursor||!subtitle)return;
- const heading='What If Work Could Do Itself?';
- const supporting='We use AI, automation and connected tools to reduce repetitive work, improve efficiency and build smarter, more cost-aware ways to get things done.';
- title.textContent='';
- subtitle.textContent='';
- title.style.visibility='visible';
- subtitle.style.visibility='visible';
- cursor.style.display='inline-block';
- box.classList.add('hero-typing-active');
- let i=0,j=0;
- function typeHeading(){
-  title.textContent=heading.slice(0,++i);
-  if(i<heading.length){setTimeout(typeHeading,58);return;}
-  cursor.style.display='none';
-  box.classList.remove('hero-typing-active');
-  box.classList.add('hero-typing-done');
-  setTimeout(typeSupporting,360);
- }
- function typeSupporting(){
-  subtitle.textContent=supporting.slice(0,++j);
-  if(j<supporting.length)setTimeout(typeSupporting,13);
- }
- setTimeout(typeHeading,260);
+ const cursor=document.getElementById('hero-cursor');
+ const box=document.getElementById('hero-type-box');
+ if(title)title.textContent='What If Work Could Do Itself?';
+ if(subtitle)subtitle.textContent='We use AI, automation and connected tools to reduce repetitive work, improve efficiency and build smarter, more cost-aware ways to get things done.';
+ if(title)title.style.visibility='visible';
+ if(subtitle)subtitle.style.visibility='visible';
+ if(cursor)cursor.style.display='none';
+ if(box)box.classList.remove('hero-typing-active','hero-typing-done');
 })();
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
