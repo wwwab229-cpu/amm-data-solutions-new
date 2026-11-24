@@ -387,7 +387,32 @@
 </style>
 
 <!-- Official ElevenLabs Zoya voice widget -->
-<elevenlabs-convai agent-id="agent_1101m7s801p8ebfs8xm23ypq55v4"></elevenlabs-convai>
+<elevenlabs-convai id="amm-zoya-widget" agent-id="agent_1101m7s801p8ebfs8xm23ypq55v4" dismissible="true"></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+<script>
+(function(){
+  var widget=document.getElementById('amm-zoya-widget');
+  if(!widget)return;
+  function collapseZoya(){
+    var root=widget.shadowRoot;
+    if(!root)return;
+    var close=root.querySelector(
+      'button[aria-label*="collapse" i],button[title*="collapse" i],button[aria-label*="minimize" i],button[title*="minimize" i]'
+    );
+    if(!close){
+      close=Array.from(root.querySelectorAll('button')).find(function(button){
+        var label=((button.getAttribute('aria-label')||'')+' '+(button.getAttribute('title')||'')+' '+(button.textContent||'')).toLowerCase();
+        return label.includes('collapse')||label.includes('minimize');
+      });
+    }
+    if(close)close.click();
+  }
+  document.addEventListener('click',function(event){
+    var path=typeof event.composedPath==='function'?event.composedPath():[];
+    if(path.includes(widget)||widget.contains(event.target))return;
+    collapseZoya();
+  },true);
+})();
+</script>
 </body>
 </html>
