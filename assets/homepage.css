@@ -1084,6 +1084,19 @@ html.js #hero-heading-text,html.js #hero-subtitle-text{visibility:hidden}
 }
 
 
+
+/* Keep the supporting hero statement visually steady on reload and page re-entry. */
+.hero-support-line,
+.hero-support-line *{
+  animation:none !important;
+  transition:none !important;
+  transform:none !important;
+}
+.hero-support-line{
+  position:relative;
+  top:0 !important;
+  opacity:1 !important;
+}
 /* Keep the hero highlight at its full size while the original typewriter reveals text. */
 #hero-type-box{
   background-size:100% 100% !important;
