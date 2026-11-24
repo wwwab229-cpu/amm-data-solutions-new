@@ -1096,6 +1096,6 @@ elevenlabs-convai{
 @media(max-width:600px){
   elevenlabs-convai{
     right:12px !important;
-    bottom:12px !important;
+    bottom:calc(110px + env(safe-area-inset-bottom, 0px)) !important;
   }
 }
