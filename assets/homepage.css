@@ -1130,32 +1130,67 @@ html.js #hero-heading-text,html.js #hero-subtitle-text{visibility:hidden}
 }
 
 
-/* Reserve the left hero column's final text height so the right-hand statement never drops as typing completes. */
-.hero .grid > div:first-child{
-  min-height:260px !important;
-}
-@media(max-width:767px){
-  .hero .grid > div:first-child{
-    min-height:250px !important;
-  }
-}
-
-
-/* Lock the hero's first grid row so typing content cannot push the supporting statement down. */
+/* Anchor the supporting statement to a fixed hero slot, independent of headline reflow. */
 .hero .grid{
-  grid-template-rows:300px;
+  position:relative !important;
+  grid-template-rows:300px !important;
+  min-height:300px !important;
 }
 .hero .grid > div:first-child{
   height:300px !important;
   min-height:0 !important;
-  min-width:0;
+  min-width:0 !important;
+}
+.hero .grid > div:nth-child(2){
+  position:absolute !important;
+  right:0 !important;
+  bottom:0 !important;
+  width:calc(50% - 20px) !important;
+  height:100px !important;
+  min-height:100px !important;
+  display:block !important;
+}
+.hero .grid > div:nth-child(2) .hero-enquiry-link{
+  position:relative !important;
+  display:block !important;
+  width:100% !important;
+  height:100px !important;
+}
+.hero .grid > div:nth-child(2) .hero-support-line{
+  position:absolute !important;
+  left:0 !important;
+  bottom:0 !important;
+  width:100% !important;
+  height:66px !important;
+  min-height:66px !important;
+  margin:0 !important;
+  top:auto !important;
+  transform:none !important;
 }
 @media(max-width:767px){
   .hero .grid{
-    grid-template-rows:300px auto !important;
+    grid-template-rows:300px !important;
+    min-height:420px !important;
+    height:420px !important;
   }
   .hero .grid > div:first-child{
     height:300px !important;
     min-height:0 !important;
+  }
+  .hero .grid > div:nth-child(2){
+    left:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    width:100% !important;
+    height:100px !important;
+    min-height:100px !important;
+  }
+  .hero .grid > div:nth-child(2) .hero-enquiry-link{
+    height:100px !important;
+  }
+  .hero .grid > div:nth-child(2) .hero-support-line{
+    height:84px !important;
+    min-height:84px !important;
+    max-width:100% !important;
   }
 }
