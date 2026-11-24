@@ -1113,3 +1113,18 @@ html.js #hero-heading-text,html.js #hero-subtitle-text{visibility:hidden}
 .amm-pricing-estimate > div > div > h3{
   margin-top:10px !important;
 }
+
+
+/* Keep the hero supporting line fixed in place; blink once, then remain visible. */
+.hero-support-line{
+  animation:ammHeroSupportBlinkReveal 1.05s steps(1,end) 1 both !important;
+}
+@keyframes ammHeroSupportBlinkReveal{
+  0%,24%{opacity:0}
+  25%,49%{opacity:1}
+  50%,74%{opacity:0}
+  75%,100%{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-support-line{animation:none !important;opacity:1 !important}
+}
