@@ -1082,3 +1082,20 @@ html.js #hero-heading-text,html.js #hero-subtitle-text{visibility:hidden}
   h2{font-size:1.4rem!important}
   .btn{padding:10px 13px!important}
 }
+
+
+/* Keep the official Zoya agent widget anchored to the viewport while the page scrolls. */
+elevenlabs-convai{
+  position:fixed !important;
+  right:20px !important;
+  bottom:20px !important;
+  left:auto !important;
+  top:auto !important;
+  z-index:9999 !important;
+}
+@media(max-width:600px){
+  elevenlabs-convai{
+    right:12px !important;
+    bottom:12px !important;
+  }
+}
