@@ -1128,3 +1128,14 @@ html.js #hero-heading-text,html.js #hero-subtitle-text{visibility:hidden}
 @media(prefers-reduced-motion:reduce){
   .hero-support-line{animation:none !important;opacity:1 !important}
 }
+
+
+/* Reserve the left hero column's final text height so the right-hand statement never drops as typing completes. */
+.hero .grid > div:first-child{
+  min-height:260px !important;
+}
+@media(max-width:767px){
+  .hero .grid > div:first-child{
+    min-height:250px !important;
+  }
+}
