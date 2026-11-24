@@ -1082,3 +1082,27 @@ html.js #hero-heading-text,html.js #hero-subtitle-text{visibility:hidden}
   h2{font-size:1.4rem!important}
   .btn{padding:10px 13px!important}
 }
+
+
+/* Requested focused fixes: keep the hero highlight static and add breathing room in pricing card. */
+#hero-type-box{
+  display:inline;
+  background:#FFD83D !important;
+  background-size:100% 100% !important;
+  transition:none !important;
+  animation:none !important;
+}
+#hero-type-box.hero-typing-active,
+#hero-type-box.hero-typing-done{
+  background-size:100% 100% !important;
+  transition:none !important;
+  animation:none !important;
+}
+html.js #hero-heading-text,
+html.js #hero-subtitle-text{
+  visibility:visible !important;
+}
+#hero-cursor{display:none !important;animation:none !important}
+.amm-pricing-estimate > div > div > h3{
+  margin-top:10px !important;
+}
