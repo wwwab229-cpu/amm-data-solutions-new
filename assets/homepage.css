@@ -1084,25 +1084,19 @@ html.js #hero-heading-text,html.js #hero-subtitle-text{visibility:hidden}
 }
 
 
-/* Requested focused fixes: keep the hero highlight static and add breathing room in pricing card. */
+/* Keep the hero highlight at its full size while the original typewriter reveals text. */
 #hero-type-box{
-  display:inline;
-  background:#FFD83D !important;
   background-size:100% 100% !important;
   transition:none !important;
-  animation:none !important;
 }
-#hero-type-box.hero-typing-active,
+#hero-type-box.hero-typing-active{
+  background-size:100% 100% !important;
+  transition:none !important;
+}
 #hero-type-box.hero-typing-done{
-  background-size:100% 100% !important;
-  transition:none !important;
-  animation:none !important;
+  animation:ammHeroHeadingSettle .48s ease-out 1 !important;
 }
-html.js #hero-heading-text,
-html.js #hero-subtitle-text{
-  visibility:visible !important;
-}
-#hero-cursor{display:none !important;animation:none !important}
+#hero-cursor{display:inline-block !important;animation:ammHeroCursorBlink .72s steps(1,end) infinite !important}
 .amm-pricing-estimate > div > div > h3{
   margin-top:10px !important;
 }
