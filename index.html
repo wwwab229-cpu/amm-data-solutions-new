@@ -386,59 +386,9 @@
   [class*="ask-amm" i] { display:none !important; visibility:hidden !important; pointer-events:none !important; }
 </style>
 
-<!-- Compact, informational-only prompt for the Zoya agent. -->
-<style>
-  #zoya-amm-prompt{
-    position:fixed;right:20px;bottom:calc(94px + env(safe-area-inset-bottom,0px));
-    z-index:9998;width:min(248px,calc(100vw - 32px));box-sizing:border-box;
-    padding:11px 34px 11px 13px;border:1px solid #eadb9a;border-radius:13px;
-    background:#fff;color:#191b35;box-shadow:0 5px 20px rgba(20,23,43,.13);
-    font:500 12px/1.4 Inter,Arial,sans-serif;pointer-events:none;
-  }
-  #zoya-amm-prompt strong{display:block;margin-bottom:3px;font-size:12px;font-weight:750}
-  #zoya-amm-prompt-close{
-    position:absolute;top:6px;right:7px;width:22px;height:22px;border:0;border-radius:50%;
-    background:#f5f3eb;color:#454545;font-size:15px;line-height:1;cursor:pointer;
-    pointer-events:auto;
-  }
-  @media(max-width:600px){
-    #zoya-amm-prompt{right:12px;bottom:calc(88px + env(safe-area-inset-bottom,0px));width:min(224px,calc(100vw - 24px));padding:9px 30px 9px 11px}
-  }
-</style>
-<div id="zoya-amm-prompt" aria-label="Message about AMM DS">
-  <button id="zoya-amm-prompt-close" type="button" aria-label="Close message">×</button>
-  <strong>Want more information?</strong>
-  <span>About AMM DS? Let's talk.</span>
-</div>
-<script>
-  (function(){
-    var prompt=document.getElementById('zoya-amm-prompt');
-    var close=document.getElementById('zoya-amm-prompt-close');
-    if(close&&prompt)close.addEventListener('click',function(){prompt.remove();});
-  })();
-</script>
-
 <!-- Official ElevenLabs Zoya voice widget -->
-<elevenlabs-convai id="amm-zoya-widget" agent-id="agent_1101m7s801p8ebfs8xm23ypq55v4" style="position:fixed!important;right:20px!important;bottom:20px!important;left:auto!important;top:auto!important;z-index:9999!important"></elevenlabs-convai>
-<script>
-  (function(){
-    var applyZoyaPosition=function(){
-      var widget=document.getElementById('amm-zoya-widget');
-      if(!widget)return;
-      widget.style.setProperty('position','fixed','important');
-      widget.style.setProperty('right',window.matchMedia('(max-width:600px)').matches?'12px':'20px','important');
-      widget.style.setProperty('bottom',window.matchMedia('(max-width:600px)').matches?'calc(110px + env(safe-area-inset-bottom, 0px))':'20px','important');
-      widget.style.setProperty('left','auto','important');
-      widget.style.setProperty('top','auto','important');
-      widget.style.setProperty('z-index','9999','important');
-    };
-    applyZoyaPosition();
-    window.addEventListener('resize',applyZoyaPosition,{passive:true});
-    if(window.customElements&&customElements.whenDefined){
-      customElements.whenDefined('elevenlabs-convai').then(applyZoyaPosition);
-    }
-  })();
-</script>
+<elevenlabs-convai agent-id="agent_1101m7s801p8ebfs8xm23ypq55v4"></elevenlabs-convai>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
