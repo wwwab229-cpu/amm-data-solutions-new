@@ -270,7 +270,7 @@
  .amm-client-showcase-head{align-items:flex-start!important}
  .amm-client-track{display:flex;gap:12px;width:max-content}
  .amm-client-preview-card{width:min(82vw,330px);min-height:150px;padding:18px;flex:0 0 auto}
- .amm-client-track.is-marquee{animation:ammClientSlide 48s linear infinite}
+ .amm-client-track.is-marquee{animation:ammClientSlide 24s linear infinite}
  .amm-client-track-viewport:focus-within .amm-client-track,
  .amm-client-track-viewport:hover .amm-client-track{animation-play-state:paused}
 }
@@ -303,8 +303,7 @@
    cancelAnimationFrame(resizeFrame);
    resizeFrame=requestAnimationFrame(setup);
  });
- viewport.addEventListener('touchstart',()=>track.style.animationPlayState='paused',{passive:true});
- viewport.addEventListener('touchend',()=>track.style.animationPlayState='',{passive:true});
+ // Marquee continues uninterrupted during touch and page scrolling.
 })();
 </script>
 
