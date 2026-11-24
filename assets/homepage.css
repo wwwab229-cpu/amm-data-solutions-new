@@ -1139,3 +1139,23 @@ html.js #hero-heading-text,html.js #hero-subtitle-text{visibility:hidden}
     min-height:250px !important;
   }
 }
+
+
+/* Lock the hero's first grid row so typing content cannot push the supporting statement down. */
+.hero .grid{
+  grid-template-rows:300px;
+}
+.hero .grid > div:first-child{
+  height:300px !important;
+  min-height:0 !important;
+  min-width:0;
+}
+@media(max-width:767px){
+  .hero .grid{
+    grid-template-rows:300px auto !important;
+  }
+  .hero .grid > div:first-child{
+    height:300px !important;
+    min-height:0 !important;
+  }
+}
