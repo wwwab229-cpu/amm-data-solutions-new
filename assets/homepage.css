@@ -1099,3 +1099,21 @@ elevenlabs-convai{
     bottom:12px !important;
   }
 }
+
+
+/* Fit the expanded Zoya conversation panel inside the visible screen area. */
+#amm-zoya-widget{
+  --elevenlabs-convai-widget-width:min(400px,calc(100vw - 40px));
+  --elevenlabs-convai-widget-height:min(600px,calc(100dvh - 100px));
+  max-width:calc(100vw - 24px)!important;
+  max-height:calc(100dvh - 32px)!important;
+  box-sizing:border-box!important;
+}
+@media(max-width:600px){
+  #amm-zoya-widget{
+    --elevenlabs-convai-widget-width:min(360px,calc(100vw - 24px));
+    --elevenlabs-convai-widget-height:min(540px,calc(100dvh - 96px));
+    max-width:calc(100vw - 24px)!important;
+    max-height:calc(100dvh - 24px)!important;
+  }
+}
