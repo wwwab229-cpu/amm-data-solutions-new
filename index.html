@@ -387,8 +387,27 @@
 </style>
 
 <!-- Official ElevenLabs Zoya voice widget -->
-<elevenlabs-convai agent-id="agent_1101m7s801p8ebfs8xm23ypq55v4"></elevenlabs-convai>
-<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+<elevenlabs-convai id="amm-zoya-widget" agent-id="agent_1101m7s801p8ebfs8xm23ypq55v4" style="position:fixed!important;right:20px!important;bottom:20px!important;left:auto!important;top:auto!important;z-index:99999!important"></elevenlabs-convai>
+<script>
+(function(){
+  function positionZoya(){
+    var widget=document.getElementById('amm-zoya-widget');
+    if(!widget)return;
+    var mobile=window.matchMedia('(max-width:600px)').matches;
+    widget.style.setProperty('position','fixed','important');
+    widget.style.setProperty('right',mobile?'12px':'20px','important');
+    widget.style.setProperty('bottom',mobile?'76px':'20px','important');
+    widget.style.setProperty('left','auto','important');
+    widget.style.setProperty('top','auto','important');
+    widget.style.setProperty('z-index','99999','important');
+  }
+  positionZoya();
+  window.addEventListener('resize',positionZoya,{passive:true});
+  if(window.customElements&&customElements.whenDefined){
+    customElements.whenDefined('elevenlabs-convai').then(positionZoya);
+  }
+})();
+</script>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
