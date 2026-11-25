@@ -616,3 +616,14 @@ window.addEventListener('load', () => {
 })();
 
 ;
+
+/* Keep full pricing explanation visible on desktop; collapse it by default on compact screens. */
+(function(){
+  const panels=document.querySelectorAll('.amm-pricing-details');
+  if(!panels.length||!window.matchMedia)return;
+  const media=window.matchMedia('(min-width: 768px)');
+  const sync=()=>panels.forEach(panel=>{panel.open=media.matches;});
+  sync();
+  if(media.addEventListener)media.addEventListener('change',sync);
+  else if(media.addListener)media.addListener(sync);
+})();
