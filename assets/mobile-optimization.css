@@ -1,0 +1,43 @@
+/* AMM Data Solutions — mobile sizing optimization only. Desktop styles and visual identity remain unchanged. */
+@media (max-width: 767px) {
+  html { scroll-padding-top: 76px; }
+  body { font-size: 15px; line-height: 1.62; }
+  .wrap, .lh-wrap { width: calc(100% - 28px) !important; }
+  header { gap: 10px !important; padding-top: 12px !important; padding-bottom: 12px !important; }
+  .nav { gap: 8px !important; font-size: .78rem !important; }
+  h1, .hero h1, .lh-hero h1, .lh-page-hero h1 { font-size: clamp(1.85rem, 7.2vw, 2.25rem) !important; line-height: 1.12 !important; }
+  h2, .section h2, .lh-section h2 { font-size: clamp(1.35rem, 5.6vw, 1.7rem) !important; line-height: 1.2 !important; }
+  h3 { font-size: 1.02rem; line-height: 1.25; }
+  .hero { padding: 22px 18px !important; margin-top: 8px !important; margin-bottom: 24px !important; border-radius: 20px !important; }
+  .hero p, .lh-hero p { font-size: .94rem !important; line-height: 1.58 !important; }
+  .section, .lh-section, .pricing-section { padding-top: 24px !important; padding-bottom: 32px !important; }
+  .section h2, .lh-section h2 { margin-bottom: 14px !important; }
+  .grid, .steps, .lh-category-grid, .lh-resource-grid { gap: 12px !important; }
+  .card, .lh-card, .lh-content-card, .pricing-market { padding: 16px !important; border-radius: 17px !important; }
+  .article-card { min-height: 0 !important; padding: 16px !important; border-radius: 18px !important; }
+  .actions { gap: 8px !important; margin-top: 16px !important; }
+  .btn, .button { min-height: 42px; max-width: 100%; padding: 10px 16px; font-size: .9rem; white-space: normal; }
+  .cta { padding: 20px 18px !important; margin: 28px 0 !important; border-radius: 20px !important; }
+  .pricing-panel { padding: 18px !important; border-radius: 20px !important; }
+  .pricing-grid { gap: 10px !important; margin: 16px 0 !important; }
+  .pricing-detail { font-size: .9rem !important; }
+  .service-contact-form { margin-top: 16px !important; padding: 16px !important; gap: 11px !important; border-radius: 17px !important; }
+  .form-grid { gap: 10px !important; }
+  input:not([type="hidden"]):not([type="checkbox"]), select, textarea { min-width: 0; max-width: 100%; min-height: 44px; padding: 10px 12px; font-size: 16px; }
+  textarea { min-height: 104px; }
+  .faq details { padding: 14px 15px !important; margin: 8px 0 !important; }
+  footer { padding-top: 20px !important; padding-bottom: 26px !important; }
+  .lh-hero-grid, .lh-resource-layout { gap: 14px !important; }
+  .lh-resource-sidebar .lh-content-card { padding: 15px !important; }
+  #work .amm-service-card { min-width: 0; }
+  #feedback-panel { padding: 16px !important; }
+  #feedback-panel input:not([type="checkbox"]), #feedback-panel textarea { min-height: 44px; font-size: 16px; }
+  img, video, iframe { max-width: 100%; }
+}
+@media (max-width: 380px) {
+  .wrap, .lh-wrap { width: calc(100% - 24px) !important; }
+  .hero { padding: 18px 15px !important; }
+  .card, .lh-card, .lh-content-card, .pricing-market { padding: 14px !important; }
+  .btn, .button { padding: 9px 12px; font-size: .84rem; }
+  .nav { gap: 6px !important; font-size: .74rem !important; }
+}
