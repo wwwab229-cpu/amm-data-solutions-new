@@ -38,6 +38,13 @@
 .amm-whatsapp-icon-link:hover{transform:scale(1.06);filter:brightness(.96)}
 .amm-whatsapp-icon-link:focus-visible{outline:3px solid #128C7E;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){.amm-whatsapp-icon-link{transition:none}}
+
+/* Restore the mobile Get in touch CTA and keep WhatsApp beside it at all widths. */
+@media(max-width:767px){
+ #nav > .wrap > div.flex.md\\:hidden{display:flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;gap:8px!important;flex:0 0 auto!important;min-width:max-content!important}
+ #nav .amm-mobile-contact{display:inline-flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;min-height:40px!important;height:auto!important;padding:9px 14px!important;font-size:13px!important;line-height:1.1!important;white-space:nowrap!important;flex:0 0 auto!important;width:auto!important;max-width:none!important}
+ #nav .amm-whatsapp-icon-link{display:inline-flex!important;visibility:visible!important;opacity:1!important;width:40px!important;height:40px!important;flex:0 0 40px!important}
+}
 </style>
 <link rel="stylesheet" href="/assets/homepage.css?v=bfac4fe">
 
