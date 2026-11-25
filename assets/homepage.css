@@ -1243,3 +1243,9 @@ html.js #hero-heading-text,html.js #hero-subtitle-text{visibility:hidden}
   .amm-pricing-extra{font-size:11px;line-height:1.5;margin-top:7px}
   .amm-pricing-cta{align-self:stretch;justify-content:center;min-height:40px;padding:9px 14px!important;font-size:13px!important}
 }
+
+
+/* Mobile-only spacing polish: give the fixed header and hero panel clear separation. */
+@media(max-width:767px){
+  #top > .wrap:first-child{margin-top:16px!important;}
+}
