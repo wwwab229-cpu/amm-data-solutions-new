@@ -28,9 +28,13 @@ const routes = [
 ];
 const viewports = [
   { name: 'mobile-320', width: 320, height: 740, isMobile: true, hasTouch: true },
+  { name: 'mobile-360', width: 360, height: 800, isMobile: true, hasTouch: true },
   { name: 'mobile-390', width: 390, height: 844, isMobile: true, hasTouch: true },
   { name: 'tablet-768', width: 768, height: 1024, isMobile: true, hasTouch: true },
+  { name: 'laptop-1024', width: 1024, height: 768, isMobile: false, hasTouch: false },
   { name: 'desktop-1365', width: 1365, height: 900, isMobile: false, hasTouch: false },
+  { name: 'desktop-1440', width: 1440, height: 900, isMobile: false, hasTouch: false },
+  { name: 'wide-desktop-1920', width: 1920, height: 1080, isMobile: false, hasTouch: false },
 ];
 const failures = [];
 
@@ -144,6 +148,8 @@ const failures = [];
       } else {
         failures.push(`[${viewport.name}] homepage feedback CTA not found`);
       }
+      // Restore the homepage after checking the separate feedback route.
+      await page.goto(base + '/', { waitUntil: 'networkidle', timeout: 30000 });
 
       // Check the service-details overlay fits and closes cleanly on each viewport.
       const firstService = page.locator('#work [data-service-index="0"]');
