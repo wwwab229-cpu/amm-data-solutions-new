@@ -1,6 +1,6 @@
 const { chromium } = require('playwright');
 
-const base = 'https://amm-data-solutions-new.vercel.app';
+const base = process.env.BASE_URL || 'https://amm-data-solutions-new.vercel.app';
 const routes = [
   '/',
   '/admin.html',
@@ -52,7 +52,7 @@ const failures = [];
 
       for (const route of routes) {
         const errors = [];
-        const onPageError = error => errors.push(error.message);
+        const onPageError = error => errors.push(`${error.message} :: ${error.stack?.split('\n').slice(0, 3).join(' | ') || ''}`);
         page.on('pageerror', onPageError);
         const response = await page.goto(base + route, { waitUntil: 'networkidle', timeout: 30000 }).catch(async error => {
           failures.push(`[${viewport.name}] ${route}: navigation failed: ${error.message}`);

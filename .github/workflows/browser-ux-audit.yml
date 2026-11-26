@@ -26,9 +26,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install Playwright and Chromium
+      - name: Install project, Playwright and Chromium
         run: |
+          npm install --no-audit --no-fund
           npm install --no-save --package-lock=false playwright
           npx playwright install chromium
-      - name: Test production pages and mobile UX
+      - name: Build branch and start local static server
+        run: |
+          npm run build
+          python3 -m http.server 4173 --directory dist >/tmp/amm-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/amm-http.log
+          exit 1
+      - name: Test branch pages and responsive UX
+        env:
+          BASE_URL: http://127.0.0.1:4173
         run: node scripts/production-browser-audit.cjs
