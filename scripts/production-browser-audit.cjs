@@ -115,6 +115,8 @@ const failures = [];
           failures.push('[mobile] Could not find the mobile menu button');
         }
       }
+      // Ensure every viewport tests the same homepage controls after the route sweep.
+      await page.goto(base + '/', { waitUntil: 'networkidle', timeout: 30000 });
       // The approved homepage CTA navigates to the dedicated feedback portal.
       // Test that public flow and its controls without submitting production data.
       const feedbackLink = page.locator('#open-feedback');
