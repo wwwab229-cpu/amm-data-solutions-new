@@ -157,7 +157,9 @@ const failures = [];
       // Restore the homepage after checking the separate feedback route.
       await page.goto(base + '/', { waitUntil: 'networkidle', timeout: 30000 });
 
-      // Capture the approved homepage design at this viewport for visual review.\n      await page.screenshot({ path: path.join(screenshotDir, `${viewport.name}.png`), fullPage: true });\n      // Check the service-details overlay fits and closes cleanly on each viewport.
+            // Capture the approved homepage design at this viewport for visual review.
+      await page.screenshot({ path: path.join(screenshotDir, `${viewport.name}.png`), fullPage: true });
+      // Check the service-details overlay fits and closes cleanly on each viewport.
       const firstService = page.locator('#work [data-service-index="0"]');
       if (await firstService.count()) {
         await firstService.click();
