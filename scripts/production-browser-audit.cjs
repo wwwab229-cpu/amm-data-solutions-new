@@ -190,7 +190,7 @@ const failures = [];
     for (const failure of failures) console.error(' - ' + failure);
     process.exitCode = 1;
   } else {
-    console.log('\nBrowser audit passed for all pages at 320px, 390px, 768px and 1365px viewports.');
+    console.log(`\nBrowser audit passed for ${routes.length} pages across ${viewports.map(v => v.width + 'px').join(', ')} viewports.`);
   }
 })();
 

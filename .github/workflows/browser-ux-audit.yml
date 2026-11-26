@@ -29,7 +29,7 @@ jobs:
       - name: Install project, Playwright and Chromium
         run: |
           npm install --no-audit --no-fund
-          npm install --no-save --package-lock=false playwright
+          npm install --no-save --package-lock=false playwright lighthouse
           npx playwright install chromium
       - name: Build branch and start local static server
         run: |
@@ -45,3 +45,18 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node scripts/production-browser-audit.cjs
+      - name: Run Lighthouse mobile and desktop audits
+        run: |
+          export CHROME_PATH="$(find "$HOME/.cache/ms-playwright" -type f -name chrome | head -n 1)"
+          test -n "$CHROME_PATH"
+          npx lighthouse http://127.0.0.1:4173/ --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=/tmp/amm-lighthouse-mobile.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --quiet
+          npx lighthouse http://127.0.0.1:4173/ --preset=desktop --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=/tmp/amm-lighthouse-desktop.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --quiet
+          node -e 'for (const f of ["/tmp/amm-lighthouse-mobile.json","/tmp/amm-lighthouse-desktop.json"]) { const r=require(f); const c=r.categories; console.log(f.includes("mobile")?"MOBILE":"DESKTOP", Object.fromEntries(Object.entries(c).map(([k,v])=>[k,Math.round(v.score*100)]))); }'
+      - name: Upload Lighthouse audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amm-lighthouse-mobile-desktop-reports
+          path: /tmp/amm-lighthouse-*.json
+          if-no-files-found: warn
+          retention-days: 14
