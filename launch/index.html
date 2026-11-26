@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#171714">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>AMM Grand Launch Experience | AMM Data Solutions</title>
+<meta name="description" content="A special website launch celebration presented by AMM Data Solutions.">
+<style>
+:root{color-scheme:dark;--ink:#171714;--paper:#f7f3eb;--gold:#e7ad25;--muted:#bcb8ad;--red:#b51f32}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--ink);color:var(--paper)}
+body{min-height:100svh;overflow-x:hidden}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.shell{min-height:100svh;display:grid;place-items:center;padding:28px 16px;position:relative;isolation:isolate;background:radial-gradient(ellipse at 50% 12%,rgba(231,173,37,.12),transparent 44%),linear-gradient(145deg,#1b1b17,#10100f)}
+.shell:before,.shell:after{content:"";position:fixed;width:340px;height:340px;border:1px solid rgba(231,173,37,.12);border-radius:50%;z-index:-1;pointer-events:none}
+.shell:before{top:-230px;left:-160px}.shell:after{right:-210px;bottom:-230px}
+.panel{width:min(100%,720px);border:1px solid rgba(231,173,37,.28);border-radius:26px;background:rgba(28,28,24,.94);box-shadow:0 28px 90px rgba(0,0,0,.35);padding:clamp(24px,5vw,48px);text-align:center;position:relative;overflow:hidden}
+.brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:26px}
+.brand img{width:54px;height:54px;object-fit:contain;background:var(--paper);border-radius:12px;padding:5px}
+.brand-copy{text-align:left}.brand-copy strong{display:block;letter-spacing:.04em;font-size:14px}.brand-copy span{display:block;color:var(--gold);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-top:3px}
+.eyebrow{color:var(--gold);font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.035em;font-size:clamp(34px,7vw,58px);line-height:1.06;margin:13px 0}
+.lead{color:#d0cdc4;line-height:1.7;max-width:530px;margin:0 auto}
+.gold{color:var(--gold)}
+.form{display:grid;gap:15px;text-align:left;margin-top:30px}
+.field{display:grid;gap:7px}.field label{font-size:12px;color:#e4dfd3;font-weight:650}
+.field input,.field textarea{width:100%;border:1px solid #4b493f;background:#12120f;color:#fff;border-radius:11px;padding:13px 14px;outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(231,173,37,.13)}
+.field textarea{min-height:82px;resize:vertical}
+.primary,.secondary{border:0;border-radius:999px;padding:14px 22px;font-weight:750;transition:transform .2s,background .2s}
+.primary{background:var(--gold);color:#171714}.primary:hover{transform:translateY(-2px);background:#f4c653}
+.secondary{background:transparent;color:#e8e3d8;border:1px solid #6a6659}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:5px}.form-actions button{flex:1}
+.result{margin-top:20px;border:1px solid rgba(231,173,37,.35);background:rgba(231,173,37,.07);padding:15px;border-radius:14px;text-align:left}
+.result[hidden]{display:none}.result label{display:block;color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.13em;margin-bottom:8px}
+.result-row{display:flex;gap:8px}.result input{flex:1;min-width:0;background:#11110f;border:1px solid #4b493f;color:#fff;border-radius:9px;padding:10px;font-size:12px}
+.note{font-size:11px;color:#a9a69d;line-height:1.6;margin:16px 0 0}
+.error{color:#ffb4b4;font-size:12px;min-height:18px}
+.ceremony{display:none}.ceremony.active{display:block}
+.ribbon-stage{height:170px;position:relative;display:grid;place-items:center;margin:22px 0 12px}
+.ribbon{position:absolute;left:-10%;right:-10%;height:54px;background:linear-gradient(180deg,#e34a58,#a90f25 48%,#7e0b1c);box-shadow:0 12px 25px rgba(0,0,0,.35);z-index:1;transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .7s}
+.ribbon:before,.ribbon:after{content:"";position:absolute;top:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);opacity:.65}
+.ribbon:after{transform:translateX(50%)}
+.bow{position:absolute;z-index:2;width:110px;height:70px;display:flex;align-items:center;justify-content:center;transition:opacity .35s,transform .5s}
+.bow:before,.bow:after{content:"";width:52px;height:42px;border:9px solid #e34a58;border-radius:70% 15% 70% 15%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.12)}
+.bow:before{transform:rotate(28deg);margin-right:-5px}.bow:after{transform:scaleX(-1) rotate(28deg);margin-left:-5px}
+.bow i{position:absolute;width:22px;height:22px;background:#a90f25;border:4px solid #e34a58;border-radius:50%;z-index:2}
+.cut-button{position:relative;z-index:4;width:92px;height:92px;border-radius:50%;border:1px solid rgba(231,173,37,.65);background:#211f19;color:var(--gold);display:grid;place-items:center;box-shadow:0 0 0 9px rgba(231,173,37,.07),0 12px 30px rgba(0,0,0,.35);transition:transform .2s,background .2s}
+.cut-button:hover{transform:scale(1.06);background:#30291b}.cut-button svg{width:43px;height:43px}
+.cut-hint{color:#c9c3b7;font-size:12px;margin-top:4px}
+.cut .ribbon.left{transform:translate(-75%,-25px) rotate(-13deg);opacity:0}.cut .ribbon.right{transform:translate(75%,25px) rotate(13deg);opacity:0}.cut .bow{opacity:0;transform:scale(.5)}
+.celebration{display:none;min-height:245px;align-content:center;justify-items:center;gap:13px;padding:14px 0}
+.celebration.active{display:grid;animation:rise .7s both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.celebration h2{font:500 clamp(30px,6vw,48px)/1.1 Georgia,serif;margin:0}
+.celebration p{max-width:500px;color:#d3cfc4;line-height:1.65;margin:0}
+.logo-large{width:124px;height:124px;object-fit:contain;background:var(--paper);border-radius:20px;padding:9px;box-shadow:0 10px 36px rgba(0,0,0,.28)}
+.timer{height:3px;background:#454238;border-radius:99px;overflow:hidden;margin:18px auto 0;max-width:310px}
+.timer span{display:block;height:100%;width:0;background:var(--gold)}
+.timer-label{font-size:11px;color:#aaa69b;margin-top:8px}
+.skip{margin-top:17px;background:none;border:0;color:#aaa69b;text-decoration:underline;text-underline-offset:3px;font-size:12px}
+.confetti{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:8;display:none}.confetti.active{display:block}
+.confetti i{position:absolute;top:-12vh;width:8px;height:15px;background:var(--gold);opacity:.85;animation:fall var(--dur,3s) linear var(--delay,0s) infinite;transform:rotate(var(--rot,0deg))}
+.confetti i:nth-child(3n){background:#d84a56}.confetti i:nth-child(3n + 1){background:#f1e4c7;width:5px;height:10px}
+@keyframes fall{to{transform:translate3d(var(--drift,40px),115vh,0) rotate(720deg)}}
+.footer-note{color:#77746b;font-size:10px;letter-spacing:.08em;margin-top:26px}
+@media(max-width:520px){.panel{border-radius:20px;padding:25px 19px}.brand{margin-bottom:21px}.ribbon-stage{height:145px}.ribbon{height:45px}.cut-button{width:82px;height:82px}.form-actions{flex-direction:column}.result-row{flex-direction:column}.result-row button{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<main class="shell">
+<section class="panel" id="generator" aria-labelledby="generatorTitle">
+  <div class="brand">
+    <img src="/logos/AMM_Data_Solutions_1200x1200_transparent%20(1).png" alt="AMM Data Solutions logo">
+    <div class="brand-copy"><strong>AMM DATA SOLUTIONS</strong><span>Let's Make Solutions</span></div>
+  </div>
+  <div class="eyebrow">Client handover studio</div>
+  <h1 id="generatorTitle">Create a <span class="gold">Grand Launch</span></h1>
+  <p class="lead">Prepare a personal website-opening experience for your client. The ceremony design stays the same; only these client details change.</p>
+  <form class="form" id="launchForm">
+    <div class="field"><label for="clientName">Client / business name *</label><input id="clientName" name="clientName" maxlength="70" placeholder="e.g. Creamy Ever After" required></div>
+    <div class="field"><label for="websiteUrl">Live website URL *</label><input id="websiteUrl" name="websiteUrl" type="url" placeholder="https://example.com" required></div>
+    <div class="field"><label for="tagline">Business tagline (optional)</label><input id="tagline" name="tagline" maxlength="100" placeholder="e.g. Made with love"></div>
+    <div class="field"><label for="wish">Personal good-wishes message (optional)</label><textarea id="wish" name="wish" maxlength="180" placeholder="Wishing your business continued success and growth."></textarea></div>
+    <div class="error" id="formError" role="alert"></div>
+    <div class="form-actions"><button class="primary" type="submit">Generate handover link ↗</button><button class="secondary" type="button" id="previewBtn">Preview ceremony</button></div>
+  </form>
+  <div class="result" id="linkResult" hidden>
+    <label for="generatedLink">Your client's private handover link</label>
+    <div class="result-row"><input id="generatedLink" readonly><button class="primary" type="button" id="copyLink">Copy link</button></div>
+    <p class="note">Send this link to your client after their website is live. It opens the AMM ceremony first, then redirects to their website after the 10-second celebration.</p>
+  </div>
+  <p class="note">This is an AMM handover utility. It does not change or install anything on the client's website.</p>
+</section>
+
+<section class="panel ceremony" id="ceremony" aria-live="polite">
+  <div class="brand">
+    <img src="/logos/AMM_Data_Solutions_1200x1200_transparent%20(1).png" alt="AMM Data Solutions logo">
+    <div class="brand-copy"><strong>AMM DATA SOLUTIONS</strong><span>Let's Make Solutions</span></div>
+  </div>
+  <div id="welcome">
+    <div class="eyebrow">A special moment, made for you</div>
+    <h1>Welcome to your <span class="gold">next chapter</span>, <span id="welcomeName">Your Business</span></h1>
+    <p class="lead" id="welcomeTagline">Today, a new digital chapter begins.</p>
+    <div class="ribbon-stage" id="ribbonStage">
+      <div class="ribbon left"></div><div class="ribbon right"></div><div class="bow"><i></i></div>
+      <button class="cut-button" id="cutButton" type="button" aria-label="Cut the launch ribbon">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="12" r="5"/><circle cx="11" cy="36" r="5"/><path d="M15 15l25 22M15 33L40 9M22 24l-5 5"/></svg>
+      </button>
+    </div>
+    <p class="cut-hint">Tap the scissors to cut the ribbon and celebrate your launch</p>
+  </div>
+  <div class="celebration" id="celebration">
+    <div class="eyebrow" id="celebrationEyebrow">A new beginning</div>
+    <h2 id="celebrationTitle">Congratulations!</h2>
+    <p id="celebrationMessage">Wishing you success, growth and exciting new opportunities.</p>
+    <img class="logo-large" src="/logos/AMM_Data_Solutions_1200x1200_transparent%20(1).png" alt="AMM Data Solutions">
+    <div class="eyebrow">Proudly presented by AMM Data Solutions</div>
+    <div class="timer" aria-hidden="true"><span id="timerBar"></span></div>
+    <div class="timer-label" id="timerLabel">Your website reveal is moments away · 10</div>
+  </div>
+  <button class="skip" id="skipButton" type="button" hidden>Skip celebration and open website</button>
+  <p class="footer-note">A DIGITAL LAUNCH EXPERIENCE BY AMM DATA SOLUTIONS</p>
+</section>
+</main>
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+<script>
+(function(){
+  "use strict";
+  const params = new URLSearchParams(window.location.search);
+  const generator = document.getElementById("generator");
+  const ceremony = document.getElementById("ceremony");
+  const isPreview = params.get("preview") === "1";
+  const client = (params.get("client") || "").trim();
+  const targetRaw = (params.get("site") || "").trim();
+  const tagline = (params.get("tagline") || "").trim();
+  const customWish = (params.get("wish") || "").trim();
+  const safeText = (value, fallback) => value ? value.slice(0,180) : fallback;
+  function validHttpsUrl(value){
+    try { const u = new URL(value); return u.protocol === "https:" && !!u.hostname; } catch (_) { return false; }
+  }
+  if (client || isPreview) {
+    if (!isPreview && (!client || !validHttpsUrl(targetRaw))) {
+      document.getElementById("formError").textContent = "This handover link is incomplete or invalid. Please ask AMM Data Solutions for a fresh link.";
+      return;
+    }
+    generator.style.display = "none";
+    ceremony.classList.add("active");
+    document.getElementById("welcomeName").textContent = safeText(client, "Your Business");
+    document.getElementById("welcomeTagline").textContent = safeText(tagline, "Today, a new digital chapter begins.");
+    window.__ammLaunchTarget = isPreview ? "" : new URL(targetRaw).href;
+    window.__ammLaunchWish = safeText(customWish, "Wishing your business continued success, meaningful growth and exciting new opportunities.");
+  }
+
+  const form = document.getElementById("launchForm");
+  form.addEventListener("submit", function(event){
+    event.preventDefault();
+    const name = document.getElementById("clientName").value.trim();
+    const website = document.getElementById("websiteUrl").value.trim();
+    const line = document.getElementById("tagline").value.trim();
+    const wish = document.getElementById("wish").value.trim();
+    const error = document.getElementById("formError");
+    error.textContent = "";
+    if (!name) { error.textContent = "Please enter the client or business name."; return; }
+    if (!validHttpsUrl(website)) { error.textContent = "Please enter a valid live website address beginning with https://."; return; }
+    const link = new URL("/launch/", window.location.origin);
+    link.searchParams.set("client", name);
+    link.searchParams.set("site", new URL(website).href);
+    if (line) link.searchParams.set("tagline", line);
+    if (wish) link.searchParams.set("wish", wish);
+    document.getElementById("generatedLink").value = link.href;
+    document.getElementById("linkResult").hidden = false;
+  });
+  document.getElementById("copyLink").addEventListener("click", async function(){
+    const input = document.getElementById("generatedLink");
+    try { await navigator.clipboard.writeText(input.value); this.textContent = "Copied ✓"; }
+    catch (_) { input.focus(); input.select(); document.execCommand("copy"); this.textContent = "Copied ✓"; }
+    const button = this;
+    setTimeout(function(){button.textContent="Copy link";},1800);
+  });
+  document.getElementById("previewBtn").addEventListener("click", function(){
+    const preview = new URL("/launch/?preview=1", window.location.origin);
+    window.location.href = preview.href;
+  });
+
+  if (!ceremony.classList.contains("active")) return;
+  const cutButton = document.getElementById("cutButton");
+  const ribbonStage = document.getElementById("ribbonStage");
+  const welcome = document.getElementById("welcome");
+  const celebration = document.getElementById("celebration");
+  const skip = document.getElementById("skipButton");
+  const title = document.getElementById("celebrationTitle");
+  const message = document.getElementById("celebrationMessage");
+  const eyebrow = document.getElementById("celebrationEyebrow");
+  const bar = document.getElementById("timerBar");
+  const timerLabel = document.getElementById("timerLabel");
+  const confetti = document.getElementById("confetti");
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let started = false, startTime = 0, raf = 0, redirectTimer = 0;
+  const messages = [
+    {at:0, title:"Congratulations!", eyebrow:"A new beginning", message:window.__ammLaunchWish},
+    {at:3300, title:"Your vision, now online.", eyebrow:"Here's to what comes next", message:"May this new digital home help your business reach more people and open new opportunities."},
+    {at:6800, title:"Let's make it happen.", eyebrow:"Proudly presented by AMM", message:"Thank you for trusting AMM Data Solutions. Your next chapter starts now."}
+  ];
+  function showMessage(index){
+    const item = messages[index];
+    title.textContent=item.title; eyebrow.textContent=item.eyebrow; message.textContent=item.message;
+  }
+  function openWebsite(){
+    if (window.__ammLaunchTarget) window.location.replace(window.__ammLaunchTarget);
+    else {
+      timerLabel.textContent = "Preview complete · your client website would open here";
+      skip.hidden = true;
+      document.getElementById("celebrationMessage").textContent = "Preview mode only. Generate a client handover link to test the complete website reveal.";
+    }
+  }
+  function tick(now){
+    const elapsed = now - startTime;
+    const remaining = Math.max(0, 10000 - elapsed);
+    bar.style.width = Math.min(100, elapsed / 10000 * 100) + "%";
+    timerLabel.textContent = window.__ammLaunchTarget ? "Your website reveal is moments away · " + Math.ceil(remaining/1000) : "Preview mode · " + Math.ceil(remaining/1000);
+    if (elapsed >= 3300 && elapsed < 6800) showMessage(1);
+    else if (elapsed >= 6800) showMessage(2);
+    if (elapsed >= 10000) { cancelAnimationFrame(raf); openWebsite(); return; }
+    raf = requestAnimationFrame(tick);
+  }
+  function startCelebration(){
+    if (started) return;
+    started = true;
+    ribbonStage.classList.add("cut");
+    welcome.style.display = "none";
+    celebration.classList.add("active");
+    skip.hidden = false;
+    if (!reduceMotion) {
+      confetti.classList.add("active");
+      for (let i=0;i<42;i++){
+        const bit=document.createElement("i");
+        bit.style.left=(Math.random()*100)+"%";
+        bit.style.setProperty("--delay",(Math.random()*2.8)+"s");
+        bit.style.setProperty("--dur",(2.6+Math.random()*2.4)+"s");
+        bit.style.setProperty("--drift",((Math.random()-.5)*180)+"px");
+        bit.style.setProperty("--rot",(Math.random()*180)+"deg");
+        confetti.appendChild(bit);
+      }
+    }
+    startTime=performance.now();
+    raf=requestAnimationFrame(tick);
+    redirectTimer=window.setTimeout(openWebsite,10000);
+  }
+  cutButton.addEventListener("click",startCelebration);
+  skip.addEventListener("click",function(){cancelAnimationFrame(raf);clearTimeout(redirectTimer);openWebsite();});
+})();
+</script>
+</body>
+</html>
