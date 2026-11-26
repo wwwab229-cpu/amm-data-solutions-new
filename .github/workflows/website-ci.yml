@@ -93,7 +93,16 @@ jobs:
               parsed = urlparse(url)
               assert parsed.scheme == "https" and parsed.netloc == "amm-data-solutions-new.vercel.app", f"unexpected sitemap host: {url}"
               route = parsed.path
-              source = "index.html" if route in ("", "/") else ("blog/index.html" if route == "/blog/" else route.lstrip("/"))
+              if route in ("", "/"):
+                  source = "index.html"
+              elif route == "/blog/":
+                  source = "blog/index.html"
+              elif re.fullmatch(r"/learn/c/[^/]+/?", route):
+                  source = "learn/category.html"  # Vercel rewrite: /learn/c/:slug -> category.html?slug=:slug
+              elif re.fullmatch(r"/learn/r/[^/]+/?", route):
+                  source = "learn/resource.html"  # Vercel rewrite: /learn/r/:slug -> resource.html?slug=:slug
+              else:
+                  source = route.lstrip("/")
               assert Path(source).is_file(), f"sitemap URL has no source file: {url} -> {source}"
 
           home = Path("index.html").read_text(encoding="utf-8")
