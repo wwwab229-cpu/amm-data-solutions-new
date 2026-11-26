@@ -35,7 +35,7 @@ jobs:
           import re
           import xml.etree.ElementTree as ET
           from pathlib import Path
-          from urllib.parse import urlparse
+          from urllib.parse import urlparse, unquote
 
           pages = [
               "index.html",
@@ -92,7 +92,7 @@ jobs:
           for url in urls:
               parsed = urlparse(url)
               assert parsed.scheme == "https" and parsed.netloc == "amm-data-solutions-new.vercel.app", f"unexpected sitemap host: {url}"
-              route = parsed.path
+              route = unquote(parsed.path)
               if route in ("", "/"):
                   source = "index.html"
               elif route == "/blog/":
