@@ -54,12 +54,13 @@ jobs:
           name: amm-responsive-qa-screenshots
           path: qa-screenshots/*.png
           if-no-files-found: warn
-          retention-days: 14\n      - name: Run Lighthouse mobile and desktop audits
+          retention-days: 14
+      - name: Run Lighthouse mobile and desktop audits
         run: |
           export CHROME_PATH="$(find "$HOME/.cache/ms-playwright" -type f -name chrome | head -n 1)"
           test -n "$CHROME_PATH"
-          npx lighthouse http://127.0.0.1:4173/ --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=/tmp/amm-lighthouse-mobile.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
-          npx lighthouse http://127.0.0.1:4173/ --preset=desktop --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=/tmp/amm-lighthouse-desktop.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
+          npx lighthouse http://127.0.0.1:4173/ --only-categories=performance,accessibility,best-practices --output=json --output-path=/tmp/amm-lighthouse-mobile.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
+          npx lighthouse http://127.0.0.1:4173/ --preset=desktop --only-categories=performance,accessibility,best-practices --output=json --output-path=/tmp/amm-lighthouse-desktop.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
           node -e 'for (const f of ["/tmp/amm-lighthouse-mobile.json","/tmp/amm-lighthouse-desktop.json"]) { const r=require(f); const c=r.categories; console.log(f.includes("mobile")?"MOBILE":"DESKTOP", Object.fromEntries(Object.entries(c).map(([k,v])=>[k,Math.round(v.score*100)]))); }'
       - name: Measure live Vercel performance baseline
         run: |
