@@ -40,7 +40,7 @@ $$('#menu a').forEach(a=>a.addEventListener('click',()=>{$('#menu').classList.ad
 const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.15});
 $$('.rv').forEach(e=>io.observe(e));
 const co=new IntersectionObserver(es=>es.forEach(x=>{if(!x.isIntersecting)return;const el=x.target,t=+el.dataset.c;let v=0;const s=setInterval(()=>{v+=Math.ceil(t/30);if(v>=t){v=t;clearInterval(s)}el.textContent=v},35);co.unobserve(el)}),{threshold:.5});
-$('[data-c]').forEach(e=>co.observe(e));
+$$('[data-c]').forEach(e=>co.observe(e));
 // Enable entrance-hide styling only after the main script and its observers are ready.
 document.documentElement.classList.add('js');
 // Approved reviews and rating summaries are rendered by AMM_APPROVED_REVIEW_RENDERER_V2 below.

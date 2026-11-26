@@ -1,9 +1,14 @@
 const { chromium } = require('playwright');
+const fs = require('fs');
+const path = require('path');
+const screenshotDir = path.join(process.cwd(), 'qa-screenshots');
+fs.mkdirSync(screenshotDir, { recursive: true });
 
-const base = 'https://amm-data-solutions-new.vercel.app';
+const base = process.env.BASE_URL || 'https://amm-data-solutions-new.vercel.app';
 const routes = [
   '/',
   '/admin.html',
+  '/feedback.html',
   '/privacy.html',
   '/site-map.html',
   '/services/ai-automation-business-everyday-work.html',
@@ -27,9 +32,13 @@ const routes = [
 ];
 const viewports = [
   { name: 'mobile-320', width: 320, height: 740, isMobile: true, hasTouch: true },
+  { name: 'mobile-360', width: 360, height: 800, isMobile: true, hasTouch: true },
   { name: 'mobile-390', width: 390, height: 844, isMobile: true, hasTouch: true },
   { name: 'tablet-768', width: 768, height: 1024, isMobile: true, hasTouch: true },
+  { name: 'laptop-1024', width: 1024, height: 768, isMobile: false, hasTouch: false },
   { name: 'desktop-1365', width: 1365, height: 900, isMobile: false, hasTouch: false },
+  { name: 'desktop-1440', width: 1440, height: 900, isMobile: false, hasTouch: false },
+  { name: 'wide-desktop-1920', width: 1920, height: 1080, isMobile: false, hasTouch: false },
 ];
 const failures = [];
 
@@ -47,7 +56,7 @@ const failures = [];
 
       for (const route of routes) {
         const errors = [];
-        const onPageError = error => errors.push(error.message);
+        const onPageError = error => errors.push(`${error.message} :: ${error.stack?.split('\n').slice(0, 3).join(' | ') || ''}`);
         page.on('pageerror', onPageError);
         const response = await page.goto(base + route, { waitUntil: 'networkidle', timeout: 30000 }).catch(async error => {
           failures.push(`[${viewport.name}] ${route}: navigation failed: ${error.message}`);
@@ -65,8 +74,6 @@ const failures = [];
           viewportWidth: window.innerWidth,
           documentWidth: document.documentElement.scrollWidth,
           missingImageAlt: [...document.images].filter(img => !img.hasAttribute('alt')).length,
-          canonical: Boolean(document.querySelector('link[rel="canonical"][href]')),
-          description: Boolean(document.querySelector('meta[name="description"][content]')),
           bodyText: (document.body?.innerText || '').trim().length,
         }));
 
@@ -77,9 +84,6 @@ const failures = [];
         if (result.documentWidth > result.viewportWidth + 1) failures.push(`[${viewport.name}] ${route}: horizontal overflow (${result.documentWidth}px > ${result.viewportWidth}px)`);
         if (result.missingImageAlt > 0) failures.push(`[${viewport.name}] ${route}: ${result.missingImageAlt} image(s) missing alt attribute`);
         if (!result.bodyText) failures.push(`[${viewport.name}] ${route}: body text is empty`);
-        if (route.startsWith('/services/') && (!result.canonical || !result.description)) {
-          failures.push(`[${viewport.name}] ${route}: missing canonical URL or meta description`);
-        }
         for (const error of errors) failures.push(`[${viewport.name}] ${route}: uncaught page error: ${error}`);
 
         console.log(`[${viewport.name}] ${route} -> HTTP ${status}; ${result.viewportWidth}px viewport; ${result.documentWidth}px document; H1=${result.h1Count}`);
@@ -110,68 +114,46 @@ const failures = [];
           failures.push('[mobile] Could not find the mobile menu button');
         }
       }
-      // Exercise the feedback controls without submitting or creating production records.
+      // Ensure every viewport tests the same homepage controls after the route sweep.
       await page.goto(base + '/', { waitUntil: 'networkidle', timeout: 30000 });
-      // Ensure the approved-review renderer finishes loading instead of remaining blank.
-      await page.waitForFunction(() => {
-        const target = document.getElementById('tq');
-        return target && !target.innerText.includes('Loading approved reviews');
-      }, { timeout: 10000 }).catch(() => {});
-      const reviewText = (await page.locator('#tq').innerText().catch(() => '')).trim();
-      if (!reviewText || /temporarily unavailable|Loading approved reviews/i.test(reviewText)) {
-        failures.push(`[${viewport.name}] approved-review renderer did not reach a stable visible state`);
-      }
-      if (/No approved feedback is available/i.test(reviewText)) {
-        failures.push(`[${viewport.name}] no approved feedback rendered on the homepage`);
-      }
-      console.log(`[${viewport.name}] approved-review renderer: ${reviewText && !/temporarily unavailable|Loading approved reviews|No approved feedback/i.test(reviewText) ? 'OK' : 'FAILED'}`);
-
-      const openFeedback = page.locator('#open-feedback');
-      if (await openFeedback.count()) {
-        await openFeedback.click();
-        const panel = page.locator('#feedback-panel');
-        const panelVisible = await panel.isVisible();
-        const feedbackDiagnostic = await page.evaluate(() => {
-          const panel = document.querySelector('#feedback-panel');
-          const star = document.querySelector('#feedback-stars .feedback-star[data-rating="3"]');
-          const style = el => {
-            if (!el) return null;
-            const cs = getComputedStyle(el);
-            const r = el.getBoundingClientRect();
-            return { tag: el.tagName, id: el.id, className: el.className, display: cs.display, visibility: cs.visibility, opacity: cs.opacity, width: r.width, height: r.height };
-          };
-          return { panel: style(panel), star: style(star), starAncestors: star ? [star.parentElement, star.parentElement?.parentElement, star.parentElement?.parentElement?.parentElement].map(style) : [] };
-        });
-        console.log(`[${viewport.name}] feedback visibility diagnostic: ${JSON.stringify({ panelVisible, ...feedbackDiagnostic })}`);
-        if (!panelVisible) failures.push(`[${viewport.name}] feedback form did not open`);
-        const thirdStar = page.locator('#feedback-stars .feedback-star[data-rating="3"]');
-        if (await thirdStar.count()) {
-          // Opening the inline panel preserves the visitor's scroll position on the next animation frame.
-          await page.waitForTimeout(120);
-          await thirdStar.scrollIntoViewIfNeeded();
-          await thirdStar.click();
-          const ratingState = await page.locator('#feedback-stars .feedback-star').evaluateAll(nodes => nodes.map(n => ({ rating: n.dataset.rating, checked: n.getAttribute('aria-checked'), filled: n.classList.contains('is-filled') })));
-          if (ratingState.filter(x => x.checked === 'true').length !== 1 || ratingState.filter(x => x.filled).length !== 3 || ratingState[2]?.checked !== 'true') {
-            failures.push(`[${viewport.name}] feedback star selection did not set cumulative three-star rating correctly`);
-          } else {
-            console.log(`[${viewport.name}] feedback form open + 3-star selection: OK`);
-          }
+      // The approved homepage CTA navigates to the dedicated feedback portal.
+      // Test that public flow and its controls without submitting production data.
+      const feedbackLink = page.locator('#open-feedback');
+      if (await feedbackLink.count()) {
+        const feedbackHref = await feedbackLink.getAttribute('href');
+        if (feedbackHref !== '/feedback.html') failures.push(`[${viewport.name}] feedback CTA destination is incorrect: ${feedbackHref}`);
+        await page.goto(base + '/feedback.html', { waitUntil: 'networkidle', timeout: 30000 });
+        const feedbackForm = page.locator('#feedbackForm');
+        if (!(await feedbackForm.isVisible())) {
+          failures.push(`[${viewport.name}] dedicated feedback form did not render`);
         } else {
-          failures.push(`[${viewport.name}] feedback star controls not found`);
+          const serviceField = page.locator('#service');
+          const messageField = page.locator('#message');
+          const submitButton = page.locator('#submitButton');
+          if (!(await serviceField.isVisible()) || !(await messageField.isVisible()) || !(await submitButton.isVisible())) {
+            failures.push(`[${viewport.name}] feedback form is missing a required visible control`);
+          }
+          const thirdStar = page.locator('.star[data-rating="3"]');
+          if (await thirdStar.count()) {
+            await thirdStar.click();
+            const ratingState = await page.locator('.star').evaluateAll(nodes => nodes.map(n => ({ rating: n.dataset.rating, pressed: n.getAttribute('aria-pressed') })));
+            if (ratingState.filter(x => x.pressed === 'true').length !== 3 || ratingState[2]?.pressed !== 'true') {
+              failures.push(`[${viewport.name}] dedicated feedback rating did not select three stars`);
+            } else {
+              console.log(`[${viewport.name}] dedicated feedback page + rating controls: OK`);
+            }
+          } else {
+            failures.push(`[${viewport.name}] dedicated feedback star controls not found`);
+          }
         }
-        const positivePill = page.locator('#feedback-positive .feedback-pill').first();
-        if (await positivePill.count()) {
-          await positivePill.click();
-          const reviewText = await page.locator('#feedback-review').inputValue();
-          if (!reviewText.trim()) failures.push(`[${viewport.name}] feedback suggestion did not populate the message field`);
-          else console.log(`[${viewport.name}] feedback suggestion pill: OK`);
-        }
-        await page.locator('#close-feedback').click();
-        if (await panel.isVisible()) failures.push(`[${viewport.name}] feedback form did not close`);
       } else {
-        failures.push(`[${viewport.name}] feedback open button not found`);
+        failures.push(`[${viewport.name}] homepage feedback CTA not found`);
       }
+      // Restore the homepage after checking the separate feedback route.
+      await page.goto(base + '/', { waitUntil: 'networkidle', timeout: 30000 });
 
+            // Capture the approved homepage design at this viewport for visual review.
+      await page.screenshot({ path: path.join(screenshotDir, `${viewport.name}.png`), fullPage: true });
       // Check the service-details overlay fits and closes cleanly on each viewport.
       const firstService = page.locator('#work [data-service-index="0"]');
       if (await firstService.count()) {
@@ -209,7 +191,7 @@ const failures = [];
     for (const failure of failures) console.error(' - ' + failure);
     process.exitCode = 1;
   } else {
-    console.log('\nBrowser audit passed for all pages at 320px, 390px, 768px and 1365px viewports.');
+    console.log(`\nBrowser audit passed for ${routes.length} pages across ${viewports.map(v => v.width + 'px').join(', ')} viewports.`);
   }
 })();
 

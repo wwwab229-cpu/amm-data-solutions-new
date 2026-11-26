@@ -3,6 +3,8 @@ name: Browser UX regression audit
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
   schedule:
     - cron: "41 5 * * *"
@@ -26,9 +28,50 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install Playwright and Chromium
+      - name: Install project, Playwright and Chromium
         run: |
-          npm install --no-save --package-lock=false playwright
+          npm install --no-audit --no-fund
+          npm install --no-save --package-lock=false playwright lighthouse
           npx playwright install chromium
-      - name: Test production pages and mobile UX
+      - name: Build branch and start local static server
+        run: |
+          npm run build
+          python3 -m http.server 4173 --directory dist >/tmp/amm-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/amm-http.log
+          exit 1
+      - name: Test branch pages and responsive UX
+        env:
+          BASE_URL: http://127.0.0.1:4173
         run: node scripts/production-browser-audit.cjs
+      - name: Upload responsive screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amm-responsive-qa-screenshots
+          path: qa-screenshots/*.png
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Run Lighthouse mobile and desktop audits
+        run: |
+          export CHROME_PATH="$(find "$HOME/.cache/ms-playwright" -type f -name chrome | head -n 1)"
+          test -n "$CHROME_PATH"
+          npx lighthouse http://127.0.0.1:4173/ --only-categories=performance,accessibility,best-practices --output=json --output-path=/tmp/amm-lighthouse-mobile.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
+          npx lighthouse http://127.0.0.1:4173/ --preset=desktop --only-categories=performance,accessibility,best-practices --output=json --output-path=/tmp/amm-lighthouse-desktop.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
+          node -e 'for (const f of ["/tmp/amm-lighthouse-mobile.json","/tmp/amm-lighthouse-desktop.json"]) { const r=require(f); const c=r.categories; console.log(f.includes("mobile")?"MOBILE":"DESKTOP", Object.fromEntries(Object.entries(c).map(([k,v])=>[k,Math.round(v.score*100)]))); }'
+      - name: Measure live Vercel performance baseline
+        run: |
+          npx lighthouse https://amm-data-solutions-new.vercel.app/ --only-categories=performance --output=json --output-path=/tmp/amm-lighthouse-live-mobile.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
+          npx lighthouse https://amm-data-solutions-new.vercel.app/ --preset=desktop --only-categories=performance --output=json --output-path=/tmp/amm-lighthouse-live-desktop.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
+          node -e 'for (const f of ["/tmp/amm-lighthouse-live-mobile.json","/tmp/amm-lighthouse-live-desktop.json"]) { const r=require(f); console.log(f.includes("mobile")?"LIVE MOBILE PERFORMANCE":"LIVE DESKTOP PERFORMANCE", Math.round(r.categories.performance.score*100)); }'
+      - name: Upload Lighthouse audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amm-lighthouse-mobile-desktop-reports
+          path: /tmp/amm-lighthouse-*.json
+          if-no-files-found: warn
+          retention-days: 14
