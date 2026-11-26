@@ -103,6 +103,8 @@ jobs:
                   source = "learn/resource.html"  # Vercel rewrite: /learn/r/:slug -> resource.html?slug=:slug
               else:
                   source = route.lstrip("/")
+                  if Path(source).is_dir():
+                      source = str(Path(source) / "index.html")
               assert Path(source).is_file(), f"sitemap URL has no source file: {url} -> {source}"
 
           home = Path("index.html").read_text(encoding="utf-8")
