@@ -3,6 +3,8 @@ name: Browser UX regression audit
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
   schedule:
     - cron: "41 5 * * *"
@@ -49,9 +51,14 @@ jobs:
         run: |
           export CHROME_PATH="$(find "$HOME/.cache/ms-playwright" -type f -name chrome | head -n 1)"
           test -n "$CHROME_PATH"
-          npx lighthouse http://127.0.0.1:4173/ --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=/tmp/amm-lighthouse-mobile.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --quiet
-          npx lighthouse http://127.0.0.1:4173/ --preset=desktop --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=/tmp/amm-lighthouse-desktop.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --quiet
+          npx lighthouse http://127.0.0.1:4173/ --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=/tmp/amm-lighthouse-mobile.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
+          npx lighthouse http://127.0.0.1:4173/ --preset=desktop --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=/tmp/amm-lighthouse-desktop.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
           node -e 'for (const f of ["/tmp/amm-lighthouse-mobile.json","/tmp/amm-lighthouse-desktop.json"]) { const r=require(f); const c=r.categories; console.log(f.includes("mobile")?"MOBILE":"DESKTOP", Object.fromEntries(Object.entries(c).map(([k,v])=>[k,Math.round(v.score*100)]))); }'
+      - name: Measure live Vercel performance baseline
+        run: |
+          npx lighthouse https://amm-data-solutions-new.vercel.app/ --only-categories=performance --output=json --output-path=/tmp/amm-lighthouse-live-mobile.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
+          npx lighthouse https://amm-data-solutions-new.vercel.app/ --preset=desktop --only-categories=performance --output=json --output-path=/tmp/amm-lighthouse-live-desktop.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage --enable-webgl --ignore-gpu-blocklist --use-gl=swiftshader" --quiet
+          node -e 'for (const f of ["/tmp/amm-lighthouse-live-mobile.json","/tmp/amm-lighthouse-live-desktop.json"]) { const r=require(f); console.log(f.includes("mobile")?"LIVE MOBILE PERFORMANCE":"LIVE DESKTOP PERFORMANCE", Math.round(r.categories.performance.score*100)); }'
       - name: Upload Lighthouse audit reports
         if: always()
         uses: actions/upload-artifact@v4
