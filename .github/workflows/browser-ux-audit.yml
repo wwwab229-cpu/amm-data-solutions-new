@@ -47,7 +47,7 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node scripts/production-browser-audit.cjs
-      - name: Run Lighthouse mobile and desktop audits
+      - name: Upload responsive screenshots\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: amm-responsive-qa-screenshots\n          path: qa-screenshots/*.png\n          if-no-files-found: warn\n          retention-days: 14\n      - name: Run Lighthouse mobile and desktop audits
         run: |
           export CHROME_PATH="$(find "$HOME/.cache/ms-playwright" -type f -name chrome | head -n 1)"
           test -n "$CHROME_PATH"
