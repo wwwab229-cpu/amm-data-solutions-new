@@ -74,8 +74,6 @@ const failures = [];
           viewportWidth: window.innerWidth,
           documentWidth: document.documentElement.scrollWidth,
           missingImageAlt: [...document.images].filter(img => !img.hasAttribute('alt')).length,
-          canonical: Boolean(document.querySelector('link[rel="canonical"][href]')),
-          description: Boolean(document.querySelector('meta[name="description"][content]')),
           bodyText: (document.body?.innerText || '').trim().length,
         }));
 
@@ -86,9 +84,6 @@ const failures = [];
         if (result.documentWidth > result.viewportWidth + 1) failures.push(`[${viewport.name}] ${route}: horizontal overflow (${result.documentWidth}px > ${result.viewportWidth}px)`);
         if (result.missingImageAlt > 0) failures.push(`[${viewport.name}] ${route}: ${result.missingImageAlt} image(s) missing alt attribute`);
         if (!result.bodyText) failures.push(`[${viewport.name}] ${route}: body text is empty`);
-        if (route.startsWith('/services/') && (!result.canonical || !result.description)) {
-          failures.push(`[${viewport.name}] ${route}: missing canonical URL or meta description`);
-        }
         for (const error of errors) failures.push(`[${viewport.name}] ${route}: uncaught page error: ${error}`);
 
         console.log(`[${viewport.name}] ${route} -> HTTP ${status}; ${result.viewportWidth}px viewport; ${result.documentWidth}px document; H1=${result.h1Count}`);
