@@ -34,11 +34,11 @@ p{color:#c9c4b8;line-height:1.65;margin:0 auto;max-width:600px}
 .stage.cut #bladeBottom{animation:bladeCloseBottom .55s cubic-bezier(.2,.7,.25,1) 1.28s forwards}
 .stage.cut .cutline{animation:flash .4s ease-out 1.76s forwards}
 .stage.cut #leftPiece{animation:leftRelease 1.55s cubic-bezier(.18,.72,.2,1) 1.82s forwards}
-.stage.cut #rightPiece{animation:rightRelease 1.55s cubic-bezier(.18,.72,.2,1) 1.82s forwards}
+.stage.cut #rightPiece{animation:rightRelease 1.55s cubic-bezier(.18,.72,.2,1) 1.82s forwards}\n.stage.cut .bow-knot{animation:knotCut .22s ease-out 1.76s forwards}
 @keyframes approachAndCut{0%{transform:translate(-50%,-50%) translateX(340px) rotate(180deg)}45%{transform:translate(-50%,-50%) translateX(18px) rotate(180deg)}62%{transform:translate(-50%,-50%) translateX(0) rotate(180deg)}78%{transform:translate(-50%,-50%) translateX(-17px) rotate(176deg)}100%{transform:translate(-50%,-50%) translateX(-7px) rotate(180deg)}}
 @keyframes bladeCloseTop{0%{transform:rotate(-24deg)}35%{transform:rotate(-10deg)}72%{transform:rotate(1deg)}100%{transform:rotate(0deg)}}
 @keyframes bladeCloseBottom{0%{transform:rotate(24deg)}35%{transform:rotate(10deg)}72%{transform:rotate(-1deg)}100%{transform:rotate(0deg)}}
-@keyframes flash{40%{transform:translate(-50%,-50%) scaleY(1);opacity:1}100%{transform:translate(-50%,-50%) scaleY(.2);opacity:0}}
+@keyframes knotCut{to{transform:scaleX(.05);opacity:0}}\n@keyframes flash{40%{transform:translate(-50%,-50%) scaleY(1);opacity:1}100%{transform:translate(-50%,-50%) scaleY(.2);opacity:0}}
 @keyframes leftRelease{0%{transform:translate(0,0) rotate(0)}10%{transform:translate(-7px,-4px) rotate(-3deg)}36%{transform:translate(-32px,-22px) rotate(-10deg)}100%{transform:translate(-145px,-105px) rotate(-28deg);opacity:0}}
 @keyframes rightRelease{0%{transform:translate(0,0) rotate(0)}10%{transform:translate(7px,4px) rotate(3deg)}36%{transform:translate(32px,22px) rotate(10deg)}100%{transform:translate(145px,105px) rotate(28deg);opacity:0}}
 @keyframes scissorExit{to{transform:translate(-50%,-50%) translate(-230px,130px) rotate(205deg);opacity:0}}
@@ -71,7 +71,7 @@ button{border:0;border-radius:999px;padding:14px 24px;font-weight:800;font-size:
 </defs>
 <g id="leftPiece" class="ribbon-piece"><path d="M286 116 C238 42 135 20 64 47 C17 65 39 136 104 154 C161 171 230 143 286 130Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/><path d="M278 113 C225 63 139 44 82 63 C54 73 61 112 103 129 C160 151 224 131 278 122Z" fill="url(#shine)"/><path d="M280 132 L205 151 L117 237 L178 245 L292 147Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/><path d="M205 151 L117 237 L178 245 L292 147Z" fill="url(#shine)" opacity=".6"/></g>
 <g id="rightPiece" class="ribbon-piece"><path d="M314 116 C362 42 465 20 536 47 C583 65 561 136 496 154 C439 171 370 143 314 130Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/><path d="M322 113 C375 63 461 44 518 63 C546 73 539 112 497 129 C440 151 376 131 322 122Z" fill="url(#shine)"/><path d="M320 132 L395 151 L483 237 L422 245 L308 147Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/><path d="M395 151 L483 237 L422 245 L308 147Z" fill="url(#shine)" opacity=".6"/></g>
-<path d="M275 91 Q300 79 325 91 L332 143 Q300 160 268 143Z" fill="url(#knot)" stroke="#f6b0b6" stroke-width="2"/><path d="M282 96 Q300 88 318 96 L321 139 Q300 148 279 139Z" fill="url(#shine)"/>
+<g class="bow-knot"><path d="M275 91 Q300 79 325 91 L332 143 Q300 160 268 143Z" fill="url(#knot)" stroke="#f6b0b6" stroke-width="2"/><path d="M282 96 Q300 88 318 96 L321 139 Q300 148 279 139Z" fill="url(#shine)"/></g>
 </svg></svg>
     </div>
     <div class="cutline"></div>
