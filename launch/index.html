@@ -77,6 +77,20 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
 .footer-note{color:#77746b;font-size:10px;letter-spacing:.08em;margin-top:26px}
 @media(max-width:520px){.panel{border-radius:20px;padding:25px 19px}.brand{margin-bottom:21px}.ribbon-stage{height:145px}.ribbon{height:45px}.cut-button{width:82px;height:82px}.form-actions{flex-direction:column}.result-row{flex-direction:column}.result-row button{width:100%}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Interactive cut choreography */
+.ribbon-stage{overflow:hidden;border-radius:8px}
+.ribbon{width:52%;height:86px;top:50%;transform-origin:center;}
+.ribbon.left{left:-1%;}
+.ribbon.right{right:-1%;}
+.ribbon:before{background:repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px),linear-gradient(180deg,rgba(255,255,255,.32),transparent 26%,rgba(0,0,0,.22) 74%,rgba(255,255,255,.13));}
+.cut .ribbon.left{animation:leftRibbonCut 1.1s cubic-bezier(.15,.75,.2,1) forwards;}
+.cut .ribbon.right{animation:rightRibbonCut 1.1s cubic-bezier(.15,.75,.2,1) forwards;}
+@keyframes leftRibbonCut{0%{transform:translateY(-50%)}18%{transform:translateY(-50%) rotate(-2deg)}35%{transform:translate(-10px,-53%) rotate(-6deg)}100%{transform:translate(-110%,-72%) rotate(-22deg);opacity:0}}
+@keyframes rightRibbonCut{0%{transform:translateY(-50%)}18%{transform:translateY(-50%) rotate(2deg)}35%{transform:translate(10px,-47%) rotate(6deg)}100%{transform:translate(110%,-25%) rotate(22deg);opacity:0}}
+.cut .bow{animation:bowTumble .75s ease-in forwards;}
+@keyframes bowTumble{0%{opacity:1;transform:rotate(0)}45%{transform:translateY(-15px) rotate(25deg)}100%{opacity:0;transform:translateY(-65px) rotate(100deg) scale(.6)}}
+@media(max-width:520px){.ribbon-stage{height:180px}.ribbon{height:55px}.welcomeWish{font-size:14px}}
 </style>
 </head>
 <body>
@@ -113,11 +127,11 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
   <div id="welcome">
     <div class="eyebrow">A special moment, made for you</div>
     <h1>Welcome to your <span class="gold">next chapter</span>, <span id="welcomeName">Your Business</span></h1>
-    <p class="lead" id="welcomeTagline">Today, a new digital chapter begins.</p>
+    <p class="lead" id="welcomeTagline">Today, a new digital chapter begins.</p><p class="lead" id="welcomeWish" style="margin-top:14px;color:var(--gold);font-weight:600"></p>
     <div class="ribbon-stage" id="ribbonStage">
       <div class="ribbon left"></div><div class="ribbon right"></div><div class="bow"><i></i></div>
       <button class="cut-button" id="cutButton" type="button" aria-label="Cut the launch ribbon">
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="12" r="5"/><circle cx="11" cy="36" r="5"/><path d="M15 15l25 22M15 33L40 9M22 24l-5 5"/></svg>
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="48" r="8"/><circle cx="13" cy="16" r="8"/><path d="M19 20L49 52M19 44L49 12"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/><path d="M32 32L54 7M32 32L54 57" stroke-width="1.6"/></svg>
       </button>
     </div>
     <p class="cut-hint">Tap the scissors to cut the ribbon and celebrate your launch</p>
@@ -159,7 +173,7 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
     generator.style.display = "none";
     ceremony.classList.add("active");
     document.getElementById("welcomeName").textContent = safeText(client, "Your Business");
-    document.getElementById("welcomeTagline").textContent = safeText(tagline, "Today, a new digital chapter begins.");
+    document.getElementById("welcomeTagline").textContent = safeText(tagline, "Today, a new digital chapter begins.");\n    document.getElementById("welcomeWish").textContent = customWish ? "“" + customWish + "”" : "";
     window.__ammLaunchTarget = isPreview ? "" : new URL(targetRaw).href;
     window.__ammLaunchWish = safeText(customWish, "Wishing your business continued success, meaningful growth and exciting new opportunities.");
   }
