@@ -33,14 +33,16 @@ p{color:#c9c4b8;line-height:1.65;margin:0 auto;max-width:600px}
 .stage.cut #bladeTop{animation:bladeCloseTop .72s cubic-bezier(.12,.78,.18,1) 1.22s forwards}
 .stage.cut #bladeBottom{animation:bladeCloseBottom .72s cubic-bezier(.12,.78,.18,1) 1.22s forwards}
 .stage.cut .cutline{animation:flash .4s ease-out 1.94s forwards}
-.stage.cut #leftPiece{animation:leftRelease 1.55s cubic-bezier(.18,.72,.2,1) 1.96s forwards}
-.stage.cut #rightPiece{animation:rightRelease 1.55s cubic-bezier(.18,.72,.2,1) 1.96s forwards}\n.stage.cut .bow-knot{animation:knotCut .22s ease-out 1.94s forwards}
+.stage.cut #leftPiece{animation:leftRelease 1.45s cubic-bezier(.18,.72,.2,1) 1.96s forwards}
+.stage.cut #rightPiece{animation:rightRelease 1.45s cubic-bezier(.18,.72,.2,1) 1.96s forwards}
+.stage.cut .bow-knot{animation:knotCut .22s ease-out 1.94s forwards}
 @keyframes approachAndCut{0%{transform:translate(-50%,-50%) translateX(340px) rotate(180deg)}45%{transform:translate(-50%,-50%) translateX(18px) rotate(180deg)}62%{transform:translate(-50%,-50%) translateX(0) rotate(180deg)}78%{transform:translate(-50%,-50%) translateX(-17px) rotate(176deg)}100%{transform:translate(-50%,-50%) translateX(-7px) rotate(180deg)}}
-@keyframes bladeCloseTop{0%{transform:rotate(24deg)}35%{transform:rotate(12deg)}72%{transform:rotate(2deg)}100%{transform:rotate(0deg)}}
-@keyframes bladeCloseBottom{0%{transform:rotate(-24deg)}35%{transform:rotate(-12deg)}72%{transform:rotate(-2deg)}100%{transform:rotate(0deg)}}
-@keyframes knotCut{to{transform:scaleX(.05);opacity:0}}\n@keyframes flash{40%{transform:translate(-50%,-50%) scaleY(1);opacity:1}100%{transform:translate(-50%,-50%) scaleY(.2);opacity:0}}
-@keyframes leftRelease{0%{transform:translate(0,0) rotate(0)}10%{transform:translate(-7px,-4px) rotate(-3deg)}36%{transform:translate(-32px,-22px) rotate(-10deg)}100%{transform:translate(-145px,-105px) rotate(-28deg);opacity:0}}
-@keyframes rightRelease{0%{transform:translate(0,0) rotate(0)}10%{transform:translate(7px,4px) rotate(3deg)}36%{transform:translate(32px,22px) rotate(10deg)}100%{transform:translate(145px,105px) rotate(28deg);opacity:0}}
+@keyframes bladeCloseTop{0%{transform:rotate(24deg)}35%{transform:rotate(13deg)}72%{transform:rotate(3deg)}100%{transform:rotate(0deg)}}
+@keyframes bladeCloseBottom{0%{transform:rotate(-24deg)}35%{transform:rotate(-13deg)}72%{transform:rotate(-3deg)}100%{transform:rotate(0deg)}}
+@keyframes knotCut{to{transform:scaleX(.05);opacity:0}}
+@keyframes flash{40%{transform:translate(-50%,-50%) scaleY(1);opacity:1}100%{transform:translate(-50%,-50%) scaleY(.2);opacity:0}}
+@keyframes leftRelease{0%{transform:translate(0,0) rotate(0);opacity:1}12%{transform:translate(-12px,-5px) rotate(-3deg)}38%{transform:translate(-110px,-24px) rotate(-10deg)}100%{transform:translate(-760px,-95px) rotate(-32deg);opacity:0}}
+@keyframes rightRelease{0%{transform:translate(0,0) rotate(0);opacity:1}12%{transform:translate(12px,5px) rotate(3deg)}38%{transform:translate(110px,24px) rotate(10deg)}100%{transform:translate(760px,95px) rotate(32deg);opacity:0}}
 @keyframes scissorExit{to{transform:translate(-50%,-50%) translate(-230px,130px) rotate(205deg);opacity:0}}
 .spark{position:absolute;z-index:5;left:50%;top:50%;width:5px;height:5px;border-radius:50%;background:#ffe7a6;box-shadow:0 0 12px 3px #efc35c;opacity:0}
 .stage.cut .spark{animation:spark 1.15s cubic-bezier(.12,.7,.2,1) 1.7s forwards}
@@ -86,7 +88,7 @@ button{border:0;border-radius:999px;padding:14px 24px;font-weight:800;font-size:
 <path d="M370 153 L421 224 L376 231 L301 151Z" fill="url(#shine)"/>
 </g>
 <g class="bow-knot"><path d="M276 91 Q300 78 324 91 L331 150 Q300 165 269 150Z" fill="url(#knot)" stroke="#f6b0b6" stroke-width="2"/><path d="M283 97 Q300 88 317 97 L320 145 Q300 153 280 145Z" fill="url(#shine)"/></g>
-</svg></svg>
+</svg>
     </div>
     <div class="cutline"></div>
     <div class="scissors" aria-hidden="true"><svg viewBox="0 0 176 176"><defs><linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff4d7"/><stop offset=".45" stop-color="#9b978d"/><stop offset=".7" stop-color="#f9e9c7"/><stop offset="1" stop-color="#77736a"/></linearGradient></defs><g class="handles"><circle class="handle" cx="42" cy="42" r="25"/><circle class="handle" cx="42" cy="134" r="25"/></g><g id="bladeTop" class="blade"><path class="metal" d="M83 88 L153 20 Q160 13 165 20 Q169 25 162 32 L92 96"/></g><g id="bladeBottom" class="blade"><path class="metal" d="M83 88 L153 156 Q160 163 165 156 Q169 151 162 144 L92 80"/></g><circle class="pivot" cx="83" cy="88" r="9"/></svg></div></div>
