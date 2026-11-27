@@ -13,14 +13,14 @@ main{width:min(900px,100%);text-align:center;border:1px solid #78602a;border-rad
 .brand{font-size:12px;letter-spacing:.19em;color:var(--gold);font-weight:800}
 h1{font:500 clamp(32px,6vw,54px)/1.08 Georgia,serif;margin:15px 0 10px}
 p{color:#c9c4b8;line-height:1.65;margin:0 auto;max-width:600px}
-.stage{height:300px;position:relative;margin:24px auto 8px;max-width:760px;display:grid;place-items:center;overflow:hidden;isolation:isolate}
-.backglow{position:absolute;width:65%;height:65%;border-radius:50%;background:#d9a52b14;filter:blur(35px)}
-.ribbon{position:absolute;left:-3%;width:106%;height:96px;top:50%;transform:translateY(-50%);z-index:2;filter:drop-shadow(0 15px 12px #0008)}
+.stage{height:320px;position:relative;margin:24px auto 8px;max-width:760px;display:grid;place-items:center;overflow:hidden;isolation:isolate;border-radius:18px;background:radial-gradient(ellipse at 50% 48%,#6e51201c 0,transparent 58%),linear-gradient(180deg,#ffffff05,transparent 58%,#00000024);box-shadow:inset 0 1px #ffffff0b,inset 0 -24px 40px #0002}
+.backglow{position:absolute;width:65%;height:65%;border-radius:50%;background:#d9a52b22;filter:blur(42px);animation:glowBreathe 4s ease-in-out infinite}.backglow:after{content:"";position:absolute;inset:-50%;border-radius:50%;background:conic-gradient(from 0deg,transparent,#e7ad2512,transparent 35%,#fff2c20b,transparent 70%);animation:slowTurn 18s linear infinite}@keyframes glowBreathe{50%{opacity:.55;transform:scale(1.08)}}@keyframes slowTurn{to{transform:rotate(360deg)}}
+.ribbon{position:absolute;left:-3%;width:106%;height:112px;top:50%;transform:translateY(-50%);z-index:2;filter:drop-shadow(0 18px 13px #0009) drop-shadow(0 2px 2px #0008);perspective:700px}.ribbon:before{content:"";position:absolute;inset:18% 0 12%;background:linear-gradient(90deg,transparent,#0005 48%,transparent 52%,#fff1 75%,transparent);filter:blur(10px);opacity:.7}
 .ribbon svg{width:100%;height:100%;display:block;overflow:visible}
-.ribbon-piece{transform-box:fill-box}
+.ribbon-piece{transform-box:fill-box;will-change:transform,opacity;filter:drop-shadow(0 2px 2px #45000b66)}
 #leftPiece{transform-origin:right center}
 #rightPiece{transform-origin:left center}
-.scissors{position:absolute;width:174px;height:174px;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%) translateX(-250px) rotate(-22deg);filter:drop-shadow(0 9px 8px #000b)}
+.scissors{position:absolute;width:184px;height:184px;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%) translateX(-310px) translateY(-22px) rotate(-31deg);filter:drop-shadow(0 12px 9px #000c) drop-shadow(0 1px 1px #fff4);will-change:transform}
 .scissors svg{width:100%;height:100%;overflow:visible}
 .blade{transform-box:view-box;transform-origin:88px 88px}
 #bladeTop{transform:rotate(-8deg)}
@@ -29,22 +29,22 @@ p{color:#c9c4b8;line-height:1.65;margin:0 auto;max-width:600px}
 .metal{fill:none;stroke:url(#steel);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
 .pivot{fill:#e5bd64;stroke:#5b431b;stroke-width:3}
 .cutline{position:absolute;z-index:3;left:50%;top:50%;height:112px;width:2px;transform:translate(-50%,-50%) scaleY(0);background:linear-gradient(transparent,#fff4d1,#fff,transparent);box-shadow:0 0 14px #ffe3a1}
-.stage.cut .scissors{animation:scissorEnter 1.35s cubic-bezier(.2,.7,.2,1) forwards}
-.stage.cut #bladeTop{animation:bladeTop .34s ease-in-out 1.12s forwards}
-.stage.cut #bladeBottom{animation:bladeBottom .34s ease-in-out 1.12s forwards}
-.stage.cut .cutline{animation:flash .32s ease-out 1.38s forwards}
-.stage.cut #leftPiece{animation:leftRelease 1.5s cubic-bezier(.18,.72,.2,1) 1.48s forwards}
-.stage.cut #rightPiece{animation:rightRelease 1.5s cubic-bezier(.18,.72,.2,1) 1.48s forwards}
-.stage.cut .scissors{animation:scissorEnter 1.35s cubic-bezier(.2,.7,.2,1) forwards,scissorExit .8s ease-in 1.62s forwards}
-@keyframes scissorEnter{0%{transform:translate(-50%,-50%) translateX(-250px) rotate(-22deg)}70%{transform:translate(-50%,-50%) translateX(0) rotate(0)}100%{transform:translate(-50%,-50%) translateX(0) rotate(0)}}
-@keyframes bladeTop{to{transform:rotate(12deg)}}
-@keyframes bladeBottom{to{transform:rotate(-12deg)}}
+.stage.cut .scissors{animation:scissorEnter 1.45s cubic-bezier(.18,.76,.18,1) forwards}
+.stage.cut #bladeTop{animation:bladeTop .42s cubic-bezier(.4,0,.2,1) 1.38s forwards}
+.stage.cut #bladeBottom{animation:bladeBottom .42s cubic-bezier(.4,0,.2,1) 1.38s forwards}
+.stage.cut .cutline{animation:flash .42s ease-out 1.68s forwards}
+.stage.cut #leftPiece{animation:leftRelease 1.8s cubic-bezier(.18,.72,.2,1) 1.82s forwards}
+.stage.cut #rightPiece{animation:rightRelease 1.8s cubic-bezier(.18,.72,.2,1) 1.82s forwards}
+.stage.cut .scissors{animation:scissorEnter 1.45s cubic-bezier(.18,.76,.18,1) forwards,scissorExit .72s cubic-bezier(.4,0,1,1) 2.05s forwards}
+@keyframes scissorEnter{0%{transform:translate(-50%,-50%) translateX(-310px) translateY(-22px) rotate(-31deg)}62%{transform:translate(-50%,-50%) translateX(7px) translateY(0) rotate(3deg)}78%{transform:translate(-50%,-50%) translateX(-3px) translateY(1px) rotate(-1deg)}100%{transform:translate(-50%,-50%) translateX(0) translateY(0) rotate(0)}}
+@keyframes bladeTop{0%{transform:rotate(-8deg)}35%{transform:rotate(15deg)}72%{transform:rotate(18deg)}100%{transform:rotate(12deg)}}
+@keyframes bladeBottom{0%{transform:rotate(8deg)}35%{transform:rotate(-15deg)}72%{transform:rotate(-18deg)}100%{transform:rotate(-12deg)}}
 @keyframes flash{40%{transform:translate(-50%,-50%) scaleY(1);opacity:1}100%{transform:translate(-50%,-50%) scaleY(.2);opacity:0}}
-@keyframes leftRelease{0%{transform:translate(0,0) rotate(0)}22%{transform:translate(-12px,-7px) rotate(-5deg)}100%{transform:translate(-120%,-52px) rotate(-18deg);opacity:0}}
-@keyframes rightRelease{0%{transform:translate(0,0) rotate(0)}22%{transform:translate(12px,7px) rotate(5deg)}100%{transform:translate(120%,52px) rotate(18deg);opacity:0}}
-@keyframes scissorExit{to{transform:translate(-50%,-50%) translate(190px,70px) rotate(65deg);opacity:0}}
+@keyframes leftRelease{0%{transform:translate(0,0) rotate(0) skewY(0)}14%{transform:translate(-5px,-3px) rotate(-2deg) skewY(-1deg)}38%{transform:translate(-30px,-13px) rotate(-7deg) skewY(-3deg)}100%{transform:translate(-125%,-78px) rotate(-24deg) skewY(-5deg);opacity:0}}
+@keyframes rightRelease{0%{transform:translate(0,0) rotate(0) skewY(0)}14%{transform:translate(5px,3px) rotate(2deg) skewY(1deg)}38%{transform:translate(30px,13px) rotate(7deg) skewY(3deg)}100%{transform:translate(125%,78px) rotate(24deg) skewY(5deg);opacity:0}}
+@keyframes scissorExit{to{transform:translate(-50%,-50%) translate(205px,88px) rotate(72deg);opacity:0}}
 .spark{position:absolute;z-index:5;left:50%;top:50%;width:5px;height:5px;border-radius:50%;background:#ffe7a6;box-shadow:0 0 12px 3px #efc35c;opacity:0}
-.stage.cut .spark{animation:spark 1s ease-out 1.38s forwards}
+.stage.cut .spark{animation:spark 1.15s cubic-bezier(.12,.7,.2,1) 1.7s forwards}
 @keyframes spark{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(.1)}}
 .controls{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
 button{border:0;border-radius:999px;padding:14px 24px;font-weight:800;font-size:14px;cursor:pointer}
@@ -52,7 +52,7 @@ button{border:0;border-radius:999px;padding:14px 24px;font-weight:800;font-size:
 #reset{background:transparent;color:#eee4cf;border:1px solid #77705d}
 .status{min-height:24px;margin-top:16px;color:#d9bd79;font-size:13px}
 .small{font-size:11px;color:#918b7d;margin-top:25px}
-@media(max-width:520px){main{padding:22px 15px;border-radius:18px}.stage{height:220px}.ribbon{height:70px}.scissors{width:138px;height:138px}}
+@media(max-width:520px){main{padding:22px 15px;border-radius:18px}.stage{height:240px}.ribbon{height:82px}.scissors{width:146px;height:146px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
 </style>
 </head>
@@ -94,7 +94,7 @@ button{border:0;border-radius:999px;padding:14px 24px;font-weight:800;font-size:
 </main>
 <script>
 const stage=document.getElementById('stage'),status=document.getElementById('status'),cut=document.getElementById('cut');
-function play(){stage.classList.remove('cut');void stage.offsetWidth;stage.classList.add('cut');cut.disabled=true;status.textContent='The ribbon is being cut…';setTimeout(()=>{status.textContent='Ribbon cut — a new chapter begins.';cut.disabled=false},3100)}
+function play(){stage.classList.remove('cut');void stage.offsetWidth;stage.classList.add('cut');cut.disabled=true;status.textContent='The scissors are approaching…';setTimeout(()=>{status.textContent='A clean cut. A beautiful new beginning.';cut.disabled=false},3900)}
 function reset(){stage.classList.remove('cut');cut.disabled=false;status.textContent='Ready for the opening moment.'}
 cut.addEventListener('click',play);document.getElementById('reset').addEventListener('click',reset);
 </script>
