@@ -41,33 +41,25 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
 .error{color:#ffb4b4;font-size:12px;min-height:18px}
 .ceremony{display:none}.ceremony.active{display:block}
 .ribbon-stage{height:170px;position:relative;display:grid;place-items:center;margin:22px 0 12px}
-/* Premium cinematic ribbon scene */
-.ribbon-stage{height:190px;perspective:900px}
-.ribbon{height:64px;left:-5%;right:-5%;background:linear-gradient(180deg,#f3b7b5 0%,#c94a52 12%,#a4112b 42%,#790a20 67%,#bd3344 86%,#f3a5a1 100%);box-shadow:0 18px 30px rgba(0,0,0,.38),inset 0 3px 8px rgba(255,255,255,.24),inset 0 -7px 12px rgba(40,0,10,.35);border-top:1px solid rgba(255,255,255,.22);border-bottom:1px solid rgba(30,0,0,.3)}
-.ribbon:before{background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.3) 20%,transparent 36%,rgba(255,255,255,.16) 64%,transparent 80%,rgba(255,255,255,.06));opacity:1}
-.ribbon:after{content:"";height:100%;background:linear-gradient(180deg,rgba(255,255,255,.17),transparent 40%,rgba(0,0,0,.15));transform:none}
-.bow{width:132px;height:88px;filter:drop-shadow(0 9px 8px rgba(0,0,0,.35))}
-.bow:before,.bow:after{width:64px;height:48px;border:11px solid #c72b40;border-radius:70% 18% 70% 18%;box-shadow:inset 0 0 8px rgba(255,255,255,.25),0 0 0 1px rgba(255,255,255,.12);background:linear-gradient(135deg,#ef9295,#ad122a 48%,#76091d)}
+/* Realistic satin ribbon split scene */
+.ribbon-stage{height:220px;position:relative;display:grid;place-items:center;margin:24px 0 12px;perspective:1000px;overflow:visible}
+.ribbon{position:absolute;top:50%;height:76px;width:50%;z-index:1;transition:transform 1.15s cubic-bezier(.16,.8,.22,1),opacity .9s;overflow:hidden;background:linear-gradient(180deg,#ffb4b9 0%,#e65b69 8%,#c52a43 25%,#9c102a 53%,#7e0920 72%,#c52b42 91%,#f7a0a8 100%);box-shadow:0 18px 28px rgba(0,0,0,.35),inset 0 5px 10px rgba(255,255,255,.24),inset 0 -8px 14px rgba(40,0,10,.3);border-top:1px solid rgba(255,255,255,.35);border-bottom:1px solid rgba(30,0,0,.3)}
+.ribbon:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(92deg,rgba(255,255,255,.025) 0px,rgba(255,255,255,.07) 1px,transparent 3px,transparent 6px),linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.32) 24%,transparent 42%,rgba(255,255,255,.12) 70%,transparent 88%);mix-blend-mode:screen}
+.ribbon:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent 28%,rgba(0,0,0,.13) 80%,rgba(255,255,255,.08))}
+.ribbon.left{left:0;transform:translateY(-50%);border-radius:3px 0 0 3px}
+.ribbon.right{right:0;transform:translateY(-50%);border-radius:0 3px 3px 0}
+.bow{position:absolute;z-index:2;width:140px;height:100px;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 10px 8px rgba(0,0,0,.4));transition:opacity .4s,transform .5s}
+.bow:before,.bow:after{content:"";width:68px;height:48px;border:11px solid #d32d46;border-radius:75% 18% 75% 18%;background:linear-gradient(145deg,#ffb0b6,#df4457 34%,#a20e29 70%,#f27683);box-shadow:inset 0 0 9px rgba(255,255,255,.26),inset 0 -7px 10px rgba(0,0,0,.18),0 0 0 1px rgba(255,255,255,.18)}
 .bow:before{transform:rotate(32deg);margin-right:-7px}.bow:after{transform:scaleX(-1) rotate(32deg);margin-left:-7px}
-.bow i{width:25px;height:25px;background:radial-gradient(circle at 30% 25%,#f8b0b1,#a40e25 65%);border:3px solid #e97b80;box-shadow:0 3px 8px #5a0615}
-.cut-button{width:104px;height:104px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#4b4435,#181713 68%);border:1px solid rgba(225,196,125,.7);box-shadow:0 0 0 8px rgba(218,183,105,.06),0 20px 42px rgba(0,0,0,.48);color:#d8c08b}
+.bow i{position:absolute;width:27px;height:27px;background:radial-gradient(circle at 30% 25%,#ffced0,#b71430 70%);border:4px solid #f27b88;border-radius:50%;z-index:3;box-shadow:0 4px 8px #560617}
+.cut-button{position:relative;z-index:4;width:104px;height:104px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#4b4435,#181713 68%);border:1px solid rgba(225,196,125,.7);box-shadow:0 0 0 8px rgba(218,183,105,.06),0 20px 42px rgba(0,0,0,.48);color:#d8c08b;display:grid;place-items:center;transition:transform .2s}
 .cut-button svg{width:58px;height:58px;filter:drop-shadow(0 3px 2px rgba(0,0,0,.4))}
-.cut .cut-button{animation:scissorSweep .65s ease-in forwards}
-.cut .ribbon.left{transform:translate(-90%,-75px) rotate(-24deg) scale(.92);opacity:0}
-.cut .ribbon.right{transform:translate(90%,75px) rotate(24deg) scale(.92);opacity:0}
-@keyframes scissorSweep{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}45%{transform:translate(0,-22px) rotate(-30deg) scale(1.05)}100%{transform:translate(140px,30px) rotate(70deg) scale(.4);opacity:0}}
-
-.ribbon{position:absolute;left:-10%;right:-10%;height:54px;background:linear-gradient(180deg,#e34a58,#a90f25 48%,#7e0b1c);box-shadow:0 12px 25px rgba(0,0,0,.35);z-index:1;transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .7s}
-.ribbon:before,.ribbon:after{content:"";position:absolute;top:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);opacity:.65}
-.ribbon:after{transform:translateX(50%)}
-.bow{position:absolute;z-index:2;width:110px;height:70px;display:flex;align-items:center;justify-content:center;transition:opacity .35s,transform .5s}
-.bow:before,.bow:after{content:"";width:52px;height:42px;border:9px solid #e34a58;border-radius:70% 15% 70% 15%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.12)}
-.bow:before{transform:rotate(28deg);margin-right:-5px}.bow:after{transform:scaleX(-1) rotate(28deg);margin-left:-5px}
-.bow i{position:absolute;width:22px;height:22px;background:#a90f25;border:4px solid #e34a58;border-radius:50%;z-index:2}
-.cut-button{position:relative;z-index:4;width:92px;height:92px;border-radius:50%;border:1px solid rgba(231,173,37,.65);background:#211f19;color:var(--gold);display:grid;place-items:center;box-shadow:0 0 0 9px rgba(231,173,37,.07),0 12px 30px rgba(0,0,0,.35);transition:transform .2s,background .2s}
-.cut-button:hover{transform:scale(1.06);background:#30291b}.cut-button svg{width:43px;height:43px}
-.cut-hint{color:#c9c3b7;font-size:12px;margin-top:4px}
-.cut .ribbon.left{transform:translate(-75%,-25px) rotate(-13deg);opacity:0}.cut .ribbon.right{transform:translate(75%,25px) rotate(13deg);opacity:0}.cut .bow{opacity:0;transform:scale(.5)}
+.cut .cut-button{animation:scissorSweep .85s ease-in forwards}
+.cut .ribbon.left{transform:translate(-110%,-50%) rotate(-18deg);opacity:0}
+.cut .ribbon.right{transform:translate(110%,-50%) rotate(18deg);opacity:0}
+.cut .bow{animation:bowRelease .6s ease-in forwards}
+@keyframes scissorSweep{0%{transform:translate(0,0) rotate(0) scale(1)}35%{transform:translate(-12px,-20px) rotate(-35deg) scale(1.06)}60%{transform:translate(12px,6px) rotate(28deg) scale(.95)}100%{transform:translate(180px,45px) rotate(95deg) scale(.45);opacity:0}}
+@keyframes bowRelease{to{opacity:0;transform:translateY(-30px) scale(.55) rotate(12deg)}}
 .celebration{display:none;min-height:245px;align-content:center;justify-items:center;gap:13px;padding:14px 0}
 .celebration.active{display:grid;animation:rise .7s both}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
