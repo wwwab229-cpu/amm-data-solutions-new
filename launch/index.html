@@ -92,7 +92,7 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
   <div class="result" id="linkResult" hidden>
     <label for="generatedLink">Your client's private handover link</label>
     <div class="result-row"><input id="generatedLink" readonly><button class="primary" type="button" id="copyLink">Copy link</button></div>
-    <p class="note">Send this link to your client after their website is live. It opens the AMM ceremony first, then redirects to their website after the 10-second celebration.</p>
+    <p class="note">Send this link to your client after their website is live. It opens the AMM ceremony first, then redirects to their website after the 15-second celebration.</p>
   </div>
   <p class="note">This is an AMM handover utility. It does not change or install anything on the client's website.</p>
 </section>
@@ -121,7 +121,7 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
     <img class="logo-large" src="/logos/AMM_Data_Solutions_1200x1200_transparent%20(1).png" alt="AMM Data Solutions">
     <div class="eyebrow">Proudly presented by AMM Data Solutions</div>
     <div class="timer" aria-hidden="true"><span id="timerBar"></span></div>
-    <div class="timer-label" id="timerLabel">Your website reveal is moments away · 10</div>
+    <div class="timer-label" id="timerLabel">Your website reveal is moments away · 15</div>
   </div>
   <button class="skip" id="skipButton" type="button" hidden>Skip celebration and open website</button>
   <p class="footer-note">A DIGITAL LAUNCH EXPERIENCE BY AMM DATA SOLUTIONS</p>
@@ -220,12 +220,12 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
   }
   function tick(now){
     const elapsed = now - startTime;
-    const remaining = Math.max(0, 10000 - elapsed);
-    bar.style.width = Math.min(100, elapsed / 10000 * 100) + "%";
+    const remaining = Math.max(0, 15000 - elapsed);
+    bar.style.width = Math.min(100, elapsed / 15000 * 100) + "%";
     timerLabel.textContent = window.__ammLaunchTarget ? "Your website reveal is moments away · " + Math.ceil(remaining/1000) : "Preview mode · " + Math.ceil(remaining/1000);
     if (elapsed >= 3300 && elapsed < 6800) showMessage(1);
     else if (elapsed >= 6800) showMessage(2);
-    if (elapsed >= 10000) { cancelAnimationFrame(raf); openWebsite(); return; }
+    if (elapsed >= 15000) { cancelAnimationFrame(raf); openWebsite(); return; }
     raf = requestAnimationFrame(tick);
   }
   function startCelebration(){
@@ -249,7 +249,7 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
     }
     startTime=performance.now();
     raf=requestAnimationFrame(tick);
-    redirectTimer=window.setTimeout(openWebsite,10000);
+    redirectTimer=window.setTimeout(openWebsite,15000);
   }
   cutButton.addEventListener("click",startCelebration);
   skip.addEventListener("click",function(){cancelAnimationFrame(raf);clearTimeout(redirectTimer);openWebsite();});
