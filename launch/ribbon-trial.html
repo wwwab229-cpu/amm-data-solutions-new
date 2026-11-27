@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#171714">
+<title>AMM Ribbon Cutting — Animation Trial</title>
+<style>
+:root{color-scheme:dark;--gold:#e7ad25;--paper:#f7f3eb;--red:#b91532}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;background:radial-gradient(ellipse at 50% 8%,#39301c 0,#191914 42%,#10100f 100%);color:var(--paper);font-family:Inter,system-ui,sans-serif;display:grid;place-items:center;padding:22px;overflow-x:hidden}
+main{width:min(900px,100%);text-align:center;border:1px solid #78602a;border-radius:24px;background:linear-gradient(145deg,rgba(38,36,28,.97),rgba(20,20,17,.98));padding:clamp(22px,5vw,48px);box-shadow:0 30px 100px #0009}
+.brand{font-size:12px;letter-spacing:.19em;color:var(--gold);font-weight:800}
+h1{font:500 clamp(32px,6vw,54px)/1.08 Georgia,serif;margin:15px 0 10px}
+p{color:#c9c4b8;line-height:1.65;margin:0 auto;max-width:600px}
+.stage{height:300px;position:relative;margin:24px auto 8px;max-width:760px;display:grid;place-items:center;overflow:hidden;isolation:isolate}
+.backglow{position:absolute;width:65%;height:65%;border-radius:50%;background:#d9a52b14;filter:blur(35px)}
+.ribbon{position:absolute;left:-3%;width:106%;height:96px;top:50%;transform:translateY(-50%);z-index:2;filter:drop-shadow(0 15px 12px #0008)}
+.ribbon svg{width:100%;height:100%;display:block;overflow:visible}
+.ribbon-piece{transform-box:fill-box}
+#leftPiece{transform-origin:right center}
+#rightPiece{transform-origin:left center}
+.scissors{position:absolute;width:174px;height:174px;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%) translateX(-250px) rotate(-22deg);filter:drop-shadow(0 9px 8px #000b)}
+.scissors svg{width:100%;height:100%;overflow:visible}
+.blade{transform-box:view-box;transform-origin:88px 88px}
+#bladeTop{transform:rotate(-8deg)}
+#bladeBottom{transform:rotate(8deg)}
+.handle{fill:none;stroke:#c99a38;stroke-width:8}
+.metal{fill:none;stroke:url(#steel);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.pivot{fill:#e5bd64;stroke:#5b431b;stroke-width:3}
+.cutline{position:absolute;z-index:3;left:50%;top:50%;height:112px;width:2px;transform:translate(-50%,-50%) scaleY(0);background:linear-gradient(transparent,#fff4d1,#fff,transparent);box-shadow:0 0 14px #ffe3a1}
+.stage.cut .scissors{animation:scissorEnter 1.35s cubic-bezier(.2,.7,.2,1) forwards}
+.stage.cut #bladeTop{animation:bladeTop .34s ease-in-out 1.12s forwards}
+.stage.cut #bladeBottom{animation:bladeBottom .34s ease-in-out 1.12s forwards}
+.stage.cut .cutline{animation:flash .32s ease-out 1.38s forwards}
+.stage.cut #leftPiece{animation:leftRelease 1.5s cubic-bezier(.18,.72,.2,1) 1.48s forwards}
+.stage.cut #rightPiece{animation:rightRelease 1.5s cubic-bezier(.18,.72,.2,1) 1.48s forwards}
+.stage.cut .scissors{animation:scissorEnter 1.35s cubic-bezier(.2,.7,.2,1) forwards,scissorExit .8s ease-in 1.62s forwards}
+@keyframes scissorEnter{0%{transform:translate(-50%,-50%) translateX(-250px) rotate(-22deg)}70%{transform:translate(-50%,-50%) translateX(0) rotate(0)}100%{transform:translate(-50%,-50%) translateX(0) rotate(0)}}
+@keyframes bladeTop{to{transform:rotate(12deg)}}
+@keyframes bladeBottom{to{transform:rotate(-12deg)}}
+@keyframes flash{40%{transform:translate(-50%,-50%) scaleY(1);opacity:1}100%{transform:translate(-50%,-50%) scaleY(.2);opacity:0}}
+@keyframes leftRelease{0%{transform:translate(0,0) rotate(0)}22%{transform:translate(-12px,-7px) rotate(-5deg)}100%{transform:translate(-120%,-52px) rotate(-18deg);opacity:0}}
+@keyframes rightRelease{0%{transform:translate(0,0) rotate(0)}22%{transform:translate(12px,7px) rotate(5deg)}100%{transform:translate(120%,52px) rotate(18deg);opacity:0}}
+@keyframes scissorExit{to{transform:translate(-50%,-50%) translate(190px,70px) rotate(65deg);opacity:0}}
+.spark{position:absolute;z-index:5;left:50%;top:50%;width:5px;height:5px;border-radius:50%;background:#ffe7a6;box-shadow:0 0 12px 3px #efc35c;opacity:0}
+.stage.cut .spark{animation:spark 1s ease-out 1.38s forwards}
+@keyframes spark{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(.1)}}
+.controls{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+button{border:0;border-radius:999px;padding:14px 24px;font-weight:800;font-size:14px;cursor:pointer}
+#cut{background:var(--gold);color:#191713;box-shadow:0 8px 24px #dca52b30}
+#reset{background:transparent;color:#eee4cf;border:1px solid #77705d}
+.status{min-height:24px;margin-top:16px;color:#d9bd79;font-size:13px}
+.small{font-size:11px;color:#918b7d;margin-top:25px}
+@media(max-width:520px){main{padding:22px 15px;border-radius:18px}.stage{height:220px}.ribbon{height:70px}.scissors{width:138px;height:138px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">AMM DATA SOLUTIONS · LET'S MAKE SOLUTIONS</div>
+  <h1>A New Beginning Deserves<br><span style="color:var(--gold)">A Grand Opening</span></h1>
+  <p>Ribbon-cutting animation trial. Press the button to watch the scissors approach, close through the ribbon, and release both satin ends.</p>
+  <div class="stage" id="stage" aria-label="Red satin ribbon cutting animation">
+    <div class="backglow"></div>
+    <div class="ribbon">
+      <svg viewBox="0 0 1000 130" preserveAspectRatio="none" role="img" aria-label="Red satin ribbon">
+        <defs>
+          <linearGradient id="satin" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffb2b8"/><stop offset=".09" stop-color="#ed6474"/><stop offset=".22" stop-color="#c82b45"/><stop offset=".48" stop-color="#9c102b"/><stop offset=".7" stop-color="#76091f"/><stop offset=".9" stop-color="#c52b43"/><stop offset="1" stop-color="#f5a0a9"/>
+          </linearGradient>
+          <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#fff" stop-opacity=".03"/><stop offset=".22" stop-color="#fff" stop-opacity=".35"/><stop offset=".38" stop-color="#fff" stop-opacity="0"/><stop offset=".72" stop-color="#fff" stop-opacity=".14"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/></linearGradient>
+          <filter id="fabric"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="8"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .08 0"/></filter>
+        </defs>
+        <g id="leftPiece" class="ribbon-piece"><path d="M0 12 Q90 3 180 12 T360 12 T500 12 L500 118 Q380 126 250 118 T0 118Z" fill="url(#satin)" stroke="#f4a1aa" stroke-opacity=".55"/><path d="M0 12 Q90 3 180 12 T360 12 T500 12 L500 118 Q380 126 250 118 T0 118Z" fill="url(#shine)"/><path d="M0 12 Q90 3 180 12 T360 12 T500 12 L500 118 Q380 126 250 118 T0 118Z" filter="url(#fabric)" opacity=".2"/></g>
+        <g id="rightPiece" class="ribbon-piece"><path d="M500 12 Q640 12 760 12 T1000 12 L1000 118 Q870 126 740 118 T500 118Z" fill="url(#satin)" stroke="#f4a1aa" stroke-opacity=".55"/><path d="M500 12 Q640 12 760 12 T1000 12 L1000 118 Q870 126 740 118 T500 118Z" fill="url(#shine)"/><path d="M500 12 Q640 12 760 12 T1000 12 L1000 118 Q870 126 740 118 T500 118Z" filter="url(#fabric)" opacity=".2"/></g>
+      </svg>
+    </div>
+    <div class="cutline"></div>
+    <div class="scissors" aria-hidden="true">
+      <svg viewBox="0 0 176 176">
+        <defs><linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff4d7"/><stop offset=".45" stop-color="#9b978d"/><stop offset=".7" stop-color="#f9e9c7"/><stop offset="1" stop-color="#77736a"/></linearGradient></defs>
+        <g class="handles"><circle class="handle" cx="42" cy="42" r="25"/><circle class="handle" cx="42" cy="134" r="25"/></g>
+        <g id="bladeTop" class="blade"><path class="metal" d="M60 55 L145 140 Q153 148 161 140 Q165 135 158 127 L76 45"/></g>
+        <g id="bladeBottom" class="blade"><path class="metal" d="M60 121 L145 36 Q153 28 161 36 Q165 41 158 49 L76 131"/></g>
+        <circle class="pivot" cx="83" cy="88" r="9"/>
+      </svg>
+    </div>
+    <i class="spark" style="--x:-55px;--y:-70px"></i><i class="spark" style="--x:60px;--y:-60px"></i><i class="spark" style="--x:-70px;--y:35px"></i><i class="spark" style="--x:75px;--y:45px"></i><i class="spark" style="--x:0px;--y:-95px"></i>
+  </div>
+  <div class="controls"><button id="cut" type="button">Cut the Ribbon</button><button id="reset" type="button">Replay Trial</button></div>
+  <div class="status" id="status" aria-live="polite">Ready for the opening moment.</div>
+  <div class="small">INDEPENDENT TRIAL · Existing AMM handover ceremony remains unchanged</div>
+</main>
+<script>
+const stage=document.getElementById('stage'),status=document.getElementById('status'),cut=document.getElementById('cut');
+function play(){stage.classList.remove('cut');void stage.offsetWidth;stage.classList.add('cut');cut.disabled=true;status.textContent='The ribbon is being cut…';setTimeout(()=>{status.textContent='Ribbon cut — a new chapter begins.';cut.disabled=false},3100)}
+function reset(){stage.classList.remove('cut');cut.disabled=false;status.textContent='Ready for the opening moment.'}
+cut.addEventListener('click',play);document.getElementById('reset').addEventListener('click',reset);
+</script>
+</body>
+</html>
