@@ -101,6 +101,20 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
 .cut .blade-b{animation:bladeCloseB .35s ease-in forwards}
 @keyframes bladeCloseA{0%{transform:rotate(0)}55%{transform:rotate(-12deg)}100%{transform:rotate(-24deg)}}
 @keyframes bladeCloseB{0%{transform:rotate(0)}55%{transform:rotate(12deg)}100%{transform:rotate(24deg)}}
+
+/* Cut timing: blade contact, visible seam, then physically separate ribbon halves */
+.ribbon-stage{height:230px;overflow:hidden;position:relative}
+.ribbon{height:82px;width:52%;top:50%;transition:none;animation:none;filter:drop-shadow(0 12px 9px rgba(0,0,0,.22))}
+.ribbon.left{left:0;right:auto;transform:translateY(-50%);border-radius:4px 0 0 4px}
+.ribbon.right{right:0;left:auto;transform:translateY(-50%);border-radius:0 4px 4px 0}
+.ribbon:before{background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px),linear-gradient(180deg,rgba(255,255,255,.3),transparent 25%,rgba(0,0,0,.22) 78%,rgba(255,255,255,.15));}
+.cut .ribbon.left{animation:splitLeft 1.3s cubic-bezier(.18,.72,.2,1) .22s forwards}
+.cut .ribbon.right{animation:splitRight 1.3s cubic-bezier(.18,.72,.2,1) .22s forwards}
+@keyframes splitLeft{0%{transform:translateY(-50%)}12%{transform:translate(1px,-50%) rotate(0)}35%{transform:translate(-15px,-58%) rotate(-4deg)}65%{transform:translate(-45%,-66%) rotate(-12deg)}100%{transform:translate(-115%,-85%) rotate(-24deg);opacity:0}}
+@keyframes splitRight{0%{transform:translateY(-50%)}12%{transform:translate(-1px,-50%) rotate(0)}35%{transform:translate(15px,-42%) rotate(4deg)}65%{transform:translate(45%,-32%) rotate(12deg)}100%{transform:translate(115%,-15%) rotate(24deg);opacity:0}}
+.cut-button{animation:none!important}
+.cut .cut-button{animation:scissorSweep .9s ease-in forwards!important}
+@media(max-width:520px){.ribbon-stage{height:190px}.ribbon{height:58px}}
 </style>
 </head>
 <body>
