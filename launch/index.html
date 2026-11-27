@@ -244,6 +244,12 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
   const targetRaw = (params.get("site") || "").trim();
   const tagline = (params.get("tagline") || "").trim();
   const customWish = (params.get("wish") || "").trim();
+  // Smart repeat visits: remember each client launch independently in this browser.
+  function launchKey(name, site){ return "amm-launch-complete:" + encodeURIComponent((name||"").trim().toLowerCase()) + ":" + encodeURIComponent((site||"").trim().toLowerCase()); }
+  const completionKey = (!isPreview && client && targetRaw && validHttpsUrl(targetRaw)) ? launchKey(client,targetRaw) : "";
+  if (completionKey) {
+    try { if (localStorage.getItem(completionKey) === "1") { window.location.replace(new URL(targetRaw).href); return; } } catch (_) {}
+  }
   const safeText = (value, fallback) => value ? value.slice(0,180) : fallback;
   function validHttpsUrl(value){
     try { const u = new URL(value); return u.protocol === "https:" && !!u.hostname; } catch (_) { return false; }
@@ -325,7 +331,10 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
     title.textContent=item.title; eyebrow.textContent=item.eyebrow; message.textContent=item.message;
   }
   function openWebsite(){
-    if (window.__ammLaunchTarget) window.location.replace(window.__ammLaunchTarget);
+    if (window.__ammLaunchTarget) {
+      try { if (completionKey) localStorage.setItem(completionKey, "1"); } catch (_) {}
+      window.location.replace(window.__ammLaunchTarget);
+    }
     else {
       timerLabel.textContent = "Preview complete · your client website would open here";
       skip.hidden = true;
