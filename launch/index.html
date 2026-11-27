@@ -208,7 +208,7 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
     event.preventDefault();
     const name = document.getElementById("clientName").value.trim();
     let website = document.getElementById("websiteUrl").value.trim();
-    if (website && !/^https?:\\/\\//i.test(website)) website = "https://" + website;
+    if (website && !/^https?:\/\//i.test(website)) website = "https://" + website;
     const line = document.getElementById("tagline").value.trim();
     const wish = document.getElementById("wish").value.trim();
     const error = document.getElementById("formError");
