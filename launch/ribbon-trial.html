@@ -23,21 +23,21 @@ p{color:#c9c4b8;line-height:1.65;margin:0 auto;max-width:600px}
 .scissors{position:absolute;width:190px;height:190px;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%) translateX(340px) rotate(180deg);filter:drop-shadow(0 12px 9px #000c) drop-shadow(0 1px 1px #fff4);will-change:transform}
 .scissors svg{width:100%;height:100%;overflow:visible}
 .blade{transform-box:view-box;transform-origin:83px 88px}
-#bladeTop{transform:rotate(-24deg)}
-#bladeBottom{transform:rotate(24deg)}
+#bladeTop{transform:rotate(24deg)}
+#bladeBottom{transform:rotate(-24deg)}
 .handle{fill:none;stroke:#c99a38;stroke-width:8}
 .metal{fill:none;stroke:url(#steel);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
 .pivot{fill:#e5bd64;stroke:#5b431b;stroke-width:3}
 .cutline{position:absolute;z-index:3;left:50%;top:50%;height:142px;width:2px;transform:translate(-50%,-50%) scaleY(0);background:linear-gradient(transparent,#fff4d1,#fff,transparent);box-shadow:0 0 14px #ffe3a1}
 .stage.cut .scissors{animation:approachAndCut 2.15s cubic-bezier(.2,.7,.2,1) forwards,scissorExit .62s cubic-bezier(.4,0,1,1) 2.55s forwards}
-.stage.cut #bladeTop{animation:bladeCloseTop .55s cubic-bezier(.2,.7,.25,1) 1.28s forwards}
-.stage.cut #bladeBottom{animation:bladeCloseBottom .55s cubic-bezier(.2,.7,.25,1) 1.28s forwards}
-.stage.cut .cutline{animation:flash .4s ease-out 1.76s forwards}
-.stage.cut #leftPiece{animation:leftRelease 1.55s cubic-bezier(.18,.72,.2,1) 1.82s forwards}
-.stage.cut #rightPiece{animation:rightRelease 1.55s cubic-bezier(.18,.72,.2,1) 1.82s forwards}\n.stage.cut .bow-knot{animation:knotCut .22s ease-out 1.76s forwards}
+.stage.cut #bladeTop{animation:bladeCloseTop .72s cubic-bezier(.12,.78,.18,1) 1.22s forwards}
+.stage.cut #bladeBottom{animation:bladeCloseBottom .72s cubic-bezier(.12,.78,.18,1) 1.22s forwards}
+.stage.cut .cutline{animation:flash .4s ease-out 1.94s forwards}
+.stage.cut #leftPiece{animation:leftRelease 1.55s cubic-bezier(.18,.72,.2,1) 1.96s forwards}
+.stage.cut #rightPiece{animation:rightRelease 1.55s cubic-bezier(.18,.72,.2,1) 1.96s forwards}\n.stage.cut .bow-knot{animation:knotCut .22s ease-out 1.94s forwards}
 @keyframes approachAndCut{0%{transform:translate(-50%,-50%) translateX(340px) rotate(180deg)}45%{transform:translate(-50%,-50%) translateX(18px) rotate(180deg)}62%{transform:translate(-50%,-50%) translateX(0) rotate(180deg)}78%{transform:translate(-50%,-50%) translateX(-17px) rotate(176deg)}100%{transform:translate(-50%,-50%) translateX(-7px) rotate(180deg)}}
-@keyframes bladeCloseTop{0%{transform:rotate(-24deg)}35%{transform:rotate(-10deg)}72%{transform:rotate(1deg)}100%{transform:rotate(0deg)}}
-@keyframes bladeCloseBottom{0%{transform:rotate(24deg)}35%{transform:rotate(10deg)}72%{transform:rotate(-1deg)}100%{transform:rotate(0deg)}}
+@keyframes bladeCloseTop{0%{transform:rotate(24deg)}35%{transform:rotate(12deg)}72%{transform:rotate(2deg)}100%{transform:rotate(0deg)}}
+@keyframes bladeCloseBottom{0%{transform:rotate(-24deg)}35%{transform:rotate(-12deg)}72%{transform:rotate(-2deg)}100%{transform:rotate(0deg)}}
 @keyframes knotCut{to{transform:scaleX(.05);opacity:0}}\n@keyframes flash{40%{transform:translate(-50%,-50%) scaleY(1);opacity:1}100%{transform:translate(-50%,-50%) scaleY(.2);opacity:0}}
 @keyframes leftRelease{0%{transform:translate(0,0) rotate(0)}10%{transform:translate(-7px,-4px) rotate(-3deg)}36%{transform:translate(-32px,-22px) rotate(-10deg)}100%{transform:translate(-145px,-105px) rotate(-28deg);opacity:0}}
 @keyframes rightRelease{0%{transform:translate(0,0) rotate(0)}10%{transform:translate(7px,4px) rotate(3deg)}36%{transform:translate(32px,22px) rotate(10deg)}100%{transform:translate(145px,105px) rotate(28deg);opacity:0}}
@@ -63,15 +63,29 @@ button{border:0;border-radius:999px;padding:14px 24px;font-weight:800;font-size:
   <div class="stage" id="stage" aria-label="Red satin ribbon cutting animation">
     <div class="backglow"></div>
     <div class="ribbon">
-      <svg viewBox="0 0 600 250" role="img" aria-label="Red satin bow ribbon">
+      <svg viewBox="0 0 600 250" role="img" aria-label="Red satin ribbon with a centered bow">
 <defs>
 <linearGradient id="satin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffb8bd"/><stop offset=".12" stop-color="#ed6474"/><stop offset=".36" stop-color="#b91e38"/><stop offset=".62" stop-color="#76091f"/><stop offset=".86" stop-color="#c52b43"/><stop offset="1" stop-color="#f5a0a9"/></linearGradient>
-<linearGradient id="shine" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".5"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".18"/></linearGradient>
+<linearGradient id="shine" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#fff" stop-opacity=".45"/><stop offset=".32" stop-color="#fff" stop-opacity="0"/><stop offset=".72" stop-color="#fff" stop-opacity=".17"/><stop offset="1" stop-color="#fff" stop-opacity=".04"/></linearGradient>
 <linearGradient id="knot" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd1d2"/><stop offset=".3" stop-color="#c52b43"/><stop offset=".7" stop-color="#76091f"/><stop offset="1" stop-color="#f5a0a9"/></linearGradient>
 </defs>
-<g id="leftPiece" class="ribbon-piece"><path d="M286 116 C238 42 135 20 64 47 C17 65 39 136 104 154 C161 171 230 143 286 130Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/><path d="M278 113 C225 63 139 44 82 63 C54 73 61 112 103 129 C160 151 224 131 278 122Z" fill="url(#shine)"/><path d="M280 132 L205 151 L117 237 L178 245 L292 147Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/><path d="M205 151 L117 237 L178 245 L292 147Z" fill="url(#shine)" opacity=".6"/></g>
-<g id="rightPiece" class="ribbon-piece"><path d="M314 116 C362 42 465 20 536 47 C583 65 561 136 496 154 C439 171 370 143 314 130Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/><path d="M322 113 C375 63 461 44 518 63 C546 73 539 112 497 129 C440 151 376 131 322 122Z" fill="url(#shine)"/><path d="M320 132 L395 151 L483 237 L422 245 L308 147Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/><path d="M395 151 L483 237 L422 245 L308 147Z" fill="url(#shine)" opacity=".6"/></g>
-<g class="bow-knot"><path d="M275 91 Q300 79 325 91 L332 143 Q300 160 268 143Z" fill="url(#knot)" stroke="#f6b0b6" stroke-width="2"/><path d="M282 96 Q300 88 318 96 L321 139 Q300 148 279 139Z" fill="url(#shine)"/></g>
+<g id="leftPiece" class="ribbon-piece">
+<path d="M0 82 Q70 75 145 82 T300 82 L300 168 Q220 176 145 168 T0 168Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/>
+<path d="M0 82 Q70 75 145 82 T300 82 L300 168 Q220 176 145 168 T0 168Z" fill="url(#shine)"/>
+<path d="M286 112 C245 48 173 28 125 54 C88 75 110 122 153 136 C203 153 252 127 286 119Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/>
+<path d="M278 111 C235 66 176 49 139 66 C117 77 132 106 160 119 C204 138 244 122 278 116Z" fill="url(#shine)"/>
+<path d="M283 137 L230 153 L179 224 L224 231 L299 151Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/>
+<path d="M230 153 L179 224 L224 231 L299 151Z" fill="url(#shine)"/>
+</g>
+<g id="rightPiece" class="ribbon-piece">
+<path d="M300 82 Q380 82 455 82 T600 82 L600 168 Q520 176 455 168 T300 168Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/>
+<path d="M300 82 Q380 82 455 82 T600 82 L600 168 Q520 176 455 168 T300 168Z" fill="url(#shine)"/>
+<path d="M314 112 C355 48 427 28 475 54 C512 75 490 122 447 136 C397 153 348 127 314 119Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/>
+<path d="M322 111 C365 66 424 49 461 66 C483 77 468 106 440 119 C396 138 356 122 322 116Z" fill="url(#shine)"/>
+<path d="M317 137 L370 153 L421 224 L376 231 L301 151Z" fill="url(#satin)" stroke="#f5a3aa" stroke-width="2"/>
+<path d="M370 153 L421 224 L376 231 L301 151Z" fill="url(#shine)"/>
+</g>
+<g class="bow-knot"><path d="M276 91 Q300 78 324 91 L331 150 Q300 165 269 150Z" fill="url(#knot)" stroke="#f6b0b6" stroke-width="2"/><path d="M283 97 Q300 88 317 97 L320 145 Q300 153 280 145Z" fill="url(#shine)"/></g>
 </svg></svg>
     </div>
     <div class="cutline"></div>
@@ -84,7 +98,7 @@ button{border:0;border-radius:999px;padding:14px 24px;font-weight:800;font-size:
 </main>
 <script>
 const stage=document.getElementById('stage'),status=document.getElementById('status'),cut=document.getElementById('cut');
-function play(){stage.classList.remove('cut');void stage.offsetWidth;stage.classList.add('cut');cut.disabled=true;status.textContent='The scissors are approaching…';setTimeout(()=>{status.textContent='A clean cut. A beautiful new beginning.';cut.disabled=false},3300)}
+function play(){stage.classList.remove('cut');void stage.offsetWidth;stage.classList.add('cut');cut.disabled=true;status.textContent='The scissors are approaching…';setTimeout(()=>{status.textContent='A clean cut. A beautiful new beginning.';cut.disabled=false},3500)}
 function reset(){stage.classList.remove('cut');cut.disabled=false;status.textContent='Ready for the opening moment.'}
 cut.addEventListener('click',play);document.getElementById('reset').addEventListener('click',reset);
 </script>
