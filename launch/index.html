@@ -124,8 +124,9 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
 .ribbon-stage #leftPiece{transform-origin:100% 50%}
 .ribbon-stage #rightPiece{transform-origin:0% 50%}
 .ribbon-stage .cutline{position:absolute;z-index:3;left:50%;top:50%;height:142px;width:2px;transform:translate(-50%,-50%) scaleY(0);background:linear-gradient(transparent,#fff4d1,#fff,transparent);box-shadow:0 0 14px #ffe3a1}
-.ribbon-stage .cut-button{position:absolute;z-index:4;left:50%;top:50%;width:190px;height:190px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:inherit;display:grid;place-items:center;transform:translate(-50%,-50%) translateX(340px) rotate(180deg);filter:drop-shadow(0 12px 9px #000c) drop-shadow(0 1px 1px #fff4);will-change:transform;transition:none}
-.ribbon-stage .cut-button:hover{background:transparent;transform:translate(-50%,-50%) translateX(340px) rotate(180deg)}
+.ribbon-stage{--scissor-start:clamp(72px,28vw,180px)}
+.ribbon-stage .cut-button{position:absolute;z-index:4;left:50%;top:50%;width:190px;height:190px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:inherit;display:grid;place-items:center;transform:translate(-50%,-50%) translateX(var(--scissor-start)) rotate(180deg);filter:drop-shadow(0 12px 9px #000c) drop-shadow(0 1px 1px #fff4);will-change:transform;transition:none;cursor:pointer;pointer-events:auto}
+.ribbon-stage .cut-button:hover{background:transparent;transform:translate(-50%,-50%) translateX(var(--scissor-start)) rotate(180deg)}
 .ribbon-stage .scissors-svg{width:100%;height:100%;overflow:visible}
 .ribbon-stage .blade{transform-box:view-box;transform-origin:83px 88px}
 .ribbon-stage #bladeTop{transform:rotate(0deg)}
@@ -139,7 +140,7 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
 .ribbon-stage.cut #leftPiece{animation:leftRelease 1.45s cubic-bezier(.18,.72,.2,1) 1.96s forwards}
 .ribbon-stage.cut #rightPiece{animation:rightRelease 1.45s cubic-bezier(.18,.72,.2,1) 1.96s forwards}
 .ribbon-stage.cut .bow-knot{animation:knotCut .22s ease-out 1.94s forwards}
-@keyframes approachAndCut{0%{transform:translate(-50%,-50%) translateX(340px) rotate(180deg)}45%{transform:translate(-50%,-50%) translateX(18px) rotate(180deg)}62%{transform:translate(-50%,-50%) translateX(0) rotate(180deg)}78%{transform:translate(-50%,-50%) translateX(-17px) rotate(176deg)}100%{transform:translate(-50%,-50%) translateX(-7px) rotate(180deg)}}
+@keyframes approachAndCut{0%{transform:translate(-50%,-50%) translateX(var(--scissor-start)) rotate(180deg)}45%{transform:translate(-50%,-50%) translateX(18px) rotate(180deg)}62%{transform:translate(-50%,-50%) translateX(0) rotate(180deg)}78%{transform:translate(-50%,-50%) translateX(-17px) rotate(176deg)}100%{transform:translate(-50%,-50%) translateX(-7px) rotate(180deg)}}
 @keyframes bladeCloseTop{0%{transform:rotate(0deg)}35%{transform:rotate(18deg)}72%{transform:rotate(36deg)}100%{transform:rotate(44deg)}}
 @keyframes bladeCloseBottom{0%{transform:rotate(0deg)}35%{transform:rotate(-18deg)}72%{transform:rotate(-36deg)}100%{transform:rotate(-44deg)}}
 @keyframes knotCut{to{transform:scaleX(.05);opacity:0}}
@@ -147,7 +148,7 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
 @keyframes leftRelease{0%{transform:translate(0,0) rotate(0);opacity:1}12%{transform:translate(-12px,-5px) rotate(-3deg)}38%{transform:translate(-110px,-24px) rotate(-10deg)}100%{transform:translate(-760px,-95px) rotate(-32deg);opacity:0}}
 @keyframes rightRelease{0%{transform:translate(0,0) rotate(0);opacity:1}12%{transform:translate(12px,5px) rotate(3deg)}38%{transform:translate(110px,24px) rotate(10deg)}100%{transform:translate(760px,95px) rotate(32deg);opacity:0}}
 @keyframes scissorExit{to{transform:translate(-50%,-50%) translate(-230px,130px) rotate(205deg);opacity:0}}
-@media(max-width:520px){.ribbon-stage{height:210px}.ribbon-stage .ribbon-art svg{width:100%;height:100%}.ribbon-stage .cut-button{width:150px;height:150px}}
+@media(max-width:520px){.ribbon-stage{height:210px;--scissor-start:54px}.ribbon-stage .ribbon-art svg{width:100%;height:100%}.ribbon-stage .cut-button{width:150px;height:150px}}
 
 </style>
 </head>
