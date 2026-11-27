@@ -196,7 +196,7 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
     }
     generator.style.display = "none";
     ceremony.classList.add("active");
-    document.getElementById("welcomeName").textContent = safeText(client, "Your Business");
+    document.getElementById("welcomeName").textContent = safeText(client || (isPreview ? "Preview Business" : ""), "Your Business");
     document.getElementById("welcomeTagline").textContent = safeText(tagline, "Today, a new digital chapter begins.");\n    document.getElementById("welcomeWish").textContent = customWish ? "“" + customWish + "”" : "";
     window.__ammLaunchTarget = isPreview ? "" : new URL(targetRaw).href;
     window.__ammLaunchWish = safeText(customWish, "Wishing your business continued success, meaningful growth and exciting new opportunities.");
@@ -206,13 +206,13 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.
   form.addEventListener("submit", function(event){
     event.preventDefault();
     const name = document.getElementById("clientName").value.trim();
-    const website = document.getElementById("websiteUrl").value.trim();
+    let website = document.getElementById("websiteUrl").value.trim();\n    if (website && !/^https?:\\/\\//i.test(website)) website = "https://" + website;
     const line = document.getElementById("tagline").value.trim();
     const wish = document.getElementById("wish").value.trim();
     const error = document.getElementById("formError");
     error.textContent = "";
     if (!name) { error.textContent = "Please enter the client or business name."; return; }
-    if (!validHttpsUrl(website)) { error.textContent = "Please enter a valid live website address beginning with https://."; return; }
+    if (!validHttpsUrl(website)) { error.textContent = "Please enter a valid website address, such as example.com."; return; }
     const link = new URL("/launch/", window.location.origin);
     link.searchParams.set("client", name);
     link.searchParams.set("site", new URL(website).href);
